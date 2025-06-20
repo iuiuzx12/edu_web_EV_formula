@@ -165,6 +165,21 @@
             border-top-right-radius: 0.5rem;
             border-bottom-right-radius: 0.5rem;
         }
+        /* เพิ่มในส่วน style */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        .animate-shake {
+            animation: shake 0.3s ease-in-out;
+        }
+
+        .input-field.border-red-500 {
+            border-color: #ef4444;
+            box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.3);
+        }
         
         #glossary-modal-backdrop {
             position: fixed;
@@ -304,6 +319,28 @@
             transform: translateY(-5px) rotate(5deg);
             box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
         }
+        /* เพิ่มในส่วน style */
+        .loop-control-btn.active {
+            border: 1px solid;
+        }
+
+        #break-btn.active {
+            background-color: #ef4444 !important;
+            border-color: #f87171;
+        }
+
+        #continue-btn.active {
+            background-color: #3b82f6 !important;
+            border-color: #60a5fa;
+        }
+
+        .bg-yellow-800\/50 {
+            background-color: rgba(146, 64, 14, 0.5);
+        }
+
+        .bg-red-800\/50 {
+            background-color: rgba(153, 27, 27, 0.5);
+        }
         
         @media (max-width: 768px) {
             .content-card {
@@ -352,7 +389,7 @@
                         <a href="#c-loops" class="nav-link">
                             <i class="fas fa-redo mr-2"></i> บทที่ 6
                         </a>
-                    </nav>
+                    </nav>  
                 </div>
                 
                 <div class="mt-6 bg-dark-800 rounded-xl p-4 shadow-lg border border-dark-600">
@@ -439,6 +476,98 @@
                             </div>
                         </div>
                         
+                        <div class="mt-8 p-6 bg-dark-800 rounded-xl border border-dark-700">
+                            <h4 class="text-xl font-semibold text-amber-300 mb-4 flex items-center">
+                                <i class="fas fa-brain mr-3"></i> ตัวอย่าง Algorithm ในชีวิตจริง: การเดินทางไปมหาวิทยาลัย
+                            </h4>
+                            <p class="text-slate-300 mb-4">ลองดูวิธีเขียน Algorithm สำหรับการเดินทางไปมหาวิทยาลัย ที่แสดงการแตกปัญหาออกเป็นขั้นตอนย่อย:</p>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <!-- ส่วนแสดงขั้นตอน -->
+                                <div>
+                                    <div class="flex items-start mb-4">
+                                        <div class="bg-primary-500 text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mt-1">1</div>
+                                        <div class="ml-3">
+                                            <p class="font-medium text-slate-100">ตั้งเวลา⏰</p>
+                                            <p class="text-slate-400 text-sm">ตั้งนาฬิกาปลุกเวลา 6:00 น.</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start mb-4">
+                                        <div class="bg-primary-500 text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mt-1">2</div>
+                                        <div class="ml-3">
+                                            <p class="font-medium text-slate-100">เตรียมตัว👕</p>
+                                            <p class="text-slate-400 text-sm">อาบน้ำ แต่งตัว กินข้าวเช้า</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start mb-4">
+                                        <div class="bg-primary-500 text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mt-1">3</div>
+                                        <div class="ml-3">
+                                            <p class="font-medium text-slate-100">ตรวจสภาพ🚗</p>
+                                            <p class="text-slate-400 text-sm">เช็คน้ำมันรถ/ประจุรถไฟฟ้า</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <div class="bg-primary-500 text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mt-1">4</div>
+                                        <div class="ml-3">
+                                            <p class="font-medium text-slate-100">เดินทาง🚦</p>
+                                            <p class="text-slate-400 text-sm">ใช้เส้นทางหลักหรือเส้นทางสำรองถ้าจราจรติด</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- ส่วนแสดง pseudocode -->
+                                <div class="bg-dark-900 p-4 rounded-lg">
+                                    <pre class="text-sm text-green-400 overflow-x-auto">
+                        Algorithm: ไปมหาวิทยาลัย
+                        Input: เวลาปัจจุบัน, สภาพการจราจร
+                        Output: ถึงมหาวิทยาลัยก่อน 8:00 น.
+
+                        1. WHILE (เวลาปัจจุบัน < 6:00 น.)
+                            หลับต่อ
+                        END WHILE
+
+                        2. IF (นาฬิกาปลุกดัง)
+                            กดปิดนาฬิกา
+                            ลุกจากเตียง
+                        ELSE
+                            ตั้งนาฬิกาปลุกใหม่
+                        END IF
+
+                        3. ทำตามลำดับ:
+                        - อาบน้ำ
+                        - แต่งตัว
+                        - กินข้าวเช้า
+
+                        4. ตรวจสอบ:
+                        - น้ำมันรถ > 20%? ➡️ ไปขั้นตอน 5
+                        - หรือ ประจุรถไฟฟ้า > 30%? ➡️ ไปขั้นตอน 5
+                        - ELSE ➡️ เรียกแท็กซี่
+
+                        5. IF (การจราจรบนเส้นทางหลักติดขัด)
+                            ใช้เส้นทางสำรอง
+                        ELSE
+                            ใช้เส้นทางหลัก
+                        END IF
+
+                        6. ขับรถ/นั่งรถ ไปมหาวิทยาลัย
+
+                        7. WHILE NOT (ถึงมหาวิทยาลัย)
+                            ขับต่อไป
+                        END WHILE
+
+                        8. แจ้งผล: "ถึงมหาวิทยาลัยเวลา {เวลาปัจจุบัน}"</pre>
+                                    <p class="text-slate-400 text-sm mt-3 text-center">Pseudocode แสดง Algorithm การเดินทาง</p>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-6 p-4 bg-primary-900 bg-opacity-20 rounded-lg border border-primary-700">
+                                <p class="text-primary-200 flex items-start">
+                                    <i class="fas fa-lightbulb mr-2 mt-1"></i>
+                                    <span>สังเกตว่า Algorithm นี้ใช้เครื่องมือทั้ง 3 อย่างที่เราจะเรียน: <strong>ฟังก์ชัน</strong> (ขั้นตอนย่อย), <strong>เงื่อนไข</strong> (if/else) และ <strong>ลูป</strong> (while) การออกแบบ Algorithm ที่ดีต้องคำนึงถึงทุกสถานการณ์ที่เป็นไปได้!</span>
+                                </p>
+                            </div>
+                        </div>
+                        
                         <h3 class="text-xl font-semibold text-slate-100 mt-8 mb-3 flex items-center">
                             <i class="fas fa-toolbox mr-2 text-yellow-400"></i> เครื่องมือในกล่องของนักคิด (The Toolbox)
                         </h3>
@@ -502,9 +631,103 @@
                         <h3 class="text-xl font-semibold text-slate-100 mb-3 flex items-center">
                             <i class="fas fa-question-circle mr-2 text-primary-400"></i> ทำไมต้องเป็นภาษา C ที่ดูน่ากลัว?
                         </h3>
+                        
                         <p class="text-slate-300 mb-4 leading-relaxed">ภาษาโปรแกรมสมัยใหม่ๆ ก็เหมือน "รถยนต์เกียร์ออโต้" ครับ ขับง่าย สะดวกสบาย มันจัดการเรื่องน่าปวดหัวให้เราหมด แต่... คุณไม่เคยได้สัมผัสการทำงานของเครื่องยนต์จริงๆ เลย คุณไม่รู้ว่าเกียร์เปลี่ยนตอนไหน หรือทำไมรอบเครื่องถึงขึ้น</p>
                         <p class="text-slate-300 mb-4 leading-relaxed">ส่วนภาษา C ก็เหมือน **"รถยนต์เกียร์กระปุก"** ครับ คุณต้องเหยียบคลัตช์เอง เข้าเกียร์เอง คุณต้องฟังเสียงเครื่องยนต์ คุณต้องรู้สึกถึงแรงสั่นสะเทือน มันอาจจะยากกว่าในตอนแรก แต่มันบังคับให้คุณต้องเข้าใจ "จิตวิญญาณ" ของยานยนต์อย่างแท้จริง และเมื่อคุณขับเป็น... คุณจะสามารถรีดประสิทธิภาพของรถออกมาได้สูงสุด การเรียน C ก็เพื่อให้เราได้ "เปิดฝากระโปรง" และเห็นการทำงานของคอมพิวเตอร์ในระดับที่ลึกที่สุดนั่นเองครับ</p>
-                        
+                        <!-- เพิ่มส่วนนี้หลังย่อหน้าที่สองของหัวข้อ "ทำไมต้องเป็นภาษา C ที่ดูน่ากลัว?" -->
+                        <div class="mt-6 p-5 bg-dark-800 rounded-xl border border-dark-700">
+                            <h3 class="text-xl font-semibold text-amber-300 mb-3 flex items-center">
+                                <i class="fas fa-language mr-2"></i> ความลับของภาษา C: มันคือ Compiled Language!
+                            </h3>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <!-- Compiler -->
+                                <div class="interactive-card">
+                                    <h4 class="text-lg font-semibold text-blue-400 mb-3 flex items-center">
+                                        <i class="fas fa-cogs mr-2"></i> Compiled Language (ภาษา C)
+                                    </h4>
+                                    <div class="flex items-start mb-3">
+                                        <div class="bg-blue-500 text-white rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mt-1 mr-2">1</div>
+                                        <p class="text-slate-300">เขียนโค้ด (source code)</p>
+                                    </div>
+                                    <div class="flex items-start mb-3">
+                                        <div class="bg-blue-500 text-white rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mt-1 mr-2">2</div>
+                                        <p class="text-slate-300">ใช้ <strong>Compiler</strong> แปลงทั้งโปรแกรมเป็นภาษาเครื่อง (machine code)</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <div class="bg-blue-500 text-white rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mt-1 mr-2">3</div>
+                                        <p class="text-slate-300">รันไฟล์ executable ที่ได้ทันทีโดยไม่ต้องแปลอีก</p>
+                                    </div>
+                                    
+                                    <div class="mt-4 p-3 bg-dark-900 rounded-lg">
+                                        <pre class="text-blue-300 text-sm">$ gcc hello.c -o hello  # Compile
+                        $ ./hello             # Run
+                        Hello, world!</pre>
+                                    </div>
+                                    
+                                    <div class="mt-4 bg-blue-900 bg-opacity-20 p-3 rounded-lg">
+                                        <p class="text-blue-300">
+                                            <i class="fas fa-bolt mr-2"></i> <strong>ข้อดี:</strong> รันเร็วมาก เหมาะกับระบบประสิทธิภาพสูง
+                                        </p>
+                                    </div>
+                                </div>
+                                
+                                <!-- Interpreter -->
+                                <div class="interactive-card">
+                                    <h4 class="text-lg font-semibold text-purple-400 mb-3 flex items-center">
+                                        <i class="fas fa-play-circle mr-2"></i> Interpreted Language (Python, JavaScript)
+                                    </h4>
+                                    <div class="flex items-start mb-3">
+                                        <div class="bg-purple-500 text-white rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mt-1 mr-2">1</div>
+                                        <p class="text-slate-300">เขียนโค้ด (source code)</p>
+                                    </div>
+                                    <div class="flex items-start mb-3">
+                                        <div class="bg-purple-500 text-white rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mt-1 mr-2">2</div>
+                                        <p class="text-slate-300">ใช้ <strong>Interpreter</strong> อ่านทีละบรรทัดและแปลงเป็นคำสั่งเครื่อง</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <div class="bg-purple-500 text-white rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mt-1 mr-2">3</div>
+                                        <p class="text-slate-300">ทำงานทันทีโดยไม่สร้างไฟล์ executable แยก</p>
+                                    </div>
+                                    
+                                    <div class="mt-4 p-3 bg-dark-900 rounded-lg">
+                                        <pre class="text-purple-300 text-sm">$ python hello.py
+                        Hello, world!</pre>
+                                    </div>
+                                    
+                                    <div class="mt-4 bg-purple-900 bg-opacity-20 p-3 rounded-lg">
+                                        <p class="text-purple-300">
+                                            <i class="fas fa-bolt mr-2"></i> <strong>ข้อดี:</strong> แก้ไขและทดสอบได้เร็ว ไม่ต้อง compile ก่อน
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <div class="bg-dark-700 p-4 rounded-lg">
+                                    <div class="text-center text-blue-400 text-2xl mb-2"><i class="fas fa-microchip"></i></div>
+                                    <p class="text-center font-semibold">ภาษาเครื่อง</p>
+                                    <p class="text-slate-400 text-sm text-center mt-1">Compiler สร้างไฟล์ภาษาเครื่องที่ CPU เข้าใจได้ตรงๆ</p>
+                                </div>
+                                <div class="bg-dark-700 p-4 rounded-lg">
+                                    <div class="text-center text-amber-400 text-2xl mb-2"><i class="fas fa-gauge-high"></i></div>
+                                    <p class="text-center font-semibold">ความเร็ว</p>
+                                    <p class="text-slate-400 text-sm text-center mt-1">Compiled code รันเร็วเพราะไม่ต้องแปลอีก</p>
+                                </div>
+                                <div class="bg-dark-700 p-4 rounded-lg">
+                                    <div class="text-center text-purple-400 text-2xl mb-2"><i class="fas fa-layer-group"></i></div>
+                                    <p class="text-center font-semibold">การพกพา</p>
+                                    <p class="text-slate-400 text-sm text-center mt-1">Compiled code ขึ้นกับระบบปฏิบัติการ</p>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-6 bg-amber-900 bg-opacity-20 border-l-4 border-amber-400 p-4 rounded-r-lg">
+                                <p class="text-amber-200">
+                                    <i class="fas fa-lightbulb mr-2"></i> <strong>เหตุผลที่ C ทำงานเร็ว:</strong> เพราะถูก compile เป็นภาษาเครื่องโดยตรง ทำให้ไม่ต้องเสียเวลาแปลอีกเมื่อรันโปรแกรม! 
+                                    นี่คือหนึ่งในเหตุผลที่ภาษา C ยังคงถูกใช้ในระบบปฏิบัติการและเกมระดับ AAA จนถึงทุกวันนี้
+                                </p>
+                            </div>
+                        </div>
                         <h3 class="text-xl font-semibold text-slate-100 mt-8 mb-3 flex items-center">
                             <i class="fas fa-heartbeat mr-2 text-red-400"></i> การสนทนาครั้งแรก: ผ่าตัดโปรแกรม Hello, world!
                         </h3>
@@ -655,10 +878,27 @@
                             </h3>
                             <p class="text-slate-300 mb-4">ลองใช้งานโปรแกรมทักทายด้วยการใส่ชื่อของคุณด้านล่าง แล้วดูผลลัพธ์ที่ได้</p>
                             
+                            <!-- แก้ไขในส่วนห้องทดลอง: ทักทายกันเถอะ! -->
                             <div class="flex flex-col md:flex-row gap-4 mb-4">
                                 <div class="flex-grow">
                                     <label class="block text-slate-300 mb-2">ป้อนชื่อของคุณ:</label>
-                                    <input type="text" id="user-name" class="input-field w-full" placeholder="เช่น Somchai" value="CS50 Lover">
+                                    <input 
+                                        type="text" 
+                                        id="user-name" 
+                                        class="input-field w-full" 
+                                        placeholder="เช่น Somchai" 
+                                        value="CS50 Lover"
+                                        minlength="2"
+                                        maxlength="20"
+                                        pattern="[A-Za-zก-๙\s]+"
+                                        title="ชื่อต้องประกอบด้วยตัวอักษรและช่องว่างเท่านั้น (2-20 ตัวอักษร)"
+                                        required
+                                    >
+                                    <!-- เพิ่มส่วนแสดงข้อความ error -->
+                                    <div id="name-error" class="text-red-400 text-sm mt-1 hidden">
+                                        <i class="fas fa-exclamation-circle mr-1"></i>
+                                        <span>กรุณาป้อนชื่อที่ถูกต้อง (2-20 ตัวอักษร, ใช้เฉพาะตัวอักษรและช่องว่าง)</span>
+                                    </div>
                                 </div>
                                 <div class="flex items-end">
                                     <button id="run-greeting-btn" class="btn-primary w-full md:w-auto">
@@ -908,15 +1148,82 @@
                                 </div>
                             </div>
                             
+                            <!-- แก้ไขส่วน "เทคนิค: การแปลงชนิดข้อมูล" เป็นดังนี้ -->
                             <div class="interactive-card">
                                 <h4 class="text-lg font-semibold text-slate-100 mb-3 flex items-center">
-                                    <i class="fas fa-lightbulb mr-2 text-blue-400"></i> เทคนิค: การแปลงชนิดข้อมูล
+                                    <i class="fas fa-exchange-alt mr-2 text-blue-400"></i> เทคนิค: การแปลงชนิดข้อมูล (Type Casting)
                                 </h4>
                                 <p class="text-slate-300 mb-4">
-                                    หากต้องการผลลัพธ์แบบทศนิยม ต้องแปลงตัวแปรอย่างน้อยหนึ่งตัวเป็น float ก่อนการคำนวณ
+                                    Type Casting คือการแปลงชนิดข้อมูลจากประเภทหนึ่งไปเป็นอีกประเภทหนึ่ง โดยเฉพาะเมื่อทำงานกับตัวเลขประเภทต่างกัน
                                 </p>
-                                <div class="bg-dark-800 p-4 rounded-lg">
-                                    <code class="text-blue-400">int a = 10, b = 3;<br>float result = (float) a / b; // ได้ 3.333</code>
+                                
+                                <div class="bg-dark-800 p-4 rounded-lg mb-4">
+                                    <pre class="code-block"><code class="language-c"><span class="code-comment">// ตัวอย่างการแปลงชนิดข้อมูล</span>
+                            <span class="code-keyword">int</span> a = 10, b = 3;
+
+                            <span class="code-comment">// แบบ implicit casting (แปลงโดยอัตโนมัติ)</span>
+                            <span class="code-keyword">float</span> result1 = a; <span class="code-comment">// int → float</span>
+
+                            <span class="code-comment">// แบบ explicit casting (แปลงแบบชัดเจน)</span>
+                            <span class="code-keyword">float</span> result2 = (<span class="code-keyword">float</span>) a / b; <span class="code-comment">// ได้ 3.333</span>
+
+                            <span class="code-comment">// แปลง float เป็น int (ตัดส่วนทศนิยมทิ้ง)</span>
+                            <span class="code-keyword">float</span> pi = 3.14159;
+                            <span class="code-keyword">int</span> intPi = (<span class="code-keyword">int</span>) pi; <span class="code-comment">// ได้ 3</span></code></pre>
+                                </div>
+                                
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                                    <div class="bg-blue-900 bg-opacity-20 p-3 rounded-lg">
+                                        <h5 class="font-semibold text-blue-300 mb-2">
+                                            <i class="fas fa-arrow-right-arrow-left mr-2"></i> การแปลงโดยอัตโนมัติ
+                                        </h5>
+                                        <ul class="text-sm text-blue-200 space-y-1">
+                                            <li>int → float (ไม่สูญเสียข้อมูล)</li>
+                                            <li>float → double (ไม่สูญเสียข้อมูล)</li>
+                                            <li>char → int (ใช้ค่า ASCII)</li>
+                                        </ul>
+                                    </div>
+                                    
+                                    <div class="bg-amber-900 bg-opacity-20 p-3 rounded-lg">
+                                        <h5 class="font-semibold text-amber-300 mb-2">
+                                            <i class="fas fa-exclamation-triangle mr-2"></i> การแปลงที่อาจสูญเสียข้อมูล
+                                        </h5>
+                                        <ul class="text-sm text-amber-200 space-y-1">
+                                            <li>float → int (ตัดทศนิยม)</li>
+                                            <li>double → float (อาจสูญเสียความแม่นยำ)</li>
+                                            <li>int → char (อาจเกินขอบเขต)</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                
+                                <!-- ส่วน Interactive Type Casting -->
+                                <div class="mt-4 p-4 bg-dark-800 rounded-lg border border-dark-700">
+                                    <h5 class="font-semibold text-slate-100 mb-3 flex items-center">
+                                        <i class="fas fa-flask mr-2 text-purple-400"></i> ห้องทดลอง Type Casting
+                                    </h5>
+                                    
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                                        <div>
+                                            <label class="block text-slate-300 mb-2">ค่าเริ่มต้น:</label>
+                                            <input type="text" id="cast-value" class="input-field w-full" value="3.14159" placeholder="เช่น 10, 3.14, 'A'">
+                                        </div>
+                                        <div>
+                                            <label class="block text-slate-300 mb-2">แปลงเป็น:</label>
+                                            <select id="cast-type" class="input-field w-full">
+                                                <option value="int">int (จำนวนเต็ม)</option>
+                                                <option value="float">float (ทศนิยม)</option>
+                                                <option value="char">char (ตัวอักษร)</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    
+                                    <button id="run-cast-btn" class="btn-primary w-full mb-4">
+                                        <i class="fas fa-bolt mr-2"></i> รันการแปลง
+                                    </button>
+                                    
+                                    <div id="cast-result" class="bg-dark-900 p-4 rounded-lg text-center">
+                                        <div class="text-lg text-slate-400">ผลลัพธ์จะแสดงที่นี่</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -1239,6 +1546,25 @@
                                                 </button>
                                             </div>
                                         </div>
+
+                                        <!-- ในส่วน "ควบคุมลูป" ใต้ประเภทลูป -->
+                                        <div class="mt-4">
+                                            <label class="block text-slate-300 mb-2">ตัวควบคุมลูป:</label>
+                                            <div class="grid grid-cols-2 gap-2">
+                                                <button id="break-btn" class="loop-control-btn bg-red-900 bg-opacity-30 hover:bg-red-800 py-2 px-4 rounded transition-colors">
+                                                    <i class="fas fa-stop-circle mr-2"></i> break
+                                                </button>
+                                                <button id="continue-btn" class="loop-control-btn bg-blue-900 bg-opacity-30 hover:bg-blue-800 py-2 px-4 rounded transition-colors">
+                                                    <i class="fas fa-forward mr-2"></i> continue
+                                                </button>
+                                            </div>
+                                            
+                                            <!-- เงื่อนไขสำหรับ break/continue -->
+                                            <div id="loop-condition" class="mt-4 hidden">
+                                                <label class="block text-slate-300 mb-2">หยุด/ข้ามเมื่อถึงรอบที่:</label>
+                                                <input type="number" id="control-point" min="1" max="10" value="3" class="input-field w-full">
+                                            </div>
+                                        </div>
                                         
                                         <div>
                                             <button id="bark-btn" class="btn-primary w-full">
@@ -1511,9 +1837,33 @@ function copyCode(elementId) {
     });
 }
 
+// แก้ไขฟังก์ชัน runInteractiveDemo()
 function runInteractiveDemo() {
-    const userName = document.getElementById('user-name').value || 'CS50 Lover';
+    const userNameInput = document.getElementById('user-name');
+    const nameError = document.getElementById('name-error');
     const greetingOutput = document.getElementById('greeting-output');
+    
+    // Reset error state
+    userNameInput.classList.remove('border-red-500');
+    nameError.classList.add('hidden');
+    
+    // Validate input
+    const userName = userNameInput.value.trim();
+    
+    if (!userName) {
+        showError(userNameInput, nameError, "กรุณาป้อนชื่อของคุณ");
+        return;
+    }
+    
+    if (userName.length < 2 || userName.length > 20) {
+        showError(userNameInput, nameError, "ชื่อต้องมีความยาว 2-20 ตัวอักษร");
+        return;
+    }
+    
+    if (!/^[A-Za-zก-๙\s]+$/.test(userName)) {
+        showError(userNameInput, nameError, "ชื่อสามารถใช้ได้เฉพาะตัวอักษรและช่องว่าง");
+        return;
+    }
     
     // สร้างเอฟเฟกต์การพิมพ์ทีละตัวอักษร
     greetingOutput.innerHTML = '';
@@ -1529,6 +1879,25 @@ function runInteractiveDemo() {
             clearInterval(typingEffect);
         }
     }, 30);
+}
+
+// เพิ่มฟังก์ชันแสดง error
+function showError(inputElement, errorElement, message) {
+    inputElement.classList.add('border-red-500');
+    errorElement.querySelector('span').textContent = message;
+    errorElement.classList.remove('hidden');
+    
+    const greetingOutput = document.getElementById('greeting-output');
+    greetingOutput.innerHTML = `<div class="text-red-400 text-center py-4">
+        <i class="fas fa-exclamation-triangle mr-2"></i>
+        ${message}
+    </div>`;
+    
+    // เพิ่มเอฟเฟกต์สั่น
+    inputElement.classList.add('animate-shake');
+    setTimeout(() => {
+        inputElement.classList.remove('animate-shake');
+    }, 500);
 }
 
 // เพิ่ม event listener สำหรับปุ่มรันโปรแกรม
@@ -1612,6 +1981,94 @@ if (defaultOpBtn) {
     defaultOpBtn.classList.add('bg-primary-500', 'text-white', 'active');
 }
 
+// เพิ่มในส่วน JavaScript ของบทที่ 4
+document.getElementById('run-cast-btn').addEventListener('click', function() {
+    const inputValue = document.getElementById('cast-value').value;
+    const castType = document.getElementById('cast-type').value;
+    const resultDiv = document.getElementById('cast-result');
+    
+    try {
+        let result;
+        let explanation;
+        
+        switch(castType) {
+            case 'int':
+                result = parseInt(inputValue);
+                explanation = `การแปลงเป็น int จะตัดส่วนทศนิยมทิ้ง (ถ้ามี)`;
+                break;
+            case 'float':
+                result = parseFloat(inputValue);
+                explanation = `การแปลงเป็น float จะเก็บค่าทศนิยม`;
+                break;
+            // แก้ไขในส่วนของ case 'char'
+            case 'char':
+                // แปลงค่าเป็นตัวเลขก่อน
+                const numValue = parseFloat(inputValue);
+                
+                if (isNaN(numValue)) {
+                    result = "ไม่สามารถแปลงเป็นตัวเลขได้";
+                    explanation = "กรุณาป้อนตัวเลขเพื่อแปลงเป็นตัวอักษร";
+                } else {
+                    // ตรวจสอบว่าเป็นจำนวนเต็ม
+                    if (Number.isInteger(numValue)) {
+                        // ตรวจสอบขอบเขตค่า ASCII
+                        if (numValue >= 0 && numValue <= 65535) {
+                            result = `'${String.fromCharCode(numValue)}'`;
+                            explanation = `แปลงจากค่า ASCII ${numValue} เป็นตัวอักษร`;
+                        } else {
+                            result = "เกินขอบเขต";
+                            explanation = "ค่า ASCII ต้องอยู่ระหว่าง 0 ถึง 65535";
+                        }
+                    } else {
+                        // ถ้าไม่ใช่จำนวนเต็ม ให้ใช้ตัวอักษรตัวแรก
+                        result = `'${inputValue.charAt(0)}'`;
+                        explanation = "ใช้ตัวอักษรตัวแรกของข้อความ (ไม่ใช่ค่า ASCII)";
+                    }
+                }
+                break;
+            default:
+                result = "ไม่รองรับชนิดนี้";
+                explanation = "";
+        }
+        
+        // ในส่วนแสดงผลลัพธ์
+        resultDiv.innerHTML = `
+            <div class="text-xl font-bold text-green-400 mb-2">${result}</div>
+            <div class="text-slate-300 mb-3">${explanation}</div>
+            
+            ${result === "ไม่สามารถแปลงเป็นตัวเลขได้" || result === "เกินขอบเขต" 
+                ? `<div class="bg-red-900 bg-opacity-30 p-2 rounded-lg text-red-200">
+                    <i class="fas fa-exclamation-triangle mr-2"></i>
+                    ${explanation}
+                </div>`
+                : ''}
+            
+            <div class="mt-3 text-sm text-slate-500">
+                <i class="fas fa-info-circle mr-1"></i> 
+                ค่าเริ่มต้น: <code>${inputValue}</code> → ชนิด: ${castType}
+            </div>
+            
+            <!-- เพิ่มตัวอย่างค่า ASCII -->
+            <div class="mt-3 text-xs text-slate-600">
+                <p>ตัวอย่างค่า ASCII: 65='A', 66='B', 97='a', 98='b'</p>
+            </div>
+        `;
+    } catch (error) {
+        resultDiv.innerHTML = `
+            <div class="text-red-400">
+                <i class="fas fa-exclamation-triangle mr-2"></i>
+                เกิดข้อผิดพลาด: ${error.message}
+            </div>
+        `;
+    }
+});
+
+// ตัวอย่างการใช้งาน
+document.addEventListener('DOMContentLoaded', function() {
+    // ตั้งค่าเริ่มต้น
+    document.getElementById('run-cast-btn').click();
+});
+
 // รันตัวอย่างเมื่อหน้าโหลดเสร็จ
 document.addEventListener('DOMContentLoaded', function() {
     setTimeout(runCalculatorDemo, 1500);
@@ -1684,12 +2141,17 @@ document.addEventListener('DOMContentLoaded', function() {
 });
  
 // ===== ฟังก์ชันสำหรับบทที่ 6 =====
+// แก้ไขฟังก์ชัน runLoopDemo()
 function runLoopDemo() {
     const barkCount = parseInt(document.getElementById('bark-count').value);
     const loopType = document.querySelector('.loop-type-btn.active').dataset.loopType;
+    const useBreak = document.getElementById('break-btn').classList.contains('active');
+    const useContinue = document.getElementById('continue-btn').classList.contains('active');
+    const controlPoint = parseInt(document.getElementById('control-point').value) || 3;
     
-    // อัปเดตจำนวนครั้งแสดงผล
-    document.getElementById('bark-count-value').textContent = `${barkCount} ครั้ง`;
+    // แสดงส่วนเงื่อนไขถ้าเลือก break/continue
+    document.getElementById('loop-condition').style.display = 
+        (useBreak || useContinue) ? 'block' : 'none';
     
     // สร้างผลลัพธ์และโค้ด
     let result = '';
@@ -1698,66 +2160,97 @@ function runLoopDemo() {
     
     if (loopType === 'for') {
         // for loop
-        code = `for (int i = 0; i < ${barkCount}; i++) {\n    printf("🐶 Woof!\\n");\n}`;
+        code = `for (int i = 0; i < ${barkCount}; i++) {\n`;
         
-        for (let i = 0; i < barkCount; i++) {
-            result += `🐶 Woof! (รอบที่ ${i+1})\n`;
+        if (useContinue) {
+            code += `    if (i == ${controlPoint - 1}) continue; // ข้ามรอบนี้\n`;
+        }
+        if (useBreak) {
+            code += `    if (i == ${controlPoint}) break; // ออกจากลูป\n`;
         }
         
-        // Visualization
-        visualizationHTML = `
-            <div class="bg-blue-900 bg-opacity-30 p-2 rounded">
-                <div class="text-xs text-blue-300 mb-1">เริ่มลูป</div>
-            </div>
-        `;
+        code += `    printf("🐶 Woof! (รอบที่ %d\\n", i+1);\n}`;
         
         for (let i = 0; i < barkCount; i++) {
+            // เงื่อนไข continue
+            if (useContinue && i === controlPoint - 1) {
+                visualizationHTML += `
+                    <div class="bg-yellow-800 bg-opacity-50 p-2 rounded">
+                        <div class="text-xs text-yellow-300 mb-1">รอบที่ ${i+1} (continue)</div>
+                        <div class="text-lg">⏩</div>
+                    </div>
+                `;
+                continue;
+            }
+            
+            // เงื่อนไข break
+            if (useBreak && i === controlPoint) {
+                visualizationHTML += `
+                    <div class="bg-red-800 bg-opacity-50 p-2 rounded">
+                        <div class="text-xs text-red-300 mb-1">รอบที่ ${i+1} (break)</div>
+                        <div class="text-lg">🛑</div>
+                    </div>
+                `;
+                result += `🛑 หยุดการทำงานที่รอบที่ ${i+1}\n`;
+                break;
+            }
+            
             visualizationHTML += `
                 <div class="bg-blue-800 bg-opacity-30 p-2 rounded">
                     <div class="text-xs text-blue-300 mb-1">รอบที่ ${i+1}</div>
                     <div class="text-lg">🐶</div>
                 </div>
             `;
+            result += `🐶 Woof! (รอบที่ ${i+1})\n`;
         }
-        
-        visualizationHTML += `
-            <div class="bg-blue-900 bg-opacity-30 p-2 rounded">
-                <div class="text-xs text-blue-300">สิ้นสุดลูป</div>
-            </div>
-        `;
     } else {
         // while loop
-        code = `int i = 0;\nwhile (i < ${barkCount}) {\n    printf("🐶 Woof!\\n");\n    i++;\n}`;
+        code = `int i = 0;\nwhile (i < ${barkCount}) {\n    i++;\n\n`;
+        
+        if (useContinue) {
+            code += `    if (i == ${controlPoint}) continue; // ข้ามรอบนี้\n`;
+        }
+        if (useBreak) {
+            code += `    if (i == ${controlPoint + 1}) break; // ออกจากลูป\n`;
+        }
+        
+        code += `    printf("🐶 Woof! (รอบที่ %d\\n", i);\n}`;
         
         let i = 0;
         while (i < barkCount) {
-            result += `🐶 Woof! (รอบที่ ${i+1})\n`;
             i++;
-        }
-        
-        // Visualization
-        visualizationHTML = `
-            <div class="bg-green-900 bg-opacity-30 p-2 rounded">
-                <div class="text-xs text-green-300 mb-1">เริ่มลูป (i=0)</div>
-            </div>
-        `;
-        
-        let counter = 0;
-        while (counter < barkCount) {
+            
+            // เงื่อนไข continue
+            if (useContinue && i === controlPoint) {
+                visualizationHTML += `
+                    <div class="bg-yellow-800 bg-opacity-50 p-2 rounded">
+                        <div class="text-xs text-yellow-300 mb-1">รอบที่ ${i} (continue)</div>
+                        <div class="text-lg">⏩</div>
+                    </div>
+                `;
+                continue;
+            }
+            
+            // เงื่อนไข break
+            if (useBreak && i === controlPoint + 1) {
+                visualizationHTML += `
+                    <div class="bg-red-800 bg-opacity-50 p-2 rounded">
+                        <div class="text-xs text-red-300 mb-1">รอบที่ ${i} (break)</div>
+                        <div class="text-lg">🛑</div>
+                    </div>
+                `;
+                result += `🛑 หยุดการทำงานที่รอบที่ ${i}\n`;
+                break;
+            }
+            
             visualizationHTML += `
                 <div class="bg-green-800 bg-opacity-30 p-2 rounded">
-                    <div class="text-xs text-green-300 mb-1">รอบที่ ${counter+1} (i=${counter})</div>
+                    <div class="text-xs text-green-300 mb-1">รอบที่ ${i}</div>
                     <div class="text-lg">🐶</div>
                 </div>
             `;
-            counter++;
+            result += `🐶 Woof! (รอบที่ ${i})\n`;
         }
-        
-        visualizationHTML += `
-            <div class="bg-green-900 bg-opacity-30 p-2 rounded">
-                <div class="text-xs text-green-300">สิ้นสุดลูป (i=${barkCount})</div>
-            </div>
-        `;
     }
     
     // แสดงผลลัพธ์
@@ -1765,6 +2258,24 @@ function runLoopDemo() {
     document.getElementById('loop-code').textContent = code;
     document.getElementById('loop-visualization').innerHTML = visualizationHTML;
 }
+
+// เพิ่ม event listeners สำหรับ break/continue
+document.getElementById('break-btn').addEventListener('click', function() {
+    this.classList.toggle('active');
+    this.classList.toggle('bg-red-500', this.classList.contains('active'));
+    document.getElementById('continue-btn').classList.remove('active', 'bg-blue-500');
+    runLoopDemo();
+});
+
+document.getElementById('continue-btn').addEventListener('click', function() {
+    this.classList.toggle('active');
+    this.classList.toggle('bg-blue-500', this.classList.contains('active'));
+    document.getElementById('break-btn').classList.remove('active', 'bg-red-500');
+    runLoopDemo();
+});
+
+// เมื่อค่า control point เปลี่ยน
+document.getElementById('control-point').addEventListener('input', runLoopDemo);
 
 // เพิ่ม event listeners สำหรับบทที่ 6
 document.getElementById('bark-btn').addEventListener('click', runLoopDemo);
