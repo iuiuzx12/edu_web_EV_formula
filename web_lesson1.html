@@ -7,79 +7,519 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        dark: {
+                            900: '#0f172a',
+                            800: '#1e293b',
+                            700: '#334155',
+                            600: '#475569',
+                        },
+                        primary: {
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                        },
+                        accent: {
+                            500: '#8b5cf6',
+                            600: '#7c3aed',
+                        }
+                    },
+                    fontFamily: {
+                        'sarabun': ['Sarabun', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        body { font-family: 'Sarabun', sans-serif; font-weight: 400; }
-        h1, h2, h3, h4, h5, h6 { font-weight: 600; }
-        .content-card { background-color: white; border-radius: 0.75rem; box-shadow: 0 4px_6px_-1px_rgb(0_0_0_/_0.1),_0_2px_4px_-2px_rgb(0_0_0_/_0.1); padding: 2rem; margin-bottom: 2rem; }
-        .code-block { background-color: #1E293B; color: #E2E8F0; padding: 1.5rem; border-radius: 0.5rem; font-family: 'Courier New', Courier, monospace; font-size: 0.95em; white-space: pre; /* Changed to pre for preserving spaces */ word-break: break-all; line-height: 1.6; }
-        .code-keyword, .keyword-glossary { color: #60A5FA; font-weight: bold; }
-        .keyword-glossary { border-bottom: 1px dotted #60A5FA; cursor: pointer; white-space: normal; }
-        .code-function { color: #A78BFA; }
-        .code-comment { color: #64748B; font-style: italic;}
-        .code-string { color: #A3E635; }
-        .code-placeholder { color: #FBBF24; font-weight: bold; }
-        #glossary-modal-backdrop { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 99; display: none; }
-        #glossary-modal { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: white; padding: 2rem; border-radius: 0.5rem; box-shadow: 0 10px 25px rgba(0,0,0,0.1); width: 90%; max-width: 500px; z-index: 100; display: none; }
+        * {
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #e2e8f0;
+            min-height: 100vh;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 600;
+            color: #f1f5f9;
+        }
+        
+        .content-card {
+            background: linear-gradient(145deg, rgba(30, 41, 59, 0.7) 0%, rgba(30, 41, 59, 0.9) 100%);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(100, 116, 139, 0.2);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .content-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+        }
+        
+        .gradient-header {
+            background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .code-block {
+            background: linear-gradient(145deg, #0f172a 0%, #1e293b 100%);
+            color: #e2e8f0;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            font-family: 'Fira Code', 'Courier New', monospace;
+            font-size: 0.95em;
+            white-space: pre;
+            word-break: break-all;
+            line-height: 1.6;
+            border: 1px solid rgba(100, 116, 139, 0.3);
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
+            overflow-x: auto;
+        }
+        
+        .code-keyword, .keyword-glossary {
+            color: #60a5fa;
+            font-weight: bold;
+        }
+        
+        .keyword-glossary {
+            border-bottom: 1px dotted #60a5fa;
+            cursor: pointer;
+            white-space: normal;
+            transition: all 0.2s ease;
+        }
+        
+        .keyword-glossary:hover {
+            color: #93c5fd;
+            border-bottom: 1px solid #93c5fd;
+        }
+        
+        .code-function {
+            color: #a78bfa;
+        }
+        
+        .code-comment {
+            color: #94a3b8;
+            font-style: italic;
+        }
+        
+        .code-string {
+            color: #a3e635;
+        }
+        
+        .code-placeholder {
+            color: #fbbf24;
+            font-weight: bold;
+        }
+        
+        .highlight-code {
+            background-color: rgba(56, 189, 248, 0.1);
+            display: block;
+            margin: 0 -1.5rem;
+            padding: 0 1.5rem;
+            border-left: 4px solid #60a5fa;
+        }
+        
+        .tab-button {
+            padding: 0.75rem 1.25rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #cbd5e1;
+            background-color: rgba(30, 41, 59, 0.7);
+            border: 1px solid #475569;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .tab-button:not(.active):hover {
+            background-color: rgba(51, 65, 85, 0.7);
+        }
+        
+        .tab-button.active {
+            background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%);
+            color: white;
+            border-color: transparent;
+        }
+        
+        .tab-button:first-child {
+            border-top-left-radius: 0.5rem;
+            border-bottom-left-radius: 0.5rem;
+        }
+        
+        .tab-button:last-child {
+            border-top-right-radius: 0.5rem;
+            border-bottom-right-radius: 0.5rem;
+        }
+        
+        #glossary-modal-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 99;
+            display: none;
+            backdrop-filter: blur(5px);
+        }
+        
+        #glossary-modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: linear-gradient(145deg, #1e293b 0%, #0f172a 100%);
+            padding: 2.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            width: 90%;
+            max-width: 500px;
+            z-index: 100;
+            display: none;
+            border: 1px solid rgba(100, 116, 139, 0.3);
+        }
+        
+        .nav-link {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            color: #cbd5e1;
+            transition: all 0.2s ease;
+            margin-bottom: 0.5rem;
+        }
+        
+        .nav-link:hover {
+            background: rgba(30, 41, 59, 0.7);
+            color: #f1f5f9;
+        }
+        
+        .nav-link.active {
+            background: linear-gradient(90deg, rgba(59, 130, 246, 0.3) 0%, rgba(139, 92, 246, 0.3) 100%);
+            color: #f1f5f9;
+            border-left: 4px solid #3b82f6;
+        }
+        
+        .progress-bar {
+            height: 4px;
+            background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%);
+            border-radius: 2px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 50;
+        }
+        
+        .section-icon {
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+        
+        .interactive-card {
+            background: linear-gradient(145deg, rgba(30, 41, 59, 0.9) 0%, rgba(15, 23, 42, 0.9) 100%);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            border: 1px solid rgba(100, 116, 139, 0.2);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%);
+            color: white;
+            font-weight: 600;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            transition: all 0.2s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(59, 130, 246, 0.2);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(59, 130, 246, 0.3);
+        }
+        
+        .input-field {
+            background: rgba(15, 23, 42, 0.5);
+            border: 1px solid #475569;
+            border-radius: 0.5rem;
+            padding: 0.75rem 1rem;
+            color: #e2e8f0;
+            transition: all 0.2s ease;
+        }
+        
+        .input-field:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+        }
+        
+        .floating-nav {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            display: flex;
+            gap: 0.75rem;
+            z-index: 40;
+        }
+        
+        .floating-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.25rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .floating-btn:hover {
+            transform: translateY(-5px) rotate(5deg);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
+        }
+        
+        @media (max-width: 768px) {
+            .content-card {
+                padding: 1.5rem;
+            }
+            
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .section-icon {
+                margin-bottom: 1rem;
+            }
+        }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800">
+<body class="antialiased">
+    <!-- Progress bar -->
+    <div class="progress-bar" id="progress-bar"></div>
 
-    <div class="container mx-auto max-w-4xl p-4 sm:p-6 lg:p-8">
-        <header class="text-center mb-12">
-            <h1 class="text-5xl font-extrabold text-sky-800 mb-2">CS50x: The Genesis</h1>
-            <p class="text-xl text-slate-600">จากแนวคิดสู่ "Hello, World!" และการสนทนาโต้ตอบ</p>
-        </header>
+    <div class="container mx-auto max-w-6xl p-4 sm:p-6 lg:p-8 flex flex-col md:flex-row gap-8">
+        <!-- Sidebar Navigation -->
+        <div class="w-full md:w-64 flex-shrink-0">
+            <div class="sticky top-24">
+                <div class="bg-dark-800 rounded-xl p-4 shadow-lg border border-dark-600">
+                    <h3 class="text-lg font-semibold text-primary-500 mb-4 flex items-center">
+                        <i class="fas fa-bookmark mr-2"></i> เนื้อหาบทเรียน
+                    </h3>
+                    <nav>
+                        <a href="#intro" class="nav-link active">
+                            <i class="fas fa-play-circle mr-2"></i> บทที่ 1
+                        </a>
+                        <a href="#c-basics" class="nav-link">
+                            <i class="fas fa-code mr-2"></i> บทที่ 2
+                        </a>
+                        <a href="#c-interactive" class="nav-link">
+                            <i class="fas fa-comments mr-2"></i> บทที่ 3
+                        </a>
+                        <a href="#c-calculator" class="nav-link">
+                            <i class="fas fa-calculator mr-2"></i> บทที่ 4
+                        </a>
+                        <a href="#c-conditionals" class="nav-link">
+                            <i class="fas fa-random mr-2"></i> บทที่ 5
+                        </a>
+                        <a href="#c-loops" class="nav-link">
+                            <i class="fas fa-redo mr-2"></i> บทที่ 6
+                        </a>
+                    </nav>
+                </div>
+                
+                <div class="mt-6 bg-dark-800 rounded-xl p-4 shadow-lg border border-dark-600">
+                    <h3 class="text-lg font-semibold text-primary-500 mb-4 flex items-center">
+                        <i class="fas fa-tools mr-2"></i> เครื่องมือ
+                    </h3>
+                    <div class="space-y-3">
+                        <button class="w-full text-left flex items-center p-3 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors">
+                            <i class="fas fa-download mr-3 text-accent-500"></i>
+                            <span>ดาวน์โหลดตัวอย่างโค้ด</span>
+                        </button>
+                        <button class="w-full text-left flex items-center p-3 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors">
+                            <i class="fas fa-book mr-3 text-green-400"></i>
+                            <span>เอกสารเพิ่มเติม</span>
+                        </button>
+                        <button class="w-full text-left flex items-center p-3 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors">
+                            <i class="fas fa-question-circle mr-3 text-yellow-400"></i>
+                            <span>คำถามที่พบบ่อย</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="flex-grow">
+            <header class="text-center mb-12 pt-8">
+                <h1 class="text-5xl font-extrabold gradient-header mb-2">CS50x: The Genesis</h1>
+                <p class="text-xl text-slate-400">จากแนวคิดสู่ "Hello, World!" และการสนทนาโต้ตอบ</p>
+                <div class="mt-8 flex justify-center">
+                    <div class="flex items-center text-slate-400">
+                        <i class="fas fa-clock mr-2"></i>
+                        <span>อัปเดตล่าสุด: 21 มิถุนายน 2025</span>
+                        <span class="mx-3">|</span>
+                        <i class="fas fa-book mr-2"></i>
+                        <span>6 บทเรียน</span>
+                        <span class="mx-3">|</span>
+                        <i class="fas fa-user-graduate mr-2"></i>
+                        <span>ระดับ: เริ่มต้น</span>
+                    </div>
+                </div>
+            </header>
 
-        <main>
-            <section id="intro" class="scroll-mt-16">
-                 <div class="content-card">
-                    <h2 class="text-3xl font-bold text-slate-900 mb-4">บทที่ 1: ศิลปะแห่งการแก้ปัญหา (The Art of Problem-Solving)</h2>
-                    <p class="text-slate-600 mb-4 leading-relaxed">ก่อนที่เราจะเขียนโปรแกรมใดๆ ในโลก เราต้องเรียนรู้ทักษะที่สำคัญกว่านั้น นั่นคือศิลปะในการ **แก้ปัญหา** ครับ ลองจินตนาการว่าคุณมีหุ่นยนต์ที่ซื่อสัตย์แต่... โง่เขลาเบาปัญญามาก คุณไม่สามารถสั่งมันว่า "ไปซื้อกาแฟให้หน่อย" ได้ เพราะมันไม่เข้าใจคำว่า "ซื้อ" หรือ "กาแฟ" เลย</p>
-                    <p class="text-slate-600 mb-4 leading-relaxed">คุณต้องแตกปัญหานี้ออกเป็นขั้นตอนที่เล็กและโง่ที่สุดเท่าที่จะทำได้ นี่แหละครับคือหัวใจของ <strong class="text-sky-600">Computational Thinking</strong></p>
-                    <div class="bg-slate-50 border border-slate-200 p-6 rounded-lg my-6">
-                        <h3 class="text-xl font-semibold text-slate-800 mb-3">Input → Process → Output: หัวใจของทุกโปรแกรม</h3>
-                        <p class="mb-4">ทุกสิ่งทุกอย่างที่คอมพิวเตอร์ทำ สามารถมองเป็นกระบวนการง่ายๆ 3 ขั้นตอนนี้ได้เสมอครับ ลองนึกถึง "ตู้กดน้ำอัดลม" ดูสิครับ:</p>
-                        <div class="bg-white p-6 rounded-lg flex flex-col md:flex-row items-start justify-around text-center gap-4">
-                            <div class="flex flex-col items-center">
-                                <div class="text-4xl">⌨️</div>
-                                <p class="font-semibold mt-2">1. Input (ข้อมูลนำเข้า)</p>
-                                <p class="text-sm text-slate-600">คุณใส่เหรียญและกดปุ่ม 'C4' นี่คือข้อมูลที่คุณป้อนเข้าไป</p>
+            <main>
+                <section id="intro" class="scroll-mt-16">
+                    <div class="content-card">
+                        <div class="flex items-start section-header">
+                            <div class="section-icon">
+                                <i class="fas fa-play text-white text-xl"></i>
                             </div>
-                            <div class="text-2xl text-slate-400 font-light my-4 md:my-0 md:mt-8">→</div>
-                            <div class="flex flex-col items-center">
-                                <div class="text-4xl">🧠</div>
-                                <p class="font-semibold mt-2">2. Process (ประมวลผล)</p>
-                                <p class="text-sm text-slate-600">กลไกข้างในตู้ทำงาน มันเช็กว่าเงินพอไหม, หาว่า 'C4' คืออะไร, แล้วสั่งให้เกลียวหมุน นี่คือ "สมอง" ของโปรแกรม หรือที่เราเรียกว่า <strong class="keyword-glossary" data-term="Algorithm" data-def="ชุดของขั้นตอนที่ชัดเจนและมีลำดับ สำหรับใช้แก้ปัญหาหรือทำงานให้สำเร็จ เหมือนสูตรทำอาหารที่ต้องทำตามเป๊ะๆ">Algorithm</strong></p>
-                            </div>
-                            <div class="text-2xl text-slate-400 font-light my-4 md:my-0 md:mt-8">→</div>
-                            <div class="flex flex-col items-center">
-                                <div class="text-4xl">🖥️</div>
-                                <p class="font-semibold mt-2">3. Output (ผลลัพธ์)</p>
-                                <p class="text-sm text-slate-600">กระป๋องน้ำอัดลมตกลงมาที่ช่องรับของ นี่คือผลลัพธ์ที่จับต้องได้</p>
+                            <div>
+                                <h2 class="text-3xl font-bold text-slate-100 mb-2">บทที่ 1: ศิลปะแห่งการแก้ปัญหา (The Art of Problem-Solving)</h2>
+                                <div class="flex items-center text-slate-400 mb-4">
+                                    <i class="far fa-clock mr-1"></i>
+                                    <span class="text-sm">ระยะเวลาอ่าน: 8 นาที</span>
+                                </div>
                             </div>
                         </div>
+                        
+                        <p class="text-slate-300 mb-4 leading-relaxed">ก่อนที่เราจะเขียนโปรแกรมใดๆ ในโลก เราต้องเรียนรู้ทักษะที่สำคัญกว่านั้น นั่นคือศิลปะในการ **แก้ปัญหา** ครับ ลองจินตนาการว่าคุณมีหุ่นยนต์ที่ซื่อสัตย์แต่... โง่เขลาเบาปัญญามาก คุณไม่สามารถสั่งมันว่า "ไปซื้อกาแฟให้หน่อย" ได้ เพราะมันไม่เข้าใจคำว่า "ซื้อ" หรือ "กาแฟ" เลย</p>
+                        <p class="text-slate-300 mb-4 leading-relaxed">คุณต้องแตกปัญหานี้ออกเป็นขั้นตอนที่เล็กและโง่ที่สุดเท่าที่จะทำได้ นี่แหละครับคือหัวใจของ <strong class="text-primary-500">Computational Thinking</strong></p>
+                        
+                        <div class="interactive-card my-6">
+                            <h3 class="text-xl font-semibold text-primary-400 mb-3 flex items-center">
+                                <i class="fas fa-project-diagram mr-2"></i> Input → Process → Output: หัวใจของทุกโปรแกรม
+                            </h3>
+                            <p class="mb-4 text-slate-300">ทุกสิ่งทุกอย่างที่คอมพิวเตอร์ทำ สามารถมองเป็นกระบวนการง่ายๆ 3 ขั้นตอนนี้ได้เสมอครับ ลองนึกถึง "ตู้กดน้ำอัดลม" ดูสิครับ:</p>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+                                <div class="flex flex-col items-center p-4 bg-dark-700 rounded-lg border border-dark-600">
+                                    <div class="text-4xl text-primary-400 mb-3">⌨️</div>
+                                    <p class="font-semibold text-slate-100">1. Input (ข้อมูลนำเข้า)</p>
+                                    <p class="text-sm text-slate-400 mt-2 text-center">คุณใส่เหรียญและกดปุ่ม 'C4' นี่คือข้อมูลที่คุณป้อนเข้าไป</p>
+                                </div>
+                                <div class="flex flex-col items-center p-4 bg-dark-700 rounded-lg border border-dark-600">
+                                    <div class="text-4xl text-accent-500 mb-3">🧠</div>
+                                    <p class="font-semibold text-slate-100">2. Process (ประมวลผล)</p>
+                                    <p class="text-sm text-slate-400 mt-2 text-center">กลไกข้างในตู้ทำงาน มันเช็กว่าเงินพอไหม, หาว่า 'C4' คืออะไร, แล้วสั่งให้เกลียวหมุน นี่คือ "สมอง" ของโปรแกรม หรือที่เราเรียกว่า <strong class="keyword-glossary text-accent-400" data-term="Algorithm" data-def="ชุดของขั้นตอนที่ชัดเจนและมีลำดับ สำหรับใช้แก้ปัญหาหรือทำงานให้สำเร็จ เหมือนสูตรทำอาหารที่ต้องทำตามเป๊ะๆ">Algorithm</strong></p>
+                                </div>
+                                <div class="flex flex-col items-center p-4 bg-dark-700 rounded-lg border border-dark-600">
+                                    <div class="text-4xl text-green-400 mb-3">🖥️</div>
+                                    <p class="font-semibold text-slate-100">3. Output (ผลลัพธ์)</p>
+                                    <p class="text-sm text-slate-400 mt-2 text-center">กระป๋องน้ำอัดลมตกลงมาที่ช่องรับของ นี่คือผลลัพธ์ที่จับต้องได้</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <h3 class="text-xl font-semibold text-slate-100 mt-8 mb-3 flex items-center">
+                            <i class="fas fa-toolbox mr-2 text-yellow-400"></i> เครื่องมือในกล่องของนักคิด (The Toolbox)
+                        </h3>
+                        <p class="text-slate-300 mb-4 leading-relaxed">และถึงแม้ Algorithm ของเราจะซับซ้อนแค่ไหน เครื่องมือที่เราต้องใช้ในการสร้างมันขึ้นมาจริงๆ มีเพียง 3 อย่างนี้เท่านั้นครับ:</p>
+                        
+                        <div class="space-y-6 mt-6">
+                            <div class="flex items-start">
+                                <div class="bg-primary-500 rounded-lg p-3 mt-1 mr-4">
+                                    <i class="fas fa-cube text-white"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-semibold text-slate-100 mb-2">ฟังก์ชัน (Functions)</h4>
+                                    <p class="text-slate-300">ลองนึกว่าคุณกำลังเขียน "ตำราอาหาร" แทนที่จะเขียนวิธี "หั่นหอมหัวใหญ่" ซ้ำๆ ในทุกๆ สูตรอาหาร คุณก็แค่เขียนวิธีหั่นไว้ในบทแรกบทเดียว แล้วตั้งชื่อให้มันว่า "วิธีหั่นหอม" ต่อไปในสูตรอื่นๆ คุณก็แค่เขียนว่า "ไปดูวิธีหั่นหอมจากบทแรก" พอ! ฟังก์ชันก็คือสิ่งเดียวกันครับ มันคือการตั้งชื่อให้ "ชุดของขั้นตอน" ที่เราทำบ่อยๆ เพื่อให้เราเรียกใช้ได้โดยไม่ต้องเขียนซ้ำ</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="bg-accent-500 rounded-lg p-3 mt-1 mr-4">
+                                    <i class="fas fa-code-branch text-white"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-semibold text-slate-100 mb-2">เงื่อนไข (Conditionals)</h4>
+                                    <p class="text-slate-300">ชีวิตเต็มไปด้วยทางแยก โปรแกรมก็เช่นกันครับ `if-else` คือเครื่องมือที่ช่วยให้โปรแกรมตัดสินใจได้ เช่น `<strong class="text-amber-400">ถ้า</strong> ตู้เย็นมีไข่ <strong class="text-amber-400">ก็ให้</strong>ทำไข่เจียว, <strong class="text-amber-400">แต่ถ้าไม่ ก็ให้</strong>ทำข้าวผัด` มันคือการสร้างทางเลือกให้โปรแกรมของเรา ไม่ใช่การเดินไปข้างหน้าอย่างเดียว</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="bg-green-500 rounded-lg p-3 mt-1 mr-4">
+                                    <i class="fas fa-sync-alt text-white"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-semibold text-slate-100 mb-2">ลูป (Loops)</h4>
+                                    <p class="text-slate-300">ลองจินตนาการว่าคุณต้องตีไข่ 50 ครั้ง คงไม่มีใครอยากเขียนคำสั่ง "ตีไข่" 50 บรรทัดใช่ไหมครับ? เราก็แค่สั่งว่า `<strong class="text-lime-400">ทำซ้ำ 50 ครั้ง:</strong> ตีไข่` นี่คือการใช้ `loop` ครับ มันคือเครื่องมือที่ทรงพลังที่สุดในการจัดการกับงานที่ต้องทำซ้ำๆ</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8 p-4 bg-dark-800 border border-dark-700 rounded-lg">
+                            <p class="text-lg text-center text-slate-200 font-medium">
+                                <i class="fas fa-lightbulb text-yellow-400 mr-2"></i> เมื่อเราเข้าใจศิลปะในการคิดและเครื่องมือทั้ง 3 อย่างนี้แล้ว... เราก็พร้อมที่จะเรียนรู้ "ภาษา" ที่จะใช้สื่อสารความคิดเหล่านี้กับคอมพิวเตอร์แล้วล่ะครับ และภาษานั้นก็คือ C
+                            </p>
+                        </div>
                     </div>
-                    <h3 class="text-xl font-semibold text-slate-800 mt-8 mb-3">เครื่องมือในกล่องของนักคิด (The Toolbox)</h3>
-                    <p class="text-slate-600 mb-4 leading-relaxed">และถึงแม้ Algorithm ของเราจะซับซ้อนแค่ไหน เครื่องมือที่เราต้องใช้ในการสร้างมันขึ้นมาจริงๆ มีเพียง 3 อย่างนี้เท่านั้นครับ:</p>
-                    <ul class="space-y-4">
-                        <li><strong>ฟังก์ชัน (Functions):</strong> ลองนึกว่าคุณกำลังเขียน "ตำราอาหาร" แทนที่จะเขียนวิธี "หั่นหอมหัวใหญ่" ซ้ำๆ ในทุกๆ สูตรอาหาร คุณก็แค่เขียนวิธีหั่นไว้ในบทแรกบทเดียว แล้วตั้งชื่อให้มันว่า "วิธีหั่นหอม" ต่อไปในสูตรอื่นๆ คุณก็แค่เขียนว่า "ไปดูวิธีหั่นหอมจากบทแรก" พอ! ฟังก์ชันก็คือสิ่งเดียวกันครับ มันคือการตั้งชื่อให้ "ชุดของขั้นตอน" ที่เราทำบ่อยๆ เพื่อให้เราเรียกใช้ได้โดยไม่ต้องเขียนซ้ำ</li>
-                        <li><strong>เงื่อนไข (Conditionals):</strong> ชีวิตเต็มไปด้วยทางแยก โปรแกรมก็เช่นกันครับ `if-else` คือเครื่องมือที่ช่วยให้โปรแกรมตัดสินใจได้ เช่น `<strong class="text-amber-600">ถ้า</strong> ตู้เย็นมีไข่ <strong class="text-amber-600">ก็ให้</strong>ทำไข่เจียว, <strong class="text-amber-600">แต่ถ้าไม่ ก็ให้</strong>ทำข้าวผัด` มันคือการสร้างทางเลือกให้โปรแกรมของเรา ไม่ใช่การเดินไปข้างหน้าอย่างเดียว</li>
-                        <li><strong>ลูป (Loops):</strong> ลองจินตนาการว่าคุณต้องตีไข่ 50 ครั้ง คงไม่มีใครอยากเขียนคำสั่ง "ตีไข่" 50 บรรทัดใช่ไหมครับ? เราก็แค่สั่งว่า `<strong class="text-lime-600">ทำซ้ำ 50 ครั้ง:</strong> ตีไข่` นี่คือการใช้ `loop` ครับ มันคือเครื่องมือที่ทรงพลังที่สุดในการจัดการกับงานที่ต้องทำซ้ำๆ</li>
-                    </ul>
-                    <p class="mt-6 text-slate-700 font-medium">เมื่อเราเข้าใจศิลปะในการคิดและเครื่องมือทั้ง 3 อย่างนี้แล้ว... เราก็พร้อมที่จะเรียนรู้ "ภาษา" ที่จะใช้สื่อสารความคิดเหล่านี้กับคอมพิวเตอร์แล้วล่ะครับ และภาษานั้นก็คือ C</p>
-                </div>
-            </section>
+                </section>
 
-            <section id="c-basics" class="scroll-mt-16">
-                 <div class="content-card">
-                    <h2 class="text-3xl font-bold text-slate-900 mb-4">บทที่ 2: การสนทนาครั้งแรก (Anatomy of C)</h2>
-                    <h3 class="text-xl font-semibold mb-3">ทำไมต้องเป็นภาษา C ที่ดูน่ากลัว?</h3>
-                    <p class="text-slate-600 mb-4 leading-relaxed">ภาษาโปรแกรมสมัยใหม่ๆ ก็เหมือน "รถยนต์เกียร์ออโต้" ครับ ขับง่าย สะดวกสบาย มันจัดการเรื่องน่าปวดหัวให้เราหมด แต่... คุณไม่เคยได้สัมผัสการทำงานของเครื่องยนต์จริงๆ เลย คุณไม่รู้ว่าเกียร์เปลี่ยนตอนไหน หรือทำไมรอบเครื่องถึงขึ้น</p>
-                    <p class="text-slate-600 mb-4 leading-relaxed">ส่วนภาษา C ก็เหมือน **"รถยนต์เกียร์กระปุก"** ครับ คุณต้องเหยียบคลัตช์เอง เข้าเกียร์เอง คุณต้องฟังเสียงเครื่องยนต์ คุณต้องรู้สึกถึงแรงสั่นสะเทือน มันอาจจะยากกว่าในตอนแรก แต่มันบังคับให้คุณต้องเข้าใจ "จิตวิญญาณ" ของยานยนต์อย่างแท้จริง และเมื่อคุณขับเป็น... คุณจะสามารถรีดประสิทธิภาพของรถออกมาได้สูงสุด การเรียน C ก็เพื่อให้เราได้ "เปิดฝากระโปรง" และเห็นการทำงานของคอมพิวเตอร์ในระดับที่ลึกที่สุดนั่นเองครับ</p>
-                    <h3 class="text-xl font-semibold mt-8 mb-3">การสนทนาครั้งแรก: ผ่าตัดโปรแกรม Hello, world!</h3>
-                    <p class="text-slate-600 mb-4">เอาล่ะครับ ถึงเวลาที่เราจะมาผ่าตัดโค้ดโปรแกรมแรกของเรากันแบบละเอียดยิบทุกอณู นี่คือบทสนทนาแรกระหว่างเรากับคอมพิวเตอร์</p>
-                     <pre class="code-block"><code class="language-c"><span class="code-comment">// นำเข้าไลบรารีมาตรฐานสำหรับ Input/Output</span>
+                <section id="c-basics" class="scroll-mt-16">
+                    <div class="content-card">
+                        <div class="flex items-start section-header">
+                            <div class="section-icon">
+                                <i class="fas fa-code text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-3xl font-bold text-slate-100 mb-2">บทที่ 2: การสนทนาครั้งแรก (Anatomy of C)</h2>
+                                <div class="flex items-center text-slate-400 mb-4">
+                                    <i class="far fa-clock mr-1"></i>
+                                    <span class="text-sm">ระยะเวลาอ่าน: 6 นาที</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <h3 class="text-xl font-semibold text-slate-100 mb-3 flex items-center">
+                            <i class="fas fa-question-circle mr-2 text-primary-400"></i> ทำไมต้องเป็นภาษา C ที่ดูน่ากลัว?
+                        </h3>
+                        <p class="text-slate-300 mb-4 leading-relaxed">ภาษาโปรแกรมสมัยใหม่ๆ ก็เหมือน "รถยนต์เกียร์ออโต้" ครับ ขับง่าย สะดวกสบาย มันจัดการเรื่องน่าปวดหัวให้เราหมด แต่... คุณไม่เคยได้สัมผัสการทำงานของเครื่องยนต์จริงๆ เลย คุณไม่รู้ว่าเกียร์เปลี่ยนตอนไหน หรือทำไมรอบเครื่องถึงขึ้น</p>
+                        <p class="text-slate-300 mb-4 leading-relaxed">ส่วนภาษา C ก็เหมือน **"รถยนต์เกียร์กระปุก"** ครับ คุณต้องเหยียบคลัตช์เอง เข้าเกียร์เอง คุณต้องฟังเสียงเครื่องยนต์ คุณต้องรู้สึกถึงแรงสั่นสะเทือน มันอาจจะยากกว่าในตอนแรก แต่มันบังคับให้คุณต้องเข้าใจ "จิตวิญญาณ" ของยานยนต์อย่างแท้จริง และเมื่อคุณขับเป็น... คุณจะสามารถรีดประสิทธิภาพของรถออกมาได้สูงสุด การเรียน C ก็เพื่อให้เราได้ "เปิดฝากระโปรง" และเห็นการทำงานของคอมพิวเตอร์ในระดับที่ลึกที่สุดนั่นเองครับ</p>
+                        
+                        <h3 class="text-xl font-semibold text-slate-100 mt-8 mb-3 flex items-center">
+                            <i class="fas fa-heartbeat mr-2 text-red-400"></i> การสนทนาครั้งแรก: ผ่าตัดโปรแกรม Hello, world!
+                        </h3>
+                        <p class="text-slate-300 mb-4">เอาล่ะครับ ถึงเวลาที่เราจะมาผ่าตัดโค้ดโปรแกรมแรกของเรากันแบบละเอียดยิบทุกอณู นี่คือบทสนทนาแรกระหว่างเรากับคอมพิวเตอร์</p>
+                        
+                        <div class="relative mt-6">
+                            <div class="absolute top-4 right-4 flex space-x-2">
+                                <button class="text-slate-400 hover:text-slate-200">
+                                    <i class="far fa-copy"></i>
+                                </button>
+                                <button class="text-slate-400 hover:text-slate-200">
+                                    <i class="fas fa-expand"></i>
+                                </button>
+                            </div>
+                            <pre class="code-block"><code class="language-c"><span class="code-comment">// นำเข้าไลบรารีมาตรฐานสำหรับ Input/Output</span>
 <span class="keyword-glossary" data-term="#include" data-def="คำสั่ง 'พรีโปรเซสเซอร์' ใช้บอกคอมไพเลอร์ว่า 'ช่วยไปเอาโค้ดจากไฟล์อื่นมารวมกับไฟล์นี้ที' เหมือนการไปหยิบกล่องเครื่องมือมาเตรียมไว้ใช้งาน">#include</span> <span class="code-string">&lt;<span class="keyword-glossary" data-term="stdio.h" data-def="ชื่อของ 'กล่องเครื่องมือ' มาตรฐาน (Standard Input/Output Header) ที่มีฟังก์ชันพื้นฐานอย่าง printf() อยู่ข้างใน">stdio.h</span>&gt;</span>
 
 <span class="code-comment">// ฟังก์ชัน main คือจุดเริ่มต้นของทุกโปรแกรมภาษา C</span>
@@ -88,95 +528,913 @@
     <span class="code-comment">// ใช้ฟังก์ชัน printf เพื่อพิมพ์ข้อความออกทางหน้าจอ</span>
     <span class="keyword-glossary code-function" data-term="printf" data-def="มาจาก Print-Formatted เป็นฟังก์ชันที่อยู่ใน stdio.h ใช้สำหรับแสดงผลข้อความหรือค่าของตัวแปรออกไปยังหน้าจอ">printf</span>(<span class="code-string">"Hello, world!\n"</span>)<span class="keyword-glossary" data-term=";" data-def="เซมิโคลอน คือเครื่องหมาย 'จบประโยค' ในภาษา C มันทำหน้าที่เหมือนจุด full-stop ในภาษาอังกฤษ เพื่อบอกคอมไพเลอร์ว่าคำสั่งนี้จบลงแล้ว">;</span>
 <span class="keyword-glossary" data-term="{ }" data-def="ปีกกา คือสัญลักษณ์ที่ใช้กำหนด 'ขอบเขต' การทำงานของฟังก์ชัน หรือบล็อกของโค้ด ทุกอย่างที่อยู่ระหว่างปีกกาเปิด { และปีกกาปิด } ถือว่าเป็นส่วนหนึ่งของบล็อกนั้นๆ">}</span></code></pre>
-                </div>
-            </section>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+                            <div class="bg-dark-700 p-4 rounded-lg border border-dark-600">
+                                <h4 class="text-lg font-semibold text-slate-100 mb-3 flex items-center">
+                                    <i class="fas fa-check-circle text-green-400 mr-2"></i> สิ่งที่ได้เรียนรู้
+                                </h4>
+                                <ul class="space-y-2 text-slate-300">
+                                    <li class="flex items-start">
+                                        <i class="fas fa-chevron-right text-primary-400 mt-1 mr-2 text-xs"></i>
+                                        <span>โครงสร้างพื้นฐานของโปรแกรม C</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-chevron-right text-primary-400 mt-1 mr-2 text-xs"></i>
+                                        <span>ฟังก์ชัน main() เป็นจุดเริ่มต้น</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-chevron-right text-primary-400 mt-1 mr-2 text-xs"></i>
+                                        <span>การใช้งานฟังก์ชัน printf()</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                            <div class="bg-dark-700 p-4 rounded-lg border border-dark-600">
+                                <h4 class="text-lg font-semibold text-slate-100 mb-3 flex items-center">
+                                    <i class="fas fa-exclamation-triangle text-yellow-400 mr-2"></i> ข้อควรระวัง
+                                </h4>
+                                <ul class="space-y-2 text-slate-300">
+                                    <li class="flex items-start">
+                                        <i class="fas fa-chevron-right text-primary-400 mt-1 mr-2 text-xs"></i>
+                                        <span>อย่าลืม ; (semicolon) ท้ายคำสั่ง</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-chevron-right text-primary-400 mt-1 mr-2 text-xs"></i>
+                                        <span>ปีกกา { } ต้องเปิด-ปิดให้ถูกคู่</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-chevron-right text-primary-400 mt-1 mr-2 text-xs"></i>
+                                        <span>ต้อง include stdio.h เพื่อใช้ printf</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ======= บทที่ 3: การสนทนาโต้ตอบ ======= -->
+                <section id="c-interactive" class="scroll-mt-16">
+                    <div class="content-card">
+                        <div class="flex items-start section-header">
+                            <div class="section-icon">
+                                <i class="fas fa-comments text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-3xl font-bold text-slate-100 mb-2">บทที่ 3: การสนทนาโต้ตอบ (Interactive Conversations)</h2>
+                                <div class="flex items-center text-slate-400 mb-4">
+                                    <i class="far fa-clock mr-1"></i>
+                                    <span class="text-sm">ระยะเวลาอ่าน: 7 นาที</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <p class="text-slate-300 mb-4 leading-relaxed">ยินดีด้วยครับ! ตอนนี้คุณสามารถส่ง "ข้อความ" ไปยังคอมพิวเตอร์ได้แล้ว แต่การสื่อสารที่ดีคือการสื่อสารสองทางใช่ไหมครับ? ในบทนี้ เราจะทำให้โปรแกรมของเรา "ฉลาด" ขึ้น โดยการรับข้อมูลจากผู้ใช้กลับมาบ้าง และนี่คือการเติมเต็มโมเดล `Input -> Process -> Output` ของเราให้สมบูรณ์</p>
+                        
+                        <h3 class="text-xl font-semibold text-slate-100 mt-8 mb-3 flex items-center">
+                            <i class="fas fa-box-open mr-2 text-amber-400"></i> กล่องมหัศจรรย์: ตัวแปร (Variables)
+                        </h3>
+                        <p class="text-slate-300 mb-4 leading-relaxed">ลองจินตนาการว่าคุณต้องการให้โปรแกรมถามชื่อของคุณ แล้วทักทายกลับมาด้วยชื่อนั้น... โปรแกรมจะ "จำ" ชื่อที่คุณพิมพ์เข้าไปได้อย่างไร? คำตอบคือ <strong class="keyword-glossary" data-term="Variable" data-def="ตัวแปร คือชื่อที่เราตั้งขึ้นมาเพื่ออ้างอิงถึงพื้นที่ในหน่วยความจำของคอมพิวเตอร์ ใช้สำหรับเก็บข้อมูลที่โปรแกรมต้องใช้งาน เปรียบเสมือนกล่องที่มีป้ายชื่อกำกับอยู่">ตัวแปร (Variable)</strong> ครับ</p>
+                        <p class="text-slate-300 mb-4 leading-relaxed">ตัวแปร ก็เหมือน "กล่องเปล่าพร้อมป้ายชื่อ" ครับ เราต้องทำ 2 อย่าง:</p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-6">
+                            <div class="interactive-card">
+                                <h4 class="text-lg font-semibold text-slate-100 mb-3 flex items-center">
+                                    <i class="fas fa-tag mr-2 text-primary-400"></i> ตั้งชื่อให้กล่อง
+                                </h4>
+                                <p class="text-slate-300">เราต้องบอกคอมพิวเตอร์ก่อนว่า "ฉันจะสร้างกล่องนะ กล่องนี้ชื่อว่า `name`"</p>
+                                <div class="mt-4 p-3 bg-dark-800 rounded-lg">
+                                    <code class="text-primary-400">string name;</code>
+                                </div>
+                            </div>
+                            
+                            <div class="interactive-card">
+                                <h4 class="text-lg font-semibold text-slate-100 mb-3 flex items-center">
+                                    <i class="fas fa-shapes mr-2 text-green-400"></i> บอกชนิดของที่จะใส่
+                                </h4>
+                                <p class="text-slate-300">เราต้องบอกด้วยว่ากล่องนี้จะเอาไว้ใส่ของ "ประเภท" ไหน เช่น ใส่ข้อความ (string) หรือใส่ตัวเลข (int)</p>
+                                <div class="mt-4 p-3 bg-dark-800 rounded-lg">
+                                    <code class="text-green-400">name = get_string("Your name? ");</code>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <h3 class="text-xl font-semibold text-slate-100 mt-8 mb-3 flex items-center">
+                            <i class="fas fa-robot mr-2 text-accent-500"></i> สนทนากับผู้ใช้: โค้ดทักทายอัจฉริยะ
+                        </h3>
+                        <p class="text-slate-300 mb-4">มาดูโปรแกรมที่สมบูรณ์ขึ้นกันครับ โปรแกรมนี้จะถามชื่อของคุณ แล้วนำชื่อนั้นมาแสดงผลบนหน้าจอ จะเห็นว่าเราได้หยิบ "กล่องเครื่องมือ" มาเพิ่มอีกหนึ่งชิ้นคือ `<cs50.h>` ซึ่งเป็นไลบรารีพิเศษของคอร์ส CS50 ที่ทำให้การรับ Input ง่ายขึ้นมากครับ</p>
+                        
+                        <div class="relative mt-6">
+                            <div class="absolute top-4 right-4 flex space-x-2">
+                                <button class="text-slate-400 hover:text-slate-200" onclick="copyCode('code-interactive')">
+                                    <i class="far fa-copy"></i>
+                                </button>
+                                <button class="text-slate-400 hover:text-slate-200" onclick="runInteractiveDemo()">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                            </div>
+                            <pre id="code-interactive" class="code-block"><code class="language-c"><span class="code-comment">// นำเข้าไลบรารี cs50 และ stdio</span>
+                <span class="keyword-glossary" data-term="#include" data-def="คำสั่ง 'พรีโปรเซสเซอร์' ใช้บอกคอมไพเลอร์ว่า 'ช่วยไปเอาโค้ดจากไฟล์อื่นมารวมกับไฟล์นี้ที' เหมือนการไปหยิบกล่องเครื่องมือมาเตรียมไว้ใช้งาน">#include</span> <span class="code-string">&lt;<span class="keyword-glossary" data-term="cs50.h" data-def="ไลบรารี (กล่องเครื่องมือ) พิเศษของ CS50 ที่มีฟังก์ชันอำนวยความสะดวก เช่น get_string(), get_int() ทำให้การรับข้อมูลจากผู้ใช้ทำได้ง่ายขึ้นมาก">cs50.h</span>&gt;</span>
+                <span class="keyword-glossary" data-term="#include" data-def="คำสั่ง 'พรีโปรเซสเซอร์' ใช้บอกคอมไพเลอร์ว่า 'ช่วยไปเอาโค้ดจากไฟล์อื่นมารวมกับไฟล์นี้ที' เหมือนการไปหยิบกล่องเครื่องมือมาเตรียมไว้ใช้งาน">#include</span> <span class="code-string">&lt;<span class="keyword-glossary" data-term="stdio.h" data-def="ชื่อของ 'กล่องเครื่องมือ' มาตรฐาน (Standard Input/Output Header) ที่มีฟังก์ชันพื้นฐานอย่าง printf() อยู่ข้างใน">stdio.h</span>&gt;</span>
+
+                <span class="keyword-glossary" data-term="int" data-def="ย่อมาจาก Integer คือชนิดของข้อมูลที่เป็น 'เลขจำนวนเต็ม' การระบุ int หน้า main หมายความว่าเมื่อฟังก์ชันนี้ทำงานเสร็จ จะต้อง 'คืนค่า' กลับไปเป็นเลขจำนวนเต็ม">int</span> <span class="keyword-glossary code-function" data-term="main" data-def="คือชื่อฟังก์ชันที่พิเศษที่สุด ถือเป็น 'ประตูทางเข้าหลัก' ของทุกโปรแกรมในภาษา C คอมพิวเตอร์จะมองหาฟังก์ชัน main() เป็นอันดับแรกเสมอ">main</span>(<span class="keyword-glossary" data-term="void" data-def="แปลว่า 'ว่างเปล่า' ในที่นี้หมายความว่าฟังก์ชัน main ไม่ต้องการรับข้อมูลใดๆ จากภายนอกเพื่อเริ่มทำงาน">void</span>)
+                <span class="keyword-glossary" data-term="{ }" data-def="ปีกกา คือสัญลักษณ์ที่ใช้กำหนด 'ขอบเขต' การทำงานของฟังก์ชัน หรือบล็อกของโค้ด ทุกอย่างที่อยู่ระหว่างปีกกาเปิด { และปีกกาปิด } ถือว่าเป็นส่วนหนึ่งของบล็อกนั้นๆ">{</span>
+                    <span class="code-comment">// รับชื่อจากผู้ใช้แล้วเก็บในตัวแปร name</span>
+                    <span class="keyword-glossary" data-term="string" data-def="ชนิดข้อมูลสำหรับเก็บ 'ข้อความ' หรือ 'ชุดของตัวอักษร' ในไลบรารีของ CS50 ทำให้การจัดการข้อความเป็นเรื่องง่าย">string</span> name = <span class="keyword-glossary code-function" data-term="get_string" data-def="ฟังก์ชันจากไลบรารี cs50.h ใช้สำหรับรับข้อมูลประเภทข้อความ (string) จากผู้ใช้">get_string</span>(<span class="code-string">"What's your name? "</span>);
+
+                    <span class="code-comment">// แสดงผลคำทักทายโดยใช้ชื่อที่รับมา</span>
+                    <span class="keyword-glossary code-function" data-term="printf" data-def="มาจาก Print-Formatted เป็นฟังก์ชันที่อยู่ใน stdio.h ใช้สำหรับแสดงผลข้อความหรือค่าของตัวแปรออกไปยังหน้าจอ">printf</span>(<span class="code-string">"hello, <span class="keyword-glossary code-placeholder" data-term="%s" data-def="เรียกว่า 'Format Specifier' เป็นตัวจองที่ในข้อความ เพื่อบอก printf ว่า 'ตรงนี้นะ เดี๋ยวจะเอาค่า string มาเสียบแทนที่'">%s</span>\n"</span>, name);
+                <span class="keyword-glossary" data-term="{ }" data-def="ปีกกา คือสัญลักษณ์ที่ใช้กำหนด 'ขอบเขต' การทำงานของฟังก์ชัน หรือบล็อกของโค้ด ทุกอย่างที่อยู่ระหว่างปีกกาเปิด { และปีกกาปิด } ถือว่าเป็นส่วนหนึ่งของบล็อกนั้นๆ">}</span></code></pre>
+                        </div>
+                        
+                        <!-- Interactive Demo Section -->
+                        <div class="interactive-card mt-8">
+                            <h3 class="text-xl font-semibold text-slate-100 mb-4 flex items-center">
+                                <i class="fas fa-flask mr-2 text-purple-400"></i> ห้องทดลอง: ทักทายกันเถอะ!
+                            </h3>
+                            <p class="text-slate-300 mb-4">ลองใช้งานโปรแกรมทักทายด้วยการใส่ชื่อของคุณด้านล่าง แล้วดูผลลัพธ์ที่ได้</p>
+                            
+                            <div class="flex flex-col md:flex-row gap-4 mb-4">
+                                <div class="flex-grow">
+                                    <label class="block text-slate-300 mb-2">ป้อนชื่อของคุณ:</label>
+                                    <input type="text" id="user-name" class="input-field w-full" placeholder="เช่น Somchai" value="CS50 Lover">
+                                </div>
+                                <div class="flex items-end">
+                                    <button id="run-greeting-btn" class="btn-primary w-full md:w-auto">
+                                        <i class="fas fa-play mr-2"></i> รันโปรแกรม
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <h4 class="text-lg font-semibold text-slate-100 mb-2 flex items-center">
+                                        <i class="fas fa-terminal mr-2 text-green-400"></i> ผลลัพธ์:
+                                    </h4>
+                                    <div id="greeting-output" class="bg-dark-800 p-4 rounded-lg min-h-[100px] font-mono text-slate-200 whitespace-pre-wrap">
+                                        <!-- ผลลัพธ์จะแสดงที่นี่ -->
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <h4 class="text-lg font-semibold text-slate-100 mb-2 flex items-center">
+                                        <i class="fas fa-code mr-2 text-blue-400"></i> กลไกการทำงาน:
+                                    </h4>
+                                    <div class="bg-dark-800 p-4 rounded-lg text-slate-300">
+                                        <p class="mb-3"><i class="fas fa-chevron-right text-primary-400 mr-2"></i> โปรแกรมสร้างตัวแปรชื่อ <code class="text-primary-400">name</code> สำหรับเก็บข้อมูล</p>
+                                        <p class="mb-3"><i class="fas fa-chevron-right text-primary-400 mr-2"></i> ใช้ <code class="text-primary-400">get_string()</code> รับค่าจากผู้ใช้</p>
+                                        <p><i class="fas fa-chevron-right text-primary-400 mr-2"></i> แสดงผลด้วย <code class="text-primary-400">printf()</code> โดยใช้ <code class="text-amber-400">%s</code> แทนที่ด้วยชื่อ</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8 p-4 bg-dark-800 border border-dark-700 rounded-lg">
+                            <p class="text-lg text-center text-slate-200 font-medium">
+                                <i class="fas fa-star text-yellow-400 mr-2"></i> ยอดเยี่ยมมากครับ! ตอนนี้เว็บไซต์ของเราได้นำพาผู้เรียนจากการเป็นเพียงผู้ส่งสารฝ่ายเดียว มาสู่การเป็นผู้สร้างบทสนทนาที่สมบูรณ์แล้ว
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ======= บทที่ 4: คอมพิวเตอร์คิดเลข ======= -->
+                <section id="c-calculator" class="scroll-mt-16">
+                    <div class="content-card">
+                        <div class="flex items-start section-header">
+                            <div class="section-icon">
+                                <i class="fas fa-calculator text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-3xl font-bold text-slate-100 mb-2">บทที่ 4: คอมพิวเตอร์คิดเลข (Calculations & Data Types)</h2>
+                                <div class="flex items-center text-slate-400 mb-4">
+                                    <i class="far fa-clock mr-1"></i>
+                                    <span class="text-sm">ระยะเวลาอ่าน: 8 นาที</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <p class="text-slate-300 mb-4 leading-relaxed">
+                            นอกจากการจัดการกับ "ข้อความ" แล้ว พลังที่แท้จริงของคอมพิวเตอร์คือการ "คำนวณ" ครับ ในบทนี้ เราจะเปลี่ยนคอมพิวเตอร์ให้กลายเป็นเครื่องคิดเลขส่วนตัวของเรา แต่ก่อนอื่น เราต้องรู้จัก "ชนิด" ของตัวเลขที่คอมพิวเตอร์เข้าใจกันก่อน
+                        </p>
+                        
+                        <h3 class="text-xl font-semibold text-slate-100 mt-8 mb-3 flex items-center">
+                            <i class="fas fa-sort-numeric-up mr-2 text-blue-400"></i> ตัวเลขก็มีหลายประเภท (Numeric Data Types)
+                        </h3>
+                        <p class="text-slate-300 mb-4 leading-relaxed">
+                            ในโลกคณิตศาสตร์มีทั้งเลขจำนวนเต็มและเลขทศนิยม ในภาษา C ก็เช่นกันครับ เราต้องเลือกใช้ "กล่อง" หรือตัวแปรให้ถูกประเภทกับตัวเลขที่เราจะเก็บ
+                        </p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 my-6">
+                            <div class="interactive-card">
+                                <h4 class="text-lg font-semibold text-slate-100 mb-3 flex items-center">
+                                    <i class="fas fa-hashtag mr-2 text-primary-400"></i> int
+                                </h4>
+                                <p class="text-slate-300">สำหรับเก็บเลข <strong>จำนวนเต็ม</strong> เช่น 5, 200, -10</p>
+                                <div class="mt-4 p-3 bg-dark-800 rounded-lg">
+                                    <code class="text-primary-400">int age = 25;</code>
+                                </div>
+                                <div class="mt-3 text-sm text-slate-400">
+                                    <i class="fas fa-info-circle mr-1"></i> เหมาะสำหรับข้อมูลที่ไม่สามารถแบ่งเป็นเศษส่วนได้
+                                </div>
+                            </div>
+                            
+                            <div class="interactive-card">
+                                <h4 class="text-lg font-semibold text-slate-100 mb-3 flex items-center">
+                                    <i class="fas fa-divide mr-2 text-green-400"></i> float
+                                </h4>
+                                <p class="text-slate-300">สำหรับเก็บเลข <strong>ทศนิยม</strong> เช่น 3.14, 1.75</p>
+                                <div class="mt-4 p-3 bg-dark-800 rounded-lg">
+                                    <code class="text-green-400">float pi = 3.14159;</code>
+                                </div>
+                                <div class="mt-3 text-sm text-slate-400">
+                                    <i class="fas fa-info-circle mr-1"></i> เหมาะกับข้อมูลที่ต้องการความละเอียด
+                                </div>
+                            </div>
+                            
+                            <div class="interactive-card">
+                                <h4 class="text-lg font-semibold text-slate-100 mb-3 flex items-center">
+                                    <i class="fas fa-infinity mr-2 text-purple-400"></i> long
+                                </h4>
+                                <p class="text-slate-300">สำหรับเก็บเลขจำนวนเต็มที่ <strong>ใหญ่มากๆ</strong></p>
+                                <div class="mt-4 p-3 bg-dark-800 rounded-lg">
+                                    <code class="text-purple-400">long population = 7000000000;</code>
+                                </div>
+                                <div class="mt-3 text-sm text-slate-400">
+                                    <i class="fas fa-info-circle mr-1"></i> ใช้เมื่อค่าเกินขอบเขตของ int
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <h3 class="text-xl font-semibold text-slate-100 mt-8 mb-3 flex items-center">
+                            <i class="fas fa-calculator mr-2 text-yellow-400"></i> เครื่องมือของนักคำนวณ: ตัวดำเนินการ (Operators)
+                        </h3>
+                        <p class="text-slate-300 mb-4">ภาษา C มีเครื่องหมายสำหรับการคำนวณเหมือนกับที่เราเรียนคณิตศาสตร์มาเลยครับ</p>
+                        
+                        <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mb-6">
+                            <div class="bg-dark-700 p-4 rounded-lg text-center">
+                                <div class="text-2xl font-bold text-primary-400 mb-2">+</div>
+                                <div class="text-sm text-slate-300">การบวก</div>
+                            </div>
+                            <div class="bg-dark-700 p-4 rounded-lg text-center">
+                                <div class="text-2xl font-bold text-primary-400 mb-2">-</div>
+                                <div class="text-sm text-slate-300">การลบ</div>
+                            </div>
+                            <div class="bg-dark-700 p-4 rounded-lg text-center">
+                                <div class="text-2xl font-bold text-primary-400 mb-2">*</div>
+                                <div class="text-sm text-slate-300">การคูณ</div>
+                            </div>
+                            <div class="bg-dark-700 p-4 rounded-lg text-center">
+                                <div class="text-2xl font-bold text-primary-400 mb-2">/</div>
+                                <div class="text-sm text-slate-300">การหาร</div>
+                            </div>
+                            <div class="bg-dark-700 p-4 rounded-lg text-center">
+                                <div class="text-2xl font-bold text-primary-400 mb-2">%</div>
+                                <div class="text-sm text-slate-300">หารเอาเศษ</div>
+                            </div>
+                        </div>
+                        
+                        <h3 class="text-xl font-semibold text-slate-100 mt-8 mb-3 flex items-center">
+                            <i class="fas fa-plus-circle mr-2 text-green-400"></i> มาสร้างเครื่องบวกเลขอย่างง่ายกัน!
+                        </h3>
+                        <p class="text-slate-300 mb-4">โปรแกรมนี้จะถามตัวเลขจากเรา 2 ตัว แล้วนำมาบวกกันและแสดงผลลัพธ์ สังเกตว่าเราจะใช้ฟังก์ชัน <strong class="keyword-glossary" data-term="get_int" data-def="ฟังก์ชันจากไลบรารี cs50.h ใช้สำหรับรับข้อมูลประเภทเลขจำนวนเต็ม (int) จากผู้ใช้โดยเฉพาะ">get_int()</strong> และใช้ <strong class="keyword-glossary code-placeholder" data-term="%i" data-def="Format Specifier สำหรับตัวแปรชนิด Integer (จำนวนเต็ม) เพื่อบอกให้ printf นำค่าตัวเลขจำนวนเต็มมาแสดงผล ณ ตำแหน่งนี้">`%i`</strong> ใน `printf` เพื่อแสดงผลตัวเลขครับ</p>
+                        
+                        <div class="relative mt-6">
+                            <div class="absolute top-4 right-4 flex space-x-2">
+                                <button class="text-slate-400 hover:text-slate-200" onclick="copyCode('code-calculator')">
+                                    <i class="far fa-copy"></i>
+                                </button>
+                                <button class="text-slate-400 hover:text-slate-200" onclick="runCalculatorDemo()">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                            </div>
+                            <pre id="code-calculator" class="code-block"><code class="language-c"><span class="code-comment">// นำเข้าไลบรารีที่จำเป็น</span>
+                <span class="keyword-glossary" data-term="#include" data-def="คำสั่ง 'พรีโปรเซสเซอร์' ใช้บอกคอมไพเลอร์ว่า 'ช่วยไปเอาโค้ดจากไฟล์อื่นมารวมกับไฟล์นี้ที'">#include</span> <span class="code-string">&lt;<span class="keyword-glossary" data-term="cs50.h" data-def="ไลบรารี (กล่องเครื่องมือ) พิเศษของ CS50 ที่มีฟังก์ชันอำนวยความสะดวก เช่น get_string(), get_int() ทำให้การรับข้อมูลจากผู้ใช้ทำได้ง่ายขึ้นมาก">cs50.h</span>&gt;</span>
+                <span class="keyword-glossary" data-term="#include" data-def="คำสั่ง 'พรีโปรเซสเซอร์' ใช้บอกคอมไพเลอร์ว่า 'ช่วยไปเอาโค้ดจากไฟล์อื่นมารวมกับไฟล์นี้ที'">#include</span> <span class="code-string">&lt;<span class="keyword-glossary" data-term="stdio.h" data-def="ชื่อของ 'กล่องเครื่องมือ' มาตรฐาน (Standard Input/Output Header) ที่มีฟังก์ชันพื้นฐานอย่าง printf() อยู่ข้างใน">stdio.h</span>&gt;</span>
+
+                <span class="keyword-glossary" data-term="int" data-def="ชนิดข้อมูลสำหรับเก็บ 'เลขจำนวนเต็ม' (Integer)">int</span> <span class="keyword-glossary code-function" data-term="main" data-def="คือชื่อฟังก์ชันที่พิเศษที่สุด ถือเป็น 'ประตูทางเข้าหลัก' ของทุกโปรแกรมในภาษา C">main</span>(<span class="keyword-glossary" data-term="void" data-def="แปลว่า 'ว่างเปล่า' ในที่นี้หมายความว่าฟังก์ชัน main ไม่ต้องการรับข้อมูลใดๆ จากภายนอกเพื่อเริ่มทำงาน">void</span>)
+                <span class="keyword-glossary" data-term="{ }" data-def="ปีกกา คือสัญลักษณ์ที่ใช้กำหนด 'ขอบเขต' การทำงานของฟังก์ชัน หรือบล็อกของโค้ด">{</span>
+                    <span class="code-comment">// รับค่า x จากผู้ใช้</span>
+                    <span class="keyword-glossary" data-term="int" data-def="ชนิดข้อมูลสำหรับเก็บ 'เลขจำนวนเต็ม' (Integer)">int</span> x = <span class="keyword-glossary code-function" data-term="get_int" data-def="ฟังก์ชันจากไลบรารี cs50.h ใช้สำหรับรับข้อมูลประเภทเลขจำนวนเต็ม (int) จากผู้ใช้โดยเฉพาะ">get_int</span>(<span class="code-string">"x: "</span>);
+                    
+                    <span class="code-comment">// รับค่า y จากผู้ใช้</span>
+                    <span class="keyword-glossary" data-term="int" data-def="ชนิดข้อมูลสำหรับเก็บ 'เลขจำนวนเต็ม' (Integer)">int</span> y = <span class="keyword-glossary code-function" data-term="get_int" data-def="ฟังก์ชันจากไลบรารี cs50.h ใช้สำหรับรับข้อมูลประเภทเลขจำนวนเต็ม (int) จากผู้ใช้โดยเฉพาะ">get_int</span>(<span class="code-string">"y: "</span>);
+
+                    <span class="code-comment">// คำนวณผลรวมแล้วแสดงผล</span>
+                    <span class="keyword-glossary code-function" data-term="printf" data-def="ฟังก์ชันสำหรับแสดงผลข้อความหรือค่าของตัวแปรออกไปยังหน้าจอ">printf</span>(<span class="code-string">"The sum is <span class="keyword-glossary code-placeholder" data-term="%i" data-def="Format Specifier สำหรับตัวแปรชนิด Integer (จำนวนเต็ม) เพื่อบอกให้ printf นำค่าตัวเลขจำนวนเต็มมาแสดงผล ณ ตำแหน่งนี้">%i</span>\n"</span>, x + y);
+                <span class="keyword-glossary" data-term="{ }" data-def="ปีกกา คือสัญลักษณ์ที่ใช้กำหนด 'ขอบเขต' การทำงานของฟังก์ชัน หรือบล็อกของโค้ด">}</span></code></pre>
+                        </div>
+                        
+                        <!-- ห้องทดลองเครื่องคิดเลข -->
+                        <div class="interactive-card mt-8">
+                            <h3 class="text-xl font-semibold text-slate-100 mb-4 flex items-center">
+                                <i class="fas fa-flask mr-2 text-purple-400"></i> ห้องทดลองเครื่องคิดเลข
+                            </h3>
+                            <p class="text-slate-300 mb-4">ทดลองใช้เครื่องคิดเลขที่เราสร้างด้วยภาษา C โดยป้อนตัวเลขสองค่าและเลือกการดำเนินการ</p>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div class="bg-dark-800 p-5 rounded-lg">
+                                    <h4 class="text-lg font-semibold text-slate-100 mb-3 flex items-center">
+                                        <i class="fas fa-sliders-h mr-2 text-blue-400"></i> ป้อนข้อมูล
+                                    </h4>
+                                    
+                                    <div class="space-y-4">
+                                        <div>
+                                            <label class="block text-slate-300 mb-2">ค่า x:</label>
+                                            <input type="number" id="calc-x" class="input-field w-full" placeholder="ป้อนตัวเลข" value="15">
+                                        </div>
+                                        
+                                        <div>
+                                            <label class="block text-slate-300 mb-2">ค่า y:</label>
+                                            <input type="number" id="calc-y" class="input-field w-full" placeholder="ป้อนตัวเลข" value="8">
+                                        </div>
+                                        
+                                        <div>
+                                            <label class="block text-slate-300 mb-2">การดำเนินการ:</label>
+                                            <div class="grid grid-cols-4 gap-2">
+                                                <button data-op="+" class="calc-op-btn bg-dark-700 hover:bg-dark-600 py-2 rounded transition-colors">+</button>
+                                                <button data-op="-" class="calc-op-btn bg-dark-700 hover:bg-dark-600 py-2 rounded transition-colors">-</button>
+                                                <button data-op="*" class="calc-op-btn bg-dark-700 hover:bg-dark-600 py-2 rounded transition-colors">×</button>
+                                                <button data-op="/" class="calc-op-btn bg-dark-700 hover:bg-dark-600 py-2 rounded transition-colors">÷</button>
+                                            </div>
+                                        </div>
+                                        
+                                        <div>
+                                            <button id="run-calculator-btn" class="btn-primary w-full">
+                                                <i class="fas fa-calculator mr-2"></i> คำนวณผลลัพธ์
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-dark-800 p-5 rounded-lg">
+                                    <h4 class="text-lg font-semibold text-slate-100 mb-3 flex items-center">
+                                        <i class="fas fa-chart-bar mr-2 text-green-400"></i> ผลลัพธ์การคำนวณ
+                                    </h4>
+                                    
+                                    <div id="calculator-output" class="mb-4">
+                                        <div class="text-center py-8 text-slate-400">
+                                            <i class="fas fa-arrow-left text-lg mb-2"></i>
+                                            <p>ป้อนตัวเลขและเลือกการดำเนินการ</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="bg-dark-900 p-4 rounded-lg">
+                                        <h5 class="text-md font-semibold text-slate-200 mb-2 flex items-center">
+                                            <i class="fas fa-info-circle mr-2 text-yellow-400"></i> ข้อมูลจำลองการทำงาน
+                                        </h5>
+                                        <div class="text-sm text-slate-400">
+                                            <p class="mb-1"><span class="inline-block w-20">x:</span> <span id="sim-x">0</span></p>
+                                            <p class="mb-1"><span class="inline-block w-20">y:</span> <span id="sim-y">0</span></p>
+                                            <p class="mb-1"><span class="inline-block w-20">Operation:</span> <span id="sim-op">?</span></p>
+                                            <p class="mb-1"><span class="inline-block w-20">Result:</span> <span id="sim-result">0</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- ส่วนการคำนวณขั้นสูง -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+                            <div class="interactive-card">
+                                <h4 class="text-lg font-semibold text-slate-100 mb-3 flex items-center">
+                                    <i class="fas fa-exclamation-triangle mr-2 text-yellow-400"></i> ข้อควรระวัง: การหารจำนวนเต็ม
+                                </h4>
+                                <p class="text-slate-300 mb-4">
+                                    ในภาษา C การหารจำนวนเต็มด้วยจำนวนเต็มจะได้ผลลัพธ์เป็นจำนวนเต็มเท่านั้น โดยจะตัดส่วนทศนิยมทิ้งไป
+                                </p>
+                                <div class="bg-dark-800 p-4 rounded-lg">
+                                    <code class="text-amber-400">int a = 10, b = 3;<br>int result = a / b; // ได้ 3 ไม่ใช่ 3.333</code>
+                                </div>
+                            </div>
+                            
+                            <div class="interactive-card">
+                                <h4 class="text-lg font-semibold text-slate-100 mb-3 flex items-center">
+                                    <i class="fas fa-lightbulb mr-2 text-blue-400"></i> เทคนิค: การแปลงชนิดข้อมูล
+                                </h4>
+                                <p class="text-slate-300 mb-4">
+                                    หากต้องการผลลัพธ์แบบทศนิยม ต้องแปลงตัวแปรอย่างน้อยหนึ่งตัวเป็น float ก่อนการคำนวณ
+                                </p>
+                                <div class="bg-dark-800 p-4 rounded-lg">
+                                    <code class="text-blue-400">int a = 10, b = 3;<br>float result = (float) a / b; // ได้ 3.333</code>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8 p-4 bg-dark-800 border border-dark-700 rounded-lg">
+                            <p class="text-lg text-center text-slate-200 font-medium">
+                                <i class="fas fa-star text-yellow-400 mr-2"></i> เพียงเท่านี้ คุณก็ได้สร้างโปรแกรมที่ไม่ได้แค่โต้ตอบ แต่ยัง "คิด" และคำนวณให้คุณได้แล้ว!
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ======= บทที่ 5: โปรแกรมผู้มีวิจารณญาณ ======= -->
+                <section id="c-conditionals" class="scroll-mt-16">
+                    <div class="content-card">
+                        <div class="flex items-start section-header">
+                            <div class="section-icon">
+                                <i class="fas fa-random text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-3xl font-bold text-slate-100 mb-2">บทที่ 5: โปรแกรมผู้มีวิจารณญาณ (Conditionals)</h2>
+                                <div class="flex items-center text-slate-400 mb-4">
+                                    <i class="far fa-clock mr-1"></i>
+                                    <span class="text-sm">ระยะเวลาอ่าน: 9 นาที</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <p class="text-slate-300 mb-4 leading-relaxed">
+                            ถึงตอนนี้ โปรแกรมของเราทำงานเป็นเส้นตรงตั้งแต่ต้นจนจบ แต่ในโลกแห่งความเป็นจริง เราต้องตัดสินใจอยู่ตลอดเวลา "ถ้าฝนตก ให้กางร่ม แต่ถ้าไม่ ก็ไม่ต้อง" โปรแกรมคอมพิวเตอร์ก็เช่นกันครับ ในบทนี้ เราจะมาสอนให้โปรแกรมของเรามี "ทางแยก" และเลือกเดินไปในเส้นทางที่ถูกต้องได้
+                        </p>
+                        
+                        <h3 class="text-xl font-semibold text-slate-100 mt-8 mb-3 flex items-center">
+                            <i class="fas fa-question-circle mr-2 text-blue-400"></i> คำถามประเภท ใช่/ไม่ใช่ (Boolean Expressions)
+                        </h3>
+                        <p class="text-slate-300 mb-4 leading-relaxed">
+                            หัวใจของการตัดสินใจคือการตั้ง "คำถาม" ที่มีคำตอบแค่ "จริง" (True) หรือ "เท็จ" (False) เท่านั้น ในทางคอมพิวเตอร์ เราเรียกตรรกะแบบนี้ว่า <strong class="keyword-glossary" data-term="Boolean" data-def="ตรรกะแบบบูลีน คือระบบคิดที่มีผลลัพธ์เพียง 2 อย่างคือ จริง (true) หรือ เท็จ (false) เป็นพื้นฐานของการตัดสินใจทั้งหมดในคอมพิวเตอร์">Boolean</strong> ครับ เช่น คำถาม "5 มากกว่า 3 หรือไม่?" คำตอบคือ "จริง" ส่วนคำถาม "10 เท่ากับ 1 หรือไม่?" คำตอบคือ "เท็จ"
+                        </p>
+                        
+                        <h3 class="text-xl font-semibold text-slate-100 mt-8 mb-3 flex items-center">
+                            <i class="fas fa-compress-arrows-alt mr-2 text-green-400"></i> เครื่องมือสำหรับเปรียบเทียบ (Comparison Operators)
+                        </h3>
+                        <p class="text-slate-300 mb-4">เพื่อสร้างคำถามแบบ Boolean ในภาษา C เราจะใช้เครื่องหมายเหล่านี้ในการเปรียบเทียบค่าสองข้างครับ</p>
+                        
+                        <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-6">
+                            <div class="bg-dark-700 p-4 rounded-lg">
+                                <div class="text-2xl font-mono text-center text-primary-400 mb-2">&gt;</div>
+                                <div class="text-center text-sm text-slate-300">มากกว่า</div>
+                            </div>
+                            <div class="bg-dark-700 p-4 rounded-lg">
+                                <div class="text-2xl font-mono text-center text-primary-400 mb-2">&lt;</div>
+                                <div class="text-center text-sm text-slate-300">น้อยกว่า</div>
+                            </div>
+                            <div class="bg-dark-700 p-4 rounded-lg">
+                                <div class="text-2xl font-mono text-center text-primary-400 mb-2">&gt;=</div>
+                                <div class="text-center text-sm text-slate-300">มากกว่าหรือเท่ากับ</div>
+                            </div>
+                            <div class="bg-dark-700 p-4 rounded-lg">
+                                <div class="text-2xl font-mono text-center text-primary-400 mb-2">&lt;=</div>
+                                <div class="text-center text-sm text-slate-300">น้อยกว่าหรือเท่ากับ</div>
+                            </div>
+                            <div class="bg-dark-700 p-4 rounded-lg">
+                                <div class="text-2xl font-mono text-center text-primary-400 mb-2">==</div>
+                                <div class="text-center text-sm text-slate-300">เท่ากัน</div>
+                            </div>
+                            <div class="bg-dark-700 p-4 rounded-lg">
+                                <div class="text-2xl font-mono text-center text-primary-400 mb-2">!=</div>
+                                <div class="text-center text-sm text-slate-300">ไม่เท่ากัน</div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-amber-900 bg-opacity-20 border-l-4 border-amber-400 p-4 my-6 rounded-lg">
+                            <p class="font-bold text-amber-300 mb-2 flex items-center">
+                                <i class="fas fa-exclamation-triangle mr-2"></i> ข้อควรระวังสุดคลาสสิก!
+                            </p>
+                            <p class="text-amber-200 mb-2"><code class="bg-amber-900 px-2 py-1 rounded">=</code> (ตัวเดียว) คือการ <strong>กำหนดค่า</strong> (Assignment) เช่น <code class="bg-amber-900 px-2 py-1 rounded">x = 5;</code> คือ "เอา 5 ไปใส่ในกล่อง x"</p>
+                            <p class="text-amber-200"><code class="bg-amber-900 px-2 py-1 rounded">==</code> (สองตัว) คือการ <strong>เปรียบเทียบ</strong> (Comparison) เช่น <code class="bg-amber-900 px-2 py-1 rounded">x == 5;</code> คือ "ถามว่าค่าในกล่อง x เท่ากับ 5 หรือไม่?"</p>
+                        </div>
+                        
+                        <h3 class="text-xl font-semibold text-slate-100 mt-8 mb-3 flex items-center">
+                            <i class="fas fa-code-branch mr-2 text-purple-400"></i> สร้างทางแยกด้วย `if-else`
+                        </h3>
+                        <p class="text-slate-300 mb-4">นี่คือโปรแกรมที่จะรับเลขมา 2 ตัว แล้วเปรียบเทียบกันโดยใช้โครงสร้าง <strong class="keyword-glossary" data-term="if-else" data-def="ชุดคำสั่งที่ใช้สร้างเงื่อนไข ถ้าเงื่อนไขใน if เป็นจริง จะทำคำสั่งในบล็อกของ if แต่ถ้าเป็นเท็จ จะไปตรวจสอบเงื่อนไขถัดไป (else if) หรือทำคำสั่งในบล็อกของ else แทน">`if-else`</strong> ครับ</p>
+                        
+                        <div class="relative mt-6">
+                            <div class="absolute top-4 right-4 flex space-x-2">
+                                <button class="text-slate-400 hover:text-slate-200" onclick="copyCode('code-conditionals')">
+                                    <i class="far fa-copy"></i>
+                                </button>
+                                <button class="text-slate-400 hover:text-slate-200" onclick="runConditionalDemo()">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                            </div>
+                            <pre id="code-conditionals" class="code-block"><code class="language-c"><span class="code-comment">// นำเข้าไลบรารีที่จำเป็น</span>
+                <span class="keyword-glossary" data-term="#include" data-def="คำสั่ง 'พรีโปรเซสเซอร์' ใช้บอกคอมไพเลอร์ว่า 'ช่วยไปเอาโค้ดจากไฟล์อื่นมารวมกับไฟล์นี้ที'">#include</span> <span class="code-string">&lt;<span class="keyword-glossary" data-term="cs50.h" data-def="ไลบรารีพิเศษของ CS50 ที่มีฟังก์ชันอำนวยความสะดวก">cs50.h</span>&gt;</span>
+                <span class="keyword-glossary" data-term="#include" data-def="คำสั่ง 'พรีโปรเซสเซอร์' ใช้บอกคอมไพเลอร์ว่า 'ช่วยไปเอาโค้ดจากไฟล์อื่นมารวมกับไฟล์นี้ที'">#include</span> <span class="code-string">&lt;<span class="keyword-glossary" data-term="stdio.h" data-def="ไลบรารีมาตรฐานสำหรับ Input/Output">stdio.h</span>&gt;</span>
+
+                <span class="keyword-glossary" data-term="int" data-def="ชนิดข้อมูลเลขจำนวนเต็ม">int</span> <span class="keyword-glossary code-function" data-term="main" data-def="ฟังก์ชันหลัก จุดเริ่มต้นของโปรแกรม">main</span>(<span class="keyword-glossary" data-term="void" data-def="หมายความว่าฟังก์ชันนี้ไม่รับค่าใดๆ">void</span>)
+                <span class="keyword-glossary" data-term="{ }">{</span>
+                    <span class="code-comment">// รับค่า x และ y จากผู้ใช้</span>
+                    <span class="keyword-glossary" data-term="int" data-def="ชนิดข้อมูลเลขจำนวนเต็ม">int</span> x = <span class="keyword-glossary code-function" data-term="get_int" data-def="ฟังก์ชันรับเลขจำนวนเต็มจากผู้ใช้">get_int</span>(<span class="code-string">"What's x? "</span>);
+                    <span class="keyword-glossary" data-term="int" data-def="ชนิดข้อมูลเลขจำนวนเต็ม">int</span> y = <span class="keyword-glossary code-function" data-term="get_int" data-def="ฟังก์ชันรับเลขจำนวนเต็มจากผู้ใช้">get_int</span>(<span class="code-string">"What's y? "</span>);
+
+                    <span class="code-comment">// เริ่มการตัดสินใจ</span>
+                    <span class="keyword-glossary" data-term="if" data-def="คำสั่งเริ่มต้นเงื่อนไข 'ถ้า...' เพื่อตรวจสอบว่าสิ่งที่อยู่ในวงเล็บเป็นจริงหรือไม่">if</span> (x < y)
+                    <span class="keyword-glossary" data-term="{ }">{</span>
+                        <span class="keyword-glossary code-function" data-term="printf" data-def="ฟังก์ชันแสดงผลข้อความ">printf</span>(<span class="code-string">"x is less than y\n"</span>);
+                    <span class="keyword-glossary" data-term="{ }">}</span>
+                    <span class="keyword-glossary" data-term="else if" data-def="คำสั่งเงื่อนไข '...หรือถ้า...' เป็นทางเลือกที่สอง ถ้าเงื่อนไข if แรกไม่เป็นจริง">else if</span> (x > y)
+                    <span class="keyword-glossary" data-term="{ }">{</span>
+                        <span class="keyword-glossary code-function" data-term="printf" data-def="ฟังก์ชันแสดงผลข้อความ">printf</span>(<span class="code-string">"x is greater than y\n"</span>);
+                    <span class="keyword-glossary" data-term="{ }">}</span>
+                    <span class="keyword-glossary" data-term="else" data-def="คำสั่งที่จะทำงาน 'ในกรณีอื่นๆ' ที่เงื่อนไข if และ else if ข้างบนไม่เป็นจริงเลย">else</span>
+                    <span class="keyword-glossary" data-term="{ }">{</span>
+                        <span class="keyword-glossary code-function" data-term="printf" data-def="ฟังก์ชันแสดงผลข้อความ">printf</span>(<span class="code-string">"x is equal to y\n"</span>);
+                    <span class="keyword-glossary" data-term="{ }">}</span>
+                <span class="keyword-glossary" data-term="{ }">}</span></code></pre>
+                        </div>
+
+                        <!-- ห้องทดลองการตัดสินใจ: ซื้อตั๋วหนัง -->
+                        <div class="interactive-card mt-8">
+                            <h3 class="text-xl font-semibold text-slate-100 mb-4 flex items-center">
+                                <i class="fas fa-ticket-alt mr-2 text-purple-400"></i> ห้องทดลองการตัดสินใจ: ซื้อตั๋วหนัง
+                            </h3>
+                            <p class="text-slate-300 mb-4">ลองป้อนอายุของคุณ แล้วดูสิว่าโปรแกรมจะตัดสินใจเลือกเส้นทางไหนให้คุณ!</p>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div class="bg-dark-800 p-5 rounded-lg">
+                                    <h4 class="text-lg font-semibold text-slate-100 mb-3 flex items-center">
+                                        <i class="fas fa-user mr-2 text-blue-400"></i> ข้อมูลผู้ใช้
+                                    </h4>
+                                    
+                                    <div class="space-y-4">
+                                        <div>
+                                            <label class="block text-slate-300 mb-2">อายุของคุณ:</label>
+                                            <input type="number" id="user-age" class="input-field w-full" placeholder="ป้อนอายุ" value="20" min="1" max="120">
+                                        </div>
+                                        
+                                        <div>
+                                            <label class="block text-slate-300 mb-2">ภาพยนตร์ที่ต้องการดู:</label>
+                                            <div class="grid grid-cols-1 gap-2">
+                                                <div class="flex items-center p-3 bg-dark-700 rounded-lg">
+                                                    <input type="radio" id="movie-g" name="movie" value="G" class="mr-3" checked>
+                                                    <label for="movie-g" class="text-slate-300">G: ทุกวัย (General)</label>
+                                                </div>
+                                                <div class="flex items-center p-3 bg-dark-700 rounded-lg">
+                                                    <input type="radio" id="movie-pg13" name="movie" value="PG-13" class="mr-3">
+                                                    <label for="movie-pg13" class="text-slate-300">PG-13: 13 ปีขึ้นไป</label>
+                                                </div>
+                                                <div class="flex items-center p-3 bg-dark-700 rounded-lg">
+                                                    <input type="radio" id="movie-r" name="movie" value="R" class="mr-3">
+                                                    <label for="movie-r" class="text-slate-300">R: 18 ปีขึ้นไป (Restricted)</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div>
+                                            <button id="check-ticket-btn" class="btn-primary w-full">
+                                                <i class="fas fa-ticket-alt mr-2"></i> ตรวจสอบสิทธิ์
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-dark-800 p-5 rounded-lg">
+                                    <h4 class="text-lg font-semibold text-slate-100 mb-3 flex items-center">
+                                        <i class="fas fa-clipboard-check mr-2 text-green-400"></i> ผลลัพธ์การตัดสินใจ
+                                    </h4>
+                                    
+                                    <div id="decision-output" class="mb-4">
+                                        <div class="text-center py-8 text-slate-400">
+                                            <i class="fas fa-arrow-left text-lg mb-2"></i>
+                                            <p>ป้อนอายุและเลือกภาพยนตร์เพื่อตรวจสอบ</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="bg-dark-900 p-4 rounded-lg">
+                                        <h5 class="text-md font-semibold text-slate-200 mb-2 flex items-center">
+                                            <i class="fas fa-code mr-2 text-yellow-400"></i> เบื้องหลังการทำงาน
+                                        </h5>
+                                        <div id="code-simulation" class="text-sm text-slate-400 font-mono overflow-x-auto">
+                                            // โค้ดจำลองการทำงาน
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <div class="bg-blue-900 bg-opacity-20 border border-blue-700 rounded-lg p-4">
+                                    <div class="text-blue-400 text-3xl mb-2 text-center">G</div>
+                                    <p class="text-center text-blue-300">ทุกวัย</p>
+                                </div>
+                                <div class="bg-amber-900 bg-opacity-20 border border-amber-700 rounded-lg p-4">
+                                    <div class="text-amber-400 text-3xl mb-2 text-center">PG-13</div>
+                                    <p class="text-center text-amber-300">13 ปีขึ้นไป</p>
+                                </div>
+                                <div class="bg-red-900 bg-opacity-20 border border-red-700 rounded-lg p-4">
+                                    <div class="text-red-400 text-3xl mb-2 text-center">R</div>
+                                    <p class="text-center text-red-300">18 ปีขึ้นไป</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8 p-4 bg-dark-800 border border-dark-700 rounded-lg">
+                            <p class="text-lg text-center text-slate-200 font-medium">
+                                <i class="fas fa-star text-yellow-400 mr-2"></i> สุดยอด! ตอนนี้โปรแกรมของคุณไม่ได้เป็นแค่เครื่องคิดเลขที่ซื่อบื้ออีกต่อไป แต่มันสามารถวิเคราะห์และให้คำตอบที่แตกต่างกันตามสถานการณ์ได้แล้ว
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ======= บทที่ 6: การทำงานซ้ำอย่างไม่รู้จักเหนื่อย ======= -->
+                <section id="c-loops" class="scroll-mt-16">
+                    <div class="content-card">
+                        <div class="flex items-start section-header">
+                            <div class="section-icon">
+                                <i class="fas fa-redo-alt text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-3xl font-bold text-slate-100 mb-2">บทที่ 6: การทำงานซ้ำอย่างไม่รู้จักเหนื่อย (Loops)</h2>
+                                <div class="flex items-center text-slate-400 mb-4">
+                                    <i class="far fa-clock mr-1"></i>
+                                    <span class="text-sm">ระยะเวลาอ่าน: 10 นาที</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <p class="text-slate-300 mb-4 leading-relaxed">
+                            เราได้สอนให้โปรแกรมตัดสินใจเป็นแล้ว แต่งานที่คอมพิวเตอร์ทำได้ดีที่สุดคืองานซ้ำซากที่มนุษย์เราเบื่อที่จะทำ ถ้าคุณต้องตอกตะปู 100 ตัว คุณคงไม่อยากนับ 1, 2, 3... ไปเรื่อยๆ ใช่ไหมครับ? คุณแค่อยากจะสั่งว่า "ตอกตะปู 100 ตัว" แล้วก็ปล่อยให้เป็นหน้าที่ของเครื่องจักร ลูปในโปรแกรมก็ทำงานแบบนั้นแหละครับ
+                        </p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
+                            <div class="interactive-card">
+                                <h3 class="text-xl font-semibold text-slate-100 mb-3 flex items-center">
+                                    <i class="fas fa-sync-alt mr-2 text-blue-400"></i> ลูปแบบ `while`: ทำไปเรื่อยๆ จนกว่าเงื่อนไขจะไม่จริง
+                                </h3>
+                                <p class="text-slate-300 mb-4">
+                                    <strong class="keyword-glossary" data-term="while loop" data-def="ลูปที่ทำงานโดยตรวจสอบเงื่อนไขก่อน ถ้าเงื่อนไขเป็นจริง ก็จะทำงานในบล็อกของตัวเองไปเรื่อยๆ จนกว่าเงื่อนไขจะเป็นเท็จ">while loop</strong> เหมือนการถามคำถามง่ายๆ ว่า "ยังต้องทำอยู่ไหม?" ถ้าคำตอบคือ "ใช่" ก็ทำต่อไป แล้วค่อยกลับมาถามใหม่ เป็นลูปที่เหมาะกับงานที่เราไม่รู้จำนวนรอบที่แน่นอน แต่รู้ว่าต้องทำไปจนกว่าจะเกิดอะไรบางอย่างขึ้น
+                                </p>
+                                
+                                <div class="bg-dark-800 p-4 rounded-lg mt-4">
+                                    <pre class="code-block"><code class="language-c"><span class="code-comment">// ตัวอย่าง: นับเลขจนกว่าจะถึง 5</span>
+                <span class="code-keyword">int</span> counter = 1;
+                <span class="code-keyword">while</span> (counter <= 5) {
+                    printf(<span class="code-string">"Count: %i\n"</span>, counter);
+                    counter++;
+                }</code></pre>
+                                </div>
+                                
+                                <div class="bg-red-900 bg-opacity-20 border-l-4 border-red-500 p-4 mt-4 rounded-r-lg">
+                                    <p class="font-bold text-red-300 mb-2 flex items-center">
+                                        <i class="fas fa-radiation-alt mr-2"></i> คำเตือน: ลูปอนันต์ (Infinite Loop)
+                                    </p>
+                                    <p class="text-red-200">ข้อควรระวังของ `while` คือ ถ้าเงื่อนไขเป็นจริง "ตลอดไป" โปรแกรมของคุณก็จะทำงานในลูปนั้นไปตลอดกาลจนกว่าจะถูกบังคับปิด! เราจึงต้องมั่นใจว่ามีโค้ดที่ทำให้เงื่อนไขมีโอกาสเป็นเท็จได้อยู่ภายในลูปเสมอ</p>
+                                </div>
+                            </div>
+                            
+                            <div class="interactive-card">
+                                <h3 class="text-xl font-semibold text-slate-100 mb-3 flex items-center">
+                                    <i class="fas fa-fast-forward mr-2 text-green-400"></i> ลูปแบบ `for`: ลูปยอดนิยมสำหรับจำนวนรอบที่แน่นอน
+                                </h3>
+                                <p class="text-slate-300 mb-4">
+                                    <strong class="keyword-glossary" data-term="for loop" data-def="ลูปที่ถูกออกแบบมาให้ทำงานซ้ำตามจำนวนรอบที่กำหนดไว้ชัดเจน โดยรวมเอา 'จุดเริ่มต้น', 'เงื่อนไข' และ 'การเปลี่ยนแปลง' ไว้ในบรรทัดเดียว">for loop</strong> เป็นเครื่องมือที่ทรงพลังและถูกใช้งานบ่อยที่สุด มันถูกออกแบบมาเพื่อทำงานซ้ำในจำนวนรอบที่เรารู้อยู่แล้ว โดยมี 3 ส่วนประกอบสำคัญในวงเล็บ:
+                                </p>
+                                
+                                <ol class="list-decimal list-inside space-y-2 mb-4 text-slate-300">
+                                    <li><strong>Initialization (จุดเริ่มต้น):</strong> สร้างตัวแปรนับรอบขึ้นมา (เช่น `int i = 0;`)</li>
+                                    <li><strong>Condition (เงื่อนไข):</strong> ตรวจสอบเงื่อนไขก่อนเริ่มแต่ละรอบ (เช่น `i < 10;`)</li>
+                                    <li><strong>Increment/Decrement (การเปลี่ยนแปลง):</strong> สิ่งที่จะทำหลังจบแต่ละรอบ (เช่น `i++;` คือการบวกค่า i ไป 1)</li>
+                                </ol>
+                                
+                                <div class="bg-dark-800 p-4 rounded-lg mt-4">
+                                    <pre class="code-block"><code class="language-c"><span class="code-comment">// ตัวอย่าง: พิมพ์ "Hello" 3 ครั้ง</span>
+                <span class="code-keyword">for</span> (<span class="code-keyword">int</span> i = 0; i < 3; i++) {
+                    printf(<span class="code-string">"Hello\n"</span>);
+                }</code></pre>
+                                </div>
+                                
+                                <div class="bg-blue-900 bg-opacity-20 border-l-4 border-blue-500 p-4 mt-4 rounded-r-lg">
+                                    <p class="font-bold text-blue-300 mb-2 flex items-center">
+                                        <i class="fas fa-lightbulb mr-2"></i> เทคนิคการใช้งาน
+                                    </p>
+                                    <p class="text-blue-200">คุณสามารถใช้ `for` loop ในการวนลูปจากค่าสูงลงมาค่าต่ำได้ โดยใช้การลดค่าตัวนับ: <code>for (int i = 10; i > 0; i--)</code></p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- ห้องทดลองลูป: สั่งน้องหมาให้เห่า! -->
+                        <div class="interactive-card mt-8">
+                            <h3 class="text-xl font-semibold text-slate-100 mb-4 flex items-center">
+                                <i class="fas fa-dog mr-2 text-amber-400"></i> ห้องทดลองลูป: สั่งน้องหมาให้เห่า!
+                            </h3>
+                            <p class="text-slate-300 mb-4">ลองป้อนจำนวนครั้ง แล้วดูซิว่าลูปแบบ `for` และ `while` ทำงานเหมือนกันได้อย่างไร</p>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                <div class="bg-dark-800 p-5 rounded-lg">
+                                    <h4 class="text-lg font-semibold text-slate-100 mb-3 flex items-center">
+                                        <i class="fas fa-sliders-h mr-2 text-blue-400"></i> ควบคุมลูป
+                                    </h4>
+                                    
+                                    <div class="space-y-4">
+                                        <div>
+                                            <label class="block text-slate-300 mb-2">จำนวนครั้งที่จะเห่า:</label>
+                                            <input type="range" id="bark-count" min="1" max="10" value="3" class="w-full">
+                                            <div class="flex justify-between">
+                                                <span class="text-sm text-slate-400">1 ครั้ง</span>
+                                                <span id="bark-count-value" class="font-bold text-amber-400">3 ครั้ง</span>
+                                                <span class="text-sm text-slate-400">10 ครั้ง</span>
+                                            </div>
+                                        </div>
+                                        
+                                        <div>
+                                            <label class="block text-slate-300 mb-2">ประเภทลูป:</label>
+                                            <div class="flex space-x-2" id="loop-toggle-btns">
+                                                <button data-loop-type="for" class="loop-type-btn active bg-primary-500 text-white py-2 px-4 rounded transition-colors">
+                                                    for loop
+                                                </button>
+                                                <button data-loop-type="while" class="loop-type-btn bg-dark-700 hover:bg-dark-600 py-2 px-4 rounded transition-colors">
+                                                    while loop
+                                                </button>
+                                            </div>
+                                        </div>
+                                        
+                                        <div>
+                                            <button id="bark-btn" class="btn-primary w-full">
+                                                <i class="fas fa-play mr-2"></i> เริ่มเห่า!
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-dark-800 p-5 rounded-lg md:col-span-2">
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                        <div>
+                                            <h4 class="text-lg font-semibold text-slate-100 mb-3 flex items-center">
+                                                <i class="fas fa-terminal mr-2 text-green-400"></i> ผลลัพธ์:
+                                            </h4>
+                                            <div id="bark-result" class="bg-dark-900 p-4 rounded-lg min-h-[150px] font-mono text-slate-200 whitespace-pre-wrap">
+                                                <!-- ผลลัพธ์จะแสดงที่นี่ -->
+                                            </div>
+                                        </div>
+                                        
+                                        <div>
+                                            <h4 class="text-lg font-semibold text-slate-100 mb-3 flex items-center">
+                                                <i class="fas fa-code mr-2 text-blue-400"></i> โค้ดที่ใช้:
+                                            </h4>
+                                            <div id="loop-code" class="bg-dark-900 p-4 rounded-lg min-h-[150px] font-mono text-sm text-slate-300 whitespace-pre overflow-x-auto">
+                                                // โค้ดจะแสดงที่นี่
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="mt-6">
+                                        <h4 class="text-lg font-semibold text-slate-100 mb-3 flex items-center">
+                                            <i class="fas fa-history mr-2 text-purple-400"></i> การทำงานของลูป:
+                                        </h4>
+                                        <div class="grid grid-cols-4 gap-2 text-center" id="loop-visualization">
+                                            <!-- Visualization will be added here -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- การเปรียบเทียบลูป -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+                            <div class="interactive-card">
+                                <h4 class="text-lg font-semibold text-slate-100 mb-3 flex items-center">
+                                    <i class="fas fa-exchange-alt mr-2 text-blue-400"></i> เปรียบเทียบ `for` และ `while`
+                                </h4>
+                                <table class="w-full text-slate-300">
+                                    <thead>
+                                        <tr class="border-b border-dark-600">
+                                            <th class="py-2 text-left">เกณฑ์</th>
+                                            <th class="py-2 text-center">for loop</th>
+                                            <th class="py-2 text-center">while loop</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="border-b border-dark-700">
+                                            <td class="py-3">ความเหมาะสม</td>
+                                            <td class="py-3 text-center">จำนวนรอบแน่นอน</td>
+                                            <td class="py-3 text-center">จำนวนรอบไม่แน่นอน</td>
+                                        </tr>
+                                        <tr class="border-b border-dark-700">
+                                            <td class="py-3">การตั้งค่าเริ่มต้น</td>
+                                            <td class="py-3 text-center">อยู่ในวงเล็บ</td>
+                                            <td class="py-3 text-center">ก่อนลูป</td>
+                                        </tr>
+                                        <tr class="border-b border-dark-700">
+                                            <td class="py-3">การอัปเดตตัวนับ</td>
+                                            <td class="py-3 text-center">อยู่ในวงเล็บ</td>
+                                            <td class="py-3 text-center">ในบล็อคลูป</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="py-3">ความเสี่ยงลูปอนันต์</td>
+                                            <td class="py-3 text-center text-green-400">น้อย</td>
+                                            <td class="py-3 text-center text-amber-400">มาก</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                            <div class="interactive-card">
+                                <h4 class="text-lg font-semibold text-slate-100 mb-3 flex items-center">
+                                    <i class="fas fa-laptop-code mr-2 text-green-400"></i> ตัวอย่างการประยุกต์ใช้งานจริง
+                                </h4>
+                                <ul class="space-y-3 text-slate-300">
+                                    <li class="flex items-start">
+                                        <i class="fas fa-circle text-xs mt-2 mr-2 text-primary-400"></i>
+                                        <span><strong>การประมวลผลรายการ:</strong> วนลูปผ่านรายการผู้ใช้, สินค้าในตะกร้า, หรือไฟล์ในโฟลเดอร์</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-circle text-xs mt-2 mr-2 text-primary-400"></i>
+                                        <span><strong>เกม:</strong> เกมที่ต้องทำงานซ้ำๆ จนกว่าผู้เล่นจะชนะหรือแพ้</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-circle text-xs mt-2 mr-2 text-primary-400"></i>
+                                        <span><strong>การคำนวณซ้ำ:</strong> คำนวณค่าทางคณิตศาสตร์ซ้ำๆ เพื่อหาค่าที่แม่นยำ</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-circle text-xs mt-2 mr-2 text-primary-400"></i>
+                                        <span><strong>การรอข้อมูล:</strong> วนลูปรอจนกว่าผู้ใช้จะป้อนข้อมูลหรือมีข้อมูลจากเซิร์ฟเวอร์</span>
+                                    </li>
+                                </ul>
+                                
+                                <div class="mt-4 bg-dark-800 p-4 rounded-lg">
+                                    <pre class="code-block"><code class="language-c"><span class="code-comment">// ตัวอย่าง: คำนวณผลรวมของตัวเลข 1 ถึง n</span>
+                <span class="code-keyword">int</span> n = 10;
+                <span class="code-keyword">int</span> sum = 0;
+
+                <span class="code-keyword">for</span> (<span class="code-keyword">int</span> i = 1; i <= n; i++) {
+                    sum += i;
+                }
+
+                printf(<span class="code-string">"Sum of 1 to %i is %i"</span>, n, sum);</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8 p-4 bg-dark-800 border border-dark-700 rounded-lg">
+                            <p class="text-lg text-center text-slate-200 font-medium">
+                                <i class="fas fa-star text-yellow-400 mr-2"></i> ตอนนี้คุณมีเครื่องมือทรงพลังในการจัดการงานซ้ำๆ แล้ว! ลูปจะช่วยให้คุณเขียนโค้ดที่กระชับและมีประสิทธิภาพมากขึ้น
+                            </p>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Remaining sections would follow the same pattern -->
+                
+            </main>
             
-            <section id="c-interactive" class="scroll-mt-16">
-                <div class="content-card">
-                    <h2 class="text-3xl font-bold text-slate-900 mb-4">บทที่ 3: การสนทนาโต้ตอบ (Interactive Conversations)</h2>
-                    <p class="text-slate-600 mb-4 leading-relaxed">ยินดีด้วยครับ! ตอนนี้คุณสามารถส่ง "ข้อความ" ไปยังคอมพิวเตอร์ได้แล้ว แต่การสื่อสารที่ดีคือการสื่อสารสองทางใช่ไหมครับ? ในบทนี้ เราจะทำให้โปรแกรมของเรา "ฉลาด" ขึ้น โดยการรับข้อมูลจากผู้ใช้กลับมาบ้าง และนี่คือการเติมเต็มโมเดล `Input -> Process -> Output` ของเราให้สมบูรณ์</p>
-                    <h3 class="text-xl font-semibold mt-8 mb-3">กล่องมหัศจรรย์: ตัวแปร (Variables)</h3>
-                     <p class="text-slate-600 mb-4 leading-relaxed">ลองจินตนาการว่าคุณต้องการให้โปรแกรมถามชื่อของคุณ แล้วทักทายกลับมาด้วยชื่อนั้น... โปรแกรมจะ "จำ" ชื่อที่คุณพิมพ์เข้าไปได้อย่างไร? คำตอบคือ <strong class="keyword-glossary" data-term="Variable" data-def="ตัวแปร คือชื่อที่เราตั้งขึ้นมาเพื่ออ้างอิงถึงพื้นที่ในหน่วยความจำของคอมพิวเตอร์ ใช้สำหรับเก็บข้อมูลที่โปรแกรมต้องใช้งาน เปรียบเสมือนกล่องที่มีป้ายชื่อกำกับอยู่">ตัวแปร (Variable)</strong> ครับ</p>
-                     <p class="text-slate-600 mb-4 leading-relaxed">ตัวแปร ก็เหมือน "กล่องเปล่าพร้อมป้ายชื่อ" ครับ เราต้องทำ 2 อย่าง:</p>
-                     <ul class="space-y-2 list-disc list-inside mb-4">
-                        <li><strong>ตั้งชื่อให้กล่อง (Declare a variable):</strong> เราต้องบอกคอมพิวเตอร์ก่อนว่า "ฉันจะสร้างกล่องนะ กล่องนี้ชื่อว่า `name`"</li>
-                        <li><strong>บอกชนิดของที่จะใส่ (Specify data type):</strong> ที่สำคัญ เราต้องบอกด้วยว่ากล่องนี้จะเอาไว้ใส่ของ "ประเภท" ไหน เช่น ใส่ข้อความ (<strong class="keyword-glossary" data-term="string" data-def="ชนิดข้อมูลสำหรับเก็บ 'ข้อความ' หรือ 'ชุดของตัวอักษร' ในไลบรารีของ CS50 ทำให้การจัดการข้อความเป็นเรื่องง่าย">string</strong>) หรือใส่ตัวเลข (<strong class="keyword-glossary" data-term="int" data-def="ชนิดข้อมูลสำหรับเก็บ 'เลขจำนวนเต็ม' (Integer) เช่น -1, 0, 5, 100">int</strong>)</li>
-                    </ul>
-                    <h3 class="text-xl font-semibold mt-8 mb-3">สนทนากับผู้ใช้: โค้ดทักทายอัจฉริยะ</h3>
-                    <p class="text-slate-600 mb-4">มาดูโปรแกรมที่สมบูรณ์ขึ้นกันครับ โปรแกรมนี้จะถามชื่อของคุณ แล้วนำชื่อนั้นมาแสดงผลบนหน้าจอ จะเห็นว่าเราได้หยิบ "กล่องเครื่องมือ" มาเพิ่มอีกหนึ่งชิ้นคือ `<cs50.h>` ซึ่งเป็นไลบรารีพิเศษของคอร์ส CS50 ที่ทำให้การรับ Input ง่ายขึ้นมากครับ</p>
-                    <pre class="code-block"><code class="language-c"><span class="code-comment">// นำเข้าไลบรารี cs50 และ stdio</span>
-<span class="keyword-glossary" data-term="#include" data-def="คำสั่ง 'พรีโปรเซสเซอร์' ใช้บอกคอมไพเลอร์ว่า 'ช่วยไปเอาโค้ดจากไฟล์อื่นมารวมกับไฟล์นี้ที' เหมือนการไปหยิบกล่องเครื่องมือมาเตรียมไว้ใช้งาน">#include</span> <span class="code-string">&lt;<span class="keyword-glossary" data-term="cs50.h" data-def="ไลบรารี (กล่องเครื่องมือ) พิเศษของ CS50 ที่มีฟังก์ชันอำนวยความสะดวก เช่น get_string(), get_int() ทำให้การรับข้อมูลจากผู้ใช้ทำได้ง่ายขึ้นมาก">cs50.h</span>&gt;</span>
-<span class="keyword-glossary" data-term="#include" data-def="คำสั่ง 'พรีโปรเซสเซอร์' ใช้บอกคอมไพเลอร์ว่า 'ช่วยไปเอาโค้ดจากไฟล์อื่นมารวมกับไฟล์นี้ที' เหมือนการไปหยิบกล่องเครื่องมือมาเตรียมไว้ใช้งาน">#include</span> <span class="code-string">&lt;<span class="keyword-glossary" data-term="stdio.h" data-def="ชื่อของ 'กล่องเครื่องมือ' มาตรฐาน (Standard Input/Output Header) ที่มีฟังก์ชันพื้นฐานอย่าง printf() อยู่ข้างใน">stdio.h</span>&gt;</span>
-
-<span class="keyword-glossary" data-term="int" data-def="ย่อมาจาก Integer คือชนิดของข้อมูลที่เป็น 'เลขจำนวนเต็ม' การระบุ int หน้า main หมายความว่าเมื่อฟังก์ชันนี้ทำงานเสร็จ จะต้อง 'คืนค่า' กลับไปเป็นเลขจำนวนเต็ม">int</span> <span class="keyword-glossary code-function" data-term="main" data-def="คือชื่อฟังก์ชันที่พิเศษที่สุด ถือเป็น 'ประตูทางเข้าหลัก' ของทุกโปรแกรมในภาษา C คอมพิวเตอร์จะมองหาฟังก์ชัน main() เป็นอันดับแรกเสมอ">main</span>(<span class="keyword-glossary" data-term="void" data-def="แปลว่า 'ว่างเปล่า' ในที่นี้หมายความว่าฟังก์ชัน main ไม่ต้องการรับข้อมูลใดๆ จากภายนอกเพื่อเริ่มทำงาน">void</span>)
-<span class="keyword-glossary" data-term="{ }" data-def="ปีกกา คือสัญลักษณ์ที่ใช้กำหนด 'ขอบเขต' การทำงานของฟังก์ชัน หรือบล็อกของโค้ด ทุกอย่างที่อยู่ระหว่างปีกกาเปิด { และปีกกาปิด } ถือว่าเป็นส่วนหนึ่งของบล็อกนั้นๆ">{</span>
-    <span class="code-comment">// รับชื่อจากผู้ใช้แล้วเก็บในตัวแปร name</span>
-    <span class="keyword-glossary" data-term="string" data-def="ชนิดข้อมูลสำหรับเก็บ 'ข้อความ' หรือ 'ชุดของตัวอักษร' ในไลบรารีของ CS50 ทำให้การจัดการข้อความเป็นเรื่องง่าย">string</span> name = <span class="keyword-glossary code-function" data-term="get_string" data-def="ฟังก์ชันจากไลบรารี cs50.h ใช้สำหรับรับข้อมูลประเภทข้อความ (string) จากผู้ใช้">get_string</span>(<span class="code-string">"What's your name? "</span>);
-
-    <span class="code-comment">// แสดงผลคำทักทายโดยใช้ชื่อที่รับมา</span>
-    <span class="keyword-glossary code-function" data-term="printf" data-def="มาจาก Print-Formatted เป็นฟังก์ชันที่อยู่ใน stdio.h ใช้สำหรับแสดงผลข้อความหรือค่าของตัวแปรออกไปยังหน้าจอ">printf</span>(<span class="code-string">"hello, <span class="keyword-glossary code-placeholder" data-term="%s" data-def="เรียกว่า 'Format Specifier' เป็นตัวจองที่ในข้อความ เพื่อบอก printf ว่า 'ตรงนี้นะ เดี๋ยวจะเอาค่า string มาเสียบแทนที่'">%s</span>\n"</span>, name);
-<span class="keyword-glossary" data-term="{ }" data-def="ปีกกา คือสัญลักษณ์ที่ใช้กำหนด 'ขอบเขต' การทำงานของฟังก์ชัน หรือบล็อกของโค้ด ทุกอย่างที่อยู่ระหว่างปีกกาเปิด { และปีกกาปิด } ถือว่าเป็นส่วนหนึ่งของบล็อกนั้นๆ">}</span></code></pre>
-                     <p class="mt-6 text-center text-lg text-slate-700 font-medium">ยอดเยี่ยมมากครับ! ตอนนี้เว็บไซต์ของเราได้นำพาผู้เรียนจากการเป็นเพียงผู้ส่งสารฝ่ายเดียว มาสู่การเป็นผู้สร้างบทสนทนาที่สมบูรณ์แล้ว</p>
+            <div class="mt-12 text-center py-6 border-t border-dark-600">
+                <p class="text-slate-400">© 2025 CS50x: The Genesis - สร้างโดย พรี่ทิวปี 4 + deepseek + gemini</p>
+                <div class="mt-4 flex justify-center space-x-4">
+                    <a href="#" class="text-slate-400 hover:text-primary-400">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="#" class="text-slate-400 hover:text-primary-400">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                    <a href="#" class="text-slate-400 hover:text-primary-400">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="text-slate-400 hover:text-primary-400">
+                        <i class="fab fa-discord"></i>
+                    </a>
                 </div>
-            </section>
-            
-            <section id="c-calculator" class="scroll-mt-16">
-                <div class="content-card">
-                    <h2 class="text-3xl font-bold text-slate-900 mb-4">บทที่ 4: คอมพิวเตอร์คิดเลข (Calculations & Data Types)</h2>
-                    <p class="text-slate-600 mb-4 leading-relaxed">นอกจากการจัดการกับ "ข้อความ" แล้ว พลังที่แท้จริงของคอมพิวเตอร์คือการ "คำนวณ" ครับ ในบทนี้ เราจะเปลี่ยนคอมพิวเตอร์ให้กลายเป็นเครื่องคิดเลขส่วนตัวของเรา แต่ก่อนอื่น เราต้องรู้จัก "ชนิด" ของตัวเลขที่คอมพิวเตอร์เข้าใจกันก่อน</p>
-                    <h3 class="text-xl font-semibold mt-8 mb-3">ตัวเลขก็มีหลายประเภท (Numeric Data Types)</h3>
-                     <p class="text-slate-600 mb-4 leading-relaxed">ในโลกคณิตศาสตร์มีทั้งเลขจำนวนเต็มและเลขทศนิยม ในภาษา C ก็เช่นกันครับ เราต้องเลือกใช้ "กล่อง" หรือตัวแปรให้ถูกประเภทกับตัวเลขที่เราจะเก็บ</p>
-                     <ul class="space-y-3 list-disc list-inside mb-4">
-                        <li><strong class="keyword-glossary" data-term="int" data-def="ชนิดข้อมูลสำหรับเก็บ 'เลขจำนวนเต็ม' (Integer) เช่น -1, 0, 5, 100 ไม่มีจุดทศนิยม">int</strong>: สำหรับเก็บเลข **จำนวนเต็ม** เช่น `5`, `200`, หรือ `-10` เหมือนการนับจำนวนคนหรือจำนวนของที่ไม่สามารถแบ่งเป็นเศษส่วนได้</li>
-                        <li><strong class="keyword-glossary" data-term="float" data-def="ชนิดข้อมูลสำหรับเก็บ 'เลขทศนิยม' (Floating-point number) เช่น 3.14, -0.5, 99.99">float</strong>: สำหรับเก็บเลข **ทศนิยม** เช่น `3.14` หรือ `1.75` เหมาะกับข้อมูลที่ต้องการความละเอียดอย่างส่วนสูงหรือเกรดเฉลี่ย</li>
-                        <li><strong class="keyword-glossary" data-term="long" data-def="ชนิดข้อมูลสำหรับเก็บ 'เลขจำนวนเต็ม' ที่มีขนาดใหญ่มาก (Long Integer) ใหญ่กว่าที่ int ทั่วไปจะเก็บได้">long</strong>: สำหรับเก็บเลขจำนวนเต็มที่ **ใหญ่มากๆ** เกินกว่าที่ `int` ธรรมดาจะรับไหว</li>
-                    </ul>
-                    <h3 class="text-xl font-semibold mt-8 mb-3">เครื่องมือของนักคำนวณ: ตัวดำเนินการ (Operators)</h3>
-                    <p class="text-slate-600 mb-4">ภาษา C มีเครื่องหมายสำหรับการคำนวณเหมือนกับที่เราเรียนคณิตศาสตร์มาเลยครับ</p>
-                    <ul class="space-y-2 mb-4">
-                        <li>`+` สำหรับการบวก</li>
-                        <li>`-` สำหรับการลบ</li>
-                        <li>`*` สำหรับการคูณ (เราใช้เครื่องหมายดอกจันนะครับ)</li>
-                        <li>`/` สำหรับการหาร</li>
-                        <li><strong class="keyword-glossary" data-term="%" data-def="เรียกว่า 'มอดุโล' (Modulo) เป็นการหารเอา 'เศษ' เช่น 7 % 3 จะได้ผลลัพธ์เป็น 1 เพราะ 7 หาร 3 ได้ 2 เหลือเศษ 1">`%`</strong> สำหรับการหารเอา **เศษ** (Modulo) ซึ่งมีประโยชน์มากในการเขียนโปรแกรมครับ</li>
-                    </ul>
-                    <h3 class="text-xl font-semibold mt-8 mb-3">มาสร้างเครื่องบวกเลขอย่างง่ายกัน!</h3>
-                    <p class="text-slate-600 mb-4">โปรแกรมนี้จะถามตัวเลขจากเรา 2 ตัว แล้วนำมาบวกกันและแสดงผลลัพธ์ สังเกตว่าเราจะใช้ฟังก์ชัน <strong class="keyword-glossary" data-term="get_int" data-def="ฟังก์ชันจากไลบรารี cs50.h ใช้สำหรับรับข้อมูลประเภทเลขจำนวนเต็ม (int) จากผู้ใช้โดยเฉพาะ">get_int()</strong> และใช้ <strong class="keyword-glossary code-placeholder" data-term="%i" data-def="Format Specifier สำหรับตัวแปรชนิด Integer (จำนวนเต็ม) เพื่อบอกให้ printf นำค่าตัวเลขจำนวนเต็มมาแสดงผล ณ ตำแหน่งนี้">`%i`</strong> ใน `printf` เพื่อแสดงผลตัวเลขครับ</p>
-                    <pre class="code-block"><code class="language-c"><span class="code-comment">// นำเข้าไลบรารีที่จำเป็น</span>
-<span class="keyword-glossary" data-term="#include" data-def="คำสั่ง 'พรีโปรเซสเซอร์' ใช้บอกคอมไพเลอร์ว่า 'ช่วยไปเอาโค้ดจากไฟล์อื่นมารวมกับไฟล์นี้ที' เหมือนการไปหยิบกล่องเครื่องมือมาเตรียมไว้ใช้งาน">#include</span> <span class="code-string">&lt;<span class="keyword-glossary" data-term="cs50.h" data-def="ไลบรารี (กล่องเครื่องมือ) พิเศษของ CS50 ที่มีฟังก์ชันอำนวยความสะดวก เช่น get_string(), get_int() ทำให้การรับข้อมูลจากผู้ใช้ทำได้ง่ายขึ้นมาก">cs50.h</span>&gt;</span>
-<span class="keyword-glossary" data-term="#include" data-def="คำสั่ง 'พรีโปรเซสเซอร์' ใช้บอกคอมไพเลอร์ว่า 'ช่วยไปเอาโค้ดจากไฟล์อื่นมารวมกับไฟล์นี้ที' เหมือนการไปหยิบกล่องเครื่องมือมาเตรียมไว้ใช้งาน">#include</span> <span class="code-string">&lt;<span class="keyword-glossary" data-term="stdio.h" data-def="ชื่อของ 'กล่องเครื่องมือ' มาตรฐาน (Standard Input/Output Header) ที่มีฟังก์ชันพื้นฐานอย่าง printf() อยู่ข้างใน">stdio.h</span>&gt;</span>
-
-<span class="keyword-glossary" data-term="int" data-def="ชนิดข้อมูลสำหรับเก็บ 'เลขจำนวนเต็ม' (Integer)">int</span> <span class="keyword-glossary code-function" data-term="main" data-def="คือชื่อฟังก์ชันที่พิเศษที่สุด ถือเป็น 'ประตูทางเข้าหลัก' ของทุกโปรแกรมในภาษา C">main</span>(<span class="keyword-glossary" data-term="void" data-def="แปลว่า 'ว่างเปล่า' ในที่นี้หมายความว่าฟังก์ชัน main ไม่ต้องการรับข้อมูลใดๆ จากภายนอกเพื่อเริ่มทำงาน">void</span>)
-<span class="keyword-glossary" data-term="{ }" data-def="ปีกกา คือสัญลักษณ์ที่ใช้กำหนด 'ขอบเขต' การทำงานของฟังก์ชัน หรือบล็อกของโค้ด">{</span>
-    <span class="code-comment">// รับค่า x จากผู้ใช้</span>
-    <span class="keyword-glossary" data-term="int" data-def="ชนิดข้อมูลสำหรับเก็บ 'เลขจำนวนเต็ม' (Integer)">int</span> x = <span class="keyword-glossary code-function" data-term="get_int" data-def="ฟังก์ชันจากไลบรารี cs50.h ใช้สำหรับรับข้อมูลประเภทเลขจำนวนเต็ม (int) จากผู้ใช้โดยเฉพาะ">get_int</span>(<span class="code-string">"x: "</span>);
-    
-    <span class="code-comment">// รับค่า y จากผู้ใช้</span>
-    <span class="keyword-glossary" data-term="int" data-def="ชนิดข้อมูลสำหรับเก็บ 'เลขจำนวนเต็ม' (Integer)">int</span> y = <span class="keyword-glossary code-function" data-term="get_int" data-def="ฟังก์ชันจากไลบรารี cs50.h ใช้สำหรับรับข้อมูลประเภทเลขจำนวนเต็ม (int) จากผู้ใช้โดยเฉพาะ">get_int</span>(<span class="code-string">"y: "</span>);
-
-    <span class="code-comment">// คำนวณผลรวมแล้วแสดงผล</span>
-    <span class="keyword-glossary code-function" data-term="printf" data-def="ฟังก์ชันสำหรับแสดงผลข้อความหรือค่าของตัวแปรออกไปยังหน้าจอ">printf</span>(<span class="code-string">"The sum is <span class="keyword-glossary code-placeholder" data-term="%i" data-def="Format Specifier สำหรับตัวแปรชนิด Integer (จำนวนเต็ม) เพื่อบอกให้ printf นำค่าตัวเลขจำนวนเต็มมาแสดงผล ณ ตำแหน่งนี้">%i</span>\n"</span>, x + y);
-<span class="keyword-glossary" data-term="{ }" data-def="ปีกกา คือสัญลักษณ์ที่ใช้กำหนด 'ขอบเขต' การทำงานของฟังก์ชัน หรือบล็อกของโค้ด">}</span></code></pre>
-                     <p class="mt-6 text-center text-lg text-slate-700 font-medium">เพียงเท่านี้ คุณก็ได้สร้างโปรแกรมที่ไม่ได้แค่โต้ตอบ แต่ยัง "คิด" และคำนวณให้คุณได้แล้ว!</p>
-                </div>
-            </section>
-        </main>
+            </div>
+        </div>
     </div>
 
+    <!-- Floating navigation -->
+    <div class="floating-nav">
+        <div class="floating-btn" title="กลับสู่ด้านบน">
+            <i class="fas fa-arrow-up"></i>
+        </div>
+        <div class="floating-btn" title="เปลี่ยนธีม">
+            <i class="fas fa-moon"></i>
+        </div>
+        <div class="floating-btn" title="แชร์บทเรียน">
+            <i class="fas fa-share-alt"></i>
+        </div>
+    </div>
+
+    <!-- Glossary Modal -->
     <div id="glossary-modal-backdrop"></div>
     <div id="glossary-modal">
-        <h3 id="glossary-term" class="text-2xl font-bold text-sky-700 mb-2"></h3>
-        <p id="glossary-def" class="text-slate-600 leading-relaxed"></p>
-        <button id="glossary-close-btn" class="mt-6 bg-slate-200 text-slate-800 px-4 py-2 rounded hover:bg-slate-300 w-full">ปิด</button>
+        <div class="flex justify-between items-center mb-4">
+            <h3 id="glossary-term" class="text-2xl font-bold text-primary-400"></h3>
+            <button id="glossary-close-btn" class="text-slate-400 hover:text-slate-200">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <p id="glossary-def" class="text-slate-300 leading-relaxed"></p>
+        <div class="mt-6 pt-4 border-t border-dark-600">
+            <p class="text-sm text-slate-400">
+                <i class="fas fa-lightbulb mr-2"></i> คลิกคำศัพท์อื่นๆ ในบทเรียนเพื่อเรียนรู้เพิ่มเติม
+            </p>
+        </div>
     </div>
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
+    // Progress bar
+    const progressBar = document.getElementById('progress-bar');
+    window.addEventListener('scroll', () => {
+        const totalHeight = document.body.scrollHeight - window.innerHeight;
+        const progress = (window.scrollY / totalHeight) * 100;
+        progressBar.style.width = `${progress}%`;
+    });
+
+    // Glossary modal
     const glossaryModal = document.getElementById('glossary-modal');
     const glossaryBackdrop = document.getElementById('glossary-modal-backdrop');
     document.body.addEventListener('click', function(event) {
         if (event.target.classList.contains('keyword-glossary')) {
-            event.preventDefault(); // Prevent default browser action
+            event.preventDefault();
             const term = event.target.dataset.term;
             const def = event.target.dataset.def;
             document.getElementById('glossary-term').textContent = term;
@@ -185,14 +1443,346 @@ document.addEventListener('DOMContentLoaded', function () {
             glossaryBackdrop.style.display = 'block';
         }
     });
+    
     function closeModal() {
         glossaryModal.style.display = 'none';
         glossaryBackdrop.style.display = 'none';
     }
+    
     document.getElementById('glossary-close-btn').addEventListener('click', closeModal);
     glossaryBackdrop.addEventListener('click', closeModal);
+
+    // Navigation active state
+    const navLinks = document.querySelectorAll('.nav-link');
+    const sections = document.querySelectorAll('section');
+    
+    function setActiveNav() {
+        let current = '';
+        
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            if (window.scrollY >= sectionTop - 150) {
+                current = section.getAttribute('id');
+            }
+        });
+        
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href').substring(1) === current) {
+                link.classList.add('active');
+            }
+        });
+    }
+    
+    window.addEventListener('scroll', setActiveNav);
+    setActiveNav();
+    
+    // Floating button - scroll to top
+    document.querySelector('.floating-btn:nth-child(1)').addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    
+    // Card hover effect
+    const cards = document.querySelectorAll('.content-card');
+    cards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+            card.style.transform = 'translateY(-5px)';
+        });
+        
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = 'translateY(0)';
+        });
+    });
+});
+
+// ===== ฟังก์ชันสำหรับบทที่ 3 =====
+function copyCode(elementId) {
+    const codeElement = document.getElementById(elementId);
+    const text = codeElement.innerText;
+    
+    navigator.clipboard.writeText(text).then(() => {
+        // แสดงการแจ้งเตือนว่าคัดลอกสำเร็จ
+        const originalIcon = event.target.innerHTML;
+        event.target.innerHTML = '<i class="fas fa-check"></i>';
+        
+        setTimeout(() => {
+            event.target.innerHTML = originalIcon;
+        }, 2000);
+    });
+}
+
+function runInteractiveDemo() {
+    const userName = document.getElementById('user-name').value || 'CS50 Lover';
+    const greetingOutput = document.getElementById('greeting-output');
+    
+    // สร้างเอฟเฟกต์การพิมพ์ทีละตัวอักษร
+    greetingOutput.innerHTML = '';
+    const message = `What's your name? ${userName}\nhello, ${userName}\n`;
+    let i = 0;
+    
+    const typingEffect = setInterval(() => {
+        if (i < message.length) {
+            greetingOutput.innerHTML += message.charAt(i);
+            i++;
+            greetingOutput.scrollTop = greetingOutput.scrollHeight;
+        } else {
+            clearInterval(typingEffect);
+        }
+    }, 30);
+}
+
+// เพิ่ม event listener สำหรับปุ่มรันโปรแกรม
+document.getElementById('run-greeting-btn').addEventListener('click', runInteractiveDemo);
+
+// รันอัตโนมัติเมื่อหน้าโหลดเสร็จ (optional)
+document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(runInteractiveDemo, 1000);
+});
+
+// ===== ฟังก์ชันสำหรับบทที่ 4 =====
+function runCalculatorDemo() {
+    const x = parseFloat(document.getElementById('calc-x').value) || 0;
+    const y = parseFloat(document.getElementById('calc-y').value) || 0;
+    
+    // ดึงตัวดำเนินการที่ผู้ใช้เลือกจริงๆ
+    const activeOpBtn = document.querySelector('.calc-op-btn.active');
+    const op = activeOpBtn ? activeOpBtn.dataset.op : '+';
+    let symbol;
+    
+    // คำนวณผลลัพธ์ตามตัวดำเนินการที่เลือก
+    let result;
+    switch(op) {
+        case '+':
+            result = x + y;
+            symbol = '+';
+            break;
+        case '-':
+            result = x - y;
+            symbol = '-';
+            break;
+        case '*':
+            result = x * y;
+            symbol = '×';
+            break;
+        case '/':
+            result = y !== 0 ? (x / y).toFixed(2) : 'Error: หารด้วยศูนย์';
+            symbol = '÷';
+            break;
+        default:
+            result = x + y;
+            symbol = '+';
+    }
+    
+    // แสดงผลลัพธ์
+    const outputDiv = document.getElementById('calculator-output');
+    outputDiv.innerHTML = `
+        <div class="text-center py-6">
+            <div class="text-5xl font-bold text-primary-400 mb-2">${result}</div>
+            <div class="text-xl text-slate-300">${x} ${symbol} ${y} = ${result}</div>
+        </div>
+    `;
+    
+    // อัปเดตข้อมูลจำลอง
+    document.getElementById('sim-x').textContent = x;
+    document.getElementById('sim-y').textContent = y;
+    document.getElementById('sim-op').textContent = symbol;
+    document.getElementById('sim-result').textContent = result;
+}
+
+// เพิ่ม event listeners สำหรับเครื่องคิดเลข
+document.getElementById('run-calculator-btn').addEventListener('click', runCalculatorDemo);
+
+// เลือกตัวดำเนินการ
+document.querySelectorAll('.calc-op-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        // ลบสถานะ active จากปุ่มอื่นๆ
+        document.querySelectorAll('.calc-op-btn').forEach(b => b.classList.remove('bg-primary-500', 'text-white', 'active'));
+        
+        // ตั้งค่าปุ่มปัจจุบันเป็น active
+        this.classList.add('bg-primary-500', 'text-white', 'active');
+        
+        // รันการคำนวณใหม่
+        runCalculatorDemo();
+    });
+});
+
+// ตั้งค่าตัวดำเนินการเริ่มต้น
+const defaultOpBtn = document.querySelector('[data-op="+"]');
+if (defaultOpBtn) {
+    defaultOpBtn.classList.add('bg-primary-500', 'text-white', 'active');
+}
+
+// รันตัวอย่างเมื่อหน้าโหลดเสร็จ
+document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(runCalculatorDemo, 1500);
+});
+
+// ===== ฟังก์ชันสำหรับบทที่ 5 =====
+function runConditionalDemo() {
+    const age = parseInt(document.getElementById('user-age').value) || 0;
+    const movieRating = document.querySelector('input[name="movie"]:checked').value;
+    
+    // ตรวจสอบเงื่อนไข
+    let resultText = '';
+    let resultClass = '';
+    let codeSimulation = '';
+    
+    // สร้างโค้ดจำลอง
+    codeSimulation = `int age = ${age};\nstring movie = "${movieRating}";\n\n`;
+    
+    if (movieRating === "G") {
+        resultText = "✅ คุณสามารถซื้อตั๋วหนังระดับ G ได้ทันที!";
+        resultClass = "text-green-400";
+        codeSimulation += `if (movie == "G") {\n    printf("คุณสามารถซื้อตั๋วหนังระดับ G ได้ทันที!");\n}`;
+    } 
+    else if (movieRating === "PG-13") {
+        if (age >= 13) {
+            resultText = "✅ คุณสามารถซื้อตั๋วหนังระดับ PG-13 ได้!";
+            resultClass = "text-green-400";
+            codeSimulation += `if (age >= 13) {\n    printf("คุณสามารถซื้อตั๋วหนังระดับ PG-13 ได้!");\n}`;
+        } else {
+            resultText = "❌ ขออภัย! คุณอายุไม่ถึง 13 ปี ไม่สามารถดูหนังระดับ PG-13 ได้";
+            resultClass = "text-red-400";
+            codeSimulation += `if (age >= 13) {\n    // อนุญาต\n} else {\n    printf("ขออภัย! คุณอายุไม่ถึง 13 ปี");\n}`;
+        }
+    } 
+    else if (movieRating === "R") {
+        if (age >= 18) {
+            resultText = "✅ คุณสามารถซื้อตั๋วหนังระดับ R ได้!";
+            resultClass = "text-green-400";
+            codeSimulation += `if (age >= 18) {\n    printf("คุณสามารถซื้อตั๋วหนังระดับ R ได้!");\n}`;
+        } else {
+            resultText = "❌ ขออภัย! คุณอายุไม่ถึง 18 ปี ไม่สามารถดูหนังระดับ R ได้";
+            resultClass = "text-red-400";
+            codeSimulation += `if (age >= 18) {\n    // อนุญาต\n} else {\n    printf("ขออภัย! คุณอายุไม่ถึง 18 ปี");\n}`;
+        }
+    }
+    
+    // แสดงผลลัพธ์
+    const outputDiv = document.getElementById('decision-output');
+    outputDiv.innerHTML = `
+        <div class="text-center py-6">
+            <div class="text-3xl font-bold ${resultClass} mb-2">${resultText}</div>
+            <div class="text-lg text-slate-300 mt-4">อายุ: ${age} ปี | ภาพยนตร์: ${movieRating}</div>
+        </div>
+    `;
+    
+    // แสดงโค้ดจำลอง
+    document.getElementById('code-simulation').textContent = codeSimulation;
+}
+
+// เพิ่ม event listeners สำหรับบทที่ 5
+document.getElementById('check-ticket-btn').addEventListener('click', runConditionalDemo);
+document.querySelectorAll('input[name="movie"]').forEach(radio => {
+    radio.addEventListener('change', runConditionalDemo);
+});
+document.getElementById('user-age').addEventListener('input', runConditionalDemo);
+
+// รันตัวอย่างเมื่อหน้าโหลดเสร็จ
+document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(runConditionalDemo, 1000);
+});
+ 
+// ===== ฟังก์ชันสำหรับบทที่ 6 =====
+function runLoopDemo() {
+    const barkCount = parseInt(document.getElementById('bark-count').value);
+    const loopType = document.querySelector('.loop-type-btn.active').dataset.loopType;
+    
+    // อัปเดตจำนวนครั้งแสดงผล
+    document.getElementById('bark-count-value').textContent = `${barkCount} ครั้ง`;
+    
+    // สร้างผลลัพธ์และโค้ด
+    let result = '';
+    let code = '';
+    let visualizationHTML = '';
+    
+    if (loopType === 'for') {
+        // for loop
+        code = `for (int i = 0; i < ${barkCount}; i++) {\n    printf("🐶 Woof!\\n");\n}`;
+        
+        for (let i = 0; i < barkCount; i++) {
+            result += `🐶 Woof! (รอบที่ ${i+1})\n`;
+        }
+        
+        // Visualization
+        visualizationHTML = `
+            <div class="bg-blue-900 bg-opacity-30 p-2 rounded">
+                <div class="text-xs text-blue-300 mb-1">เริ่มลูป</div>
+            </div>
+        `;
+        
+        for (let i = 0; i < barkCount; i++) {
+            visualizationHTML += `
+                <div class="bg-blue-800 bg-opacity-30 p-2 rounded">
+                    <div class="text-xs text-blue-300 mb-1">รอบที่ ${i+1}</div>
+                    <div class="text-lg">🐶</div>
+                </div>
+            `;
+        }
+        
+        visualizationHTML += `
+            <div class="bg-blue-900 bg-opacity-30 p-2 rounded">
+                <div class="text-xs text-blue-300">สิ้นสุดลูป</div>
+            </div>
+        `;
+    } else {
+        // while loop
+        code = `int i = 0;\nwhile (i < ${barkCount}) {\n    printf("🐶 Woof!\\n");\n    i++;\n}`;
+        
+        let i = 0;
+        while (i < barkCount) {
+            result += `🐶 Woof! (รอบที่ ${i+1})\n`;
+            i++;
+        }
+        
+        // Visualization
+        visualizationHTML = `
+            <div class="bg-green-900 bg-opacity-30 p-2 rounded">
+                <div class="text-xs text-green-300 mb-1">เริ่มลูป (i=0)</div>
+            </div>
+        `;
+        
+        let counter = 0;
+        while (counter < barkCount) {
+            visualizationHTML += `
+                <div class="bg-green-800 bg-opacity-30 p-2 rounded">
+                    <div class="text-xs text-green-300 mb-1">รอบที่ ${counter+1} (i=${counter})</div>
+                    <div class="text-lg">🐶</div>
+                </div>
+            `;
+            counter++;
+        }
+        
+        visualizationHTML += `
+            <div class="bg-green-900 bg-opacity-30 p-2 rounded">
+                <div class="text-xs text-green-300">สิ้นสุดลูป (i=${barkCount})</div>
+            </div>
+        `;
+    }
+    
+    // แสดงผลลัพธ์
+    document.getElementById('bark-result').textContent = result || "⚠️ กรุณาเลือกจำนวนครั้งมากกว่า 0";
+    document.getElementById('loop-code').textContent = code;
+    document.getElementById('loop-visualization').innerHTML = visualizationHTML;
+}
+
+// เพิ่ม event listeners สำหรับบทที่ 6
+document.getElementById('bark-btn').addEventListener('click', runLoopDemo);
+document.getElementById('bark-count').addEventListener('input', runLoopDemo);
+
+// เลือกประเภทลูป
+document.querySelectorAll('.loop-type-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        document.querySelectorAll('.loop-type-btn').forEach(b => b.classList.remove('active', 'bg-primary-500', 'text-white'));
+        this.classList.add('active', 'bg-primary-500', 'text-white');
+        runLoopDemo();
+    });
+});
+
+// รันตัวอย่างเมื่อหน้าโหลดเสร็จ
+document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(runLoopDemo, 1000);
 });
 </script>
-
 </body>
 </html>
