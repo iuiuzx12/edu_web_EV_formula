@@ -50,12 +50,12 @@
     /* Light Theme Colors */
     --light-bg-start: #f0f9ff;
     --light-bg-end: #e6f7ff;
-    --light-text-primary: #1e293b; /* Base text color for light mode, used by --text-primary in body.light-mode */
-    --light-text-headings: #0f172a;
-    --light-text-primary-actual: #1e293b; /* Specific variable for light mode if needed, though --text-primary is preferred */
-    --light-text-secondary: #334155;
-    --light-text-muted: #475569;
-    --light-text-subtle: #64748b;
+    --light-text-primary: #1a202c; /* Base text color for light mode, used by --text-primary in body.light-mode - Changed */
+    --light-text-headings: #0a0e14; /* Changed */
+    --light-text-primary-actual: #1a202c; /* Specific variable for light mode if needed, though --text-primary is preferred - Changed */
+    --light-text-secondary: #2d3748; /* Changed */
+    --light-text-muted: #4a5568; /* Changed */
+    --light-text-subtle: #718096; /* Changed */
 
     --light-card-bg-start: rgba(255, 255, 255, 0.9);
     --light-card-bg-end: rgba(240, 240, 240, 0.9);
@@ -65,13 +65,13 @@
     --light-interactive-card-border: #cbd5e1;
 
     --light-code-bg: var(--color-white);
-    --light-code-text: var(--light-text-headings);
+    --light-code-text: #0a0e14; /* Changed from var(--light-text-headings) */
     --light-code-border: var(--light-interactive-card-border);
-    --light-code-keyword: var(--color-blue-darker);
-    --light-code-function: var(--color-purple-darker);
-    --light-code-comment: var(--light-text-subtle);
-    --light-code-string: var(--color-green-darkest);
-    --light-code-placeholder: var(--color-amber-darker);
+    --light-code-keyword: #1e3a8a; /* Darker blue - Changed from var(--color-blue-darker) */
+    --light-code-function: #5b21b6; /* Darker purple - Changed from var(--color-purple-darker) */
+    --light-code-comment: #4a5568; /* Darker gray - Changed from var(--light-text-subtle) */
+    --light-code-string: #047857; /* Darker green - Changed from var(--color-green-darkest) */
+    --light-code-placeholder: #92400e; /* Darker amber - Changed from var(--color-amber-darker) */
     
     --light-button-primary-bg-start: var(--color-blue-darker);
     --light-button-primary-bg-end: var(--color-purple-darker);
