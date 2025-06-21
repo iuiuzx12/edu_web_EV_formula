@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="th" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>บทที่ 2: การสนทนาครั้งแรก (Anatomy of C)</title> 
+    <link rel="stylesheet" href="../css/main.css"> <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+
+<body class="antialiased">
+    
+    <div class="container mx-auto max-w-6xl p-4 sm:p-6 lg:p-8 flex flex-col md:flex-row gap-8">
+        
+        <aside class="w-full md:w-64 flex-shrink-0">
+            <div id="nav-placeholder" class="sticky top-8">
+                </div>
+        </aside>
+
+        <div class="flex-grow">
+            <main>
+
+                <section id="c-basics" class="scroll-mt-16">
+                    <div class="content-card">
+                        <div class="flex items-start section-header">
+                            <div class="section-icon" style="background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);">
+                                <i class="fas fa-code text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-3xl font-bold text-slate-100 mb-2">บทที่ 2: การสนทนาครั้งแรก (Anatomy of C)</h2>
+                                <div class="flex items-center text-slate-400 mb-4">
+                                    <i class="far fa-clock mr-1"></i>
+                                    <span class="text-sm">ระยะเวลาอ่าน: 6 นาที</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <h3 class="text-xl font-semibold text-slate-100 mb-3 flex items-center">
+                            <i class="fas fa-question-circle mr-2 text-primary-400"></i> ทำไมต้องเป็นภาษา C ที่ดูน่ากลัว?
+                        </h3>
+                        
+                        <p class="text-slate-300 mb-4 leading-relaxed">ภาษาโปรแกรมสมัยใหม่ๆ ก็เหมือน "รถยนต์เกียร์ออโต้" ครับ ขับง่าย สะดวกสบาย มันจัดการเรื่องน่าปวดหัวให้เราหมด แต่... คุณไม่เคยได้สัมผัสการทำงานของเครื่องยนต์จริงๆ เลย คุณไม่รู้ว่าเกียร์เปลี่ยนตอนไหน หรือทำไมรอบเครื่องถึงขึ้น</p>
+                        <p class="text-slate-300 mb-4 leading-relaxed">ส่วนภาษา C ก็เหมือน **"รถยนต์เกียร์กระปุก"** ครับ คุณต้องเหยียบคลัตช์เอง เข้าเกียร์เอง คุณต้องฟังเสียงเครื่องยนต์ คุณต้องรู้สึกถึงแรงสั่นสะเทือน มันอาจจะยากกว่าในตอนแรก แต่มันบังคับให้คุณต้องเข้าใจ "จิตวิญญาณ" ของยานยนต์อย่างแท้จริง และเมื่อคุณขับเป็น... คุณจะสามารถรีดประสิทธิภาพของรถออกมาได้สูงสุด การเรียน C ก็เพื่อให้เราได้ "เปิดฝากระโปรง" และเห็นการทำงานของคอมพิวเตอร์ในระดับที่ลึกที่สุดนั่นเองครับ</p>
+                        <!-- เพิ่มส่วนนี้หลังย่อหน้าที่สองของหัวข้อ "ทำไมต้องเป็นภาษา C ที่ดูน่ากลัว?" -->
+                        <div class="mt-6 p-5 bg-dark-800 rounded-xl border border-dark-700">
+                            <h3 class="text-xl font-semibold text-amber-300 mb-3 flex items-center">
+                                <i class="fas fa-language mr-2"></i> ความลับของภาษา C: มันคือ Compiled Language!
+                            </h3>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <!-- Compiler -->
+                                <div class="interactive-card">
+                                    <h4 class="text-lg font-semibold text-blue-400 mb-3 flex items-center">
+                                        <i class="fas fa-cogs mr-2"></i> Compiled Language (ภาษา C)
+                                    </h4>
+                                    <div class="flex items-start mb-3">
+                                        <div class="bg-blue-500 text-white rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mt-1 mr-2">1</div>
+                                        <p class="text-slate-300">เขียนโค้ด (source code)</p>
+                                    </div>
+                                    <div class="flex items-start mb-3">
+                                        <div class="bg-blue-500 text-white rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mt-1 mr-2">2</div>
+                                        <p class="text-slate-300">ใช้ <strong>Compiler</strong> แปลงทั้งโปรแกรมเป็นภาษาเครื่อง (machine code)</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <div class="bg-blue-500 text-white rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mt-1 mr-2">3</div>
+                                        <p class="text-slate-300">รันไฟล์ executable ที่ได้ทันทีโดยไม่ต้องแปลอีก</p>
+                                    </div>
+                                    
+                                    <div class="mt-4 p-3 bg-dark-900 rounded-lg">
+                                        <pre class="text-blue-300 text-sm">$ gcc hello.c -o hello  # Compile
+                        $ ./hello             # Run
+                        Hello, world!</pre>
+                                    </div>
+                                    
+                                    <div class="mt-4 bg-blue-900 bg-opacity-20 p-3 rounded-lg">
+                                        <p class="text-blue-300">
+                                            <i class="fas fa-bolt mr-2"></i> <strong>ข้อดี:</strong> รันเร็วมาก เหมาะกับระบบประสิทธิภาพสูง
+                                        </p>
+                                    </div>
+                                </div>
+                                
+                                <!-- Interpreter -->
+                                <div class="interactive-card">
+                                    <h4 class="text-lg font-semibold text-purple-400 mb-3 flex items-center">
+                                        <i class="fas fa-play-circle mr-2"></i> Interpreted Language (Python, JavaScript)
+                                    </h4>
+                                    <div class="flex items-start mb-3">
+                                        <div class="bg-purple-500 text-white rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mt-1 mr-2">1</div>
+                                        <p class="text-slate-300">เขียนโค้ด (source code)</p>
+                                    </div>
+                                    <div class="flex items-start mb-3">
+                                        <div class="bg-purple-500 text-white rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mt-1 mr-2">2</div>
+                                        <p class="text-slate-300">ใช้ <strong>Interpreter</strong> อ่านทีละบรรทัดและแปลงเป็นคำสั่งเครื่อง</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <div class="bg-purple-500 text-white rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mt-1 mr-2">3</div>
+                                        <p class="text-slate-300">ทำงานทันทีโดยไม่สร้างไฟล์ executable แยก</p>
+                                    </div>
+                                    
+                                    <div class="mt-4 p-3 bg-dark-900 rounded-lg">
+                                        <pre class="text-purple-300 text-sm">$ python hello.py
+                        Hello, world!</pre>
+                                    </div>
+                                    
+                                    <div class="mt-4 bg-purple-900 bg-opacity-20 p-3 rounded-lg">
+                                        <p class="text-purple-300">
+                                            <i class="fas fa-bolt mr-2"></i> <strong>ข้อดี:</strong> แก้ไขและทดสอบได้เร็ว ไม่ต้อง compile ก่อน
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <div class="bg-dark-700 p-4 rounded-lg">
+                                    <div class="text-center text-blue-400 text-2xl mb-2"><i class="fas fa-microchip"></i></div>
+                                    <p class="text-center font-semibold">ภาษาเครื่อง</p>
+                                    <p class="text-slate-400 text-sm text-center mt-1">Compiler สร้างไฟล์ภาษาเครื่องที่ CPU เข้าใจได้ตรงๆ</p>
+                                </div>
+                                <div class="bg-dark-700 p-4 rounded-lg">
+                                    <div class="text-center text-amber-400 text-2xl mb-2"><i class="fas fa-gauge-high"></i></div>
+                                    <p class="text-center font-semibold">ความเร็ว</p>
+                                    <p class="text-slate-400 text-sm text-center mt-1">Compiled code รันเร็วเพราะไม่ต้องแปลอีก</p>
+                                </div>
+                                <div class="bg-dark-700 p-4 rounded-lg">
+                                    <div class="text-center text-purple-400 text-2xl mb-2"><i class="fas fa-layer-group"></i></div>
+                                    <p class="text-center font-semibold">การพกพา</p>
+                                    <p class="text-slate-400 text-sm text-center mt-1">Compiled code ขึ้นกับระบบปฏิบัติการ</p>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-6 bg-amber-900 bg-opacity-20 border-l-4 border-amber-400 p-4 rounded-r-lg">
+                                <p class="text-amber-200">
+                                    <i class="fas fa-lightbulb mr-2"></i> <strong>เหตุผลที่ C ทำงานเร็ว:</strong> เพราะถูก compile เป็นภาษาเครื่องโดยตรง ทำให้ไม่ต้องเสียเวลาแปลอีกเมื่อรันโปรแกรม! 
+                                    นี่คือหนึ่งในเหตุผลที่ภาษา C ยังคงถูกใช้ในระบบปฏิบัติการและเกมระดับ AAA จนถึงทุกวันนี้
+                                </p>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-semibold text-slate-100 mt-8 mb-3 flex items-center">
+                            <i class="fas fa-heartbeat mr-2 text-red-400"></i> การสนทนาครั้งแรก: ผ่าตัดโปรแกรม Hello, world!
+                        </h3>
+                        <p class="text-slate-300 mb-4">เอาล่ะครับ ถึงเวลาที่เราจะมาผ่าตัดโค้ดโปรแกรมแรกของเรากันแบบละเอียดยิบทุกอณู นี่คือบทสนทนาแรกระหว่างเรากับคอมพิวเตอร์</p>
+                        
+                        <div class="relative mt-6">
+                            <div class="absolute top-4 right-4 flex space-x-2">
+                                <button class="text-slate-400 hover:text-slate-200">
+                                    <i class="far fa-copy"></i>
+                                </button>
+                                <button class="text-slate-400 hover:text-slate-200">
+                                    <i class="fas fa-expand"></i>
+                                </button>
+                            </div>
+                            <pre class="code-block"><code class="language-c"><span class="code-comment">// นำเข้าไลบรารีมาตรฐานสำหรับ Input/Output</span>
+<span class="keyword-glossary" data-term="#include" data-def="คำสั่ง 'พรีโปรเซสเซอร์' ใช้บอกคอมไพเลอร์ว่า 'ช่วยไปเอาโค้ดจากไฟล์อื่นมารวมกับไฟล์นี้ที' เหมือนการไปหยิบกล่องเครื่องมือมาเตรียมไว้ใช้งาน">#include</span> <span class="code-string">&lt;<span class="keyword-glossary" data-term="stdio.h" data-def="ชื่อของ 'กล่องเครื่องมือ' มาตรฐาน (Standard Input/Output Header) ที่มีฟังก์ชันพื้นฐานอย่าง printf() อยู่ข้างใน">stdio.h</span>&gt;</span>
+
+<span class="code-comment">// ฟังก์ชัน main คือจุดเริ่มต้นของทุกโปรแกรมภาษา C</span>
+<span class="keyword-glossary" data-term="int" data-def="ย่อมาจาก Integer คือชนิดของข้อมูลที่เป็น 'เลขจำนวนเต็ม' การระบุ int หน้า main หมายความว่าเมื่อฟังก์ชันนี้ทำงานเสร็จ จะต้อง 'คืนค่า' กลับไปเป็นเลขจำนวนเต็ม">int</span> <span class="keyword-glossary code-function" data-term="main" data-def="คือชื่อฟังก์ชันที่พิเศษที่สุด ถือเป็น 'ประตูทางเข้าหลัก' ของทุกโปรแกรมในภาษา C คอมพิวเตอร์จะมองหาฟังก์ชัน main() เป็นอันดับแรกเสมอ">main</span>(<span class="keyword-glossary" data-term="void" data-def="แปลว่า 'ว่างเปล่า' ในที่นี้หมายความว่าฟังก์ชัน main ไม่ต้องการรับข้อมูลใดๆ จากภายนอกเพื่อเริ่มทำงาน">void</span>)
+<span class="keyword-glossary" data-term="{ }" data-def="ปีกกา คือสัญลักษณ์ที่ใช้กำหนด 'ขอบเขต' การทำงานของฟังก์ชัน หรือบล็อกของโค้ด ทุกอย่างที่อยู่ระหว่างปีกกาเปิด { และปีกกาปิด } ถือว่าเป็นส่วนหนึ่งของบล็อกนั้นๆ">{</span>
+    <span class="code-comment">// ใช้ฟังก์ชัน printf เพื่อพิมพ์ข้อความออกทางหน้าจอ</span>
+    <span class="keyword-glossary code-function" data-term="printf" data-def="มาจาก Print-Formatted เป็นฟังก์ชันที่อยู่ใน stdio.h ใช้สำหรับแสดงผลข้อความหรือค่าของตัวแปรออกไปยังหน้าจอ">printf</span>(<span class="code-string">"Hello, world!\n"</span>)<span class="keyword-glossary" data-term=";" data-def="เซมิโคลอน คือเครื่องหมาย 'จบประโยค' ในภาษา C มันทำหน้าที่เหมือนจุด full-stop ในภาษาอังกฤษ เพื่อบอกคอมไพเลอร์ว่าคำสั่งนี้จบลงแล้ว">;</span>
+<span class="keyword-glossary" data-term="{ }" data-def="ปีกกา คือสัญลักษณ์ที่ใช้กำหนด 'ขอบเขต' การทำงานของฟังก์ชัน หรือบล็อกของโค้ด ทุกอย่างที่อยู่ระหว่างปีกกาเปิด { และปีกกาปิด } ถือว่าเป็นส่วนหนึ่งของบล็อกนั้นๆ">}</span></code></pre>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+                            <div class="bg-dark-700 p-4 rounded-lg border border-dark-600">
+                                <h4 class="text-lg font-semibold text-slate-100 mb-3 flex items-center">
+                                    <i class="fas fa-check-circle text-green-400 mr-2"></i> สิ่งที่ได้เรียนรู้
+                                </h4>
+                                <ul class="space-y-2 text-slate-300">
+                                    <li class="flex items-start">
+                                        <i class="fas fa-chevron-right text-primary-400 mt-1 mr-2 text-xs"></i>
+                                        <span>โครงสร้างพื้นฐานของโปรแกรม C</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-chevron-right text-primary-400 mt-1 mr-2 text-xs"></i>
+                                        <span>ฟังก์ชัน main() เป็นจุดเริ่มต้น</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-chevron-right text-primary-400 mt-1 mr-2 text-xs"></i>
+                                        <span>การใช้งานฟังก์ชัน printf()</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                            <div class="bg-dark-700 p-4 rounded-lg border border-dark-600">
+                                <h4 class="text-lg font-semibold text-slate-100 mb-3 flex items-center">
+                                    <i class="fas fa-exclamation-triangle text-yellow-400 mr-2"></i> ข้อควรระวัง
+                                </h4>
+                                <ul class="space-y-2 text-slate-300">
+                                    <li class="flex items-start">
+                                        <i class="fas fa-chevron-right text-primary-400 mt-1 mr-2 text-xs"></i>
+                                        <span>อย่าลืม ; (semicolon) ท้ายคำสั่ง</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-chevron-right text-primary-400 mt-1 mr-2 text-xs"></i>
+                                        <span>ปีกกา { } ต้องเปิด-ปิดให้ถูกคู่</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-chevron-right text-primary-400 mt-1 mr-2 text-xs"></i>
+                                        <span>ต้อง include stdio.h เพื่อใช้ printf</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+
+            </main>
+        </div>
+    </div>
+
+    <script src="../js/main.js" defer></script>
+</body>
+
+</html>

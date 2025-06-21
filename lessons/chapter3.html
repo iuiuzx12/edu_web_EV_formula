@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="th" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>บทที่ 3: การสนทนาโต้ตอบ (Interactive Conversations)</title> 
+    <link rel="stylesheet" href="../css/main.css"> <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+
+<body class="antialiased">
+    
+    <div class="container mx-auto max-w-6xl p-4 sm:p-6 lg:p-8 flex flex-col md:flex-row gap-8">
+        
+        <aside class="w-full md:w-64 flex-shrink-0">
+            <div id="nav-placeholder" class="sticky top-8">
+                </div>
+        </aside>
+
+        <div class="flex-grow">
+            <main>
+
+                <!-- ======= บทที่ 3: การสนทนาโต้ตอบ ======= -->
+                <section id="c-interactive" class="scroll-mt-16">
+                    <div class="content-card">
+                        <div class="flex items-start section-header">
+                            <div class="section-icon" style="background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);">
+                                <i class="fas fa-comments text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-3xl font-bold text-slate-100 mb-2">บทที่ 3: การสนทนาโต้ตอบ (Interactive Conversations)</h2>
+                                <div class="flex items-center text-slate-400 mb-4">
+                                    <i class="far fa-clock mr-1"></i>
+                                    <span class="text-sm">ระยะเวลาอ่าน: 7 นาที</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <p class="text-slate-300 mb-4 leading-relaxed">ยินดีด้วยครับ! ตอนนี้คุณสามารถส่ง "ข้อความ" ไปยังคอมพิวเตอร์ได้แล้ว แต่การสื่อสารที่ดีคือการสื่อสารสองทางใช่ไหมครับ? ในบทนี้ เราจะทำให้โปรแกรมของเรา "ฉลาด" ขึ้น โดยการรับข้อมูลจากผู้ใช้กลับมาบ้าง และนี่คือการเติมเต็มโมเดล `Input -> Process -> Output` ของเราให้สมบูรณ์</p>
+                        
+                        <h3 class="text-xl font-semibold text-slate-100 mt-8 mb-3 flex items-center">
+                            <i class="fas fa-box-open mr-2 text-amber-400"></i> กล่องมหัศจรรย์: ตัวแปร (Variables)
+                        </h3>
+                        <p class="text-slate-300 mb-4 leading-relaxed">ลองจินตนาการว่าคุณต้องการให้โปรแกรมถามชื่อของคุณ แล้วทักทายกลับมาด้วยชื่อนั้น... โปรแกรมจะ "จำ" ชื่อที่คุณพิมพ์เข้าไปได้อย่างไร? คำตอบคือ <strong class="keyword-glossary" data-term="Variable" data-def="ตัวแปร คือชื่อที่เราตั้งขึ้นมาเพื่ออ้างอิงถึงพื้นที่ในหน่วยความจำของคอมพิวเตอร์ ใช้สำหรับเก็บข้อมูลที่โปรแกรมต้องใช้งาน เปรียบเสมือนกล่องที่มีป้ายชื่อกำกับอยู่">ตัวแปร (Variable)</strong> ครับ</p>
+                        <p class="text-slate-300 mb-4 leading-relaxed">ตัวแปร ก็เหมือน "กล่องเปล่าพร้อมป้ายชื่อ" ครับ เราต้องทำ 2 อย่าง:</p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-6">
+                            <div class="interactive-card">
+                                <h4 class="text-lg font-semibold text-slate-100 mb-3 flex items-center">
+                                    <i class="fas fa-tag mr-2 text-primary-400"></i> ตั้งชื่อให้กล่อง
+                                </h4>
+                                <p class="text-slate-300">เราต้องบอกคอมพิวเตอร์ก่อนว่า "ฉันจะสร้างกล่องนะ กล่องนี้ชื่อว่า `name`"</p>
+                                <div class="mt-4 p-3 bg-dark-800 rounded-lg">
+                                    <code class="text-primary-400">string name;</code>
+                                </div>
+                            </div>
+                            
+                            <div class="interactive-card">
+                                <h4 class="text-lg font-semibold text-slate-100 mb-3 flex items-center">
+                                    <i class="fas fa-shapes mr-2 text-green-400"></i> บอกชนิดของที่จะใส่
+                                </h4>
+                                <p class="text-slate-300">เราต้องบอกด้วยว่ากล่องนี้จะเอาไว้ใส่ของ "ประเภท" ไหน เช่น ใส่ข้อความ (string) หรือใส่ตัวเลข (int)</p>
+                                <div class="mt-4 p-3 bg-dark-800 rounded-lg">
+                                    <code class="text-green-400">name = get_string("Your name? ");</code>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <h3 class="text-xl font-semibold text-slate-100 mt-8 mb-3 flex items-center">
+                            <i class="fas fa-robot mr-2 text-accent-500"></i> สนทนากับผู้ใช้: โค้ดทักทายอัจฉริยะ
+                        </h3>
+                        <p class="text-slate-300 mb-4">มาดูโปรแกรมที่สมบูรณ์ขึ้นกันครับ โปรแกรมนี้จะถามชื่อของคุณ แล้วนำชื่อนั้นมาแสดงผลบนหน้าจอ จะเห็นว่าเราได้หยิบ "กล่องเครื่องมือ" มาเพิ่มอีกหนึ่งชิ้นคือ `<cs50.h>` ซึ่งเป็นไลบรารีพิเศษของคอร์ส CS50 ที่ทำให้การรับ Input ง่ายขึ้นมากครับ</p>
+                        
+                        <div class="relative mt-6">
+                            <div class="absolute top-4 right-4 flex space-x-2">
+                                <button class="text-slate-400 hover:text-slate-200" onclick="copyCode('code-interactive')">
+                                    <i class="far fa-copy"></i>
+                                </button>
+                                <button class="text-slate-400 hover:text-slate-200" onclick="runInteractiveDemo()">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                            </div>
+                            <pre id="code-interactive" class="code-block"><code class="language-c"><span class="code-comment">// นำเข้าไลบรารี cs50 และ stdio</span>
+                <span class="keyword-glossary" data-term="#include" data-def="คำสั่ง 'พรีโปรเซสเซอร์' ใช้บอกคอมไพเลอร์ว่า 'ช่วยไปเอาโค้ดจากไฟล์อื่นมารวมกับไฟล์นี้ที' เหมือนการไปหยิบกล่องเครื่องมือมาเตรียมไว้ใช้งาน">#include</span> <span class="code-string">&lt;<span class="keyword-glossary" data-term="cs50.h" data-def="ไลบรารี (กล่องเครื่องมือ) พิเศษของ CS50 ที่มีฟังก์ชันอำนวยความสะดวก เช่น get_string(), get_int() ทำให้การรับข้อมูลจากผู้ใช้ทำได้ง่ายขึ้นมาก">cs50.h</span>&gt;</span>
+                <span class="keyword-glossary" data-term="#include" data-def="คำสั่ง 'พรีโปรเซสเซอร์' ใช้บอกคอมไพเลอร์ว่า 'ช่วยไปเอาโค้ดจากไฟล์อื่นมารวมกับไฟล์นี้ที' เหมือนการไปหยิบกล่องเครื่องมือมาเตรียมไว้ใช้งาน">#include</span> <span class="code-string">&lt;<span class="keyword-glossary" data-term="stdio.h" data-def="ชื่อของ 'กล่องเครื่องมือ' มาตรฐาน (Standard Input/Output Header) ที่มีฟังก์ชันพื้นฐานอย่าง printf() อยู่ข้างใน">stdio.h</span>&gt;</span>
+
+                <span class="keyword-glossary" data-term="int" data-def="ย่อมาจาก Integer คือชนิดของข้อมูลที่เป็น 'เลขจำนวนเต็ม' การระบุ int หน้า main หมายความว่าเมื่อฟังก์ชันนี้ทำงานเสร็จ จะต้อง 'คืนค่า' กลับไปเป็นเลขจำนวนเต็ม">int</span> <span class="keyword-glossary code-function" data-term="main" data-def="คือชื่อฟังก์ชันที่พิเศษที่สุด ถือเป็น 'ประตูทางเข้าหลัก' ของทุกโปรแกรมในภาษา C คอมพิวเตอร์จะมองหาฟังก์ชัน main() เป็นอันดับแรกเสมอ">main</span>(<span class="keyword-glossary" data-term="void" data-def="แปลว่า 'ว่างเปล่า' ในที่นี้หมายความว่าฟังก์ชัน main ไม่ต้องการรับข้อมูลใดๆ จากภายนอกเพื่อเริ่มทำงาน">void</span>)
+                <span class="keyword-glossary" data-term="{ }" data-def="ปีกกา คือสัญลักษณ์ที่ใช้กำหนด 'ขอบเขต' การทำงานของฟังก์ชัน หรือบล็อกของโค้ด ทุกอย่างที่อยู่ระหว่างปีกกาเปิด { และปีกกาปิด } ถือว่าเป็นส่วนหนึ่งของบล็อกนั้นๆ">{</span>
+                    <span class="code-comment">// รับชื่อจากผู้ใช้แล้วเก็บในตัวแปร name</span>
+                    <span class="keyword-glossary" data-term="string" data-def="ชนิดข้อมูลสำหรับเก็บ 'ข้อความ' หรือ 'ชุดของตัวอักษร' ในไลบรารีของ CS50 ทำให้การจัดการข้อความเป็นเรื่องง่าย">string</span> name = <span class="keyword-glossary code-function" data-term="get_string" data-def="ฟังก์ชันจากไลบรารี cs50.h ใช้สำหรับรับข้อมูลประเภทข้อความ (string) จากผู้ใช้">get_string</span>(<span class="code-string">"What's your name? "</span>);
+
+                    <span class="code-comment">// แสดงผลคำทักทายโดยใช้ชื่อที่รับมา</span>
+                    <span class="keyword-glossary code-function" data-term="printf" data-def="มาจาก Print-Formatted เป็นฟังก์ชันที่อยู่ใน stdio.h ใช้สำหรับแสดงผลข้อความหรือค่าของตัวแปรออกไปยังหน้าจอ">printf</span>(<span class="code-string">"hello, <span class="keyword-glossary code-placeholder" data-term="%s" data-def="เรียกว่า 'Format Specifier' เป็นตัวจองที่ในข้อความ เพื่อบอก printf ว่า 'ตรงนี้นะ เดี๋ยวจะเอาค่า string มาเสียบแทนที่'">%s</span>\n"</span>, name);
+                <span class="keyword-glossary" data-term="{ }" data-def="ปีกกา คือสัญลักษณ์ที่ใช้กำหนด 'ขอบเขต' การทำงานของฟังก์ชัน หรือบล็อกของโค้ด ทุกอย่างที่อยู่ระหว่างปีกกาเปิด { และปีกกาปิด } ถือว่าเป็นส่วนหนึ่งของบล็อกนั้นๆ">}</span></code></pre>
+                        </div>
+                        
+                        <!-- Interactive Demo Section -->
+                        <div class="interactive-card mt-8">
+                            <h3 class="text-xl font-semibold text-slate-100 mb-4 flex items-center">
+                                <i class="fas fa-flask mr-2 text-purple-400"></i> ห้องทดลอง: ทักทายกันเถอะ!
+                            </h3>
+                            <p class="text-slate-300 mb-4">ลองใช้งานโปรแกรมทักทายด้วยการใส่ชื่อของคุณด้านล่าง แล้วดูผลลัพธ์ที่ได้</p>
+                            
+                            <!-- แก้ไขในส่วนห้องทดลอง: ทักทายกันเถอะ! -->
+                            <div class="flex flex-col md:flex-row gap-4 mb-4">
+                                <div class="flex-grow">
+                                    <label class="block text-slate-300 mb-2">ป้อนชื่อของคุณ:</label>
+                                    <input 
+                                        type="text" 
+                                        id="user-name" 
+                                        class="input-field w-full" 
+                                        placeholder="เช่น Somchai" 
+                                        value="CS50 Lover"
+                                        minlength="2"
+                                        maxlength="20"
+                                        pattern="[A-Za-zก-๙\s]+"
+                                        title="ชื่อต้องประกอบด้วยตัวอักษรและช่องว่างเท่านั้น (2-20 ตัวอักษร)"
+                                        required
+                                    >
+                                    <!-- เพิ่มส่วนแสดงข้อความ error -->
+                                    <div id="name-error" class="text-red-400 text-sm mt-1 hidden">
+                                        <i class="fas fa-exclamation-circle mr-1"></i>
+                                        <span>กรุณาป้อนชื่อที่ถูกต้อง (2-20 ตัวอักษร, ใช้เฉพาะตัวอักษรและช่องว่าง)</span>
+                                    </div>
+                                </div>
+                                <div class="flex items-end">
+                                    <button id="run-greeting-btn" class="btn-primary w-full md:w-auto">
+                                        <i class="fas fa-play mr-2"></i> รันโปรแกรม
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <h4 class="text-lg font-semibold text-slate-100 mb-2 flex items-center">
+                                        <i class="fas fa-terminal mr-2 text-green-400"></i> ผลลัพธ์:
+                                    </h4>
+                                    <div id="greeting-output" class="bg-dark-800 p-4 rounded-lg min-h-[100px] font-mono text-slate-200 whitespace-pre-wrap">
+                                        <!-- ผลลัพธ์จะแสดงที่นี่ -->
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <h4 class="text-lg font-semibold text-slate-100 mb-2 flex items-center">
+                                        <i class="fas fa-code mr-2 text-blue-400"></i> กลไกการทำงาน:
+                                    </h4>
+                                    <div class="bg-dark-800 p-4 rounded-lg text-slate-300">
+                                        <p class="mb-3"><i class="fas fa-chevron-right text-primary-400 mr-2"></i> โปรแกรมสร้างตัวแปรชื่อ <code class="text-primary-400">name</code> สำหรับเก็บข้อมูล</p>
+                                        <p class="mb-3"><i class="fas fa-chevron-right text-primary-400 mr-2"></i> ใช้ <code class="text-primary-400">get_string()</code> รับค่าจากผู้ใช้</p>
+                                        <p><i class="fas fa-chevron-right text-primary-400 mr-2"></i> แสดงผลด้วย <code class="text-primary-400">printf()</code> โดยใช้ <code class="text-amber-400">%s</code> แทนที่ด้วยชื่อ</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8 p-4 bg-dark-800 border border-dark-700 rounded-lg">
+                            <p class="text-lg text-center text-slate-200 font-medium">
+                                <i class="fas fa-star text-yellow-400 mr-2"></i> ยอดเยี่ยมมากครับ! ตอนนี้เว็บไซต์ของเราได้นำพาผู้เรียนจากการเป็นเพียงผู้ส่งสารฝ่ายเดียว มาสู่การเป็นผู้สร้างบทสนทนาที่สมบูรณ์แล้ว
+                            </p>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <script src="../js/main.js" defer></script>
+</body>
+
+
+</html>

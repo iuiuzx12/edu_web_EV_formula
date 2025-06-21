@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="th" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>บทที่ 6: การทำงานซ้ำอย่างไม่รู้จักเหนื่อย (Loops)</title> 
+    <link rel="stylesheet" href="../css/main.css"> <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body class="antialiased">
+    
+    <div class="container mx-auto max-w-6xl p-4 sm:p-6 lg:p-8 flex flex-col md:flex-row gap-8">
+        
+        <aside class="w-full md:w-64 flex-shrink-0">
+            <div id="nav-placeholder" class="sticky top-8">
+                </div>
+        </aside>
+
+        <div class="flex-grow">
+            <main>
+
+
+                <section id="c-loops" class="scroll-mt-16">
+                    <div class="content-card">
+                        <div class="flex items-start section-header">
+                            <div class="section-icon" style="background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);">
+                                <i class="fas fa-redo-alt text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-3xl font-bold text-slate-100 mb-2">บทที่ 6: การทำงานซ้ำอย่างไม่รู้จักเหนื่อย (Loops)</h2>
+                                <div class="flex items-center text-slate-400 mb-4">
+                                    <i class="far fa-clock mr-1"></i>
+                                    <span class="text-sm">ระยะเวลาอ่าน: 10 นาที</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <p class="text-slate-300 mb-4 leading-relaxed">
+                            เราได้สอนให้โปรแกรมตัดสินใจเป็นแล้ว แต่งานที่คอมพิวเตอร์ทำได้ดีที่สุดคืองานซ้ำซากที่มนุษย์เราเบื่อที่จะทำ ถ้าคุณต้องตอกตะปู 100 ตัว คุณคงไม่อยากนับ 1, 2, 3... ไปเรื่อยๆ ใช่ไหมครับ? คุณแค่อยากจะสั่งว่า "ตอกตะปู 100 ตัว" แล้วก็ปล่อยให้เป็นหน้าที่ของเครื่องจักร ลูปในโปรแกรมก็ทำงานแบบนั้นแหละครับ
+                        </p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
+                            <div class="interactive-card">
+                                <h3 class="text-xl font-semibold text-slate-100 mb-3 flex items-center">
+                                    <i class="fas fa-sync-alt mr-2 text-blue-400"></i> ลูปแบบ `while`: ทำไปเรื่อยๆ จนกว่าเงื่อนไขจะไม่จริง
+                                </h3>
+                                <p class="text-slate-300 mb-4">
+                                    <strong class="keyword-glossary" data-term="while loop" data-def="ลูปที่ทำงานโดยตรวจสอบเงื่อนไขก่อน ถ้าเงื่อนไขเป็นจริง ก็จะทำงานในบล็อกของตัวเองไปเรื่อยๆ จนกว่าเงื่อนไขจะเป็นเท็จ">while loop</strong> เหมือนการถามคำถามง่ายๆ ว่า "ยังต้องทำอยู่ไหม?" ถ้าคำตอบคือ "ใช่" ก็ทำต่อไป แล้วค่อยกลับมาถามใหม่ เป็นลูปที่เหมาะกับงานที่เราไม่รู้จำนวนรอบที่แน่นอน แต่รู้ว่าต้องทำไปจนกว่าจะเกิดอะไรบางอย่างขึ้น
+                                </p>
+                                
+                                <div class="bg-dark-800 p-4 rounded-lg mt-4">
+                                    <pre class="code-block"><code class="language-c"><span class="code-comment">// ตัวอย่าง: นับเลขจนกว่าจะถึง 5</span>
+                <span class="code-keyword">int</span> counter = 1;
+                <span class="code-keyword">while</span> (counter <= 5) {
+                    printf(<span class="code-string">"Count: %i\n"</span>, counter);
+                    counter++;
+                }</code></pre>
+                                </div>
+                                
+                                <div class="bg-red-900 bg-opacity-20 border-l-4 border-red-500 p-4 mt-4 rounded-r-lg">
+                                    <p class="font-bold text-red-300 mb-2 flex items-center">
+                                        <i class="fas fa-radiation-alt mr-2"></i> คำเตือน: ลูปอนันต์ (Infinite Loop)
+                                    </p>
+                                    <p class="text-red-200">ข้อควรระวังของ `while` คือ ถ้าเงื่อนไขเป็นจริง "ตลอดไป" โปรแกรมของคุณก็จะทำงานในลูปนั้นไปตลอดกาลจนกว่าจะถูกบังคับปิด! เราจึงต้องมั่นใจว่ามีโค้ดที่ทำให้เงื่อนไขมีโอกาสเป็นเท็จได้อยู่ภายในลูปเสมอ</p>
+                                </div>
+                            </div>
+                            
+                            <div class="interactive-card">
+                                <h3 class="text-xl font-semibold text-slate-100 mb-3 flex items-center">
+                                    <i class="fas fa-fast-forward mr-2 text-green-400"></i> ลูปแบบ `for`: ลูปยอดนิยมสำหรับจำนวนรอบที่แน่นอน
+                                </h3>
+                                <p class="text-slate-300 mb-4">
+                                    <strong class="keyword-glossary" data-term="for loop" data-def="ลูปที่ถูกออกแบบมาให้ทำงานซ้ำตามจำนวนรอบที่กำหนดไว้ชัดเจน โดยรวมเอา 'จุดเริ่มต้น', 'เงื่อนไข' และ 'การเปลี่ยนแปลง' ไว้ในบรรทัดเดียว">for loop</strong> เป็นเครื่องมือที่ทรงพลังและถูกใช้งานบ่อยที่สุด มันถูกออกแบบมาเพื่อทำงานซ้ำในจำนวนรอบที่เรารู้อยู่แล้ว โดยมี 3 ส่วนประกอบสำคัญในวงเล็บ:
+                                </p>
+                                
+                                <ol class="list-decimal list-inside space-y-2 mb-4 text-slate-300">
+                                    <li><strong>Initialization (จุดเริ่มต้น):</strong> สร้างตัวแปรนับรอบขึ้นมา (เช่น `int i = 0;`)</li>
+                                    <li><strong>Condition (เงื่อนไข):</strong> ตรวจสอบเงื่อนไขก่อนเริ่มแต่ละรอบ (เช่น `i < 10;`)</li>
+                                    <li><strong>Increment/Decrement (การเปลี่ยนแปลง):</strong> สิ่งที่จะทำหลังจบแต่ละรอบ (เช่น `i++;` คือการบวกค่า i ไป 1)</li>
+                                </ol>
+                                
+                                <div class="bg-dark-800 p-4 rounded-lg mt-4">
+                                    <pre class="code-block"><code class="language-c"><span class="code-comment">// ตัวอย่าง: พิมพ์ "Hello" 3 ครั้ง</span>
+                <span class="code-keyword">for</span> (<span class="code-keyword">int</span> i = 0; i < 3; i++) {
+                    printf(<span class="code-string">"Hello\n"</span>);
+                }</code></pre>
+                                </div>
+                                
+                                <div class="bg-blue-900 bg-opacity-20 border-l-4 border-blue-500 p-4 mt-4 rounded-r-lg">
+                                    <p class="font-bold text-loop-highlight mb-2 flex items-center">
+                                        <i class="fas fa-lightbulb mr-2"></i> เทคนิคการใช้งาน
+                                    </p>
+                                    <p class="text-loop-highlight">คุณสามารถใช้ `for` loop ในการวนลูปจากค่าสูงลงมาค่าต่ำได้ โดยใช้การลดค่าตัวนับ: <code>for (int i = 10; i > 0; i--)</code></p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- ห้องทดลองลูป: สั่งน้องหมาให้เห่า! -->
+                        <div class="interactive-card mt-8">
+                            <h3 class="text-xl font-semibold text-slate-100 mb-4 flex items-center">
+                                <i class="fas fa-dog mr-2 text-amber-400"></i> ห้องทดลองลูป: สั่งน้องหมาให้เห่า!
+                            </h3>
+                            <p class="text-slate-300 mb-4">ลองป้อนจำนวนครั้ง แล้วดูซิว่าลูปแบบ `for` และ `while` ทำงานเหมือนกันได้อย่างไร</p>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                <div class="bg-dark-800 p-5 rounded-lg">
+                                    <h4 class="text-lg font-semibold text-slate-100 mb-3 flex items-center">
+                                        <i class="fas fa-sliders-h mr-2 text-blue-400"></i> ควบคุมลูป
+                                    </h4>
+                                    
+                                    <div class="space-y-4">
+                                        <div>
+                                            <label class="block text-slate-300 mb-2">จำนวนครั้งที่จะเห่า:</label>
+                                            <input type="range" id="bark-count" min="1" max="10" value="3" class="w-full">
+                                            <div class="flex justify-between">
+                                                <span class="text-sm text-slate-400">1 ครั้ง</span>
+                                                <span id="bark-count-value" class="font-bold text-amber-400">3 ครั้ง</span>
+                                                <span class="text-sm text-slate-400">10 ครั้ง</span>
+                                            </div>
+                                        </div>
+                                        
+                                        <div>
+                                            <label class="block text-slate-300 mb-2">ประเภทลูป:</label>
+                                            <div class="flex space-x-2" id="loop-toggle-btns">
+                                                <button data-loop-type="for" class="loop-type-btn active bg-primary-500 text-white py-2 px-4 rounded transition-colors">
+                                                    for loop
+                                                </button>
+                                                <button data-loop-type="while" class="loop-type-btn bg-dark-700 hover:bg-dark-600 py-2 px-4 rounded transition-colors">
+                                                    while loop
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <!-- ในส่วน "ควบคุมลูป" ใต้ประเภทลูป -->
+                                        <div class="mt-4">
+                                            <label class="block text-slate-300 mb-2">ตัวควบคุมลูป:</label>
+                                            <div class="grid grid-cols-2 gap-2">
+                                                <button id="break-btn" class="loop-control-btn bg-red-900 bg-opacity-30 hover:bg-red-800 py-2 px-4 rounded transition-colors">
+                                                    <i class="fas fa-stop-circle mr-2"></i> break
+                                                </button>
+                                                <button id="continue-btn" class="loop-control-btn bg-blue-900 bg-opacity-30 hover:bg-blue-800 py-2 px-4 rounded transition-colors">
+                                                    <i class="fas fa-forward mr-2"></i> continue
+                                                </button>
+                                            </div>
+                                            
+                                            <!-- เงื่อนไขสำหรับ break/continue -->
+                                            <div id="loop-condition" class="mt-4 hidden">
+                                                <label class="block text-slate-300 mb-2">หยุด/ข้ามเมื่อถึงรอบที่:</label>
+                                                <input type="number" id="control-point" min="1" max="10" value="3" class="input-field w-full">
+                                            </div>
+                                        </div>
+                                        
+                                        <div>
+                                            <button id="bark-btn" class="btn-primary w-full">
+                                                <i class="fas fa-play mr-2"></i> เริ่มเห่า!
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-dark-800 p-5 rounded-lg md:col-span-2">
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                        <div>
+                                            <h4 class="text-lg font-semibold text-slate-100 mb-3 flex items-center">
+                                                <i class="fas fa-terminal mr-2 text-green-400"></i> ผลลัพธ์:
+                                            </h4>
+                                            <div id="bark-result" class="bg-dark-900 p-4 rounded-lg min-h-[150px] font-mono text-slate-100 whitespace-pre-wrap">
+                                                <!-- ผลลัพธ์จะแสดงที่นี่ -->
+                                            </div>
+                                        </div>
+                                        
+                                        <div>
+                                            <h4 class="text-lg font-semibold text-slate-100 mb-3 flex items-center">
+                                                <i class="fas fa-code mr-2 text-blue-400"></i> โค้ดที่ใช้:
+                                            </h4>
+                                            <div id="loop-code" class="bg-dark-900 p-4 rounded-lg min-h-[150px] font-mono text-sm text-slate-100 whitespace-pre overflow-x-auto">
+                                                // โค้ดจะแสดงที่นี่
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="mt-6">
+                                        <h4 class="text-lg font-semibold text-slate-100 mb-3 flex items-center">
+                                            <i class="fas fa-history mr-2 text-purple-400"></i> การทำงานของลูป:
+                                        </h4>
+                                        <div class="grid grid-cols-4 gap-2 text-center" id="loop-visualization">
+                                            <!-- Visualization will be added here -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- การเปรียบเทียบลูป -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+                            <div class="interactive-card">
+                                <h4 class="text-lg font-semibold text-slate-100 mb-3 flex items-center">
+                                    <i class="fas fa-exchange-alt mr-2 text-blue-400"></i> เปรียบเทียบ `for` และ `while`
+                                </h4>
+                                <table class="w-full text-slate-300">
+                                    <thead>
+                                        <tr class="border-b border-dark-600">
+                                            <th class="py-2 text-left">เกณฑ์</th>
+                                            <th class="py-2 text-center">for loop</th>
+                                            <th class="py-2 text-center">while loop</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="border-b border-dark-700">
+                                            <td class="py-3">ความเหมาะสม</td>
+                                            <td class="py-3 text-center">จำนวนรอบแน่นอน</td>
+                                            <td class="py-3 text-center">จำนวนรอบไม่แน่นอน</td>
+                                        </tr>
+                                        <tr class="border-b border-dark-700">
+                                            <td class="py-3">การตั้งค่าเริ่มต้น</td>
+                                            <td class="py-3 text-center">อยู่ในวงเล็บ</td>
+                                            <td class="py-3 text-center">ก่อนลูป</td>
+                                        </tr>
+                                        <tr class="border-b border-dark-700">
+                                            <td class="py-3">การอัปเดตตัวนับ</td>
+                                            <td class="py-3 text-center">อยู่ในวงเล็บ</td>
+                                            <td class="py-3 text-center">ในบล็อคลูป</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="py-3">ความเสี่ยงลูปอนันต์</td>
+                                            <td class="py-3 text-center text-green-400">น้อย</td>
+                                            <td class="py-3 text-center text-amber-400">มาก</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                            <div class="interactive-card">
+                                <h4 class="text-lg font-semibold text-slate-100 mb-3 flex items-center">
+                                    <i class="fas fa-laptop-code mr-2 text-green-400"></i> ตัวอย่างการประยุกต์ใช้งานจริง
+                                </h4>
+                                <ul class="space-y-3 text-slate-300">
+                                    <li class="flex items-start">
+                                        <i class="fas fa-circle text-xs mt-2 mr-2 text-primary-400"></i>
+                                        <span><strong>การประมวลผลรายการ:</strong> วนลูปผ่านรายการผู้ใช้, สินค้าในตะกร้า, หรือไฟล์ในโฟลเดอร์</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-circle text-xs mt-2 mr-2 text-primary-400"></i>
+                                        <span><strong>เกม:</strong> เกมที่ต้องทำงานซ้ำๆ จนกว่าผู้เล่นจะชนะหรือแพ้</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-circle text-xs mt-2 mr-2 text-primary-400"></i>
+                                        <span><strong>การคำนวณซ้ำ:</strong> คำนวณค่าทางคณิตศาสตร์ซ้ำๆ เพื่อหาค่าที่แม่นยำ</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-circle text-xs mt-2 mr-2 text-primary-400"></i>
+                                        <span><strong>การรอข้อมูล:</strong> วนลูปรอจนกว่าผู้ใช้จะป้อนข้อมูลหรือมีข้อมูลจากเซิร์ฟเวอร์</span>
+                                    </li>
+                                </ul>
+                                
+                                <div class="mt-4 bg-dark-800 p-4 rounded-lg">
+                                    <pre class="code-block"><code class="language-c"><span class="code-comment">// ตัวอย่าง: คำนวณผลรวมของตัวเลข 1 ถึง n</span>
+                <span class="code-keyword">int</span> n = 10;
+                <span class="code-keyword">int</span> sum = 0;
+
+                <span class="code-keyword">for</span> (<span class="code-keyword">int</span> i = 1; i <= n; i++) {
+                    sum += i;
+                }
+
+                printf(<span class="code-string">"Sum of 1 to %i is %i"</span>, n, sum);</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8 p-4 bg-dark-800 border border-dark-700 rounded-lg">
+                            <p class="text-lg text-center text-slate-200 font-medium">
+                                <i class="fas fa-star text-yellow-400 mr-2"></i> ตอนนี้คุณมีเครื่องมือทรงพลังในการจัดการงานซ้ำๆ แล้ว! ลูปจะช่วยให้คุณเขียนโค้ดที่กระชับและมีประสิทธิภาพมากขึ้น
+                            </p>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <script src="../js/main.js" defer></script>
+</body>
+
+
+
+</html>

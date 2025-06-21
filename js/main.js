@@ -1,11 +1,16 @@
 document.addEventListener('DOMContentLoaded', function () {
-    // Progress bar
-    const progressBar = document.getElementById('progress-bar');
-    window.addEventListener('scroll', () => {
-        const totalHeight = document.body.scrollHeight - window.innerHeight;
-        const progress = (window.scrollY / totalHeight) * 100;
-        progressBar.style.width = `${progress}%`;
-    });
+    const navPlaceholder = document.getElementById('nav-placeholder');
+    if (navPlaceholder) {
+        // ตรวจสอบว่าเราอยู่ในหน้า lessons หรือไม่เพื่อกำหนด path ให้ถูกต้อง
+        const navPath = window.location.pathname.includes('/lessons/') ? '../_navigation.html' : '_navigation.html';
+
+        fetch(navPath)
+            .then(response => response.text())
+            .then(data => {
+                navPlaceholder.innerHTML = data;
+                initializeNavigation();
+            });
+    }
 
     // Glossary modal
     const glossaryModal = document.getElementById('glossary-modal');
@@ -21,6 +26,39 @@ document.addEventListener('DOMContentLoaded', function () {
             glossaryBackdrop.style.display = 'block';
         }
     });
+
+    function initializeNavigation() {
+        const toggles = document.querySelectorAll('.nav-part-toggle');
+        const links = document.querySelectorAll('#main-nav .nav-link');
+        const currentPath = window.location.pathname;
+
+        toggles.forEach(toggle => {
+            toggle.addEventListener('click', () => {
+                const chapterList = toggle.nextElementSibling;
+                const icon = toggle.querySelector('i');
+
+                chapterList.classList.toggle('hidden');
+                icon.classList.toggle('fa-chevron-down');
+                icon.classList.toggle('fa-chevron-up');
+            });
+        });
+
+        links.forEach(link => {
+            // ทำให้ link ของหน้าที่เราอยู่ active
+            if (link.getAttribute('href') === currentPath || link.getAttribute('href') === '..' + currentPath) {
+                link.classList.add('active');
+                
+                // เปิด section ของหน้าที่ active อยู่
+                const parentList = link.closest('.nav-chapters-list');
+                if (parentList) {
+                    parentList.classList.remove('hidden');
+                    const parentToggle = parentList.previousElementSibling;
+                    const parentIcon = parentToggle.querySelector('i');
+                    parentIcon.classList.replace('fa-chevron-down', 'fa-chevron-up');
+                }
+            }
+        });
+    }
     
     function closeModal() {
         glossaryModal.style.display = 'none';

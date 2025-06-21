@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="th" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>บทที่ 5: โปรแกรมผู้มีวิจารณญาณ (Conditionals)</title> 
+    <link rel="stylesheet" href="../css/main.css"> <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+
+<body class="antialiased">
+    
+    <div class="container mx-auto max-w-6xl p-4 sm:p-6 lg:p-8 flex flex-col md:flex-row gap-8">
+        
+        <aside class="w-full md:w-64 flex-shrink-0">
+            <div id="nav-placeholder" class="sticky top-8">
+                </div>
+        </aside>
+
+        <div class="flex-grow">
+            <main>
+
+                <!-- ======= บทที่ 5: โปรแกรมผู้มีวิจารณญาณ ======= -->
+                <section id="c-conditionals" class="scroll-mt-16">
+                    <div class="content-card">
+                        <div class="flex items-start section-header">
+                            <div class="section-icon" style="background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);">
+                                <i class="fas fa-random text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-3xl font-bold text-slate-100 mb-2">บทที่ 5: โปรแกรมผู้มีวิจารณญาณ (Conditionals)</h2>
+                                <div class="flex items-center text-slate-400 mb-4">
+                                    <i class="far fa-clock mr-1"></i>
+                                    <span class="text-sm">ระยะเวลาอ่าน: 9 นาที</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <p class="text-slate-300 mb-4 leading-relaxed">
+                            ถึงตอนนี้ โปรแกรมของเราทำงานเป็นเส้นตรงตั้งแต่ต้นจนจบ แต่ในโลกแห่งความเป็นจริง เราต้องตัดสินใจอยู่ตลอดเวลา "ถ้าฝนตก ให้กางร่ม แต่ถ้าไม่ ก็ไม่ต้อง" โปรแกรมคอมพิวเตอร์ก็เช่นกันครับ ในบทนี้ เราจะมาสอนให้โปรแกรมของเรามี "ทางแยก" และเลือกเดินไปในเส้นทางที่ถูกต้องได้
+                        </p>
+                        
+                        <h3 class="text-xl font-semibold text-slate-100 mt-8 mb-3 flex items-center">
+                            <i class="fas fa-question-circle mr-2 text-blue-400"></i> คำถามประเภท ใช่/ไม่ใช่ (Boolean Expressions)
+                        </h3>
+                        <p class="text-slate-300 mb-4 leading-relaxed">
+                            หัวใจของการตัดสินใจคือการตั้ง "คำถาม" ที่มีคำตอบแค่ "จริง" (True) หรือ "เท็จ" (False) เท่านั้น ในทางคอมพิวเตอร์ เราเรียกตรรกะแบบนี้ว่า <strong class="keyword-glossary" data-term="Boolean" data-def="ตรรกะแบบบูลีน คือระบบคิดที่มีผลลัพธ์เพียง 2 อย่างคือ จริง (true) หรือ เท็จ (false) เป็นพื้นฐานของการตัดสินใจทั้งหมดในคอมพิวเตอร์">Boolean</strong> ครับ เช่น คำถาม "5 มากกว่า 3 หรือไม่?" คำตอบคือ "จริง" ส่วนคำถาม "10 เท่ากับ 1 หรือไม่?" คำตอบคือ "เท็จ"
+                        </p>
+                        
+                        <h3 class="text-xl font-semibold text-slate-100 mt-8 mb-3 flex items-center">
+                            <i class="fas fa-compress-arrows-alt mr-2 text-green-400"></i> เครื่องมือสำหรับเปรียบเทียบ (Comparison Operators)
+                        </h3>
+                        <p class="text-slate-300 mb-4">เพื่อสร้างคำถามแบบ Boolean ในภาษา C เราจะใช้เครื่องหมายเหล่านี้ในการเปรียบเทียบค่าสองข้างครับ</p>
+                        
+                        <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-6">
+                            <div class="bg-dark-700 p-4 rounded-lg">
+                                <div class="text-2xl font-mono text-center text-primary-400 mb-2">&gt;</div>
+                                <div class="text-center text-sm text-slate-300">มากกว่า</div>
+                            </div>
+                            <div class="bg-dark-700 p-4 rounded-lg">
+                                <div class="text-2xl font-mono text-center text-primary-400 mb-2">&lt;</div>
+                                <div class="text-center text-sm text-slate-300">น้อยกว่า</div>
+                            </div>
+                            <div class="bg-dark-700 p-4 rounded-lg">
+                                <div class="text-2xl font-mono text-center text-primary-400 mb-2">&gt;=</div>
+                                <div class="text-center text-sm text-slate-300">มากกว่าหรือเท่ากับ</div>
+                            </div>
+                            <div class="bg-dark-700 p-4 rounded-lg">
+                                <div class="text-2xl font-mono text-center text-primary-400 mb-2">&lt;=</div>
+                                <div class="text-center text-sm text-slate-300">น้อยกว่าหรือเท่ากับ</div>
+                            </div>
+                            <div class="bg-dark-700 p-4 rounded-lg">
+                                <div class="text-2xl font-mono text-center text-primary-400 mb-2">==</div>
+                                <div class="text-center text-sm text-slate-300">เท่ากัน</div>
+                            </div>
+                            <div class="bg-dark-700 p-4 rounded-lg">
+                                <div class="text-2xl font-mono text-center text-primary-400 mb-2">!=</div>
+                                <div class="text-center text-sm text-slate-300">ไม่เท่ากัน</div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-amber-900 bg-opacity-20 border-l-4 border-amber-400 p-4 my-6 rounded-lg">
+                            <p class="font-bold text-amber-300 mb-2 flex items-center">
+                                <i class="fas fa-exclamation-triangle mr-2"></i> ข้อควรระวังสุดคลาสสิก!
+                            </p>
+                            <p class="text-amber-200 mb-2"><code class="bg-amber-900 px-2 py-1 rounded">=</code> (ตัวเดียว) คือการ <strong>กำหนดค่า</strong> (Assignment) เช่น <code class="bg-amber-900 px-2 py-1 rounded">x = 5;</code> คือ "เอา 5 ไปใส่ในกล่อง x"</p>
+                            <p class="text-amber-200"><code class="bg-amber-900 px-2 py-1 rounded">==</code> (สองตัว) คือการ <strong>เปรียบเทียบ</strong> (Comparison) เช่น <code class="bg-amber-900 px-2 py-1 rounded">x == 5;</code> คือ "ถามว่าค่าในกล่อง x เท่ากับ 5 หรือไม่?"</p>
+                        </div>
+                        
+                        <h3 class="text-xl font-semibold text-slate-100 mt-8 mb-3 flex items-center">
+                            <i class="fas fa-code-branch mr-2 text-purple-400"></i> สร้างทางแยกด้วย `if-else`
+                        </h3>
+                        <p class="text-slate-300 mb-4">นี่คือโปรแกรมที่จะรับเลขมา 2 ตัว แล้วเปรียบเทียบกันโดยใช้โครงสร้าง <strong class="keyword-glossary" data-term="if-else" data-def="ชุดคำสั่งที่ใช้สร้างเงื่อนไข ถ้าเงื่อนไขใน if เป็นจริง จะทำคำสั่งในบล็อกของ if แต่ถ้าเป็นเท็จ จะไปตรวจสอบเงื่อนไขถัดไป (else if) หรือทำคำสั่งในบล็อกของ else แทน">`if-else`</strong> ครับ</p>
+                        
+                        <div class="relative mt-6">
+                            <div class="absolute top-4 right-4 flex space-x-2">
+                                <button class="text-slate-400 hover:text-slate-200" onclick="copyCode('code-conditionals')">
+                                    <i class="far fa-copy"></i>
+                                </button>
+                                <button class="text-slate-400 hover:text-slate-200" onclick="runConditionalDemo()">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                            </div>
+                            <pre id="code-conditionals" class="code-block"><code class="language-c"><span class="code-comment">// นำเข้าไลบรารีที่จำเป็น</span>
+                <span class="keyword-glossary" data-term="#include" data-def="คำสั่ง 'พรีโปรเซสเซอร์' ใช้บอกคอมไพเลอร์ว่า 'ช่วยไปเอาโค้ดจากไฟล์อื่นมารวมกับไฟล์นี้ที'">#include</span> <span class="code-string">&lt;<span class="keyword-glossary" data-term="cs50.h" data-def="ไลบรารีพิเศษของ CS50 ที่มีฟังก์ชันอำนวยความสะดวก">cs50.h</span>&gt;</span>
+                <span class="keyword-glossary" data-term="#include" data-def="คำสั่ง 'พรีโปรเซสเซอร์' ใช้บอกคอมไพเลอร์ว่า 'ช่วยไปเอาโค้ดจากไฟล์อื่นมารวมกับไฟล์นี้ที'">#include</span> <span class="code-string">&lt;<span class="keyword-glossary" data-term="stdio.h" data-def="ไลบรารีมาตรฐานสำหรับ Input/Output">stdio.h</span>&gt;</span>
+
+                <span class="keyword-glossary" data-term="int" data-def="ชนิดข้อมูลเลขจำนวนเต็ม">int</span> <span class="keyword-glossary code-function" data-term="main" data-def="ฟังก์ชันหลัก จุดเริ่มต้นของโปรแกรม">main</span>(<span class="keyword-glossary" data-term="void" data-def="หมายความว่าฟังก์ชันนี้ไม่รับค่าใดๆ">void</span>)
+                <span class="keyword-glossary" data-term="{ }">{</span>
+                    <span class="code-comment">// รับค่า x และ y จากผู้ใช้</span>
+                    <span class="keyword-glossary" data-term="int" data-def="ชนิดข้อมูลเลขจำนวนเต็ม">int</span> x = <span class="keyword-glossary code-function" data-term="get_int" data-def="ฟังก์ชันรับเลขจำนวนเต็มจากผู้ใช้">get_int</span>(<span class="code-string">"What's x? "</span>);
+                    <span class="keyword-glossary" data-term="int" data-def="ชนิดข้อมูลเลขจำนวนเต็ม">int</span> y = <span class="keyword-glossary code-function" data-term="get_int" data-def="ฟังก์ชันรับเลขจำนวนเต็มจากผู้ใช้">get_int</span>(<span class="code-string">"What's y? "</span>);
+
+                    <span class="code-comment">// เริ่มการตัดสินใจ</span>
+                    <span class="keyword-glossary" data-term="if" data-def="คำสั่งเริ่มต้นเงื่อนไข 'ถ้า...' เพื่อตรวจสอบว่าสิ่งที่อยู่ในวงเล็บเป็นจริงหรือไม่">if</span> (x < y)
+                    <span class="keyword-glossary" data-term="{ }">{</span>
+                        <span class="keyword-glossary code-function" data-term="printf" data-def="ฟังก์ชันแสดงผลข้อความ">printf</span>(<span class="code-string">"x is less than y\n"</span>);
+                    <span class="keyword-glossary" data-term="{ }">}</span>
+                    <span class="keyword-glossary" data-term="else if" data-def="คำสั่งเงื่อนไข '...หรือถ้า...' เป็นทางเลือกที่สอง ถ้าเงื่อนไข if แรกไม่เป็นจริง">else if</span> (x > y)
+                    <span class="keyword-glossary" data-term="{ }">{</span>
+                        <span class="keyword-glossary code-function" data-term="printf" data-def="ฟังก์ชันแสดงผลข้อความ">printf</span>(<span class="code-string">"x is greater than y\n"</span>);
+                    <span class="keyword-glossary" data-term="{ }">}</span>
+                    <span class="keyword-glossary" data-term="else" data-def="คำสั่งที่จะทำงาน 'ในกรณีอื่นๆ' ที่เงื่อนไข if และ else if ข้างบนไม่เป็นจริงเลย">else</span>
+                    <span class="keyword-glossary" data-term="{ }">{</span>
+                        <span class="keyword-glossary code-function" data-term="printf" data-def="ฟังก์ชันแสดงผลข้อความ">printf</span>(<span class="code-string">"x is equal to y\n"</span>);
+                    <span class="keyword-glossary" data-term="{ }">}</span>
+                <span class="keyword-glossary" data-term="{ }">}</span></code></pre>
+                        </div>
+
+                        <!-- ห้องทดลองการตัดสินใจ: ซื้อตั๋วหนัง -->
+                        <div class="interactive-card mt-8">
+                            <h3 class="text-xl font-semibold text-slate-100 mb-4 flex items-center">
+                                <i class="fas fa-ticket-alt mr-2 text-purple-400"></i> ห้องทดลองการตัดสินใจ: ซื้อตั๋วหนัง
+                            </h3>
+                            <p class="text-slate-300 mb-4">ลองป้อนอายุของคุณ แล้วดูสิว่าโปรแกรมจะตัดสินใจเลือกเส้นทางไหนให้คุณ!</p>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div class="bg-dark-800 p-5 rounded-lg">
+                                    <h4 class="text-lg font-semibold text-slate-100 mb-3 flex items-center">
+                                        <i class="fas fa-user mr-2 text-blue-400"></i> ข้อมูลผู้ใช้
+                                    </h4>
+                                    
+                                    <div class="space-y-4">
+                                        <div>
+                                            <label class="block text-slate-300 mb-2">อายุของคุณ:</label>
+                                            <input type="number" id="user-age" class="input-field w-full" placeholder="ป้อนอายุ" value="20" min="1" max="120">
+                                        </div>
+                                        
+                                        <div>
+                                            <label class="block text-slate-300 mb-2">ภาพยนตร์ที่ต้องการดู:</label>
+                                            <div class="grid grid-cols-1 gap-2">
+                                                <div class="flex items-center p-3 bg-dark-700 rounded-lg">
+                                                    <input type="radio" id="movie-g" name="movie" value="G" class="mr-3" checked>
+                                                    <label for="movie-g" class="text-slate-300">G: ทุกวัย (General)</label>
+                                                </div>
+                                                <div class="flex items-center p-3 bg-dark-700 rounded-lg">
+                                                    <input type="radio" id="movie-pg13" name="movie" value="PG-13" class="mr-3">
+                                                    <label for="movie-pg13" class="text-slate-300">PG-13: 13 ปีขึ้นไป</label>
+                                                </div>
+                                                <div class="flex items-center p-3 bg-dark-700 rounded-lg">
+                                                    <input type="radio" id="movie-r" name="movie" value="R" class="mr-3">
+                                                    <label for="movie-r" class="text-slate-300">R: 18 ปีขึ้นไป (Restricted)</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div>
+                                            <button id="check-ticket-btn" class="btn-primary w-full">
+                                                <i class="fas fa-ticket-alt mr-2"></i> ตรวจสอบสิทธิ์
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-dark-800 p-5 rounded-lg">
+                                    <h4 class="text-lg font-semibold text-slate-100 mb-3 flex items-center">
+                                        <i class="fas fa-clipboard-check mr-2 text-green-400"></i> ผลลัพธ์การตัดสินใจ
+                                    </h4>
+                                    
+                                    <div id="decision-output" class="mb-4">
+                                        <div class="text-center py-8 text-slate-400">
+                                            <i class="fas fa-arrow-left text-lg mb-2"></i>
+                                            <p>ป้อนอายุและเลือกภาพยนตร์เพื่อตรวจสอบ</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="bg-dark-900 p-4 rounded-lg">
+                                        <h5 class="text-md font-semibold text-slate-200 mb-2 flex items-center">
+                                            <i class="fas fa-code mr-2 text-yellow-400"></i> เบื้องหลังการทำงาน
+                                        </h5>
+                                        <div id="code-simulation" class="text-sm text-slate-400 font-mono overflow-x-auto">
+                                            // โค้ดจำลองการทำงาน
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <div class="bg-blue-900 bg-opacity-20 border border-blue-700 rounded-lg p-4">
+                                    <div class="text-blue-400 text-3xl mb-2 text-center">G</div>
+                                    <p class="text-center text-blue-300">ทุกวัย</p>
+                                </div>
+                                <div class="bg-amber-900 bg-opacity-20 border border-amber-700 rounded-lg p-4">
+                                    <div class="text-amber-400 text-3xl mb-2 text-center">PG-13</div>
+                                    <p class="text-center text-amber-300">13 ปีขึ้นไป</p>
+                                </div>
+                                <div class="bg-red-900 bg-opacity-20 border border-red-700 rounded-lg p-4">
+                                    <div class="text-red-400 text-3xl mb-2 text-center">R</div>
+                                    <p class="text-center text-red-300">18 ปีขึ้นไป</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8 p-4 bg-dark-800 border border-dark-700 rounded-lg">
+                            <p class="text-lg text-center text-slate-200 font-medium">
+                                <i class="fas fa-star text-yellow-400 mr-2"></i> สุดยอด! ตอนนี้โปรแกรมของคุณไม่ได้เป็นแค่เครื่องคิดเลขที่ซื่อบื้ออีกต่อไป แต่มันสามารถวิเคราะห์และให้คำตอบที่แตกต่างกันตามสถานการณ์ได้แล้ว
+                            </p>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <script src="../js/main.js" defer></script>
+</body>
+
+
+
+</html>

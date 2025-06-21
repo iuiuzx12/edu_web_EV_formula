@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="th" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>บทที่ 4: คอมพิวเตอร์คิดเลข (Calculations & Data Types)</title> 
+    <link rel="stylesheet" href="../css/main.css"> <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body class="antialiased">
+    
+    <div class="container mx-auto max-w-6xl p-4 sm:p-6 lg:p-8 flex flex-col md:flex-row gap-8">
+        
+        <aside class="w-full md:w-64 flex-shrink-0">
+            <div id="nav-placeholder" class="sticky top-8">
+                </div>
+        </aside>
+
+        <div class="flex-grow">
+            <main>
+                
+                <!-- ======= บทที่ 4: คอมพิวเตอร์คิดเลข ======= -->
+                <section id="c-calculator" class="scroll-mt-16">
+                    <div class="content-card">
+                        <div class="flex items-start section-header">
+                            <div class="section-icon" style="background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);">
+                                <i class="fas fa-calculator text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-3xl font-bold text-slate-100 mb-2">บทที่ 4: คอมพิวเตอร์คิดเลข (Calculations & Data Types)</h2>
+                                <div class="flex items-center text-slate-400 mb-4">
+                                    <i class="far fa-clock mr-1"></i>
+                                    <span class="text-sm">ระยะเวลาอ่าน: 8 นาที</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <p class="text-slate-300 mb-4 leading-relaxed">
+                            นอกจากการจัดการกับ "ข้อความ" แล้ว พลังที่แท้จริงของคอมพิวเตอร์คือการ "คำนวณ" ครับ ในบทนี้ เราจะเปลี่ยนคอมพิวเตอร์ให้กลายเป็นเครื่องคิดเลขส่วนตัวของเรา แต่ก่อนอื่น เราต้องรู้จัก "ชนิด" ของตัวเลขที่คอมพิวเตอร์เข้าใจกันก่อน
+                        </p>
+                        
+                        <h3 class="text-xl font-semibold text-slate-100 mt-8 mb-3 flex items-center">
+                            <i class="fas fa-sort-numeric-up mr-2 text-blue-400"></i> ตัวเลขก็มีหลายประเภท (Numeric Data Types)
+                        </h3>
+                        <p class="text-slate-300 mb-4 leading-relaxed">
+                            ในโลกคณิตศาสตร์มีทั้งเลขจำนวนเต็มและเลขทศนิยม ในภาษา C ก็เช่นกันครับ เราต้องเลือกใช้ "กล่อง" หรือตัวแปรให้ถูกประเภทกับตัวเลขที่เราจะเก็บ
+                        </p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 my-6">
+                            <div class="interactive-card">
+                                <h4 class="text-lg font-semibold text-slate-100 mb-3 flex items-center">
+                                    <i class="fas fa-hashtag mr-2 text-primary-400"></i> int
+                                </h4>
+                                <p class="text-slate-300">สำหรับเก็บเลข <strong>จำนวนเต็ม</strong> เช่น 5, 200, -10</p>
+                                <div class="mt-4 p-3 bg-dark-800 rounded-lg">
+                                    <code class="text-primary-400">int age = 25;</code>
+                                </div>
+                                <div class="mt-3 text-sm text-slate-400">
+                                    <i class="fas fa-info-circle mr-1"></i> เหมาะสำหรับข้อมูลที่ไม่สามารถแบ่งเป็นเศษส่วนได้
+                                </div>
+                            </div>
+                            
+                            <div class="interactive-card">
+                                <h4 class="text-lg font-semibold text-slate-100 mb-3 flex items-center">
+                                    <i class="fas fa-divide mr-2 text-green-400"></i> float
+                                </h4>
+                                <p class="text-slate-300">สำหรับเก็บเลข <strong>ทศนิยม</strong> เช่น 3.14, 1.75</p>
+                                <div class="mt-4 p-3 bg-dark-800 rounded-lg">
+                                    <code class="text-green-400">float pi = 3.14159;</code>
+                                </div>
+                                <div class="mt-3 text-sm text-slate-400">
+                                    <i class="fas fa-info-circle mr-1"></i> เหมาะกับข้อมูลที่ต้องการความละเอียด
+                                </div>
+                            </div>
+                            
+                            <div class="interactive-card">
+                                <h4 class="text-lg font-semibold text-slate-100 mb-3 flex items-center">
+                                    <i class="fas fa-infinity mr-2 text-purple-400"></i> long
+                                </h4>
+                                <p class="text-slate-300">สำหรับเก็บเลขจำนวนเต็มที่ <strong>ใหญ่มากๆ</strong></p>
+                                <div class="mt-4 p-3 bg-dark-800 rounded-lg">
+                                    <code class="text-purple-400">long population = 7000000000;</code>
+                                </div>
+                                <div class="mt-3 text-sm text-slate-400">
+                                    <i class="fas fa-info-circle mr-1"></i> ใช้เมื่อค่าเกินขอบเขตของ int
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <h3 class="text-xl font-semibold text-slate-100 mt-8 mb-3 flex items-center">
+                            <i class="fas fa-calculator mr-2 text-yellow-400"></i> เครื่องมือของนักคำนวณ: ตัวดำเนินการ (Operators)
+                        </h3>
+                        <p class="text-slate-300 mb-4">ภาษา C มีเครื่องหมายสำหรับการคำนวณเหมือนกับที่เราเรียนคณิตศาสตร์มาเลยครับ</p>
+                        
+                        <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mb-6">
+                            <div class="bg-dark-700 p-4 rounded-lg text-center">
+                                <div class="text-2xl font-bold text-primary-400 mb-2">+</div>
+                                <div class="text-sm text-slate-300">การบวก</div>
+                            </div>
+                            <div class="bg-dark-700 p-4 rounded-lg text-center">
+                                <div class="text-2xl font-bold text-primary-400 mb-2">-</div>
+                                <div class="text-sm text-slate-300">การลบ</div>
+                            </div>
+                            <div class="bg-dark-700 p-4 rounded-lg text-center">
+                                <div class="text-2xl font-bold text-primary-400 mb-2">*</div>
+                                <div class="text-sm text-slate-300">การคูณ</div>
+                            </div>
+                            <div class="bg-dark-700 p-4 rounded-lg text-center">
+                                <div class="text-2xl font-bold text-primary-400 mb-2">/</div>
+                                <div class="text-sm text-slate-300">การหาร</div>
+                            </div>
+                            <div class="bg-dark-700 p-4 rounded-lg text-center">
+                                <div class="text-2xl font-bold text-primary-400 mb-2">%</div>
+                                <div class="text-sm text-slate-300">หารเอาเศษ</div>
+                            </div>
+                        </div>
+                        
+                        <h3 class="text-xl font-semibold text-slate-100 mt-8 mb-3 flex items-center">
+                            <i class="fas fa-plus-circle mr-2 text-green-400"></i> มาสร้างเครื่องบวกเลขอย่างง่ายกัน!
+                        </h3>
+                        <p class="text-slate-300 mb-4">โปรแกรมนี้จะถามตัวเลขจากเรา 2 ตัว แล้วนำมาบวกกันและแสดงผลลัพธ์ สังเกตว่าเราจะใช้ฟังก์ชัน <strong class="keyword-glossary" data-term="get_int" data-def="ฟังก์ชันจากไลบรารี cs50.h ใช้สำหรับรับข้อมูลประเภทเลขจำนวนเต็ม (int) จากผู้ใช้โดยเฉพาะ">get_int()</strong> และใช้ <strong class="keyword-glossary code-placeholder" data-term="%i" data-def="Format Specifier สำหรับตัวแปรชนิด Integer (จำนวนเต็ม) เพื่อบอกให้ printf นำค่าตัวเลขจำนวนเต็มมาแสดงผล ณ ตำแหน่งนี้">`%i`</strong> ใน `printf` เพื่อแสดงผลตัวเลขครับ</p>
+                        
+                        <div class="relative mt-6">
+                            <div class="absolute top-4 right-4 flex space-x-2">
+                                <button class="text-slate-400 hover:text-slate-200" onclick="copyCode('code-calculator')">
+                                    <i class="far fa-copy"></i>
+                                </button>
+                                <button class="text-slate-400 hover:text-slate-200" onclick="runCalculatorDemo()">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                            </div>
+                            <pre id="code-calculator" class="code-block"><code class="language-c"><span class="code-comment">// นำเข้าไลบรารีที่จำเป็น</span>
+                <span class="keyword-glossary" data-term="#include" data-def="คำสั่ง 'พรีโปรเซสเซอร์' ใช้บอกคอมไพเลอร์ว่า 'ช่วยไปเอาโค้ดจากไฟล์อื่นมารวมกับไฟล์นี้ที'">#include</span> <span class="code-string">&lt;<span class="keyword-glossary" data-term="cs50.h" data-def="ไลบรารี (กล่องเครื่องมือ) พิเศษของ CS50 ที่มีฟังก์ชันอำนวยความสะดวก เช่น get_string(), get_int() ทำให้การรับข้อมูลจากผู้ใช้ทำได้ง่ายขึ้นมาก">cs50.h</span>&gt;</span>
+                <span class="keyword-glossary" data-term="#include" data-def="คำสั่ง 'พรีโปรเซสเซอร์' ใช้บอกคอมไพเลอร์ว่า 'ช่วยไปเอาโค้ดจากไฟล์อื่นมารวมกับไฟล์นี้ที'">#include</span> <span class="code-string">&lt;<span class="keyword-glossary" data-term="stdio.h" data-def="ชื่อของ 'กล่องเครื่องมือ' มาตรฐาน (Standard Input/Output Header) ที่มีฟังก์ชันพื้นฐานอย่าง printf() อยู่ข้างใน">stdio.h</span>&gt;</span>
+
+                <span class="keyword-glossary" data-term="int" data-def="ชนิดข้อมูลสำหรับเก็บ 'เลขจำนวนเต็ม' (Integer)">int</span> <span class="keyword-glossary code-function" data-term="main" data-def="คือชื่อฟังก์ชันที่พิเศษที่สุด ถือเป็น 'ประตูทางเข้าหลัก' ของทุกโปรแกรมในภาษา C">main</span>(<span class="keyword-glossary" data-term="void" data-def="แปลว่า 'ว่างเปล่า' ในที่นี้หมายความว่าฟังก์ชัน main ไม่ต้องการรับข้อมูลใดๆ จากภายนอกเพื่อเริ่มทำงาน">void</span>)
+                <span class="keyword-glossary" data-term="{ }" data-def="ปีกกา คือสัญลักษณ์ที่ใช้กำหนด 'ขอบเขต' การทำงานของฟังก์ชัน หรือบล็อกของโค้ด">{</span>
+                    <span class="code-comment">// รับค่า x จากผู้ใช้</span>
+                    <span class="keyword-glossary" data-term="int" data-def="ชนิดข้อมูลสำหรับเก็บ 'เลขจำนวนเต็ม' (Integer)">int</span> x = <span class="keyword-glossary code-function" data-term="get_int" data-def="ฟังก์ชันจากไลบรารี cs50.h ใช้สำหรับรับข้อมูลประเภทเลขจำนวนเต็ม (int) จากผู้ใช้โดยเฉพาะ">get_int</span>(<span class="code-string">"x: "</span>);
+                    
+                    <span class="code-comment">// รับค่า y จากผู้ใช้</span>
+                    <span class="keyword-glossary" data-term="int" data-def="ชนิดข้อมูลสำหรับเก็บ 'เลขจำนวนเต็ม' (Integer)">int</span> y = <span class="keyword-glossary code-function" data-term="get_int" data-def="ฟังก์ชันจากไลบรารี cs50.h ใช้สำหรับรับข้อมูลประเภทเลขจำนวนเต็ม (int) จากผู้ใช้โดยเฉพาะ">get_int</span>(<span class="code-string">"y: "</span>);
+
+                    <span class="code-comment">// คำนวณผลรวมแล้วแสดงผล</span>
+                    <span class="keyword-glossary code-function" data-term="printf" data-def="ฟังก์ชันสำหรับแสดงผลข้อความหรือค่าของตัวแปรออกไปยังหน้าจอ">printf</span>(<span class="code-string">"The sum is <span class="keyword-glossary code-placeholder" data-term="%i" data-def="Format Specifier สำหรับตัวแปรชนิด Integer (จำนวนเต็ม) เพื่อบอกให้ printf นำค่าตัวเลขจำนวนเต็มมาแสดงผล ณ ตำแหน่งนี้">%i</span>\n"</span>, x + y);
+                <span class="keyword-glossary" data-term="{ }" data-def="ปีกกา คือสัญลักษณ์ที่ใช้กำหนด 'ขอบเขต' การทำงานของฟังก์ชัน หรือบล็อกของโค้ด">}</span></code></pre>
+                        </div>
+                        
+                        <!-- ห้องทดลองเครื่องคิดเลข -->
+                        <div class="interactive-card mt-8">
+                            <h3 class="text-xl font-semibold text-slate-100 mb-4 flex items-center">
+                                <i class="fas fa-flask mr-2 text-purple-400"></i> ห้องทดลองเครื่องคิดเลข
+                            </h3>
+                            <p class="text-slate-300 mb-4">ทดลองใช้เครื่องคิดเลขที่เราสร้างด้วยภาษา C โดยป้อนตัวเลขสองค่าและเลือกการดำเนินการ</p>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div class="bg-dark-800 p-5 rounded-lg">
+                                    <h4 class="text-lg font-semibold text-slate-100 mb-3 flex items-center">
+                                        <i class="fas fa-sliders-h mr-2 text-blue-400"></i> ป้อนข้อมูล
+                                    </h4>
+                                    
+                                    <div class="space-y-4">
+                                        <div>
+                                            <label class="block text-slate-300 mb-2">ค่า x:</label>
+                                            <input type="number" id="calc-x" class="input-field w-full" placeholder="ป้อนตัวเลข" value="15">
+                                        </div>
+                                        
+                                        <div>
+                                            <label class="block text-slate-300 mb-2">ค่า y:</label>
+                                            <input type="number" id="calc-y" class="input-field w-full" placeholder="ป้อนตัวเลข" value="8">
+                                        </div>
+                                        
+                                        <div>
+                                            <label class="block text-slate-300 mb-2">การดำเนินการ:</label>
+                                            <div class="grid grid-cols-4 gap-2">
+                                                <button data-op="+" class="calc-op-btn bg-dark-700 hover:bg-dark-600 py-2 rounded transition-colors">+</button>
+                                                <button data-op="-" class="calc-op-btn bg-dark-700 hover:bg-dark-600 py-2 rounded transition-colors">-</button>
+                                                <button data-op="*" class="calc-op-btn bg-dark-700 hover:bg-dark-600 py-2 rounded transition-colors">×</button>
+                                                <button data-op="/" class="calc-op-btn bg-dark-700 hover:bg-dark-600 py-2 rounded transition-colors">÷</button>
+                                            </div>
+                                        </div>
+                                        
+                                        <div>
+                                            <button id="run-calculator-btn" class="btn-primary w-full">
+                                                <i class="fas fa-calculator mr-2"></i> คำนวณผลลัพธ์
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-dark-800 p-5 rounded-lg">
+                                    <h4 class="text-lg font-semibold text-slate-100 mb-3 flex items-center">
+                                        <i class="fas fa-chart-bar mr-2 text-green-400"></i> ผลลัพธ์การคำนวณ
+                                    </h4>
+                                    
+                                    <div id="calculator-output" class="mb-4">
+                                        <div class="text-center py-8 text-slate-400">
+                                            <i class="fas fa-arrow-left text-lg mb-2"></i>
+                                            <p>ป้อนตัวเลขและเลือกการดำเนินการ</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="bg-dark-900 p-4 rounded-lg">
+                                        <h5 class="text-md font-semibold text-slate-200 mb-2 flex items-center">
+                                            <i class="fas fa-info-circle mr-2 text-yellow-400"></i> ข้อมูลจำลองการทำงาน
+                                        </h5>
+                                        <div class="text-sm text-slate-400">
+                                            <p class="mb-1"><span class="inline-block w-20">x:</span> <span id="sim-x">0</span></p>
+                                            <p class="mb-1"><span class="inline-block w-20">y:</span> <span id="sim-y">0</span></p>
+                                            <p class="mb-1"><span class="inline-block w-20">Operation:</span> <span id="sim-op">?</span></p>
+                                            <p class="mb-1"><span class="inline-block w-20">Result:</span> <span id="sim-result">0</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- ส่วนการคำนวณขั้นสูง -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+                            <div class="interactive-card">
+                                <h4 class="text-lg font-semibold text-slate-100 mb-3 flex items-center">
+                                    <i class="fas fa-exclamation-triangle mr-2 text-yellow-400"></i> ข้อควรระวัง: การหารจำนวนเต็ม
+                                </h4>
+                                <p class="text-slate-300 mb-4">
+                                    ในภาษา C การหารจำนวนเต็มด้วยจำนวนเต็มจะได้ผลลัพธ์เป็นจำนวนเต็มเท่านั้น โดยจะตัดส่วนทศนิยมทิ้งไป
+                                </p>
+                                <div class="bg-dark-800 p-4 rounded-lg">
+                                    <code class="text-amber-400">int a = 10, b = 3;<br>int result = a / b; // ได้ 3 ไม่ใช่ 3.333</code>
+                                </div>
+                            </div>
+                            
+                            <!-- แก้ไขส่วน "เทคนิค: การแปลงชนิดข้อมูล" เป็นดังนี้ -->
+                            <div class="interactive-card">
+                                <h4 class="text-lg font-semibold text-slate-100 mb-3 flex items-center">
+                                    <i class="fas fa-exchange-alt mr-2 text-blue-400"></i> เทคนิค: การแปลงชนิดข้อมูล (Type Casting)
+                                </h4>
+                                <p class="text-slate-300 mb-4">
+                                    Type Casting คือการแปลงชนิดข้อมูลจากประเภทหนึ่งไปเป็นอีกประเภทหนึ่ง โดยเฉพาะเมื่อทำงานกับตัวเลขประเภทต่างกัน
+                                </p>
+                                
+                                <div class="bg-dark-800 p-4 rounded-lg mb-4">
+                                    <pre class="code-block"><code class="language-c"><span class="code-comment">// ตัวอย่างการแปลงชนิดข้อมูล</span>
+                            <span class="code-keyword">int</span> a = 10, b = 3;
+
+                            <span class="code-comment">// แบบ implicit casting (แปลงโดยอัตโนมัติ)</span>
+                            <span class="code-keyword">float</span> result1 = a; <span class="code-comment">// int → float</span>
+
+                            <span class="code-comment">// แบบ explicit casting (แปลงแบบชัดเจน)</span>
+                            <span class="code-keyword">float</span> result2 = (<span class="code-keyword">float</span>) a / b; <span class="code-comment">// ได้ 3.333</span>
+
+                            <span class="code-comment">// แปลง float เป็น int (ตัดส่วนทศนิยมทิ้ง)</span>
+                            <span class="code-keyword">float</span> pi = 3.14159;
+                            <span class="code-keyword">int</span> intPi = (<span class="code-keyword">int</span>) pi; <span class="code-comment">// ได้ 3</span></code></pre>
+                                </div>
+                                
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                                    <div class="bg-blue-900 bg-opacity-20 p-3 rounded-lg">
+                                        <h5 class="font-semibold text-blue-300 mb-2">
+                                            <i class="fas fa-arrow-right-arrow-left mr-2"></i> การแปลงโดยอัตโนมัติ
+                                        </h5>
+                                        <ul class="text-sm text-blue-200 space-y-1">
+                                            <li>int → float (ไม่สูญเสียข้อมูล)</li>
+                                            <li>float → double (ไม่สูญเสียข้อมูล)</li>
+                                            <li>char → int (ใช้ค่า ASCII)</li>
+                                        </ul>
+                                    </div>
+                                    
+                                    <div class="bg-amber-900 bg-opacity-20 p-3 rounded-lg">
+                                        <h5 class="font-semibold text-amber-300 mb-2">
+                                            <i class="fas fa-exclamation-triangle mr-2"></i> การแปลงที่อาจสูญเสียข้อมูล
+                                        </h5>
+                                        <ul class="text-sm text-amber-200 space-y-1">
+                                            <li>float → int (ตัดทศนิยม)</li>
+                                            <li>double → float (อาจสูญเสียความแม่นยำ)</li>
+                                            <li>int → char (อาจเกินขอบเขต)</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                
+                                <!-- ส่วน Interactive Type Casting -->
+                                <div class="mt-4 p-4 bg-dark-800 rounded-lg border border-dark-700">
+                                    <h5 class="font-semibold text-slate-100 mb-3 flex items-center">
+                                        <i class="fas fa-flask mr-2 text-purple-400"></i> ห้องทดลอง Type Casting
+                                    </h5>
+                                    
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                                        <div>
+                                            <label class="block text-slate-300 mb-2">ค่าเริ่มต้น:</label>
+                                            <input type="text" id="cast-value" class="input-field w-full" value="3.14159" placeholder="เช่น 10, 3.14, 'A'">
+                                        </div>
+                                        <div>
+                                            <label class="block text-slate-300 mb-2">แปลงเป็น:</label>
+                                            <select id="cast-type" class="input-field w-full">
+                                                <option value="int">int (จำนวนเต็ม)</option>
+                                                <option value="float">float (ทศนิยม)</option>
+                                                <option value="char">char (ตัวอักษร)</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    
+                                    <button id="run-cast-btn" class="btn-primary w-full mb-4">
+                                        <i class="fas fa-bolt mr-2"></i> รันการแปลง
+                                    </button>
+                                    
+                                    <div id="cast-result" class="bg-dark-900 p-4 rounded-lg text-center">
+                                        <div class="text-lg text-slate-400">ผลลัพธ์จะแสดงที่นี่</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8 p-4 bg-dark-800 border border-dark-700 rounded-lg">
+                            <p class="text-lg text-center text-slate-200 font-medium">
+                                <i class="fas fa-star text-yellow-400 mr-2"></i> เพียงเท่านี้ คุณก็ได้สร้างโปรแกรมที่ไม่ได้แค่โต้ตอบ แต่ยัง "คิด" และคำนวณให้คุณได้แล้ว!
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+            </main>
+        </div>
+    </div>
+
+    <script src="../js/main.js" defer></script>
+</body>
+
+
+
+</html>
