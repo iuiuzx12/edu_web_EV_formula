@@ -679,57 +679,66 @@ body.light-mode .border-t { border-color: var(--interactive-card-border); }
 /* ===================================== */
 /* Chapter-Specific Styles             */
 /* ===================================== */
+/* This section overrides specific Tailwind text color classes
+   to ensure high contrast and readability in light mode across all chapters. */
 
-/* ----- Chapter 1: #intro ----- */
-body.light-mode #intro .content-card,
-body.light-mode #intro .interactive-card { 
-    /* background and border should be themed by general .content-card/.interactive-card styles */
+/* ----- Generic Text Color Overrides for Light Mode ----- */
+
+/* Main paragraph and list text */
+body.light-mode .text-slate-100,
+body.light-mode .text-slate-200,
+body.light-mode .text-slate-300 {
+    color: var(--light-text-primary); /* Use the main dark text color: #1a202c */
 }
 
-body.light-mode #intro .text-slate-100 { color: var(--text-headings); } 
-body.light-mode #intro .text-primary-500 { color: var(--light-button-primary-bg-start); } 
-body.light-mode #intro .text-accent-500 { color: var(--light-button-primary-bg-end); } 
-body.light-mode #intro .text-amber-400 { color: #d97706; } 
-body.light-mode #intro .text-lime-400 { color: #65a30d; }  
-
-body.light-mode #intro .text-blue-300 { color: var(--light-button-primary-bg-start); } 
-body.light-mode #intro .text-amber-200 { color: var(--color-amber-darkest); } 
-body.light-mode #intro .text-amber-300 { color: var(--color-amber-darker); } 
-body.light-mode #intro .text-primary-200 { color: var(--light-button-primary-bg-start); }
-body.light-mode #intro .text-green-400 { color: var(--color-green-darker); } 
-
-body.light-mode #intro pre { 
-    /* Styles inherited from .code-block which uses themed variables */
+/* Secondary, muted, and subtle text */
+body.light-mode .text-slate-400,
+body.light-mode .text-slate-500 {
+    color: var(--light-text-muted); /* Use the darker muted color: #4a5568 */
 }
 
-/* ----- Chapter 2: #c-basics ----- */
-body.light-mode #c-basics .interactive-card h4 { color: var(--light-button-primary-bg-start); }
-body.light-mode #c-basics .interactive-card p { color: var(--text-secondary); }
-
-body.light-mode #c-basics .bg-dark-700 p { color: var(--text-headings); }
-body.light-mode #c-basics .bg-dark-700 .font-semibold { color: var(--light-button-primary-bg-start); }
-
-body.light-mode #c-basics .text-blue-300 { color: var(--color-blue-darkest); }
-body.light-mode #c-basics .text-purple-300 { color: var(--color-purple-darkest); }
-
-/* ----- Chapter 4: #c-calculator ----- */
-body.light-mode #c-calculator .interactive-card h5 {
-    color: var(--text-headings); /* Should be default h5 color via general theming */
-    font-weight: 600; /* If different from base h5 */
-    font-size: 1.1rem; /* If different from base h5 */
-    margin-bottom: var(--border-radius-sm); 
+/* ----- Primary Accent Colors (Blue/Purple) ----- */
+body.light-mode .text-primary-200,
+body.light-mode .text-primary-300,
+body.light-mode .text-primary-400,
+body.light-mode .text-primary-500,
+body.light-mode .text-blue-200,
+body.light-mode .text-blue-300,
+body.light-mode .text-blue-400 {
+    color: var(--light-code-keyword); /* A strong, dark blue: #1e3a8a */
 }
 
-body.light-mode #c-calculator .text-blue-300 { font-weight: 600; } 
-body.light-mode #c-calculator .text-amber-300 { font-weight: 600; }
-
-body.light-mode #c-calculator .text-blue-200,
-body.light-mode #c-calculator .text-amber-200 {
-    font-weight: 500;
+body.light-mode .text-purple-300,
+body.light-mode .text-purple-400,
+body.light-mode .text-accent-500 {
+    color: var(--light-code-function); /* A strong, dark purple: #5b21b6 */
 }
 
-/* ----- Chapter 5: #c-conditionals ----- */
-body.light-mode #c-conditionals .text-amber-300 { font-weight: 700; } 
+
+/* ----- Other Accent Colors (Amber, Green, Red) ----- */
+body.light-mode .text-amber-200,
+body.light-mode .text-amber-300,
+body.light-mode .text-amber-400 {
+    color: var(--light-code-placeholder); /* A rich, dark amber: #92400e */
+}
+
+body.light-mode .text-green-400,
+body.light-mode .text-lime-400 {
+    color: var(--light-code-string); /* A deep green: #047857 */
+}
+
+body.light-mode .text-red-200,
+body.light-mode .text-red-300,
+body.light-mode .text-red-400 {
+    color: var(--color-red-darker); /* A deep red: #b91c1c */
+}
+
+/* ----- Special Highlight Classes ----- */
+
+body.light-mode .text-loop-highlight {
+    color: #1d4ed8; /* A very strong blue for special highlights */
+}
+
 body.light-mode #c-conditionals code.bg-amber-900 { 
     background-color: var(--color-amber-inline-code-bg);
     border: 1px solid var(--color-amber-light-border);
@@ -737,30 +746,23 @@ body.light-mode #c-conditionals code.bg-amber-900 {
     font-weight: 600;
 }
 
-body.light-mode #c-conditionals .text-blue-400 { color: var(--color-blue-darkest); }
-body.light-mode #c-conditionals .text-amber-400 { color: var(--color-amber-darker); } 
-body.light-mode #c-conditionals .text-red-400 { color: var(--color-red-darker); } 
-
-body.light-mode #c-conditionals #decision-output .text-green-400 { color: var(--color-green-decision); font-weight: 600; }
-body.light-mode #c-conditionals #decision-output .text-red-400 { color: var(--color-red-darker); font-weight: 600; }
-
-/* ----- Chapter 6: #c-loops ----- */
-body.light-mode #c-loops .text-red-300,
-body.light-mode #c-loops .text-red-200 {
-    color: var(--color-red-darker);
+body.light-mode #c-conditionals #decision-output .text-green-400 { 
+    color: var(--color-green-decision); 
+    font-weight: 600; 
 }
 
-/* Visualization backgrounds are specific, keep as is if necessary or make them variables */
-body.light-mode #c-loops .bg-blue-800\/30 { background-color: var(--color-blue-light-bg); } 
-body.light-mode #c-loops .bg-green-800\/30 { background-color: #dcfce7; } 
-body.light-mode #c-loops .bg-yellow-800\/50 { background-color: var(--color-amber-inline-code-bg); } 
-body.light-mode #c-loops .bg-red-800\/50 { background-color: var(--color-red-light-bg); }
+body.light-mode #c-conditionals #decision-output .text-red-400 { 
+    color: var(--color-red-darker); 
+    font-weight: 600; 
+}
 
-/* Table styles */
-body.light-mode #c-loops table { border-color: var(--interactive-card-border); }
-body.light-mode #c-loops th,
-body.light-mode #c-loops td {
-    border-color: var(--light-modal-bg-end); /* Use a variable consistent with other light borders */
+/* ----- Table styles for light mode ----- */
+body.light-mode table { 
+    border-color: var(--interactive-card-border); 
+}
+body.light-mode th,
+body.light-mode td {
+    border-color: var(--light-modal-bg-end);
     color: var(--text-primary);
 }
 
@@ -780,4 +782,34 @@ body.light-mode #c-loops td {
     .section-icon {
         margin-bottom: 1rem; 
     }
+}
+
+/* ================================== */
+/* Light Mode Contrast Patch v2.0    */
+/* ================================== */
+/* Force-overriding specific faint Tailwind classes in light mode */
+
+body.light-mode .text-slate-300 {
+    color: #1e293b; /* Using a much darker color (like slate-800) for main paragraphs */
+}
+
+body.light-mode .text-slate-400 {
+    color: #475569; /* Using a darker color (like slate-600) for secondary text */
+}
+
+/* ================================== */
+/* Light Mode Icon Background Fix    */
+/* ================================== */
+/* Overriding faint icon background colors for light mode */
+
+body.light-mode .bg-primary-500 {
+    background-color: var(--color-blue-darker) !important; /* Force a dark blue */
+}
+
+body.light-mode .bg-accent-500 {
+    background-color: var(--color-purple-darker) !important; /* Force a dark purple */
+}
+
+body.light-mode .bg-green-500 {
+    background-color: var(--color-green-darker) !important; /* Force a dark green for other icons */
 }
