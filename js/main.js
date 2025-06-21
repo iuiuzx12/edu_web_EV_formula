@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function () {
         glossaryBackdrop.style.display = 'none';
     }
     
-    document.getElementById('glossary-close-btn').addEventListener('click', closeModal);
+    const glossaryCloseBtn = document.getElementById('glossary-close-btn');
     if (glossaryCloseBtn) {
         glossaryCloseBtn.addEventListener('click', closeModal);
     }
@@ -322,210 +322,90 @@ function showError(inputElement, errorElement, message) {
 const runGreetingBtn = document.getElementById('run-greeting-btn');
 if (runGreetingBtn) {
     runGreetingBtn.addEventListener('click', runInteractiveDemo);
-
-    // รันอัตโนมัติเมื่อหน้าโหลดเสร็จ (optional), เฉพาะเมื่อมีปุ่มนี้เท่านั้น
-    document.addEventListener('DOMContentLoaded', function() {
-        // ตรวจสอบอีกครั้งภายใน DOMContentLoaded เผื่อกรณี script โหลดแบบ async/defer
-        if (document.getElementById('user-name') && document.getElementById('greeting-output')) {
-            setTimeout(runInteractiveDemo, 1000);
-        }
-    });
+    // Auto-run logic will be handled by the main DOMContentLoaded listener
 }
 
 // ===== ฟังก์ชันสำหรับบทที่ 4 =====
 function runCalculatorDemo() {
-    const x = parseFloat(document.getElementById('calc-x').value) || 0;
-    const y = parseFloat(document.getElementById('calc-y').value) || 0;
+    const calcX = document.getElementById('calc-x');
+    const calcY = document.getElementById('calc-y');
+    const calculatorOutput = document.getElementById('calculator-output');
+    const simX = document.getElementById('sim-x');
+    const simY = document.getElementById('sim-y');
+    const simOp = document.getElementById('sim-op');
+    const simResult = document.getElementById('sim-result');
+
+    if (!calcX || !calcY || !calculatorOutput || !simX || !simY || !simOp || !simResult) {
+        // console.warn("Calculator demo elements not found. Skipping demo.");
+        return;
+    }
+
+    const x = parseFloat(calcX.value) || 0;
+    const y = parseFloat(calcY.value) || 0;
     
-    // ดึงตัวดำเนินการที่ผู้ใช้เลือกจริงๆ
     const activeOpBtn = document.querySelector('.calc-op-btn.active');
     const op = activeOpBtn ? activeOpBtn.dataset.op : '+';
     let symbol;
     
-    // คำนวณผลลัพธ์ตามตัวดำเนินการที่เลือก
     let result;
     switch(op) {
-        case '+':
-            result = x + y;
-            symbol = '+';
-            break;
-        case '-':
-            result = x - y;
-            symbol = '-';
-            break;
-        case '*':
-            result = x * y;
-            symbol = '×';
-            break;
-        case '/':
-            result = y !== 0 ? (x / y).toFixed(2) : 'Error: หารด้วยศูนย์';
-            symbol = '÷';
-            break;
-        default:
-            result = x + y;
-            symbol = '+';
+        case '+': result = x + y; symbol = '+'; break;
+        case '-': result = x - y; symbol = '-'; break;
+        case '*': result = x * y; symbol = '×'; break;
+        case '/': result = y !== 0 ? (x / y).toFixed(2) : 'Error: หารด้วยศูนย์'; symbol = '÷'; break;
+        default: result = x + y; symbol = '+';
     }
     
-    // แสดงผลลัพธ์
-    const outputDiv = document.getElementById('calculator-output');
-    outputDiv.innerHTML = `
+    calculatorOutput.innerHTML = `
         <div class="text-center py-6">
             <div class="text-5xl font-bold text-primary-400 mb-2">${result}</div>
             <div class="text-xl text-slate-300">${x} ${symbol} ${y} = ${result}</div>
         </div>
     `;
     
-    // อัปเดตข้อมูลจำลอง
-    document.getElementById('sim-x').textContent = x;
-    document.getElementById('sim-y').textContent = y;
-    document.getElementById('sim-op').textContent = symbol;
-    document.getElementById('sim-result').textContent = result;
+    simX.textContent = x;
+    simY.textContent = y;
+    simOp.textContent = symbol;
+    simResult.textContent = result;
 }
 
-// เพิ่ม event listeners สำหรับเครื่องคิดเลข
-// const runCalculatorBtn is already defined and checked before auto-run setup
-if (runCalculatorBtn) { // This is the button with id 'run-calculator-btn'
+const runCalculatorBtn = document.getElementById('run-calculator-btn');
+if (runCalculatorBtn) {
     runCalculatorBtn.addEventListener('click', runCalculatorDemo);
 }
 
-// เลือกตัวดำเนินการ
 const calcOpBtns = document.querySelectorAll('.calc-op-btn');
 if (calcOpBtns.length > 0) {
     calcOpBtns.forEach(btn => {
         btn.addEventListener('click', function() {
-            // ลบสถานะ active จากปุ่มอื่นๆ
             document.querySelectorAll('.calc-op-btn').forEach(b => b.classList.remove('bg-primary-500', 'text-white', 'active'));
-            
-            // ตั้งค่าปุ่มปัจจุบันเป็น active
             this.classList.add('bg-primary-500', 'text-white', 'active');
-            
-            // รันการคำนวณใหม่
-            if (typeof runCalculatorDemo === 'function' && document.getElementById('calc-x')) { // Check if demo is relevant
+            if (typeof runCalculatorDemo === 'function' && document.getElementById('calc-x')) {
                 runCalculatorDemo();
             }
         });
     });
 
-    // ตั้งค่าตัวดำเนินการเริ่มต้น
     const defaultOpBtn = document.querySelector('.calc-op-btn[data-op="+"]');
     if (defaultOpBtn) {
         defaultOpBtn.classList.add('bg-primary-500', 'text-white', 'active');
     }
 }
 
-// เพิ่มในส่วน JavaScript ของบทที่ 4
-// const runCastBtn is already defined and checked before auto-run setup
-if (runCastBtn) { // This is the button with id 'run-cast-btn'
-    runCastBtn.addEventListener('click', function() {
-        // Ensure relevant elements exist before proceeding
-        const castValueEl = document.getElementById('cast-value');
-        const castTypeEl = document.getElementById('cast-type');
-        const castResultEl = document.getElementById('cast-result');
+// ฟังก์ชันสำหรับ Type Casting Demo (บทที่ 4)
+function runCastDemo() {
+    const castValueEl = document.getElementById('cast-value');
+    const castTypeEl = document.getElementById('cast-type');
+    const castResultEl = document.getElementById('cast-result');
 
-        if (!castValueEl || !castTypeEl || !castResultEl) {
-            console.warn("Type casting demo elements not found. Skipping cast operation.");
-            return;
-        }
+    if (!castValueEl || !castTypeEl || !castResultEl) {
+        // console.warn("Type casting demo elements not found. Skipping cast operation.");
+        return;
+    }
 
-        const inputValue = castValueEl.value;
-        const castType = castTypeEl.value;
-        const resultDiv = castResultEl;
-        
-        try {
-            let result;
-            let explanation;
-            
-            switch(castType) {
-                case 'int':
-                    result = parseInt(inputValue);
-                    explanation = `การแปลงเป็น int จะตัดส่วนทศนิยมทิ้ง (ถ้ามี)`;
-                    break;
-                case 'float':
-                    result = parseFloat(inputValue);
-                    explanation = `การแปลงเป็น float จะเก็บค่าทศนิยม`;
-                    break;
-                // แก้ไขในส่วนของ case 'char'
-                case 'char':
-                    // แปลงค่าเป็นตัวเลขก่อน
-                    const numValue = parseFloat(inputValue);
-                    
-                    if (isNaN(numValue)) {
-                        result = "ไม่สามารถแปลงเป็นตัวเลขได้";
-                        explanation = "กรุณาป้อนตัวเลขเพื่อแปลงเป็นตัวอักษร";
-                    } else {
-                        // ตรวจสอบว่าเป็นจำนวนเต็ม
-                        if (Number.isInteger(numValue)) {
-                            // ตรวจสอบขอบเขตค่า ASCII
-                            if (numValue >= 0 && numValue <= 65535) {
-                                result = `'${String.fromCharCode(numValue)}'`;
-                                explanation = `แปลงจากค่า ASCII ${numValue} เป็นตัวอักษร`;
-                            } else {
-                                result = "เกินขอบเขต";
-                                explanation = "ค่า ASCII ต้องอยู่ระหว่าง 0 ถึง 65535";
-                            }
-                        } else {
-                            // ถ้าไม่ใช่จำนวนเต็ม ให้ใช้ตัวอักษรตัวแรก
-                            result = `'${inputValue.charAt(0)}'`;
-                            explanation = "ใช้ตัวอักษรตัวแรกของข้อความ (ไม่ใช่ค่า ASCII)";
-                        }
-                    }
-                    break;
-                default:
-                    result = "ไม่รองรับชนิดนี้";
-                    explanation = "";
-            }
-            
-            // ในส่วนแสดงผลลัพธ์
-            resultDiv.innerHTML = `
-                <div class="text-xl font-bold text-green-400 mb-2">${result}</div>
-                <div class="text-slate-300 mb-3">${explanation}</div>
-                
-                ${result === "ไม่สามารถแปลงเป็นตัวเลขได้" || result === "เกินขอบเขต" 
-                    ? `<div class="bg-red-900 bg-opacity-30 p-2 rounded-lg text-red-200">
-                        <i class="fas fa-exclamation-triangle mr-2"></i>
-                        ${explanation}
-                    </div>`
-                    : ''}
-                
-                <div class="mt-3 text-sm text-slate-500">
-                    <i class="fas fa-info-circle mr-1"></i> 
-                    ค่าเริ่มต้น: <code>${inputValue}</code> → ชนิด: ${castType}
-                </div>
-                
-                <!-- เพิ่มตัวอย่างค่า ASCII -->
-                <div class="mt-3 text-xs text-slate-600">
-                    <p>ตัวอย่างค่า ASCII: 65='A', 66='B', 97='a', 98='b'</p>
-                </div>
-            `;
-        } catch (error) {
-            resultDiv.innerHTML = `
-                <div class="text-red-400">
-                    <i class="fas fa-exclamation-triangle mr-2"></i>
-                    เกิดข้อผิดพลาด: ${error.message}
-                </div>
-            `;
-        }
-    });
-}
-
-
-// ตัวอย่างการใช้งาน
-// document.addEventListener('DOMContentLoaded', function() {
-    // ตั้งค่าเริ่มต้น
-    // document.getElementById('run-cast-btn').click(); // This is now handled by the auto-run logic for runCastBtn
-// });
-
-// รันตัวอย่างเมื่อหน้าโหลดเสร็จ
-// document.addEventListener('DOMContentLoaded', function() {
-    // setTimeout(runCalculatorDemo, 1500); // This is now handled by the auto-run logic for runCalculatorBtn
-// });
-
-
-// ===== ฟังก์ชันสำหรับบทที่ 5 =====
-function runConditionalDemo() {
-    const age = parseInt(document.getElementById('user-age').value) || 0;
-    const movieRating = document.querySelector('input[name="movie"]:checked').value;
-    const resultDiv = document.getElementById('cast-result');
+    const inputValue = castValueEl.value;
+    const castType = castTypeEl.value;
+    const resultDiv = castResultEl;
     
     try {
         let result;
@@ -540,18 +420,13 @@ function runConditionalDemo() {
                 result = parseFloat(inputValue);
                 explanation = `การแปลงเป็น float จะเก็บค่าทศนิยม`;
                 break;
-            // แก้ไขในส่วนของ case 'char'
             case 'char':
-                // แปลงค่าเป็นตัวเลขก่อน
                 const numValue = parseFloat(inputValue);
-                
                 if (isNaN(numValue)) {
                     result = "ไม่สามารถแปลงเป็นตัวเลขได้";
                     explanation = "กรุณาป้อนตัวเลขเพื่อแปลงเป็นตัวอักษร";
                 } else {
-                    // ตรวจสอบว่าเป็นจำนวนเต็ม
                     if (Number.isInteger(numValue)) {
-                        // ตรวจสอบขอบเขตค่า ASCII
                         if (numValue >= 0 && numValue <= 65535) {
                             result = `'${String.fromCharCode(numValue)}'`;
                             explanation = `แปลงจากค่า ASCII ${numValue} เป็นตัวอักษร`;
@@ -560,7 +435,6 @@ function runConditionalDemo() {
                             explanation = "ค่า ASCII ต้องอยู่ระหว่าง 0 ถึง 65535";
                         }
                     } else {
-                        // ถ้าไม่ใช่จำนวนเต็ม ให้ใช้ตัวอักษรตัวแรก
                         result = `'${inputValue.charAt(0)}'`;
                         explanation = "ใช้ตัวอักษรตัวแรกของข้อความ (ไม่ใช่ค่า ASCII)";
                     }
@@ -571,87 +445,47 @@ function runConditionalDemo() {
                 explanation = "";
         }
         
-        // ในส่วนแสดงผลลัพธ์
         resultDiv.innerHTML = `
             <div class="text-xl font-bold text-green-400 mb-2">${result}</div>
             <div class="text-slate-300 mb-3">${explanation}</div>
-            
             ${result === "ไม่สามารถแปลงเป็นตัวเลขได้" || result === "เกินขอบเขต" 
-                ? `<div class="bg-red-900 bg-opacity-30 p-2 rounded-lg text-red-200">
-                    <i class="fas fa-exclamation-triangle mr-2"></i>
-                    ${explanation}
-                </div>`
+                ? `<div class="bg-red-900 bg-opacity-30 p-2 rounded-lg text-red-200"><i class="fas fa-exclamation-triangle mr-2"></i>${explanation}</div>`
                 : ''}
-            
-            <div class="mt-3 text-sm text-slate-500">
-                <i class="fas fa-info-circle mr-1"></i> 
-                ค่าเริ่มต้น: <code>${inputValue}</code> → ชนิด: ${castType}
-            </div>
-            
-            <!-- เพิ่มตัวอย่างค่า ASCII -->
-            <div class="mt-3 text-xs text-slate-600">
-                <p>ตัวอย่างค่า ASCII: 65='A', 66='B', 97='a', 98='b'</p>
-            </div>
+            <div class="mt-3 text-sm text-slate-500"><i class="fas fa-info-circle mr-1"></i> ค่าเริ่มต้น: <code>${inputValue}</code> → ชนิด: ${castType}</div>
+            <div class="mt-3 text-xs text-slate-600"><p>ตัวอย่างค่า ASCII: 65='A', 66='B', 97='a', 98='b'</p></div>
         `;
     } catch (error) {
-        resultDiv.innerHTML = `
-            <div class="text-red-400">
-                <i class="fas fa-exclamation-triangle mr-2"></i>
-                เกิดข้อผิดพลาด: ${error.message}
-            </div>
-        `;
+        resultDiv.innerHTML = `<div class="text-red-400"><i class="fas fa-exclamation-triangle mr-2"></i>เกิดข้อผิดพลาด: ${error.message}</div>`;
     }
-});
-
-// ตัวอย่างการใช้งาน
-document.addEventListener('DOMContentLoaded', function() {
-    // ตั้งค่าเริ่มต้น
-    document.getElementById('run-cast-btn').click();
-});
-
-// รันตัวอย่างเมื่อหน้าโหลดเสร็จ, เฉพาะเมื่อมี element ที่เกี่ยวข้อง
-const runCalculatorBtn = document.getElementById('run-calculator-btn');
-if (runCalculatorBtn) {
-    document.addEventListener('DOMContentLoaded', function() {
-        // ตรวจสอบ elements ที่ runCalculatorDemo ใช้
-        if (document.getElementById('calc-x') && 
-            document.getElementById('calc-y') &&
-            document.getElementById('calculator-output')) {
-            setTimeout(runCalculatorDemo, 1500);
-        }
-    });
 }
 
-// เพิ่มการตรวจสอบสำหรับ run-cast-btn ก่อนเรียก click
 const runCastBtn = document.getElementById('run-cast-btn');
 if (runCastBtn) {
-    // Event listener สำหรับปุ่ม run-cast-btn ควรอยู่นอก DOMContentLoaded ถ้าปุ่มถูกสร้างแบบ dynamic
-    // แต่ในกรณีนี้ HTML มีปุ่มอยู่แล้ว การผูก event listener สามารถทำได้เลย
-    // (โค้ดเดิมผูก event listener โดยตรง ไม่ได้อยู่ใน DOMContentLoaded สำหรับการผูก)
-
-    document.addEventListener('DOMContentLoaded', function() {
-        // ตรวจสอบ elements ที่ runCastDemo (listener ของ run-cast-btn) ใช้
-        if (document.getElementById('cast-value') && 
-            document.getElementById('cast-type') &&
-            document.getElementById('cast-result')) {
-            runCastBtn.click(); // เรียก click เพื่อแสดงผลเริ่มต้น
-        }
-    });
+    runCastBtn.addEventListener('click', runCastDemo);
 }
 
 
 // ===== ฟังก์ชันสำหรับบทที่ 5 =====
 function runConditionalDemo() {
-    const age = parseInt(document.getElementById('user-age').value) || 0;
-    const movieRating = document.querySelector('input[name="movie"]:checked').value;
-    
-    // ตรวจสอบเงื่อนไข
+    const userAgeEl = document.getElementById('user-age');
+    const decisionOutputEl = document.getElementById('decision-output');
+    const codeSimulationEl = document.getElementById('code-simulation');
+
+    if (!userAgeEl || !decisionOutputEl || !codeSimulationEl) {
+        // console.warn("Conditional demo elements not found. Skipping demo.");
+        return;
+    }
+    const age = parseInt(userAgeEl.value) || 0;
+    const movieRatingChecked = document.querySelector('input[name="movie"]:checked');
+    if (!movieRatingChecked) {
+        // console.warn("No movie rating selected. Skipping conditional demo.");
+        return;
+    }
+    const movieRating = movieRatingChecked.value;
+        
     let resultText = '';
     let resultClass = '';
-    let codeSimulation = '';
-    
-    // สร้างโค้ดจำลอง
-    codeSimulation = `int age = ${age};\nstring movie = "${movieRating}";\n\n`;
+    let codeSimulation = `int age = ${age};\nstring movie = "${movieRating}";\n\n`;
     
     if (movieRating === "G") {
         resultText = "✅ คุณสามารถซื้อตั๋วหนังระดับ G ได้ทันที!";
@@ -681,22 +515,17 @@ function runConditionalDemo() {
         }
     }
     
-    // แสดงผลลัพธ์
-    const outputDiv = document.getElementById('decision-output');
-    outputDiv.innerHTML = `
+    decisionOutputEl.innerHTML = `
         <div class="text-center py-6">
             <div class="text-3xl font-bold ${resultClass} mb-2">${resultText}</div>
             <div class="text-lg text-slate-300 mt-4">อายุ: ${age} ปี | ภาพยนตร์: ${movieRating}</div>
         </div>
     `;
-    
-    // แสดงโค้ดจำลอง
-    document.getElementById('code-simulation').textContent = codeSimulation;
+    codeSimulationEl.textContent = codeSimulation;
 }
 
-// เพิ่ม event listeners สำหรับบทที่ 5
-// const checkTicketBtn is already defined and checked before auto-run setup
-if (checkTicketBtn) { // This is the button with id 'check-ticket-btn'
+const checkTicketBtn = document.getElementById('check-ticket-btn');
+if (checkTicketBtn) {
     checkTicketBtn.addEventListener('click', runConditionalDemo);
 
     const movieRadioBtns = document.querySelectorAll('input[name="movie"]');
@@ -710,156 +539,121 @@ if (checkTicketBtn) { // This is the button with id 'check-ticket-btn'
     if (userAgeInputConditional) {
         userAgeInputConditional.addEventListener('input', runConditionalDemo);
     }
-
-    // Auto-run logic is already in place and guarded by 'if (checkTicketBtn)'
 }
  
 // ===== ฟังก์ชันสำหรับบทที่ 6 =====
-// แก้ไขฟังก์ชัน runLoopDemo()
 function runLoopDemo() {
-    const barkCount = parseInt(document.getElementById('bark-count').value);
-    const loopType = document.querySelector('.loop-type-btn.active').dataset.loopType;
-    const useBreak = document.getElementById('break-btn').classList.contains('active');
-    const useContinue = document.getElementById('continue-btn').classList.contains('active');
-    const controlPoint = parseInt(document.getElementById('control-point').value) || 3;
+    const barkCountEl = document.getElementById('bark-count');
+    const loopConditionEl = document.getElementById('loop-condition');
+    const barkResultEl = document.getElementById('bark-result');
+    const loopCodeEl = document.getElementById('loop-code');
+    const loopVisualizationEl = document.getElementById('loop-visualization');
+    const breakBtnEl = document.getElementById('break-btn');
+    const continueBtnEl = document.getElementById('continue-btn');
+    const controlPointEl = document.getElementById('control-point');
+
+    if (!barkCountEl || !loopConditionEl || !barkResultEl || !loopCodeEl || !loopVisualizationEl || !breakBtnEl || !continueBtnEl || !controlPointEl) {
+        // console.warn("Loop demo elements not found. Skipping demo.");
+        return;
+    }
+
+    const barkCount = parseInt(barkCountEl.value);
+    const activeLoopTypeBtn = document.querySelector('.loop-type-btn.active');
+    if (!activeLoopTypeBtn) {
+        // console.warn("No loop type selected. Skipping loop demo.");
+        return;
+    }
+    const loopType = activeLoopTypeBtn.dataset.loopType;
+    const useBreak = breakBtnEl.classList.contains('active');
+    const useContinue = continueBtnEl.classList.contains('active');
+    const controlPoint = parseInt(controlPointEl.value) || 3;
     
-    // แสดงส่วนเงื่อนไขถ้าเลือก break/continue
-    document.getElementById('loop-condition').style.display = 
-        (useBreak || useContinue) ? 'block' : 'none';
+    loopConditionEl.style.display = (useBreak || useContinue) ? 'block' : 'none';
     
-    // สร้างผลลัพธ์และโค้ด
     let result = '';
     let code = '';
     let visualizationHTML = '';
     
     if (loopType === 'for') {
-        // for loop
         code = `for (int i = 0; i < ${barkCount}; i++) {\n`;
-        
-        if (useContinue) {
-            code += `    if (i == ${controlPoint - 1}) continue; // ข้ามรอบนี้\n`;
-        }
-        if (useBreak) {
-            code += `    if (i == ${controlPoint}) break; // ออกจากลูป\n`;
-        }
-        
+        if (useContinue) code += `    if (i == ${controlPoint - 1}) continue; // ข้ามรอบนี้\n`;
+        if (useBreak) code += `    if (i == ${controlPoint}) break; // ออกจากลูป\n`;
         code += `    printf("🐶 Woof! (รอบที่ %d\\n", i+1);\n}`;
         
         for (let i = 0; i < barkCount; i++) {
-            // เงื่อนไข continue
             if (useContinue && i === controlPoint - 1) {
-                visualizationHTML += `
-                    <div class="bg-yellow-800 bg-opacity-50 p-2 rounded">
-                        <div class="text-xs text-yellow-300 mb-1">รอบที่ ${i+1} (continue)</div>
-                        <div class="text-lg">⏩</div>
-                    </div>
-                `;
+                visualizationHTML += `<div class="bg-yellow-800 bg-opacity-50 p-2 rounded"><div class="text-xs text-yellow-300 mb-1">รอบที่ ${i+1} (continue)</div><div class="text-lg">⏩</div></div>`;
                 continue;
             }
-            
-            // เงื่อนไข break
             if (useBreak && i === controlPoint) {
-                visualizationHTML += `
-                    <div class="bg-red-800 bg-opacity-50 p-2 rounded">
-                        <div class="text-xs text-red-300 mb-1">รอบที่ ${i+1} (break)</div>
-                        <div class="text-lg">🛑</div>
-                    </div>
-                `;
+                visualizationHTML += `<div class="bg-red-800 bg-opacity-50 p-2 rounded"><div class="text-xs text-red-300 mb-1">รอบที่ ${i+1} (break)</div><div class="text-lg">🛑</div></div>`;
                 result += `🛑 หยุดการทำงานที่รอบที่ ${i+1}\n`;
                 break;
             }
-            
-            visualizationHTML += `
-                <div class="bg-blue-800 bg-opacity-30 p-2 rounded">
-                    <div class="text-xs text-loop-highlight mb-1">รอบที่ ${i+1}</div>
-                    <div class="text-lg">🐶</div>
-                </div>
-            `;
+            visualizationHTML += `<div class="bg-blue-800 bg-opacity-30 p-2 rounded"><div class="text-xs text-loop-highlight mb-1">รอบที่ ${i+1}</div><div class="text-lg">🐶</div></div>`;
             result += `🐶 Woof! (รอบที่ ${i+1})\n`;
         }
-    } else {
-        // while loop
+    } else { // while loop
         code = `int i = 0;\nwhile (i < ${barkCount}) {\n    i++;\n\n`;
-        
-        if (useContinue) {
-            code += `    if (i == ${controlPoint}) continue; // ข้ามรอบนี้\n`;
-        }
-        if (useBreak) {
-            code += `    if (i == ${controlPoint + 1}) break; // ออกจากลูป\n`;
-        }
-        
+        if (useContinue) code += `    if (i == ${controlPoint}) continue; // ข้ามรอบนี้\n`;
+        if (useBreak) code += `    if (i == ${controlPoint + 1}) break; // ออกจากลูป\n`;
         code += `    printf("🐶 Woof! (รอบที่ %d\\n", i);\n}`;
         
         let i = 0;
         while (i < barkCount) {
             i++;
-            
-            // เงื่อนไข continue
             if (useContinue && i === controlPoint) {
-                visualizationHTML += `
-                    <div class="bg-yellow-800 bg-opacity-50 p-2 rounded">
-                        <div class="text-xs text-yellow-300 mb-1">รอบที่ ${i} (continue)</div>
-                        <div class="text-lg">⏩</div>
-                    </div>
-                `;
+                visualizationHTML += `<div class="bg-yellow-800 bg-opacity-50 p-2 rounded"><div class="text-xs text-yellow-300 mb-1">รอบที่ ${i} (continue)</div><div class="text-lg">⏩</div></div>`;
                 continue;
             }
-            
-            // เงื่อนไข break
             if (useBreak && i === controlPoint + 1) {
-                visualizationHTML += `
-                    <div class="bg-red-800 bg-opacity-50 p-2 rounded">
-                        <div class="text-xs text-red-300 mb-1">รอบที่ ${i} (break)</div>
-                        <div class="text-lg">🛑</div>
-                    </div>
-                `;
+                visualizationHTML += `<div class="bg-red-800 bg-opacity-50 p-2 rounded"><div class="text-xs text-red-300 mb-1">รอบที่ ${i} (break)</div><div class="text-lg">🛑</div></div>`;
                 result += `🛑 หยุดการทำงานที่รอบที่ ${i}\n`;
                 break;
             }
-            
-            visualizationHTML += `
-            <div class="bg-green-800 bg-opacity-30 p-2 rounded">
-                <div class="text-xs text-loop-highlight mb-1">รอบที่ ${i}</div>
-                <div class="text-lg">🐶</div>
-            </div>
-        `;
+            visualizationHTML += `<div class="bg-green-800 bg-opacity-30 p-2 rounded"><div class="text-xs text-loop-highlight mb-1">รอบที่ ${i}</div><div class="text-lg">🐶</div></div>`;
             result += `🐶 Woof! (รอบที่ ${i})\n`;
         }
     }
     
-    // แสดงผลลัพธ์
-    document.getElementById('bark-result').textContent = result || "⚠️ กรุณาเลือกจำนวนครั้งมากกว่า 0";
-    document.getElementById('loop-code').textContent = code;
-    document.getElementById('loop-visualization').innerHTML = visualizationHTML;
+    barkResultEl.textContent = result || "⚠️ กรุณาเลือกจำนวนครั้งมากกว่า 0";
+    loopCodeEl.textContent = code;
+    loopVisualizationEl.innerHTML = visualizationHTML;
 }
 
-// เพิ่ม event listeners สำหรับ break/continue
-document.getElementById('break-btn').addEventListener('click', function() {
-    this.classList.toggle('active');
-    this.classList.toggle('bg-red-500', this.classList.contains('active'));
-    document.getElementById('continue-btn').classList.remove('active', 'bg-blue-500');
-    runLoopDemo();
-});
+const breakBtn = document.getElementById('break-btn');
+const continueBtn = document.getElementById('continue-btn');
+const controlPointInputLoop = document.getElementById('control-point');
 
-document.getElementById('continue-btn').addEventListener('click', function() {
-    this.classList.toggle('active');
-    this.classList.toggle('bg-blue-500', this.classList.contains('active'));
-    document.getElementById('break-btn').classList.remove('active', 'bg-red-500');
-    runLoopDemo();
-});
+if (breakBtn && continueBtn) {
+    breakBtn.addEventListener('click', function() {
+        this.classList.toggle('active');
+        this.classList.toggle('bg-red-500', this.classList.contains('active'));
+        continueBtn.classList.remove('active', 'bg-blue-500');
+        if (typeof runLoopDemo === 'function') runLoopDemo();
+    });
 
-// เมื่อค่า control point เปลี่ยน
-document.getElementById('control-point').addEventListener('input', runLoopDemo);
+    continueBtn.addEventListener('click', function() {
+        this.classList.toggle('active');
+        this.classList.toggle('bg-blue-500', this.classList.contains('active'));
+        breakBtn.classList.remove('active', 'bg-red-500');
+        if (typeof runLoopDemo === 'function') runLoopDemo();
+    });
+}
+if (controlPointInputLoop) {
+    controlPointInputLoop.addEventListener('input', () => {
+        if (typeof runLoopDemo === 'function') runLoopDemo();
+    });
+}
 
-// เพิ่ม event listeners สำหรับบทที่ 6
-// const barkBtn is already defined and checked before auto-run setup
-if (barkBtn) { // This is the button with id 'bark-btn'
+
+const barkBtn = document.getElementById('bark-btn');
+if (barkBtn) {
     barkBtn.addEventListener('click', runLoopDemo);
 
     const barkCountInput = document.getElementById('bark-count');
     if (barkCountInput) {
         barkCountInput.addEventListener('input', runLoopDemo);
-        // The separate listener for barkCountValueDisplay is already correctly placed inside 'if (barkBtn)'
     }
 
     const loopTypeBtns = document.querySelectorAll('.loop-type-btn');
@@ -868,48 +662,30 @@ if (barkBtn) { // This is the button with id 'bark-btn'
             btn.addEventListener('click', function() {
                 document.querySelectorAll('.loop-type-btn').forEach(b => b.classList.remove('active', 'bg-primary-500', 'text-white'));
                 this.classList.add('active', 'bg-primary-500', 'text-white');
-                if (typeof runLoopDemo === 'function' && document.getElementById('bark-result')) { // Check if demo is relevant
+                if (typeof runLoopDemo === 'function' && document.getElementById('bark-result')) {
                     runLoopDemo();
                 }
             });
         });
+        // Set default active loop type if none is active
+        if (!document.querySelector('.loop-type-btn.active') && loopTypeBtns.length > 0) {
+            loopTypeBtns[0].classList.add('active', 'bg-primary-500', 'text-white');
+        }
     }
-    
-    // Event listeners for break/continue and control-point are already inside runLoopDemo or associated functions,
-    // and those functions are called from barkBtn click or other guarded listeners.
-    // The specific listeners for break-btn, continue-btn, control-point are:
-    const breakBtn = document.getElementById('break-btn');
-    if (breakBtn) {
-        breakBtn.addEventListener('click', function() {
-            this.classList.toggle('active');
-            this.classList.toggle('bg-red-500', this.classList.contains('active'));
-            const continueBtn = document.getElementById('continue-btn');
-            if (continueBtn) {
-                continueBtn.classList.remove('active', 'bg-blue-500');
-            }
-            if (typeof runLoopDemo === 'function' && document.getElementById('bark-result')) runLoopDemo();
-        });
-    }
+}
 
-    const continueBtn = document.getElementById('continue-btn');
-    if (continueBtn) {
-        continueBtn.addEventListener('click', function() {
-            this.classList.toggle('active');
-            this.classList.toggle('bg-blue-500', this.classList.contains('active'));
-            const breakBtn = document.getElementById('break-btn');
-            if (breakBtn) {
-                breakBtn.classList.remove('active', 'bg-red-500');
-            }
-            if (typeof runLoopDemo === 'function' && document.getElementById('bark-result')) runLoopDemo();
-        });
-    }
-
-    const controlPointInput = document.getElementById('control-point');
-    if (controlPointInput) {
-        controlPointInput.addEventListener('input', runLoopDemo);
-    }
+// ฟังก์ชันสำหรับเปลี่ยนสีไอคอนใน section-icon และ nav-link
+function updateIconColors() {
+    if (!document.body) return;
+    const isLightMode = document.body.classList.contains('light-mode');
     
-    // Auto-run logic is already in place and guarded by 'if (barkBtn)'
+    document.querySelectorAll('.section-icon i').forEach(icon => {
+        icon.style.color = isLightMode ? 'white' : '';
+    });
+    // Nav link icons in sidebar should be white in light mode due to dark sidebar background
+    document.querySelectorAll('#main-nav .nav-link i').forEach(icon => {
+        icon.style.color = isLightMode ? 'white' : '';
+    });
 }
 
 // เพิ่มฟังก์ชันสลับธีม
@@ -918,80 +694,56 @@ if (themeToggleBtn) {
     themeToggleBtn.addEventListener('click', function() {
         const body = document.body;
         const themeIcon = document.getElementById('theme-icon');
-        if (!themeIcon) return; // Guard against missing theme icon
+        if (!themeIcon) return;
     
-    // สลับธีม
-    body.classList.toggle('light-mode');
+        body.classList.toggle('light-mode');
     
-    // อัปเดตไอคอนและ localStorage
-    if (body.classList.contains('light-mode')) {
-        themeIcon.classList.replace('fa-moon', 'fa-sun');
-        localStorage.setItem('theme', 'light');
-        
-        // อัปเดตสีไอคอนในส่วนต่างๆ
-        document.querySelectorAll('.nav-link i, .section-icon i').forEach(icon => {
-            icon.style.color = 'white'; // ไอคอนใน sidebar ควรเป็นสีขาวเสมอ (เพราะพื้นหลังสี)
-        });
-    } else {
-        themeIcon.classList.replace('fa-sun', 'fa-moon');
-        localStorage.setItem('theme', 'dark');
-        
-        // คืนค่าสีไอคอน
-        document.querySelectorAll('.nav-link i, .section-icon i').forEach(icon => {
-            icon.style.color = '';
-        });
-    }
-});
-
-        // คืนค่าสีไอคอน
-        document.querySelectorAll('.nav-link i, .section-icon i').forEach(icon => {
-            icon.style.color = ''; // Reset to default CSS behavior
-        });
-    }
-    updateIconColors(); // Call common icon update logic
-});
-
-
-// ตรวจสอบธีมที่บันทึกไว้ และเรียก updateIconColors
-document.addEventListener('DOMContentLoaded', function() {
-    const savedTheme = localStorage.getItem('theme');
-    const themeIcon = document.getElementById('theme-icon'); // Already guarded by themeToggleBtn check for listener
-    
-    if (savedTheme === 'light') {
-        document.body.classList.add('light-mode');
-        if (themeIcon) {
+        if (body.classList.contains('light-mode')) {
             themeIcon.classList.replace('fa-moon', 'fa-sun');
-        }
-    }
-    // Always call updateIconColors after potentially changing the theme based on localStorage
-    // Ensure this runs after the body class might have been set.
-    if (themeToggleBtn) { // Ensure theme functionality is present
-      updateIconColors();
-    }
-});
-
-// ฟังก์ชันสำหรับเปลี่ยนสีไอคอนใน section-icon
-function updateIconColors() {
-    // Ensure body exists, though it's highly unlikely it wouldn't at this point.
-    if (!document.body) return; 
-    
-    const isLightMode = document.body.classList.contains('light-mode');
-    const sectionIcons = document.querySelectorAll('.section-icon i');
-    
-    sectionIcons.forEach(icon => {
-        if (isLightMode) {
-            icon.style.color = 'white';
+            localStorage.setItem('theme', 'light');
         } else {
-            icon.style.color = ''; // Reset to default CSS behavior
+            themeIcon.classList.replace('fa-sun', 'fa-moon');
+            localStorage.setItem('theme', 'dark');
         }
+        updateIconColors(); // Update icons after toggling theme
     });
-
-    // For .nav-link i, they should always be white if the theme is light, due to dark sidebar background
-    // This logic was in the theme toggle, let's consolidate or ensure it's correctly applied.
-    // The current logic in theme toggle seems fine for .nav-link i.
 }
 
-// The direct call to updateIconColors() at the end of the file is now effectively handled
-// by the DOMContentLoaded listener above, which calls it after setting the initial theme.
-// The duplicate event listener for 'theme-toggle' calling updateIconColors was removed as
-// updateIconColors is now called directly within the main theme toggle listener.
+// Main DOMContentLoaded listener for initial setup
+document.addEventListener('DOMContentLoaded', function () {
+    // Navigation placeholder moved to the top of the file
+
+    // Initialize theme
+    const savedTheme = localStorage.getItem('theme');
+    const themeIcon = document.getElementById('theme-icon');
+    if (savedTheme === 'light') {
+        document.body.classList.add('light-mode');
+        if (themeIcon) themeIcon.classList.replace('fa-moon', 'fa-sun');
+    }
+    if (themeToggleBtn) { // Ensure theme functionality is present before updating colors
+        updateIconColors(); // Initial icon color update
+    }
+
+    // Auto-run demos if their respective buttons and necessary elements exist
+    if (runGreetingBtn && document.getElementById('user-name') && document.getElementById('greeting-output')) {
+        setTimeout(runInteractiveDemo, 1000);
+    }
+    if (runCalculatorBtn && document.getElementById('calc-x') && document.getElementById('calc-y') && document.getElementById('calculator-output')) {
+        // Set default operator for calculator if not already set by other logic
+        const defaultCalcOpBtn = document.querySelector('.calc-op-btn[data-op="+"]');
+        if (defaultCalcOpBtn && !document.querySelector('.calc-op-btn.active')) {
+            defaultCalcOpBtn.click(); // Simulate click to set active and run demo
+        } else {
+            runCalculatorDemo(); // Run demo if an operator is already active
+        }
+    }
+    if (runCastBtn && document.getElementById('cast-value') && document.getElementById('cast-type') && document.getElementById('cast-result')) {
+        runCastDemo(); // Run cast demo on load
+    }
+    if (checkTicketBtn && document.getElementById('user-age') && document.querySelector('input[name="movie"]:checked') && document.getElementById('decision-output')) {
+        runConditionalDemo(); // Run conditional demo on load
+    }
+    if (barkBtn && document.getElementById('bark-count') && document.querySelector('.loop-type-btn.active') && document.getElementById('bark-result')) {
+        runLoopDemo(); // Run loop demo on load
+    }
+});
