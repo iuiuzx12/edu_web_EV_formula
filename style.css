@@ -1,0 +1,1169 @@
+* {
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #e2e8f0;
+            min-height: 100vh;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 600;
+            color: #f1f5f9;
+        }
+        
+        .content-card {
+            background: linear-gradient(145deg, rgba(30, 41, 59, 0.7) 0%, rgba(30, 41, 59, 0.9) 100%);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(100, 116, 139, 0.2);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .content-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+        }
+        
+        .gradient-header {
+            background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .code-block {
+            background: linear-gradient(145deg, #0f172a 0%, #1e293b 100%);
+            color: #e2e8f0;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            font-family: 'Fira Code', 'Courier New', monospace;
+            font-size: 0.95em;
+            white-space: pre;
+            word-break: break-all;
+            line-height: 1.6;
+            border: 1px solid rgba(100, 116, 139, 0.3);
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
+            overflow-x: auto;
+        }
+        
+        .code-keyword, .keyword-glossary {
+            color: #60a5fa;
+            font-weight: bold;
+        }
+        
+        .keyword-glossary {
+            border-bottom: 1px dotted #60a5fa;
+            cursor: pointer;
+            white-space: normal;
+            transition: all 0.2s ease;
+        }
+        
+        .keyword-glossary:hover {
+            color: #93c5fd;
+            border-bottom: 1px solid #93c5fd;
+        }
+        
+        .code-function {
+            color: #a78bfa;
+        }
+        
+        .code-comment {
+            color: #94a3b8;
+            font-style: italic;
+        }
+        
+        .code-string {
+            color: #a3e635;
+        }
+        
+        .code-placeholder {
+            color: #fbbf24;
+            font-weight: bold;
+        }
+        
+        .highlight-code {
+            background-color: rgba(56, 189, 248, 0.1);
+            display: block;
+            margin: 0 -1.5rem;
+            padding: 0 1.5rem;
+            border-left: 4px solid #60a5fa;
+        }
+        
+        .tab-button {
+            padding: 0.75rem 1.25rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #cbd5e1;
+            background-color: rgba(30, 41, 59, 0.7);
+            border: 1px solid #475569;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .tab-button:not(.active):hover {
+            background-color: rgba(51, 65, 85, 0.7);
+        }
+        
+        .tab-button.active {
+            background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%);
+            color: white;
+            border-color: transparent;
+        }
+        
+        .tab-button:first-child {
+            border-top-left-radius: 0.5rem;
+            border-bottom-left-radius: 0.5rem;
+        }
+        
+        .tab-button:last-child {
+            border-top-right-radius: 0.5rem;
+            border-bottom-right-radius: 0.5rem;
+        }
+        /* เพิ่มในส่วน style */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        .animate-shake {
+            animation: shake 0.3s ease-in-out;
+        }
+
+        .input-field.border-red-500 {
+            border-color: #ef4444;
+            box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.3);
+        }
+
+        /* ==================== */
+        /* Global Light Styles */
+        /* ==================== */
+        body.light-mode {
+            /* เพิ่มความเข้มของตัวอักษรหลัก */
+            color: #334155;
+        }
+
+        body.light-mode h1, 
+        body.light-mode h2, 
+        body.light-mode h3, 
+        body.light-mode h4, 
+        body.light-mode h5, 
+        body.light-mode h6 {
+            color: #0f172a;
+        }
+
+        body.light-mode .text-slate-400 {
+            color: #64748b;
+        }
+
+
+        body.light-mode .text-slate-200 {
+            color: #334155;
+        }
+
+        /* ==================== */
+        /* Components */
+        /* ==================== */
+
+        /* Progress Bar */
+        body.light-mode .progress-bar {
+            background: linear-gradient(90deg, #1e40af 0%, #7c3aed 100%);
+        }
+
+        /* Content Cards */
+        body.light-mode .content-card {
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.95) 100%) !important;
+            border: 1px solid #cbd5e1 !important;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.03) !important;
+        }
+
+        /* Headers */
+        body.light-mode .gradient-header {
+            background: linear-gradient(90deg, #1e40af 0%, #7c3aed 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+        }
+
+        /* Code Blocks */
+        body.light-mode .code-block {
+            background: linear-gradient(145deg, #f1f5f9 0%, #e2e8f0 100%) !important;
+            color: #1e293b !important;
+            border: 1px solid #cbd5e1 !important;
+        }
+
+        body.light-mode .code-keyword, 
+        body.light-mode .keyword-glossary {
+            color: #1e40af !important; /* สีน้ำเงินเข้ม */
+            font-weight: 600;
+        }
+
+        body.light-mode .keyword-glossary:hover {
+            color: #3b82f6 !important;
+        }
+
+        body.light-mode .code-function {
+            color: #7c3aed !important;
+        }
+
+        body.light-mode .code-comment {
+            color: #64748b !important;
+        }
+
+        body.light-mode .code-string {
+            color: #15803d !important;
+        }
+
+        body.light-mode .code-placeholder {
+            color: #b45309 !important;
+        }
+
+        /* Buttons */
+        body.light-mode .btn-primary {
+            background: linear-gradient(90deg, #1e40af 0%, #7c3aed 100%);
+            color: white;
+            box-shadow: 0 4px 6px rgba(30, 64, 175, 0.1);
+        }
+
+        body.light-mode .btn-primary:hover {
+            box-shadow: 0 6px 8px rgba(30, 64, 175, 0.15);
+        }
+
+        body.light-mode .tab-button {
+            color: #475569;
+            background-color: rgba(241, 245, 249, 0.7);
+            border: 1px solid #cbd5e1;
+        }
+
+        body.light-mode .tab-button.active {
+            background: linear-gradient(90deg, #1e40af 0%, #7c3aed 100%);
+            color: white;
+        }
+
+        /* Forms */
+        body.light-mode .input-field {
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid #cbd5e1;
+            color: #1e293b;
+        }
+
+        body.light-mode .input-field:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+        }
+
+        /* Floating Buttons */
+        body.light-mode .floating-btn {
+            background: linear-gradient(135deg, #1e40af 0%, #7c3aed 100%);
+            color: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* ==================== */
+        /* Sections */
+        /* ==================== */
+
+        /* Sidebar */
+        body.light-mode .bg-dark-800 {
+            background-color: #f1f5f9 !important;
+            border-color: #cbd5e1 !important;
+        }
+
+        body.light-mode .bg-dark-700 {
+            background-color: #e2e8f0 !important;
+        }
+
+        body.light-mode .bg-dark-600 {
+            border-color: #cbd5e1 !important;
+        }
+
+        body.light-mode .text-primary-500 {
+            color: #1e40af;
+        }
+
+        body.light-mode .nav-link {
+            color: #334155 !important;
+            border-left: 4px solid transparent;
+        }
+
+        body.light-mode .nav-link:hover {
+            color: #0f172a !important; /* สีเข้มสุดเมื่อโฮเวอร์ */
+            background: rgba(226, 232, 240, 0.9) !important;
+        }
+
+        body.light-mode .nav-link.active {
+            background: linear-gradient(90deg, rgba(30, 64, 175, 0.1) 0%, rgba(124, 58, 237, 0.1) 100%) !important;
+            color: #1e40af !important;
+            border-left: 4px solid #1e40af !important;
+        }
+
+        /* Section Icons */
+        /* เปลี่ยนสี section-icon ใน light mode */
+        body.light-mode .section-icon {
+            background: linear-gradient(135deg, #1e40af 0%, #4338ca 100%) !important;
+        }
+
+        /* ======== แก้ไขบทที่ 2 ใน Light Mode ======== */
+
+        /* กล่อง Compiled Language และ Interpreted Language */
+        body.light-mode #c-basics .interactive-card h4 {
+            color: #1e40af !important; /* สีน้ำเงินเข้ม */
+        }
+
+        body.light-mode #c-basics .interactive-card p {
+            color: #334155 !important; /* สีเทาเข้ม */
+        }
+
+        /* กล่องคุณสมบัติ (ภาษาเครื่อง, ความเร็ว, การพกพา) */
+        body.light-mode #c-basics .bg-dark-700 {
+            background-color: #f1f5f9 !important; /* พื้นหลังสว่าง */
+        }
+
+        body.light-mode #c-basics .bg-dark-700 p {
+            color: #0f172a !important; /* สีดำเข้ม */
+        }
+
+        body.light-mode #c-basics .bg-dark-700 .font-semibold {
+            color: #1e40af !important; /* สีน้ำเงินเข้ม */
+        }
+
+        /* กล่องเหตุผลที่ C ทำงานเร็ว */
+        body.light-mode #c-basics .bg-amber-900 {
+            background-color: #fffbeb !important; /* พื้นหลังสีอำพันอ่อน */
+        }
+
+        body.light-mode #c-basics .text-amber-200 {
+            color: #92400e !important; /* สีน้ำตาลเข้ม */
+        }
+
+        /* เพิ่มความเข้มให้หัวข้อในกล่องเหตุผล */
+        body.light-mode #c-basics .font-bold {
+            color: #b45309 !important;
+        }
+
+        /* ข้อความใน code block */
+        body.light-mode #c-basics .text-blue-300 {
+            color: #1d4ed8 !important; /* สีน้ำเงินเข้ม */
+        }
+
+        body.light-mode #c-basics .text-purple-300 {
+            color: #6d28d9 !important; /* สีม่วงเข้ม */
+        }
+
+        /* Interactive Cards */
+        body.light-mode .interactive-card {
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.95) 100%) !important;
+            border: 1px solid #cbd5e1 !important;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05) !important;
+        }
+
+        /* Glossary Modal */
+        body.light-mode #glossary-modal {
+            background: linear-gradient(145deg, #f1f5f9 0%, #e2e8f0 100%) !important;
+            border: 1px solid #cbd5e1 !important;
+        }
+
+        /* ======== แก้ไขบทที่ 4 ใน Light Mode ======== */
+
+        /* หัวข้อกล่อง */
+        body.light-mode #c-calculator .interactive-card h5 {
+            color: #0f172a !important; /* สีดำเข้ม */
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* กล่องการแปลงโดยอัตโนมัติ */
+        body.light-mode #c-calculator .bg-blue-900 {
+            background-color: #dbeafe !important; /* พื้นหลังสีฟ้าอ่อน */
+            border: 1px solid #93c5fd !important; /* เส้นขอบ */
+        }
+
+        body.light-mode #c-calculator .text-blue-300 {
+            color: #1e40af !important; /* สีน้ำเงินเข้ม */
+            font-weight: 600;
+        }
+
+        /* กล่องการแปลงที่อาจสูญเสียข้อมูล */
+        body.light-mode #c-calculator .bg-amber-900 {
+            background-color: #fffbeb !important; /* พื้นหลังสีเหลืองอ่อน */
+            border: 1px solid #fbbf24 !important; /* เส้นขอบ */
+        }
+
+        body.light-mode #c-calculator .text-amber-300 {
+            color: #b45309 !important; /* สีน้ำตาลเข้ม */
+            font-weight: 600;
+        }
+
+        /* รายการในกล่อง */
+        body.light-mode #c-calculator .text-blue-200,
+        body.light-mode #c-calculator .text-amber-200 {
+            color: #334155 !important; /* สีเทาเข้ม */
+            font-weight: 500;
+        }
+
+        /* เพิ่มความเข้มให้รายการ */
+        body.light-mode #c-calculator ul.text-sm li {
+            color: #0f172a !important; /* สีดำเข้ม */
+            margin-bottom: 0.4rem;
+        }
+
+        /* เพิ่มระยะห่างระหว่างรายการ */
+        body.light-mode #c-calculator .space-y-1 li {
+            margin-bottom: 0.5rem;
+        }
+
+        body.light-mode #c-conditionals .bg-amber-900 {
+            background-color: #fffbeb !important; /* พื้นหลังสีอำพันอ่อน */
+            border-left: 4px solid #f59e0b !important; /* เส้นขอบสีส้มเข้ม */
+        }
+
+        body.light-mode #c-conditionals .interactive-card {
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.95) 100%) !important;
+            border: 1px solid #e2e8f0 !important;
+        }
+
+        body.light-mode #c-conditionals .bg-dark-800 {
+            background-color: #f8fafc !important;
+            border: 1px solid #e2e8f0 !important;
+        }
+
+        /* ปรับสีระดับภาพยนตร์ในโหมดสว่าง */
+        body.light-mode #c-conditionals .bg-blue-900 {
+            background-color: #dbeafe !important;
+            border-color: #93c5fd !important;
+        }
+
+        body.light-mode #c-conditionals .bg-amber-900 {
+            background-color: #fffbeb !important;
+            border-color: #fcd34d !important;
+        }
+
+        body.light-mode #c-conditionals .bg-red-900 {
+            background-color: #fee2e2 !important;
+            border-color: #fca5a5 !important;
+        }
+
+        body.light-mode #c-conditionals .text-blue-400 {
+            color: #1d4ed8 !important;
+        }
+
+        body.light-mode #c-conditionals .text-amber-400 {
+            color: #b45309 !important;
+        }
+
+        body.light-mode #c-conditionals .text-red-400 {
+            color: #b91c1c !important;
+        }
+
+        /* ปรับส่วนแสดงผลการตัดสินใจ */
+        body.light-mode #c-conditionals #decision-output .text-green-400 {
+            color: #166534 !important;
+            font-weight: 600;
+        }
+
+        body.light-mode #c-conditionals #decision-output .text-red-400 {
+            color: #b91c1c !important;
+            font-weight: 600;
+        }
+
+        /* ปรับส่วนแสดงโค้ดจำลอง */
+        body.light-mode #c-conditionals #code-simulation {
+            background-color: #f1f5f9 !important;
+            border: 1px solid #cbd5e1 !important;
+            color: #1e293b !important;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            font-family: 'Fira Code', monospace;
+        }
+
+        body.light-mode #c-conditionals .text-amber-300 {
+            color: #b45309 !important; /* สีน้ำตาลเข้มสำหรับหัวข้อ */
+            font-weight: 700; /* ทำให้ตัวหนาขึ้น */
+        }
+
+        body.light-mode #c-conditionals .text-amber-200 {
+            color: #7c2d12 !important; /* สีน้ำตาลเข้มกว่าสำหรับเนื้อหา */
+        }
+
+        body.light-mode #c-conditionals code.bg-amber-900 {
+            background-color: #fef3c7 !important; /* พื้นหลังโค้ดสีอำพันอ่อน */
+            color: #7c2d12 !important; /* ข้อความโค้ดสีเข้ม */
+            border: 1px solid #fbbf24 !important; /* เส้นขอบโค้ด */
+            font-weight: 600; /* ตัวหนา */
+        }
+
+        /* Footer */
+        body.light-mode .border-t {
+            border-color: #cbd5e1 !important;
+        }
+
+        /* ==================== */
+        /* Utility Classes */
+        /* ==================== */
+        body.light-mode .bg-primary-500 { background-color: #1e40af !important; }
+        body.light-mode .bg-accent-500 { background-color: #7c3aed !important; }
+        body.light-mode .bg-green-500 { background-color: #059669 !important; }
+        body.light-mode .bg-yellow-400 { background-color: #f59e0b !important; }
+        body.light-mode .bg-blue-400 { background-color: #60a5fa !important; }
+        body.light-mode .bg-purple-400 { background-color: #a78bfa !important; }
+
+        body.light-mode .text-primary-400 { color: #3b82f6 !important; }
+        body.light-mode .text-accent-400 { color: #8b5cf6 !important; }
+        body.light-mode .text-green-400 { color: #10b981 !important; }
+        body.light-mode .text-amber-400 { color: #f59e0b !important; }
+        body.light-mode .text-red-400 { color: #ef4444 !important; }
+        body.light-mode .text-blue-400 { color: #60a5fa !important; }
+
+        body.light-mode .border-dark-600 { border-color: #cbd5e1 !important; }
+        body.light-mode .border-dark-700 { border-color: #e2e8f0 !important; }
+
+        /* ==================== */
+        /* Special Components */
+        /* ==================== */
+
+        /* Algorithm Example (บทที่ 1) */
+        body.light-mode #intro .interactive-card {
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.95) 100%) !important;
+        }
+
+        body.light-mode #intro .bg-dark-700 {
+            background-color: #e2e8f0 !important;
+        }
+
+        body.light-mode #intro .bg-dark-800 {
+            background-color: #f1f5f9 !important;
+        }
+
+        body.light-mode #intro .bg-primary-500 {
+            background-color: #1e40af !important;
+        }
+
+        /* Type Casting (บทที่ 4) */
+        body.light-mode #c-calculator .interactive-card {
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.95) 100%) !important;
+        }
+
+        /* Decision Making (บทที่ 5) */
+        body.light-mode #c-conditionals .interactive-card {
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.95) 100%) !important;
+        }
+
+        body.light-mode #c-loops .bg-red-900 {
+            background-color: #fee2e2 !important; /* พื้นหลังสีแดงอ่อน */
+            border-left: 4px solid #ef4444 !important; /* เส้นขอบสีแดงเข้ม */
+        }
+
+        body.light-mode #c-loops .text-red-300,
+        body.light-mode #c-loops .text-red-200 {
+            color: #b91c1c !important; /* สีแดงเข้มสำหรับข้อความ */
+        }
+
+        body.light-mode #c-loops .bg-dark-700,
+        body.light-mode #c-loops .bg-dark-800 {
+            background-color: #f8fafc !important; /* สีพื้นหลังอ่อน */
+        }
+
+        body.light-mode #c-loops .bg-red-900 {
+            background-color: #fee2e2 !important;
+            border-left: 4px solid #ef4444 !important;
+        }
+
+        body.light-mode #c-loops .text-red-300,
+        body.light-mode #c-loops .text-red-200 {
+            color: #b91c1c !important;
+        }
+
+        /* ห้องทดลองลูป */
+        body.light-mode #c-loops .interactive-card {
+            background: #ffffff !important;
+            border: 1px solid #e2e8f0 !important;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05) !important;
+        }
+
+        body.light-mode #c-loops .bg-dark-700,
+        body.light-mode #c-loops .bg-dark-800 {
+            background-color: #f8fafc !important;
+        }
+
+        body.light-mode #c-loops .text-slate-300 {
+            color: #334155 !important;
+        }
+
+        body.light-mode #c-loops .loop-type-btn.active {
+            background: linear-gradient(90deg, #1e40af 0%, #7c3aed 100%) !important;
+            color: white !important;
+        }
+
+        body.light-mode #c-loops #break-btn.active {
+            background-color: #ef4444 !important;
+            border-color: #f87171;
+            color: white !important;
+        }
+
+        body.light-mode #c-loops #continue-btn.active {
+            background-color: #3b82f6 !important;
+            border-color: #60a5fa;
+            color: white !important;
+        }
+
+        /* Visualization */
+        body.light-mode #c-loops .bg-blue-800\/30 {
+            background-color: #dbeafe !important;
+        }
+
+        body.light-mode #c-loops .bg-green-800\/30 {
+            background-color: #dcfce7 !important;
+        }
+
+        body.light-mode #c-loops .bg-yellow-800\/50 {
+            background-color: #fef3c7 !important;
+        }
+
+        body.light-mode #c-loops .bg-red-800\/50 {
+            background-color: #fee2e2 !important;
+        }
+
+        /* ตารางเปรียบเทียบ */
+        body.light-mode #c-loops table {
+            border-color: #cbd5e1 !important;
+        }
+
+        body.light-mode #c-loops th,
+        body.light-mode #c-loops td {
+            color: #1e293b !important;
+            border-color: #e2e8f0 !important;
+        }
+
+        body.light-mode #c-loops .text-slate-300 {
+            color: #334155 !important; /* สีเทาเข้ม */
+        }
+
+        body.light-mode #c-loops .loop-type-btn.active {
+            background: linear-gradient(90deg, #1e40af 0%, #7c3aed 100%) !important;
+            color: white !important;
+        }
+
+        body.light-mode #c-loops #break-btn.active {
+            background-color: #ef4444 !important;
+            border-color: #f87171;
+            color: white !important;
+        }
+
+        body.light-mode #c-loops #continue-btn.active {
+            background-color: #3b82f6 !important;
+            border-color: #60a5fa;
+            color: white !important;
+        }
+
+        body.light-mode #c-loops .bg-blue-800\/30 {
+            background-color: #dbeafe !important; /* สีฟ้าอ่อน */
+        }
+
+        body.light-mode #c-loops .bg-green-800\/30 {
+            background-color: #dcfce7 !important; /* สีเขียวอ่อน */
+        }
+
+        body.light-mode #c-loops .bg-yellow-800\/50 {
+            background-color: #fef3c7 !important; /* สีเหลืองอ่อน */
+        }
+
+        body.light-mode #c-loops .bg-red-800\/50 {
+            background-color: #fee2e2 !important; /* สีแดงอ่อน */
+        }
+
+        body.light-mode #c-loops table {
+            border-color: #cbd5e1 !important;
+        }
+
+        body.light-mode #c-loops th,
+        body.light-mode #c-loops td {
+            color: #1e293b !important; /* สีดำเข้ม */
+            border-color: #e2e8f0 !important;
+        }
+
+        /* Loops (บทที่ 6) */
+        body.light-mode #c-loops .interactive-card {
+            background: #ffffff !important; /* พื้นหลังขาว */
+            border: 1px solid #e2e8f0 !important; /* เส้นขอบสีเทาอ่อน */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05) !important;
+        }
+
+        /* ==================== */
+        /* Animation & Effects */
+        /* ==================== */
+
+        /* สีพิเศษสำหรับ Loop Highlight */
+        .text-loop-highlight {
+            color: #cadcff; /* สีฟ้าอ่อนๆ */
+        }
+
+        body.light-mode .text-loop-highlight {
+            color: #3e64d3; /* สีน้ำเงินสำหรับ Light Mode */
+        }
+        body.light-mode .keyword-glossary {
+            border-bottom: 1px dotted #1e40af;
+        }
+
+        body.light-mode .keyword-glossary:hover {
+            border-bottom: 1px solid #3b82f6;
+        }
+
+        body.light-mode .content-card:hover {
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 10px 10px -5px rgba(0, 0, 0, 0.03) !important;
+        }
+
+        /* เพิ่มในส่วน light mode CSS */
+        body.light-mode .bg-dark-800 {
+            background-color: #f1f5f9 !important;
+            border-color: #cbd5e1 !important;
+        }
+
+        body.light-mode .bg-dark-700 {
+            background-color: #e2e8f0 !important;
+        }
+
+        body.light-mode .bg-dark-600 {
+            border-color: #cbd5e1 !important;
+        }
+
+        body.light-mode .text-primary-500 {
+            color: #1e40af;
+        }
+
+        body.light-mode .nav-link {
+            color: #475569;
+            border-left: 4px solid transparent;
+        }
+
+        body.light-mode .nav-link i {
+            color: #1e40af !important; /* สีน้ำเงินเข้ม */
+        }
+
+        body.light-mode .nav-link:hover {
+            background: rgba(226, 232, 240, 0.7);
+            color: #0f172a;
+        }
+
+        body.light-mode .nav-link.active {
+            background: linear-gradient(90deg, rgba(30, 64, 175, 0.1) 0%, rgba(124, 58, 237, 0.1) 100%);
+            color: #1e40af;
+            border-left: 4px solid #1e40af;
+        }
+
+        body.light-mode .section-icon {
+            background: linear-gradient(135deg, #1e40af 0%, #7c3aed 100%);
+        }
+
+        body.light-mode .text-slate-400 {
+            color: #64748b;
+        }
+
+        body.light-mode .text-slate-300,
+        body.light-mode .text-slate-400 {
+            color: #475569 !important; /* สีเข้มขึ้น */
+        }
+
+        body.light-mode .interactive-card {
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.9) 0%, rgba(241, 245, 249, 0.9) 100%);
+            border: 1px solid #cbd5e1;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        body.light-mode .interactive-card h3,
+        body.light-mode .interactive-card h4 {
+            color: #1e293b;
+        }
+
+        /* สไตล์เฉพาะบทที่ 1 ใน light mode */
+        body.light-mode #intro .content-card {
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.95) 100%);
+        }
+
+        body.light-mode #intro .interactive-card {
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.95) 0%, rgba(241, 245, 249, 0.95) 100%);
+            border: 1px solid #e2e8f0;
+        }
+
+        body.light-mode #intro .bg-dark-700 {
+            background-color: #e2e8f0 !important;
+        }
+
+        body.light-mode #intro .bg-dark-800 {
+            background-color: #f1f5f9 !important;
+        }
+
+        body.light-mode #intro .bg-primary-500 {
+            background-color: #1e40af !important;
+        }
+
+        body.light-mode #intro .bg-accent-500 {
+            background-color: #7c3aed !important;
+        }
+
+        body.light-mode #intro .bg-green-500 {
+            background-color: #059669 !important;
+        }
+
+        body.light-mode #intro .text-slate-100 {
+            color: #0f172a;
+        }
+
+        body.light-mode #intro .text-primary-500 {
+            color: #1e40af;
+        }
+
+        body.light-mode #intro .text-accent-500 {
+            color: #7c3aed;
+        }
+
+        body.light-mode #intro .text-amber-400 {
+            color: #d97706;
+        }
+
+        body.light-mode #intro .text-lime-400 {
+            color: #65a30d;
+        }
+
+        body.light-mode #intro .bg-blue-900 {
+            background-color: #dbeafe !important;
+        }
+
+        body.light-mode #intro .border-blue-700 {
+            border-color: #93c5fd !important;
+        }
+
+        body.light-mode #intro .text-blue-300 {
+            color: #1e40af;
+        }
+
+        body.light-mode #intro .bg-amber-900 {
+            background-color: #fef3c7 !important;
+        }
+
+        body.light-mode #intro .border-amber-400 {
+            border-color: #fbbf24 !important;
+        }
+
+        body.light-mode #intro .text-amber-200 {
+            color: #92400e;
+        }
+
+        body.light-mode #intro .bg-dark-900 {
+            background-color: #e2e8f0 !important;
+        }
+
+        body.light-mode #intro .bg-primary-900 {
+            background-color: #dbeafe !important;
+        }
+
+        body.light-mode #intro .border-primary-700 {
+            border-color: #93c5fd !important;
+        }
+
+        body.light-mode #intro .text-primary-200 {
+            color: #1e40af;
+        }
+
+        /* สไตล์สำหรับส่วน Algorithm ในบทที่ 1 */
+        body.light-mode #intro .bg-amber-900 {
+            background-color: #fffbeb !important;
+        }
+
+        body.light-mode #intro .text-amber-300 {
+            color: #b45309;
+        }
+
+        /* เพิ่มสไตล์เฉพาะสำหรับตัวอย่าง Algorithm ในบทที่ 1 */
+        body.light-mode #intro .bg-dark-800 {
+            background-color: #f8fafc !important;
+        }
+
+        body.light-mode #intro .bg-dark-700 {
+            background-color: #f1f5f9 !important;
+        }
+
+        body.light-mode #intro .border-dark-600 {
+            border-color: #e2e8f0 !important;
+        }
+
+        body.light-mode #intro .text-amber-300 {
+            color: #b45309;
+        }
+
+        body.light-mode #intro .bg-amber-900 {
+            background-color: #fffbeb !important;
+        }
+
+        body.light-mode #intro .border-amber-400 {
+            border-color: #fbbf24 !important;
+        }
+
+        body.light-mode #intro .text-green-400 {
+            color: #059669;
+        }
+
+        body.light-mode #intro pre {
+            background-color: #f1f5f9 !important;
+            color: #1e293b !important;
+            border: 1px solid #cbd5e1 !important;
+        }
+
+        body.light-mode #intro .bg-primary-900 {
+            background-color: #dbeafe !important;
+        }
+
+        body.light-mode #intro .border-primary-700 {
+            border-color: #93c5fd !important;
+        }
+
+        body.light-mode #intro .text-primary-200 {
+            color: #1e40af;
+        }
+        
+        #glossary-modal-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 99;
+            display: none;
+            backdrop-filter: blur(5px);
+        }
+        
+        #glossary-modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: linear-gradient(145deg, #1e293b 0%, #0f172a 100%);
+            padding: 2.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            width: 90%;
+            max-width: 500px;
+            z-index: 100;
+            display: none;
+            border: 1px solid rgba(100, 116, 139, 0.3);
+        }
+        
+        .nav-link {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            color: #cbd5e1;
+            transition: all 0.2s ease;
+            margin-bottom: 0.5rem;
+        }
+        
+        .nav-link:hover {
+            background: rgba(30, 41, 59, 0.7);
+            color: #f1f5f9;
+        }
+        
+        .nav-link.active {
+            background: linear-gradient(90deg, rgba(59, 130, 246, 0.3) 0%, rgba(139, 92, 246, 0.3) 100%);
+            color: #f1f5f9;
+            border-left: 4px solid #3b82f6;
+        }
+        
+        .progress-bar {
+            height: 4px;
+            background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%);
+            border-radius: 2px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 50;
+        }
+        
+        .section-icon {
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+        
+        .interactive-card {
+            background: linear-gradient(145deg, rgba(30, 41, 59, 0.9) 0%, rgba(15, 23, 42, 0.9) 100%);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            border: 1px solid rgba(100, 116, 139, 0.2);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%);
+            color: white;
+            font-weight: 600;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            transition: all 0.2s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(59, 130, 246, 0.2);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(59, 130, 246, 0.3);
+        }
+        
+        .input-field {
+            background: rgba(15, 23, 42, 0.5);
+            border: 1px solid #475569;
+            border-radius: 0.5rem;
+            padding: 0.75rem 1rem;
+            color: #e2e8f0;
+            transition: all 0.2s ease;
+        }
+        
+        .input-field:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+        }
+        
+        .floating-nav {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            display: flex;
+            gap: 0.75rem;
+            z-index: 40;
+        }
+        
+        .floating-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.25rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .floating-btn:hover {
+            transform: translateY(-5px) rotate(5deg);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
+        }
+        /* เพิ่มในส่วน style */
+        .loop-control-btn.active {
+            border: 1px solid;
+        }
+
+        #break-btn.active {
+            background-color: #ef4444 !important;
+            border-color: #f87171;
+        }
+
+        #continue-btn.active {
+            background-color: #3b82f6 !important;
+            border-color: #60a5fa;
+        }
+
+        /* เพิ่มในส่วน style */
+        body.light-mode {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e6f7ff 100%);
+            color: #1e293b;
+        }
+
+        body.light-mode h1, 
+        body.light-mode h2, 
+        body.light-mode h3, 
+        body.light-mode h4, 
+        body.light-mode h5, 
+        body.light-mode h6 {
+            color: #0f172a !important;
+        }
+
+        body.light-mode .content-card {
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.9) 0%, rgba(240, 240, 240, 0.9) 100%);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+        }
+
+        body.light-mode .gradient-header {
+            background: linear-gradient(90deg, #1e40af 0%, #7c3aed 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+        }
+
+        body.light-mode .code-block {
+            background: white !important;
+            color: #0f172a !important; /* สีดำเข้ม */
+            border: 1px solid #cbd5e1 !important;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05) !important;
+        }
+
+        body.light-mode .nav-link {
+            color: #475569;
+        }
+
+        body.light-mode .nav-link:hover, 
+        body.light-mode .nav-link.active {
+            color: #0f172a;
+        }
+
+        body.light-mode .interactive-card {
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.9) 0%, rgba(240, 240, 240, 0.9) 100%);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+        }
+
+        body.light-mode .input-field {
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid #cbd5e1;
+            color: #1e293b;
+        }
+
+        body.light-mode .input-field:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+        }
+
+        /* เพิ่มสีสำหรับ light mode ในส่วนอื่นๆ ตามต้องการ */
+
+        .bg-yellow-800\/50 {
+            background-color: rgba(146, 64, 14, 0.5);
+        }
+
+        .bg-red-800\/50 {
+            background-color: rgba(153, 27, 27, 0.5);
+        }
+        
+        @media (max-width: 768px) {
+            .content-card {
+                padding: 1.5rem;
+            }
+            
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .section-icon {
+                margin-bottom: 1rem;
+            }
+        }
