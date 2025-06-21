@@ -168,6 +168,33 @@
         </div>
     </div>
 
+    <!-- Floating navigation -->
+    <div class="floating-nav">
+        <div class="floating-btn" title="กลับสู่ด้านบน">
+            <i class="fas fa-arrow-up"></i>
+        </div>
+        <div class="floating-btn" id="theme-toggle" title="เปลี่ยนธีม">
+            <i class="fas fa-moon" id="theme-icon"></i>
+        </div>
+    </div>
+
+    <!-- Glossary Modal -->
+    <div id="glossary-modal-backdrop"></div>
+    <div id="glossary-modal">
+        <div class="flex justify-between items-center mb-4">
+            <h3 id="glossary-term" class="text-2xl font-bold text-primary-400"></h3>
+            <button id="glossary-close-btn" class="text-slate-400 hover:text-slate-200">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <p id="glossary-def" class="text-slate-300 leading-relaxed"></p>
+        <div class="mt-6 pt-4 border-t border-dark-600">
+            <p class="text-sm text-slate-400">
+                <i class="fas fa-lightbulb mr-2"></i> คลิกคำศัพท์อื่นๆ ในบทเรียนเพื่อเรียนรู้เพิ่มเติม
+            </p>
+        </div>
+    </div>
+
     <script src="../js/main.js" defer></script>
 </body>
 
