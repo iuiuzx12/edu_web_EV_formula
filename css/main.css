@@ -1,1169 +1,783 @@
+:root {
+    /* ========================== */
+    /*      Color Palette         */
+    /* ========================== */
+
+    /* Dark Theme Colors */
+    --dark-bg-start: #0f172a;
+    --dark-bg-end: #1e293b;
+    --dark-text-primary: #e2e8f0;
+    --dark-text-headings: #f1f5f9;
+    --dark-text-secondary: #cbd5e1;
+    --dark-text-muted: #94a3b8;
+
+    --dark-card-bg-start: rgba(30, 41, 59, 0.7);
+    --dark-card-bg-end: rgba(30, 41, 59, 0.9);
+    --dark-card-border: rgba(100, 116, 139, 0.2);
+    --dark-interactive-card-bg-start: rgba(30, 41, 59, 0.9);
+    --dark-interactive-card-bg-end: rgba(15, 23, 42, 0.9);
+
+    --dark-code-bg-start: #0f172a;
+    --dark-code-bg-end: #1e293b;
+    --dark-code-text: #e2e8f0;
+    --dark-code-border: rgba(100, 116, 139, 0.3);
+    --dark-code-keyword: #60a5fa;
+    --dark-code-function: #a78bfa;
+    --dark-code-comment: #94a3b8;
+    --dark-code-string: #a3e635;
+    --dark-code-placeholder: #fbbf24;
+    --dark-highlight-bg: rgba(56, 189, 248, 0.1);
+    --dark-highlight-border: #60a5fa;
+
+    --dark-button-primary-bg-start: #3b82f6;
+    --dark-button-primary-bg-end: #8b5cf6;
+    --dark-button-text: white;
+    --dark-tab-bg: rgba(30, 41, 59, 0.7);
+    --dark-tab-border: #475569;
+    --dark-tab-hover-bg: rgba(51, 65, 85, 0.7);
+    --dark-input-bg: rgba(15, 23, 42, 0.5);
+    --dark-input-border: #475569;
+    --dark-input-focus-border: #3b82f6;
+    --dark-input-focus-shadow: rgba(59, 130, 246, 0.3);
+
+    --dark-nav-link-active-bg-start: rgba(59, 130, 246, 0.3);
+    --dark-nav-link-active-bg-end: rgba(139, 92, 246, 0.3);
+    --dark-nav-link-active-border: #3b82f6;
+    
+    --dark-modal-bg-start: #1e293b;
+    --dark-modal-bg-end: #0f172a;
+
+    /* Light Theme Colors */
+    --light-bg-start: #f0f9ff;
+    --light-bg-end: #e6f7ff;
+    --light-text-primary: #1e293b; /* Base text color for light mode, used by --text-primary in body.light-mode */
+    --light-text-headings: #0f172a;
+    --light-text-primary-actual: #1e293b; /* Specific variable for light mode if needed, though --text-primary is preferred */
+    --light-text-secondary: #334155;
+    --light-text-muted: #475569;
+    --light-text-subtle: #64748b;
+
+    --light-card-bg-start: rgba(255, 255, 255, 0.9);
+    --light-card-bg-end: rgba(240, 240, 240, 0.9);
+    --light-card-border: rgba(148, 163, 184, 0.2);
+    --light-interactive-card-bg-start: rgba(255, 255, 255, 0.9);
+    --light-interactive-card-bg-end: rgba(241, 245, 249, 0.9);
+    --light-interactive-card-border: #cbd5e1;
+
+    --light-code-bg: var(--color-white);
+    --light-code-text: var(--light-text-headings);
+    --light-code-border: var(--light-interactive-card-border);
+    --light-code-keyword: var(--color-blue-darker);
+    --light-code-function: var(--color-purple-darker);
+    --light-code-comment: var(--light-text-subtle);
+    --light-code-string: var(--color-green-darkest);
+    --light-code-placeholder: var(--color-amber-darker);
+    
+    --light-button-primary-bg-start: var(--color-blue-darker);
+    --light-button-primary-bg-end: var(--color-purple-darker);
+    --light-tab-bg: rgba(241, 245, 249, 0.7);
+    --light-tab-border: var(--light-interactive-card-border);
+    --light-input-bg: rgba(255, 255, 255, 0.7);
+    --light-input-border: var(--light-interactive-card-border);
+    --light-input-focus-border: var(--color-blue-primary);
+    --light-input-focus-shadow: rgba(59, 130, 246, 0.2);
+
+    --light-nav-link-color: var(--light-text-muted);
+    --light-nav-link-hover-color: var(--light-text-headings);
+    --light-nav-link-hover-bg: rgba(226, 232, 240, 0.9);
+    --light-nav-link-active-bg-start: rgba(30, 64, 175, 0.1);
+    --light-nav-link-active-bg-end: rgba(124, 58, 237, 0.1);
+    --light-nav-link-active-color: var(--color-blue-darker);
+    --light-nav-link-active-border: var(--color-blue-darker);
+    --light-section-icon-bg-start: var(--color-blue-darker);
+    --light-section-icon-bg-end: #4338ca; 
+    
+    --light-modal-bg-start: #f1f5f9;
+    --light-modal-bg-end: #e2e8f0;
+
+    /* ========================== */
+    /* Theme-Agnostic Color Palette */
+    /* ========================== */
+    /* These colors are used directly or as base for theme-specific variables. */
+    --color-white: white;
+    --color-red-error: #ef4444;
+    --color-red-error-shadow: rgba(239, 68, 68, 0.3);
+    --color-red-darker: #b91c1c;
+    --color-red-light-bg: #fee2e2;
+    --color-red-light-border: #fca5a5;
+    --color-red-active-border: #f87171;
+
+    --color-blue-primary: #3b82f6;
+    --color-blue-darker: #1e40af;
+    --color-blue-darkest: #1d4ed8;
+    --color-blue-light-bg: #dbeafe;
+    --color-blue-light-border: #93c5fd;
+    --color-blue-active-border: #60a5fa;
+    
+    --color-purple-primary: #8b5cf6;
+    --color-purple-darker: #7c3aed;
+    --color-purple-darkest: #6d28d9;
+
+    --color-amber-primary: #f59e0b;
+    --color-amber-darker: #b45309;
+    --color-amber-darkest: #92400e;
+    --color-amber-light-bg: #fffbeb;
+    --color-amber-light-border: #fbbf24;
+    --color-amber-inline-code-bg: #fef3c7;
+    --color-amber-inline-code-text: #7c2d12;
+
+    --color-green-primary: #10b981;
+    --color-green-darker: #059669;
+    --color-green-darkest: #15803d;
+    --color-green-decision: #166534;
+
+    /* ========================== */
+    /*      Fonts & Sizing        */
+    /* ========================== */
+    /* Fonts */
+    --font-primary: 'Sarabun', sans-serif;
+    --font-code: 'Fira Code', 'Courier New', monospace;
+
+    /* Sizes & Spacing */
+    --border-radius-sm: 0.5rem;
+    --border-radius-md: 0.75rem;
+    --border-radius-lg: 1rem;
+    --padding-sm: 0.75rem;
+    --padding-md: 1.5rem;
+    --padding-lg: 2rem;
+    --padding-xl: 2.5rem;
+
+    /* Transitions */
+    --transition-bg-color: background-color 0.3s ease, color 0.3s ease;
+    --transition-transform-shadow: transform 0.3s ease, box-shadow 0.3s ease;
+    --transition-all-fast: all 0.2s ease;
+
+    /* ===================================== */
+    /* Theme-Specific Variables (Dark Default) */
+    /* ===================================== */
+    /* These variables switch values based on the active theme (dark/light). */
+    /* They are defined first for Dark mode, then overridden in body.light-mode. */
+    --bg-gradient: linear-gradient(135deg, var(--dark-bg-start) 0%, var(--dark-bg-end) 100%);
+    --text-primary: var(--dark-text-primary);
+    --text-headings: var(--dark-text-headings);
+    --text-secondary: var(--dark-text-secondary);
+    --text-muted: var(--dark-text-muted);
+    --text-subtle: var(--dark-text-muted);
+
+    --card-bg-gradient: linear-gradient(145deg, var(--dark-card-bg-start) 0%, var(--dark-card-bg-end) 100%);
+    --card-border: var(--dark-card-border);
+    --interactive-card-bg-gradient: linear-gradient(145deg, var(--dark-interactive-card-bg-start) 0%, var(--dark-interactive-card-bg-end) 100%);
+    --interactive-card-border: var(--dark-card-border);
+    
+    --code-bg-gradient: linear-gradient(145deg, var(--dark-code-bg-start) 0%, var(--dark-code-bg-end) 100%);
+    --code-text-color: var(--dark-code-text);
+    --code-border-color: var(--dark-code-border);
+    --code-keyword-color: var(--dark-code-keyword);
+    --code-function-color: var(--dark-code-function);
+    --code-comment-color: var(--dark-code-comment);
+    --code-string-color: var(--dark-code-string);
+    --code-placeholder-color: var(--dark-code-placeholder);
+    --highlight-bg-color: var(--dark-highlight-bg);
+    --highlight-border-color: var(--dark-highlight-border);
+
+    --button-primary-bg-gradient: linear-gradient(90deg, var(--dark-button-primary-bg-start) 0%, var(--dark-button-primary-bg-end) 100%);
+    --button-text-color: var(--dark-button-text);
+    --tab-bg-color: var(--dark-tab-bg);
+    --tab-border-color: var(--dark-tab-border);
+    --tab-hover-bg-color: var(--dark-tab-hover-bg);
+    --input-bg-color: var(--dark-input-bg);
+    --input-border-color: var(--dark-input-border);
+    --input-focus-border-color: var(--dark-input-focus-border);
+    --input-focus-shadow-color: var(--dark-input-focus-shadow);
+
+    --nav-link-color: var(--dark-text-secondary);
+    --nav-link-hover-color: var(--dark-text-headings);
+    --nav-link-hover-bg: var(--dark-tab-bg);
+    --nav-link-active-bg-gradient: linear-gradient(90deg, var(--dark-nav-link-active-bg-start) 0%, var(--dark-nav-link-active-bg-end) 100%);
+    --nav-link-active-color: var(--dark-text-headings);
+    --nav-link-active-border-color: var(--dark-nav-link-active-border);
+    --section-icon-bg-gradient: linear-gradient(135deg, var(--dark-button-primary-bg-start) 0%, var(--dark-button-primary-bg-end) 100%);
+    --progress-bar-bg-gradient: linear-gradient(90deg, var(--dark-button-primary-bg-start) 0%, var(--dark-button-primary-bg-end) 100%);
+    
+    --modal-bg-gradient: linear-gradient(145deg, var(--dark-modal-bg-start) 0%, var(--dark-modal-bg-end) 100%);
+    --modal-border-color: var(--dark-card-border);
+
+    --card-box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.2);
+    --card-hover-box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+    --interactive-card-box-shadow: none; 
+    --button-primary-box-shadow: 0 4px 6px rgba(59, 130, 246, 0.2);
+    --button-primary-hover-box-shadow: 0 6px 8px rgba(59, 130, 246, 0.3);
+    --floating-btn-box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    --floating-btn-hover-box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
+    --code-block-box-shadow: inset 0 1px 3px rgba(0,0,0,0.5);
+}
+
+/* ===================================== */
+/*      Light Mode Variable Overrides    */
+/* ===================================== */
+/* This block redefines the theme-specific variables for when the 'light-mode' 
+   class is applied to the body. These variables are then used throughout the
+   stylesheet to style elements for the light theme. */
+body.light-mode {
+    --bg-gradient: linear-gradient(135deg, var(--light-bg-start) 0%, var(--light-bg-end) 100%);
+    --text-primary: var(--light-text-primary-actual); 
+    --text-headings: var(--light-text-headings);
+    --text-secondary: var(--light-text-secondary);
+    --text-muted: var(--light-text-muted);
+    --text-subtle: var(--light-text-subtle);
+
+    --card-bg-gradient: linear-gradient(145deg, var(--light-card-bg-start) 0%, var(--light-card-bg-end) 100%);
+    --card-border: var(--light-card-border);
+    --interactive-card-bg-gradient: linear-gradient(145deg, var(--light-interactive-card-bg-start) 0%, var(--light-interactive-card-bg-end) 100%);
+    --interactive-card-border: var(--light-interactive-card-border);
+
+    --code-bg-gradient: var(--light-code-bg);
+    --code-text-color: var(--light-code-text);
+    --code-border-color: var(--light-code-border);
+    --code-keyword-color: var(--light-code-keyword);
+    --code-function-color: var(--light-code-function);
+    --code-comment-color: var(--light-code-comment);
+    --code-string-color: var(--light-code-string);
+    --code-placeholder-color: var(--light-code-placeholder);
+    
+    --button-primary-bg-gradient: linear-gradient(90deg, var(--light-button-primary-bg-start) 0%, var(--light-button-primary-bg-end) 100%);
+    --tab-bg-color: var(--light-tab-bg);
+    --tab-border-color: var(--light-tab-border);
+    --input-bg-color: var(--light-input-bg);
+    --input-border-color: var(--light-input-border);
+    --input-focus-border-color: var(--light-input-focus-border);
+    --input-focus-shadow-color: var(--light-input-focus-shadow);
+
+    --nav-link-color: var(--light-nav-link-color);
+    --nav-link-hover-color: var(--light-nav-link-hover-color);
+    --nav-link-hover-bg: var(--light-nav-link-hover-bg);
+    --nav-link-active-bg-gradient: linear-gradient(90deg, var(--light-nav-link-active-bg-start) 0%, var(--light-nav-link-active-bg-end) 100%);
+    --nav-link-active-color: var(--light-nav-link-active-color);
+    --nav-link-active-border-color: var(--light-nav-link-active-border);
+    --section-icon-bg-gradient: linear-gradient(135deg, var(--light-section-icon-bg-start) 0%, var(--light-section-icon-bg-end) 100%);
+    --progress-bar-bg-gradient: linear-gradient(90deg, var(--light-button-primary-bg-start) 0%, var(--light-button-primary-bg-end) 100%);
+    
+    --modal-bg-gradient: linear-gradient(145deg, var(--light-modal-bg-start) 0%, var(--light-modal-bg-end) 100%);
+    --modal-border-color: var(--light-interactive-card-border);
+
+    --card-box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.05);
+    --card-hover-box-shadow: 0 20px 25px -5px rgba(0,0,0,0.08), 0 10px 10px -5px rgba(0,0,0,0.03);
+    --interactive-card-box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    --button-primary-box-shadow: 0 4px 6px rgba(30, 64, 175, 0.1);
+    --button-primary-hover-box-shadow: 0 6px 8px rgba(30, 64, 175, 0.15);
+    --floating-btn-box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    --floating-btn-hover-box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+    --code-block-box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+
+/* ========================== */
+/* Basic Styles & Global Reset */
+/* ========================== */
 * {
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-        
-        body {
-            font-family: 'Sarabun', sans-serif;
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-            color: #e2e8f0;
-            min-height: 100vh;
-        }
-        
-        h1, h2, h3, h4, h5, h6 {
-            font-weight: 600;
-            color: #f1f5f9;
-        }
-        
-        .content-card {
-            background: linear-gradient(145deg, rgba(30, 41, 59, 0.7) 0%, rgba(30, 41, 59, 0.9) 100%);
-            border-radius: 1rem;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(100, 116, 139, 0.2);
-            backdrop-filter: blur(10px);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .content-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
-        }
-        
-        .gradient-header {
-            background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            color: transparent;
-        }
-        
-        .code-block {
-            background: linear-gradient(145deg, #0f172a 0%, #1e293b 100%);
-            color: #e2e8f0;
-            padding: 1.5rem;
-            border-radius: 0.75rem;
-            font-family: 'Fira Code', 'Courier New', monospace;
-            font-size: 0.95em;
-            white-space: pre;
-            word-break: break-all;
-            line-height: 1.6;
-            border: 1px solid rgba(100, 116, 139, 0.3);
-            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
-            overflow-x: auto;
-        }
-        
-        .code-keyword, .keyword-glossary {
-            color: #60a5fa;
-            font-weight: bold;
-        }
-        
-        .keyword-glossary {
-            border-bottom: 1px dotted #60a5fa;
-            cursor: pointer;
-            white-space: normal;
-            transition: all 0.2s ease;
-        }
-        
-        .keyword-glossary:hover {
-            color: #93c5fd;
-            border-bottom: 1px solid #93c5fd;
-        }
-        
-        .code-function {
-            color: #a78bfa;
-        }
-        
-        .code-comment {
-            color: #94a3b8;
-            font-style: italic;
-        }
-        
-        .code-string {
-            color: #a3e635;
-        }
-        
-        .code-placeholder {
-            color: #fbbf24;
-            font-weight: bold;
-        }
-        
-        .highlight-code {
-            background-color: rgba(56, 189, 248, 0.1);
-            display: block;
-            margin: 0 -1.5rem;
-            padding: 0 1.5rem;
-            border-left: 4px solid #60a5fa;
-        }
-        
-        .tab-button {
-            padding: 0.75rem 1.25rem;
-            font-size: 0.875rem;
-            font-weight: 600;
-            color: #cbd5e1;
-            background-color: rgba(30, 41, 59, 0.7);
-            border: 1px solid #475569;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-        
-        .tab-button:not(.active):hover {
-            background-color: rgba(51, 65, 85, 0.7);
-        }
-        
-        .tab-button.active {
-            background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%);
-            color: white;
-            border-color: transparent;
-        }
-        
-        .tab-button:first-child {
-            border-top-left-radius: 0.5rem;
-            border-bottom-left-radius: 0.5rem;
-        }
-        
-        .tab-button:last-child {
-            border-top-right-radius: 0.5rem;
-            border-bottom-right-radius: 0.5rem;
-        }
-        /* เพิ่มในส่วน style */
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-5px); }
-            75% { transform: translateX(5px); }
-        }
-
-        .animate-shake {
-            animation: shake 0.3s ease-in-out;
-        }
-
-        .input-field.border-red-500 {
-            border-color: #ef4444;
-            box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.3);
-        }
-
-        /* ==================== */
-        /* Global Light Styles */
-        /* ==================== */
-        body.light-mode {
-            /* เพิ่มความเข้มของตัวอักษรหลัก */
-            color: #334155;
-        }
-
-        body.light-mode h1, 
-        body.light-mode h2, 
-        body.light-mode h3, 
-        body.light-mode h4, 
-        body.light-mode h5, 
-        body.light-mode h6 {
-            color: #0f172a;
-        }
-
-        body.light-mode .text-slate-400 {
-            color: #64748b;
-        }
-
-
-        body.light-mode .text-slate-200 {
-            color: #334155;
-        }
-
-        /* ==================== */
-        /* Components */
-        /* ==================== */
-
-        /* Progress Bar */
-        body.light-mode .progress-bar {
-            background: linear-gradient(90deg, #1e40af 0%, #7c3aed 100%);
-        }
-
-        /* Content Cards */
-        body.light-mode .content-card {
-            background: linear-gradient(145deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.95) 100%) !important;
-            border: 1px solid #cbd5e1 !important;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.03) !important;
-        }
-
-        /* Headers */
-        body.light-mode .gradient-header {
-            background: linear-gradient(90deg, #1e40af 0%, #7c3aed 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            color: transparent;
-        }
-
-        /* Code Blocks */
-        body.light-mode .code-block {
-            background: linear-gradient(145deg, #f1f5f9 0%, #e2e8f0 100%) !important;
-            color: #1e293b !important;
-            border: 1px solid #cbd5e1 !important;
-        }
-
-        body.light-mode .code-keyword, 
-        body.light-mode .keyword-glossary {
-            color: #1e40af !important; /* สีน้ำเงินเข้ม */
-            font-weight: 600;
-        }
-
-        body.light-mode .keyword-glossary:hover {
-            color: #3b82f6 !important;
-        }
-
-        body.light-mode .code-function {
-            color: #7c3aed !important;
-        }
-
-        body.light-mode .code-comment {
-            color: #64748b !important;
-        }
-
-        body.light-mode .code-string {
-            color: #15803d !important;
-        }
-
-        body.light-mode .code-placeholder {
-            color: #b45309 !important;
-        }
-
-        /* Buttons */
-        body.light-mode .btn-primary {
-            background: linear-gradient(90deg, #1e40af 0%, #7c3aed 100%);
-            color: white;
-            box-shadow: 0 4px 6px rgba(30, 64, 175, 0.1);
-        }
-
-        body.light-mode .btn-primary:hover {
-            box-shadow: 0 6px 8px rgba(30, 64, 175, 0.15);
-        }
-
-        body.light-mode .tab-button {
-            color: #475569;
-            background-color: rgba(241, 245, 249, 0.7);
-            border: 1px solid #cbd5e1;
-        }
-
-        body.light-mode .tab-button.active {
-            background: linear-gradient(90deg, #1e40af 0%, #7c3aed 100%);
-            color: white;
-        }
-
-        /* Forms */
-        body.light-mode .input-field {
-            background: rgba(255, 255, 255, 0.7);
-            border: 1px solid #cbd5e1;
-            color: #1e293b;
-        }
-
-        body.light-mode .input-field:focus {
-            border-color: #3b82f6;
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
-        }
-
-        /* Floating Buttons */
-        body.light-mode .floating-btn {
-            background: linear-gradient(135deg, #1e40af 0%, #7c3aed 100%);
-            color: white;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        /* ==================== */
-        /* Sections */
-        /* ==================== */
-
-        /* Sidebar */
-        body.light-mode .bg-dark-800 {
-            background-color: #f1f5f9 !important;
-            border-color: #cbd5e1 !important;
-        }
-
-        body.light-mode .bg-dark-700 {
-            background-color: #e2e8f0 !important;
-        }
-
-        body.light-mode .bg-dark-600 {
-            border-color: #cbd5e1 !important;
-        }
-
-        body.light-mode .text-primary-500 {
-            color: #1e40af;
-        }
-
-        body.light-mode .nav-link {
-            color: #334155 !important;
-            border-left: 4px solid transparent;
-        }
-
-        body.light-mode .nav-link:hover {
-            color: #0f172a !important; /* สีเข้มสุดเมื่อโฮเวอร์ */
-            background: rgba(226, 232, 240, 0.9) !important;
-        }
-
-        body.light-mode .nav-link.active {
-            background: linear-gradient(90deg, rgba(30, 64, 175, 0.1) 0%, rgba(124, 58, 237, 0.1) 100%) !important;
-            color: #1e40af !important;
-            border-left: 4px solid #1e40af !important;
-        }
-
-        /* Section Icons */
-        /* เปลี่ยนสี section-icon ใน light mode */
-        body.light-mode .section-icon {
-            background: linear-gradient(135deg, #1e40af 0%, #4338ca 100%) !important;
-        }
-
-        /* ======== แก้ไขบทที่ 2 ใน Light Mode ======== */
-
-        /* กล่อง Compiled Language และ Interpreted Language */
-        body.light-mode #c-basics .interactive-card h4 {
-            color: #1e40af !important; /* สีน้ำเงินเข้ม */
-        }
-
-        body.light-mode #c-basics .interactive-card p {
-            color: #334155 !important; /* สีเทาเข้ม */
-        }
-
-        /* กล่องคุณสมบัติ (ภาษาเครื่อง, ความเร็ว, การพกพา) */
-        body.light-mode #c-basics .bg-dark-700 {
-            background-color: #f1f5f9 !important; /* พื้นหลังสว่าง */
-        }
-
-        body.light-mode #c-basics .bg-dark-700 p {
-            color: #0f172a !important; /* สีดำเข้ม */
-        }
-
-        body.light-mode #c-basics .bg-dark-700 .font-semibold {
-            color: #1e40af !important; /* สีน้ำเงินเข้ม */
-        }
-
-        /* กล่องเหตุผลที่ C ทำงานเร็ว */
-        body.light-mode #c-basics .bg-amber-900 {
-            background-color: #fffbeb !important; /* พื้นหลังสีอำพันอ่อน */
-        }
-
-        body.light-mode #c-basics .text-amber-200 {
-            color: #92400e !important; /* สีน้ำตาลเข้ม */
-        }
-
-        /* เพิ่มความเข้มให้หัวข้อในกล่องเหตุผล */
-        body.light-mode #c-basics .font-bold {
-            color: #b45309 !important;
-        }
-
-        /* ข้อความใน code block */
-        body.light-mode #c-basics .text-blue-300 {
-            color: #1d4ed8 !important; /* สีน้ำเงินเข้ม */
-        }
-
-        body.light-mode #c-basics .text-purple-300 {
-            color: #6d28d9 !important; /* สีม่วงเข้ม */
-        }
-
-        /* Interactive Cards */
-        body.light-mode .interactive-card {
-            background: linear-gradient(145deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.95) 100%) !important;
-            border: 1px solid #cbd5e1 !important;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05) !important;
-        }
-
-        /* Glossary Modal */
-        body.light-mode #glossary-modal {
-            background: linear-gradient(145deg, #f1f5f9 0%, #e2e8f0 100%) !important;
-            border: 1px solid #cbd5e1 !important;
-        }
-
-        /* ======== แก้ไขบทที่ 4 ใน Light Mode ======== */
-
-        /* หัวข้อกล่อง */
-        body.light-mode #c-calculator .interactive-card h5 {
-            color: #0f172a !important; /* สีดำเข้ม */
-            font-weight: 600;
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-        }
-
-        /* กล่องการแปลงโดยอัตโนมัติ */
-        body.light-mode #c-calculator .bg-blue-900 {
-            background-color: #dbeafe !important; /* พื้นหลังสีฟ้าอ่อน */
-            border: 1px solid #93c5fd !important; /* เส้นขอบ */
-        }
-
-        body.light-mode #c-calculator .text-blue-300 {
-            color: #1e40af !important; /* สีน้ำเงินเข้ม */
-            font-weight: 600;
-        }
-
-        /* กล่องการแปลงที่อาจสูญเสียข้อมูล */
-        body.light-mode #c-calculator .bg-amber-900 {
-            background-color: #fffbeb !important; /* พื้นหลังสีเหลืองอ่อน */
-            border: 1px solid #fbbf24 !important; /* เส้นขอบ */
-        }
-
-        body.light-mode #c-calculator .text-amber-300 {
-            color: #b45309 !important; /* สีน้ำตาลเข้ม */
-            font-weight: 600;
-        }
-
-        /* รายการในกล่อง */
-        body.light-mode #c-calculator .text-blue-200,
-        body.light-mode #c-calculator .text-amber-200 {
-            color: #334155 !important; /* สีเทาเข้ม */
-            font-weight: 500;
-        }
-
-        /* เพิ่มความเข้มให้รายการ */
-        body.light-mode #c-calculator ul.text-sm li {
-            color: #0f172a !important; /* สีดำเข้ม */
-            margin-bottom: 0.4rem;
-        }
-
-        /* เพิ่มระยะห่างระหว่างรายการ */
-        body.light-mode #c-calculator .space-y-1 li {
-            margin-bottom: 0.5rem;
-        }
-
-        body.light-mode #c-conditionals .bg-amber-900 {
-            background-color: #fffbeb !important; /* พื้นหลังสีอำพันอ่อน */
-            border-left: 4px solid #f59e0b !important; /* เส้นขอบสีส้มเข้ม */
-        }
-
-        body.light-mode #c-conditionals .interactive-card {
-            background: linear-gradient(145deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.95) 100%) !important;
-            border: 1px solid #e2e8f0 !important;
-        }
-
-        body.light-mode #c-conditionals .bg-dark-800 {
-            background-color: #f8fafc !important;
-            border: 1px solid #e2e8f0 !important;
-        }
-
-        /* ปรับสีระดับภาพยนตร์ในโหมดสว่าง */
-        body.light-mode #c-conditionals .bg-blue-900 {
-            background-color: #dbeafe !important;
-            border-color: #93c5fd !important;
-        }
-
-        body.light-mode #c-conditionals .bg-amber-900 {
-            background-color: #fffbeb !important;
-            border-color: #fcd34d !important;
-        }
-
-        body.light-mode #c-conditionals .bg-red-900 {
-            background-color: #fee2e2 !important;
-            border-color: #fca5a5 !important;
-        }
-
-        body.light-mode #c-conditionals .text-blue-400 {
-            color: #1d4ed8 !important;
-        }
-
-        body.light-mode #c-conditionals .text-amber-400 {
-            color: #b45309 !important;
-        }
-
-        body.light-mode #c-conditionals .text-red-400 {
-            color: #b91c1c !important;
-        }
-
-        /* ปรับส่วนแสดงผลการตัดสินใจ */
-        body.light-mode #c-conditionals #decision-output .text-green-400 {
-            color: #166534 !important;
-            font-weight: 600;
-        }
-
-        body.light-mode #c-conditionals #decision-output .text-red-400 {
-            color: #b91c1c !important;
-            font-weight: 600;
-        }
-
-        /* ปรับส่วนแสดงโค้ดจำลอง */
-        body.light-mode #c-conditionals #code-simulation {
-            background-color: #f1f5f9 !important;
-            border: 1px solid #cbd5e1 !important;
-            color: #1e293b !important;
-            padding: 1rem;
-            border-radius: 0.5rem;
-            font-family: 'Fira Code', monospace;
-        }
-
-        body.light-mode #c-conditionals .text-amber-300 {
-            color: #b45309 !important; /* สีน้ำตาลเข้มสำหรับหัวข้อ */
-            font-weight: 700; /* ทำให้ตัวหนาขึ้น */
-        }
-
-        body.light-mode #c-conditionals .text-amber-200 {
-            color: #7c2d12 !important; /* สีน้ำตาลเข้มกว่าสำหรับเนื้อหา */
-        }
-
-        body.light-mode #c-conditionals code.bg-amber-900 {
-            background-color: #fef3c7 !important; /* พื้นหลังโค้ดสีอำพันอ่อน */
-            color: #7c2d12 !important; /* ข้อความโค้ดสีเข้ม */
-            border: 1px solid #fbbf24 !important; /* เส้นขอบโค้ด */
-            font-weight: 600; /* ตัวหนา */
-        }
-
-        /* Footer */
-        body.light-mode .border-t {
-            border-color: #cbd5e1 !important;
-        }
-
-        /* ==================== */
-        /* Utility Classes */
-        /* ==================== */
-        body.light-mode .bg-primary-500 { background-color: #1e40af !important; }
-        body.light-mode .bg-accent-500 { background-color: #7c3aed !important; }
-        body.light-mode .bg-green-500 { background-color: #059669 !important; }
-        body.light-mode .bg-yellow-400 { background-color: #f59e0b !important; }
-        body.light-mode .bg-blue-400 { background-color: #60a5fa !important; }
-        body.light-mode .bg-purple-400 { background-color: #a78bfa !important; }
-
-        body.light-mode .text-primary-400 { color: #3b82f6 !important; }
-        body.light-mode .text-accent-400 { color: #8b5cf6 !important; }
-        body.light-mode .text-green-400 { color: #10b981 !important; }
-        body.light-mode .text-amber-400 { color: #f59e0b !important; }
-        body.light-mode .text-red-400 { color: #ef4444 !important; }
-        body.light-mode .text-blue-400 { color: #60a5fa !important; }
-
-        body.light-mode .border-dark-600 { border-color: #cbd5e1 !important; }
-        body.light-mode .border-dark-700 { border-color: #e2e8f0 !important; }
-
-        /* ==================== */
-        /* Special Components */
-        /* ==================== */
-
-        /* Algorithm Example (บทที่ 1) */
-        body.light-mode #intro .interactive-card {
-            background: linear-gradient(145deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.95) 100%) !important;
-        }
-
-        body.light-mode #intro .bg-dark-700 {
-            background-color: #e2e8f0 !important;
-        }
-
-        body.light-mode #intro .bg-dark-800 {
-            background-color: #f1f5f9 !important;
-        }
-
-        body.light-mode #intro .bg-primary-500 {
-            background-color: #1e40af !important;
-        }
-
-        /* Type Casting (บทที่ 4) */
-        body.light-mode #c-calculator .interactive-card {
-            background: linear-gradient(145deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.95) 100%) !important;
-        }
-
-        /* Decision Making (บทที่ 5) */
-        body.light-mode #c-conditionals .interactive-card {
-            background: linear-gradient(145deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.95) 100%) !important;
-        }
-
-        body.light-mode #c-loops .bg-red-900 {
-            background-color: #fee2e2 !important; /* พื้นหลังสีแดงอ่อน */
-            border-left: 4px solid #ef4444 !important; /* เส้นขอบสีแดงเข้ม */
-        }
-
-        body.light-mode #c-loops .text-red-300,
-        body.light-mode #c-loops .text-red-200 {
-            color: #b91c1c !important; /* สีแดงเข้มสำหรับข้อความ */
-        }
-
-        body.light-mode #c-loops .bg-dark-700,
-        body.light-mode #c-loops .bg-dark-800 {
-            background-color: #f8fafc !important; /* สีพื้นหลังอ่อน */
-        }
-
-        body.light-mode #c-loops .bg-red-900 {
-            background-color: #fee2e2 !important;
-            border-left: 4px solid #ef4444 !important;
-        }
-
-        body.light-mode #c-loops .text-red-300,
-        body.light-mode #c-loops .text-red-200 {
-            color: #b91c1c !important;
-        }
-
-        /* ห้องทดลองลูป */
-        body.light-mode #c-loops .interactive-card {
-            background: #ffffff !important;
-            border: 1px solid #e2e8f0 !important;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05) !important;
-        }
-
-        body.light-mode #c-loops .bg-dark-700,
-        body.light-mode #c-loops .bg-dark-800 {
-            background-color: #f8fafc !important;
-        }
-
-        body.light-mode #c-loops .text-slate-300 {
-            color: #334155 !important;
-        }
-
-        body.light-mode #c-loops .loop-type-btn.active {
-            background: linear-gradient(90deg, #1e40af 0%, #7c3aed 100%) !important;
-            color: white !important;
-        }
-
-        body.light-mode #c-loops #break-btn.active {
-            background-color: #ef4444 !important;
-            border-color: #f87171;
-            color: white !important;
-        }
-
-        body.light-mode #c-loops #continue-btn.active {
-            background-color: #3b82f6 !important;
-            border-color: #60a5fa;
-            color: white !important;
-        }
-
-        /* Visualization */
-        body.light-mode #c-loops .bg-blue-800\/30 {
-            background-color: #dbeafe !important;
-        }
-
-        body.light-mode #c-loops .bg-green-800\/30 {
-            background-color: #dcfce7 !important;
-        }
-
-        body.light-mode #c-loops .bg-yellow-800\/50 {
-            background-color: #fef3c7 !important;
-        }
-
-        body.light-mode #c-loops .bg-red-800\/50 {
-            background-color: #fee2e2 !important;
-        }
-
-        /* ตารางเปรียบเทียบ */
-        body.light-mode #c-loops table {
-            border-color: #cbd5e1 !important;
-        }
-
-        body.light-mode #c-loops th,
-        body.light-mode #c-loops td {
-            color: #1e293b !important;
-            border-color: #e2e8f0 !important;
-        }
-
-        body.light-mode #c-loops .text-slate-300 {
-            color: #334155 !important; /* สีเทาเข้ม */
-        }
-
-        body.light-mode #c-loops .loop-type-btn.active {
-            background: linear-gradient(90deg, #1e40af 0%, #7c3aed 100%) !important;
-            color: white !important;
-        }
-
-        body.light-mode #c-loops #break-btn.active {
-            background-color: #ef4444 !important;
-            border-color: #f87171;
-            color: white !important;
-        }
-
-        body.light-mode #c-loops #continue-btn.active {
-            background-color: #3b82f6 !important;
-            border-color: #60a5fa;
-            color: white !important;
-        }
-
-        body.light-mode #c-loops .bg-blue-800\/30 {
-            background-color: #dbeafe !important; /* สีฟ้าอ่อน */
-        }
-
-        body.light-mode #c-loops .bg-green-800\/30 {
-            background-color: #dcfce7 !important; /* สีเขียวอ่อน */
-        }
-
-        body.light-mode #c-loops .bg-yellow-800\/50 {
-            background-color: #fef3c7 !important; /* สีเหลืองอ่อน */
-        }
-
-        body.light-mode #c-loops .bg-red-800\/50 {
-            background-color: #fee2e2 !important; /* สีแดงอ่อน */
-        }
-
-        body.light-mode #c-loops table {
-            border-color: #cbd5e1 !important;
-        }
-
-        body.light-mode #c-loops th,
-        body.light-mode #c-loops td {
-            color: #1e293b !important; /* สีดำเข้ม */
-            border-color: #e2e8f0 !important;
-        }
-
-        /* Loops (บทที่ 6) */
-        body.light-mode #c-loops .interactive-card {
-            background: #ffffff !important; /* พื้นหลังขาว */
-            border: 1px solid #e2e8f0 !important; /* เส้นขอบสีเทาอ่อน */
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05) !important;
-        }
-
-        /* ==================== */
-        /* Animation & Effects */
-        /* ==================== */
-
-        /* สีพิเศษสำหรับ Loop Highlight */
-        .text-loop-highlight {
-            color: #cadcff; /* สีฟ้าอ่อนๆ */
-        }
-
-        body.light-mode .text-loop-highlight {
-            color: #3e64d3; /* สีน้ำเงินสำหรับ Light Mode */
-        }
-        body.light-mode .keyword-glossary {
-            border-bottom: 1px dotted #1e40af;
-        }
-
-        body.light-mode .keyword-glossary:hover {
-            border-bottom: 1px solid #3b82f6;
-        }
-
-        body.light-mode .content-card:hover {
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 10px 10px -5px rgba(0, 0, 0, 0.03) !important;
-        }
-
-        /* เพิ่มในส่วน light mode CSS */
-        body.light-mode .bg-dark-800 {
-            background-color: #f1f5f9 !important;
-            border-color: #cbd5e1 !important;
-        }
-
-        body.light-mode .bg-dark-700 {
-            background-color: #e2e8f0 !important;
-        }
-
-        body.light-mode .bg-dark-600 {
-            border-color: #cbd5e1 !important;
-        }
-
-        body.light-mode .text-primary-500 {
-            color: #1e40af;
-        }
-
-        body.light-mode .nav-link {
-            color: #475569;
-            border-left: 4px solid transparent;
-        }
-
-        body.light-mode .nav-link i {
-            color: #1e40af !important; /* สีน้ำเงินเข้ม */
-        }
-
-        body.light-mode .nav-link:hover {
-            background: rgba(226, 232, 240, 0.7);
-            color: #0f172a;
-        }
-
-        body.light-mode .nav-link.active {
-            background: linear-gradient(90deg, rgba(30, 64, 175, 0.1) 0%, rgba(124, 58, 237, 0.1) 100%);
-            color: #1e40af;
-            border-left: 4px solid #1e40af;
-        }
-
-        body.light-mode .section-icon {
-            background: linear-gradient(135deg, #1e40af 0%, #7c3aed 100%);
-        }
-
-        body.light-mode .text-slate-400 {
-            color: #64748b;
-        }
-
-        body.light-mode .text-slate-300,
-        body.light-mode .text-slate-400 {
-            color: #475569 !important; /* สีเข้มขึ้น */
-        }
-
-        body.light-mode .interactive-card {
-            background: linear-gradient(145deg, rgba(255, 255, 255, 0.9) 0%, rgba(241, 245, 249, 0.9) 100%);
-            border: 1px solid #cbd5e1;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-        }
-
-        body.light-mode .interactive-card h3,
-        body.light-mode .interactive-card h4 {
-            color: #1e293b;
-        }
-
-        /* สไตล์เฉพาะบทที่ 1 ใน light mode */
-        body.light-mode #intro .content-card {
-            background: linear-gradient(145deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.95) 100%);
-        }
-
-        body.light-mode #intro .interactive-card {
-            background: linear-gradient(145deg, rgba(255, 255, 255, 0.95) 0%, rgba(241, 245, 249, 0.95) 100%);
-            border: 1px solid #e2e8f0;
-        }
-
-        body.light-mode #intro .bg-dark-700 {
-            background-color: #e2e8f0 !important;
-        }
-
-        body.light-mode #intro .bg-dark-800 {
-            background-color: #f1f5f9 !important;
-        }
-
-        body.light-mode #intro .bg-primary-500 {
-            background-color: #1e40af !important;
-        }
-
-        body.light-mode #intro .bg-accent-500 {
-            background-color: #7c3aed !important;
-        }
-
-        body.light-mode #intro .bg-green-500 {
-            background-color: #059669 !important;
-        }
-
-        body.light-mode #intro .text-slate-100 {
-            color: #0f172a;
-        }
-
-        body.light-mode #intro .text-primary-500 {
-            color: #1e40af;
-        }
-
-        body.light-mode #intro .text-accent-500 {
-            color: #7c3aed;
-        }
-
-        body.light-mode #intro .text-amber-400 {
-            color: #d97706;
-        }
-
-        body.light-mode #intro .text-lime-400 {
-            color: #65a30d;
-        }
-
-        body.light-mode #intro .bg-blue-900 {
-            background-color: #dbeafe !important;
-        }
-
-        body.light-mode #intro .border-blue-700 {
-            border-color: #93c5fd !important;
-        }
-
-        body.light-mode #intro .text-blue-300 {
-            color: #1e40af;
-        }
-
-        body.light-mode #intro .bg-amber-900 {
-            background-color: #fef3c7 !important;
-        }
-
-        body.light-mode #intro .border-amber-400 {
-            border-color: #fbbf24 !important;
-        }
-
-        body.light-mode #intro .text-amber-200 {
-            color: #92400e;
-        }
-
-        body.light-mode #intro .bg-dark-900 {
-            background-color: #e2e8f0 !important;
-        }
-
-        body.light-mode #intro .bg-primary-900 {
-            background-color: #dbeafe !important;
-        }
-
-        body.light-mode #intro .border-primary-700 {
-            border-color: #93c5fd !important;
-        }
-
-        body.light-mode #intro .text-primary-200 {
-            color: #1e40af;
-        }
-
-        /* สไตล์สำหรับส่วน Algorithm ในบทที่ 1 */
-        body.light-mode #intro .bg-amber-900 {
-            background-color: #fffbeb !important;
-        }
-
-        body.light-mode #intro .text-amber-300 {
-            color: #b45309;
-        }
-
-        /* เพิ่มสไตล์เฉพาะสำหรับตัวอย่าง Algorithm ในบทที่ 1 */
-        body.light-mode #intro .bg-dark-800 {
-            background-color: #f8fafc !important;
-        }
-
-        body.light-mode #intro .bg-dark-700 {
-            background-color: #f1f5f9 !important;
-        }
-
-        body.light-mode #intro .border-dark-600 {
-            border-color: #e2e8f0 !important;
-        }
-
-        body.light-mode #intro .text-amber-300 {
-            color: #b45309;
-        }
-
-        body.light-mode #intro .bg-amber-900 {
-            background-color: #fffbeb !important;
-        }
-
-        body.light-mode #intro .border-amber-400 {
-            border-color: #fbbf24 !important;
-        }
-
-        body.light-mode #intro .text-green-400 {
-            color: #059669;
-        }
-
-        body.light-mode #intro pre {
-            background-color: #f1f5f9 !important;
-            color: #1e293b !important;
-            border: 1px solid #cbd5e1 !important;
-        }
-
-        body.light-mode #intro .bg-primary-900 {
-            background-color: #dbeafe !important;
-        }
-
-        body.light-mode #intro .border-primary-700 {
-            border-color: #93c5fd !important;
-        }
-
-        body.light-mode #intro .text-primary-200 {
-            color: #1e40af;
-        }
-        
-        #glossary-modal-backdrop {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            z-index: 99;
-            display: none;
-            backdrop-filter: blur(5px);
-        }
-        
-        #glossary-modal {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: linear-gradient(145deg, #1e293b 0%, #0f172a 100%);
-            padding: 2.5rem;
-            border-radius: 1rem;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-            width: 90%;
-            max-width: 500px;
-            z-index: 100;
-            display: none;
-            border: 1px solid rgba(100, 116, 139, 0.3);
-        }
-        
-        .nav-link {
-            display: flex;
-            align-items: center;
-            padding: 0.75rem 1.5rem;
-            border-radius: 0.5rem;
-            color: #cbd5e1;
-            transition: all 0.2s ease;
-            margin-bottom: 0.5rem;
-        }
-        
-        .nav-link:hover {
-            background: rgba(30, 41, 59, 0.7);
-            color: #f1f5f9;
-        }
-        
-        .nav-link.active {
-            background: linear-gradient(90deg, rgba(59, 130, 246, 0.3) 0%, rgba(139, 92, 246, 0.3) 100%);
-            color: #f1f5f9;
-            border-left: 4px solid #3b82f6;
-        }
-        
-        .progress-bar {
-            height: 4px;
-            background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%);
-            border-radius: 2px;
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 50;
-        }
-        
-        .section-icon {
-            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
-            width: 50px;
-            height: 50px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 1rem;
-            flex-shrink: 0;
-        }
-        
-        .interactive-card {
-            background: linear-gradient(145deg, rgba(30, 41, 59, 0.9) 0%, rgba(15, 23, 42, 0.9) 100%);
-            border-radius: 1rem;
-            padding: 1.5rem;
-            border: 1px solid rgba(100, 116, 139, 0.2);
-        }
-        
-        .btn-primary {
-            background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%);
-            color: white;
-            font-weight: 600;
-            padding: 0.75rem 1.5rem;
-            border-radius: 0.5rem;
-            transition: all 0.2s ease;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 4px 6px rgba(59, 130, 246, 0.2);
-        }
-        
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 8px rgba(59, 130, 246, 0.3);
-        }
-        
-        .input-field {
-            background: rgba(15, 23, 42, 0.5);
-            border: 1px solid #475569;
-            border-radius: 0.5rem;
-            padding: 0.75rem 1rem;
-            color: #e2e8f0;
-            transition: all 0.2s ease;
-        }
-        
-        .input-field:focus {
-            outline: none;
-            border-color: #3b82f6;
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
-        }
-        
-        .floating-nav {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            display: flex;
-            gap: 0.75rem;
-            z-index: 40;
-        }
-        
-        .floating-btn {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.25rem;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-        
-        .floating-btn:hover {
-            transform: translateY(-5px) rotate(5deg);
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
-        }
-        /* เพิ่มในส่วน style */
-        .loop-control-btn.active {
-            border: 1px solid;
-        }
-
-        #break-btn.active {
-            background-color: #ef4444 !important;
-            border-color: #f87171;
-        }
-
-        #continue-btn.active {
-            background-color: #3b82f6 !important;
-            border-color: #60a5fa;
-        }
-
-        /* เพิ่มในส่วน style */
-        body.light-mode {
-            background: linear-gradient(135deg, #f0f9ff 0%, #e6f7ff 100%);
-            color: #1e293b;
-        }
-
-        body.light-mode h1, 
-        body.light-mode h2, 
-        body.light-mode h3, 
-        body.light-mode h4, 
-        body.light-mode h5, 
-        body.light-mode h6 {
-            color: #0f172a !important;
-        }
-
-        body.light-mode .content-card {
-            background: linear-gradient(145deg, rgba(255, 255, 255, 0.9) 0%, rgba(240, 240, 240, 0.9) 100%);
-            border: 1px solid rgba(148, 163, 184, 0.2);
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
-        }
-
-        body.light-mode .gradient-header {
-            background: linear-gradient(90deg, #1e40af 0%, #7c3aed 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            color: transparent;
-        }
-
-        body.light-mode .code-block {
-            background: white !important;
-            color: #0f172a !important; /* สีดำเข้ม */
-            border: 1px solid #cbd5e1 !important;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05) !important;
-        }
-
-        body.light-mode .nav-link {
-            color: #475569;
-        }
-
-        body.light-mode .nav-link:hover, 
-        body.light-mode .nav-link.active {
-            color: #0f172a;
-        }
-
-        body.light-mode .interactive-card {
-            background: linear-gradient(145deg, rgba(255, 255, 255, 0.9) 0%, rgba(240, 240, 240, 0.9) 100%);
-            border: 1px solid rgba(148, 163, 184, 0.2);
-        }
-
-        body.light-mode .input-field {
-            background: rgba(255, 255, 255, 0.7);
-            border: 1px solid #cbd5e1;
-            color: #1e293b;
-        }
-
-        body.light-mode .input-field:focus {
-            border-color: #3b82f6;
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
-        }
-
-        /* เพิ่มสีสำหรับ light mode ในส่วนอื่นๆ ตามต้องการ */
-
-        .bg-yellow-800\/50 {
-            background-color: rgba(146, 64, 14, 0.5);
-        }
-
-        .bg-red-800\/50 {
-            background-color: rgba(153, 27, 27, 0.5);
-        }
-        
-        @media (max-width: 768px) {
-            .content-card {
-                padding: 1.5rem;
-            }
-            
-            .section-header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            
-            .section-icon {
-                margin-bottom: 1rem;
-            }
-        }
+    /* Global transition for theme switching (background and text color) */
+    transition: var(--transition-bg-color);
+}
+
+body {
+    background: var(--bg-gradient); /* Themed background gradient */
+    color: var(--text-primary);     /* Themed primary text color */
+    font-family: var(--font-primary); /* Default font for the entire page */
+    min-height: 100vh;              /* Ensure body takes at least full viewport height */
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--text-headings); /* Themed color for all heading levels */
+    font-weight: 600;            /* Semi-bold headings */
+}
+
+/* ========================== */
+/* Layout Components          */
+/* ========================== */
+
+/* General purpose card for displaying content sections */
+.content-card {
+    /* Box Model */
+    border: 1px solid var(--card-border);
+    border-radius: var(--border-radius-lg);
+    margin-bottom: var(--padding-lg); /* Space below the card */
+    padding: var(--padding-lg);
+    /* Visual */
+    backdrop-filter: blur(10px); /* Frosted glass effect behind the card */
+    background: var(--card-bg-gradient);
+    box-shadow: var(--card-box-shadow);
+    /* Animation & Transitions */
+    transition: var(--transition-transform-shadow); /* Smooth hover effect */
+}
+
+.content-card:hover {
+    box-shadow: var(--card-hover-box-shadow);
+    transform: translateY(-5px);
+}
+
+.interactive-card {
+    /* Box Model */
+    border: 1px solid var(--interactive-card-border);
+    border-radius: var(--border-radius-lg);
+    padding: var(--padding-md);
+    /* Visual */
+    background: var(--interactive-card-bg-gradient);
+    box-shadow: var(--interactive-card-box-shadow);
+}
+
+/* ==================== */
+/* Typography & Text    */
+/* ==================== */
+.gradient-header {
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background: var(--button-primary-bg-gradient); 
+    background-clip: text;
+    color: transparent;
+}
+
+.keyword-glossary {
+    border-bottom: 1px dotted var(--code-keyword-color);
+    color: var(--code-keyword-color); 
+    cursor: pointer;
+    font-weight: bold; 
+    transition: var(--transition-all-fast);
+    white-space: normal;
+}
+
+.keyword-glossary:hover {
+    border-bottom: 1px solid #93c5fd; 
+    color: #93c5fd; 
+}
+
+/* ==================== */
+/* Code Display         */
+/* ==================== */
+.code-block {
+    /* Box Model */
+    border: 1px solid var(--code-border-color);
+    border-radius: var(--border-radius-md);
+    overflow-x: auto;
+    padding: var(--padding-md);
+    /* Typography */
+    color: var(--code-text-color);
+    font-family: var(--font-code);
+    font-size: 0.95em;
+    line-height: 1.6;
+    white-space: pre;
+    word-break: break-all;
+    /* Visual */
+    background: var(--code-bg-gradient);
+    box-shadow: var(--code-block-box-shadow);
+}
+
+.code-keyword { 
+    color: var(--code-keyword-color);
+    font-weight: bold;
+}
+
+.code-function {
+    color: var(--code-function-color);
+}
+
+.code-comment {
+    color: var(--code-comment-color);
+    font-style: italic;
+}
+
+.code-string {
+    color: var(--code-string-color);
+}
+
+.code-placeholder {
+    color: var(--code-placeholder-color);
+    font-weight: bold;
+}
+
+.highlight-code {
+    /* Positioning */
+    display: block;
+    /* Box Model */
+    border-left: 4px solid var(--highlight-border-color);
+    margin: 0 calc(-1 * var(--padding-md)); 
+    padding: 0 var(--padding-md);
+    /* Visual */
+    background-color: var(--highlight-bg-color);
+}
+
+/* ==================== */
+/* Buttons & Forms      */
+/* ==================== */
+.tab-button {
+    /* Box Model */
+    border: 1px solid var(--tab-border-color);
+    padding: var(--padding-sm) 1.25rem; 
+    /* Typography */
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    font-weight: 600;
+    /* Visual */
+    background-color: var(--tab-bg-color);
+    /* Animation & Transitions */
+    transition: var(--transition-all-fast);
+    /* Misc */
+    cursor: pointer;
+}
+
+.tab-button:not(.active):hover {
+    background-color: var(--tab-hover-bg-color);
+}
+
+.tab-button.active {
+    border-color: transparent;
+    color: var(--button-text-color);
+    background: var(--button-primary-bg-gradient);
+}
+
+.tab-button:first-child {
+    border-bottom-left-radius: var(--border-radius-sm);
+    border-top-left-radius: var(--border-radius-sm);
+}
+
+.tab-button:last-child {
+    border-bottom-right-radius: var(--border-radius-sm);
+    border-top-right-radius: var(--border-radius-sm);
+}
+
+.btn-primary {
+    /* Box Model */
+    border: none;
+    border-radius: var(--border-radius-sm);
+    padding: var(--padding-sm) var(--padding-md);
+    /* Typography */
+    color: var(--button-text-color);
+    font-weight: 600;
+    /* Visual */
+    background: var(--button-primary-bg-gradient);
+    box-shadow: var(--button-primary-box-shadow);
+    /* Animation & Transitions */
+    transition: var(--transition-all-fast);
+    /* Misc */
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    box-shadow: var(--button-primary-hover-box-shadow);
+    transform: translateY(-2px);
+}
+
+.input-field {
+    /* Box Model */
+    border: 1px solid var(--input-border-color);
+    border-radius: var(--border-radius-sm);
+    padding: var(--padding-sm) 1rem; 
+    /* Typography */
+    color: var(--text-primary);
+    /* Visual */
+    background: var(--input-bg-color);
+    /* Animation & Transitions */
+    transition: var(--transition-all-fast);
+}
+
+.input-field:focus {
+    border-color: var(--input-focus-border-color);
+    box-shadow: 0 0 0 3px var(--input-focus-shadow-color);
+    outline: none;
+}
+
+.input-field.border-red-500 { 
+    border-color: var(--color-red-error);
+    box-shadow: 0 0 0 3px var(--color-red-error-shadow);
+}
+
+.loop-control-btn.active {
+    border: 1px solid; 
+}
+
+#break-btn.active {
+    background-color: var(--color-red-error) !important; 
+    border-color: var(--color-red-active-border);
+    color: var(--color-white) !important; 
+}
+
+#continue-btn.active {
+    background-color: var(--color-blue-primary) !important; 
+    border-color: var(--color-blue-active-border);
+    color: var(--color-white) !important; 
+}
+
+/* ==================== */
+/* Navigation & Modals  */
+/* ==================== */
+.nav-link {
+    /* Positioning */
+    align-items: center;
+    display: flex;
+    /* Box Model */
+    border-radius: var(--border-radius-sm);
+    margin-bottom: var(--padding-sm);
+    padding: var(--padding-sm) var(--padding-md);
+    /* Typography */
+    color: var(--nav-link-color);
+    /* Animation & Transitions */
+    transition: var(--transition-all-fast);
+}
+
+.nav-link:hover {
+    background: var(--nav-link-hover-bg);
+    color: var(--nav-link-hover-color);
+}
+
+.nav-link.active {
+    background: var(--nav-link-active-bg-gradient);
+    border-left: 4px solid var(--nav-link-active-border-color);
+    color: var(--nav-link-active-color);
+}
+body.light-mode .nav-link i { 
+    color: var(--light-button-primary-bg-start) !important; 
+}
+
+
+.progress-bar {
+    /* Positioning */
+    left: 0;
+    position: fixed;
+    top: 0;
+    z-index: 50;
+    /* Box Model */
+    border-radius: 2px;
+    height: 4px;
+    /* Visual */
+    background: var(--progress-bar-bg-gradient);
+}
+
+.section-icon {
+    /* Positioning */
+    align-items: center;
+    display: flex;
+    flex-shrink: 0;
+    justify-content: center;
+    /* Box Model */
+    border-radius: 12px; 
+    height: 50px;
+    margin-right: 1rem;
+    width: 50px;
+    /* Visual */
+    background: var(--section-icon-bg-gradient);
+}
+
+.floating-nav {
+    /* Positioning */
+    bottom: var(--padding-lg);
+    display: flex;
+    position: fixed;
+    right: var(--padding-lg);
+    z-index: 40;
+    /* Box Model */
+    gap: var(--padding-sm);
+}
+
+.floating-btn {
+    /* Positioning */
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    /* Box Model */
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    /* Typography */
+    color: var(--button-text-color);
+    font-size: 1.25rem;
+    /* Visual */
+    background: var(--button-primary-bg-gradient); 
+    box-shadow: var(--floating-btn-box-shadow);
+    /* Animation & Transitions */
+    transition: var(--transition-all-fast);
+    /* Misc */
+    cursor: pointer;
+}
+
+.floating-btn:hover {
+    box-shadow: var(--floating-btn-hover-box-shadow);
+    transform: translateY(-5px) rotate(5deg);
+}
+
+#glossary-modal-backdrop {
+    /* Positioning */
+    left: 0;
+    position: fixed;
+    top: 0;
+    z-index: 99;
+    /* Box Model */
+    height: 100%;
+    width: 100%;
+    /* Visual */
+    backdrop-filter: blur(5px);
+    background-color: rgba(0, 0, 0, 0.7);
+    /* Misc */
+    display: none; 
+}
+
+#glossary-modal {
+    /* Positioning */
+    left: 50%;
+    position: fixed;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 100;
+    /* Box Model */
+    border: 1px solid var(--modal-border-color);
+    border-radius: var(--border-radius-lg);
+    max-width: 500px;
+    padding: var(--padding-xl);
+    width: 90%;
+    /* Visual */
+    background: var(--modal-bg-gradient);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); 
+    /* Misc */
+    display: none;
+}
+
+/* ==================== */
+/* Animations & Effects */
+/* ==================== */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+.animate-shake {
+    animation: shake 0.3s ease-in-out;
+}
+
+.text-loop-highlight {
+    color: #cadcff; 
+}
+body.light-mode .text-loop-highlight {
+    color: #3e64d3;
+}
+
+/* ======================== */
+/* Utility / Helper Classes */
+/* ======================== */
+.bg-yellow-800\/50 { 
+    background-color: rgba(146, 64, 14, 0.5); 
+}
+body.light-mode .bg-yellow-800\/50 { background-color: var(--color-amber-inline-code-bg) !important; }
+
+
+.bg-red-800\/50 {
+    background-color: rgba(153, 27, 27, 0.5); 
+}
+body.light-mode .bg-red-800\/50 { background-color: var(--color-red-light-bg) !important; }
+
+body.light-mode .border-t { border-color: var(--interactive-card-border); }
+
+
+/* ===================================== */
+/* Chapter-Specific Styles             */
+/* ===================================== */
+
+/* ----- Chapter 1: #intro ----- */
+body.light-mode #intro .content-card,
+body.light-mode #intro .interactive-card { 
+    /* background and border should be themed by general .content-card/.interactive-card styles */
+}
+
+body.light-mode #intro .text-slate-100 { color: var(--text-headings); } 
+body.light-mode #intro .text-primary-500 { color: var(--light-button-primary-bg-start); } 
+body.light-mode #intro .text-accent-500 { color: var(--light-button-primary-bg-end); } 
+body.light-mode #intro .text-amber-400 { color: #d97706; } 
+body.light-mode #intro .text-lime-400 { color: #65a30d; }  
+
+body.light-mode #intro .text-blue-300 { color: var(--light-button-primary-bg-start); } 
+body.light-mode #intro .text-amber-200 { color: var(--color-amber-darkest); } 
+body.light-mode #intro .text-amber-300 { color: var(--color-amber-darker); } 
+body.light-mode #intro .text-primary-200 { color: var(--light-button-primary-bg-start); }
+body.light-mode #intro .text-green-400 { color: var(--color-green-darker); } 
+
+body.light-mode #intro pre { 
+    /* Styles inherited from .code-block which uses themed variables */
+}
+
+/* ----- Chapter 2: #c-basics ----- */
+body.light-mode #c-basics .interactive-card h4 { color: var(--light-button-primary-bg-start); }
+body.light-mode #c-basics .interactive-card p { color: var(--text-secondary); }
+
+body.light-mode #c-basics .bg-dark-700 p { color: var(--text-headings); }
+body.light-mode #c-basics .bg-dark-700 .font-semibold { color: var(--light-button-primary-bg-start); }
+
+body.light-mode #c-basics .text-blue-300 { color: var(--color-blue-darkest); }
+body.light-mode #c-basics .text-purple-300 { color: var(--color-purple-darkest); }
+
+/* ----- Chapter 4: #c-calculator ----- */
+body.light-mode #c-calculator .interactive-card h5 {
+    color: var(--text-headings); /* Should be default h5 color via general theming */
+    font-weight: 600; /* If different from base h5 */
+    font-size: 1.1rem; /* If different from base h5 */
+    margin-bottom: var(--border-radius-sm); 
+}
+
+body.light-mode #c-calculator .text-blue-300 { font-weight: 600; } 
+body.light-mode #c-calculator .text-amber-300 { font-weight: 600; }
+
+body.light-mode #c-calculator .text-blue-200,
+body.light-mode #c-calculator .text-amber-200 {
+    font-weight: 500;
+}
+
+/* ----- Chapter 5: #c-conditionals ----- */
+body.light-mode #c-conditionals .text-amber-300 { font-weight: 700; } 
+body.light-mode #c-conditionals code.bg-amber-900 { 
+    background-color: var(--color-amber-inline-code-bg);
+    border: 1px solid var(--color-amber-light-border);
+    color: var(--color-amber-inline-code-text);
+    font-weight: 600;
+}
+
+body.light-mode #c-conditionals .text-blue-400 { color: var(--color-blue-darkest); }
+body.light-mode #c-conditionals .text-amber-400 { color: var(--color-amber-darker); } 
+body.light-mode #c-conditionals .text-red-400 { color: var(--color-red-darker); } 
+
+body.light-mode #c-conditionals #decision-output .text-green-400 { color: var(--color-green-decision); font-weight: 600; }
+body.light-mode #c-conditionals #decision-output .text-red-400 { color: var(--color-red-darker); font-weight: 600; }
+
+/* ----- Chapter 6: #c-loops ----- */
+body.light-mode #c-loops .text-red-300,
+body.light-mode #c-loops .text-red-200 {
+    color: var(--color-red-darker);
+}
+
+/* Visualization backgrounds are specific, keep as is if necessary or make them variables */
+body.light-mode #c-loops .bg-blue-800\/30 { background-color: var(--color-blue-light-bg); } 
+body.light-mode #c-loops .bg-green-800\/30 { background-color: #dcfce7; } 
+body.light-mode #c-loops .bg-yellow-800\/50 { background-color: var(--color-amber-inline-code-bg); } 
+body.light-mode #c-loops .bg-red-800\/50 { background-color: var(--color-red-light-bg); }
+
+/* Table styles */
+body.light-mode #c-loops table { border-color: var(--interactive-card-border); }
+body.light-mode #c-loops th,
+body.light-mode #c-loops td {
+    border-color: var(--light-modal-bg-end); /* Use a variable consistent with other light borders */
+    color: var(--text-primary);
+}
+
+/* ==================== */
+/* Responsive Design    */
+/* ==================== */
+@media (max-width: 768px) {
+    .content-card {
+        padding: var(--padding-md);
+    }
+    
+    .section-header { 
+        align-items: flex-start;
+        flex-direction: column;
+    }
+    
+    .section-icon {
+        margin-bottom: 1rem; 
+    }
+}
