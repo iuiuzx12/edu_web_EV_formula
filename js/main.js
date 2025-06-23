@@ -2,10 +2,43 @@ document.addEventListener('DOMContentLoaded', function () {
     const navPlaceholder = document.getElementById('nav-placeholder');
     if (navPlaceholder) {
         // ตรวจสอบว่าเราอยู่ในหน้า lessons หรือไม่เพื่อกำหนด path ให้ถูกต้อง
-        const navPath = window.location.pathname.includes('/lessons/') ? '../_navigation.html' : '_navigation.html';
+        // const navPath = window.location.pathname.includes('/lessons/') ? '../_navigation.html' : '_navigation.html';
+        const pathSegments = window.location.pathname.split('/').filter(segment => segment !== '' && segment !== 'index.html');
+        let relativePathToRoot = '';
+        // นับจำนวน segments ที่ไม่ใช่ไฟล์ (ลงท้ายด้วย .html) เพื่อกำหนดความลึก
+        // หากอยู่ใน root (เช่น /index.html หรือ /) pathSegments จะว่างเปล่า หรือมีแค่ชื่อไฟล์
+        // หากอยู่ใน /lessons/foo.html, pathSegments จะเป็น ['lessons'] (หลัง filter ชื่อไฟล์)
+        // หากอยู่ใน /lessons/bar/baz.html, pathSegments จะเป็น ['lessons', 'bar']
+
+        // ปรับปรุง: พิจารณา path จาก root ของ site แทนที่จะเป็น root ของ repo
+        // หาก window.location.pathname เป็น "/" หรือ "/index.html", pathSegments จะว่าง
+        // หากเป็น "/lessons/foo.html", pathSegments จะเป็น ["lessons"]
+        // หากเป็น "/lessons/sub/foo.html", pathSegments จะเป็น ["lessons", "sub"]
+        // เราต้องการ '../' สำหรับแต่ละ segment ที่เป็น directory
+
+        // เริ่มต้นด้วยการนับจำนวน directory levels จาก root
+        // pathname เช่น "/lessons/lesson1/part1.html"
+        // split('/') -> ["", "lessons", "lesson1", "part1.html"]
+        // filter(Boolean) -> ["lessons", "lesson1", "part1.html"]
+        const currentPathParts = window.location.pathname.split('/').filter(Boolean);
+        
+        // หากส่วนสุดท้ายเป็นชื่อไฟล์ (มี '.'), ให้เอามันออกเพื่อที่เราจะนับเฉพาะ directories
+        if (currentPathParts.length > 0 && currentPathParts[currentPathParts.length - 1].includes('.')) {
+            currentPathParts.pop();
+        }
+        
+        // จำนวน '../' คือจำนวน directory levels ที่เราอยู่ลึกลงไป
+        relativePathToRoot = '../'.repeat(currentPathParts.length);
+
+        const navPath = relativePathToRoot + '_navigation.html';
 
         fetch(navPath)
-            .then(response => response.text())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status} while fetching ${navPath}`);
+                }
+                return response.text();
+            })
             .then(data => {
                 navPlaceholder.innerHTML = data;
                 initializeNavigation();
@@ -33,28 +66,76 @@ document.addEventListener('DOMContentLoaded', function () {
         const currentPath = window.location.pathname;
 
         toggles.forEach(toggle => {
-            toggle.addEventListener('click', () => {
-                const chapterList = toggle.nextElementSibling;
-                const icon = toggle.querySelector('i');
+            // Ensure the elements exist before adding event listeners
+            const chapterList = toggle.nextElementSibling;
+            const icon = toggle.querySelector('i');
 
-                chapterList.classList.toggle('hidden');
-                icon.classList.toggle('fa-chevron-down');
-                icon.classList.toggle('fa-chevron-up');
-            });
+            if (chapterList && icon) {
+                toggle.addEventListener('click', () => {
+                    chapterList.classList.toggle('hidden');
+                    icon.classList.toggle('fa-chevron-down');
+                    icon.classList.toggle('fa-chevron-up');
+                });
+
+                // Set initial state based on whether the list is hidden or not
+                // This is important if some submenus are meant to be open by default
+                // or if state is restored (e.g. active link opens its parents)
+                if (chapterList.classList.contains('hidden')) {
+                    icon.classList.remove('fa-chevron-up');
+                    icon.classList.add('fa-chevron-down');
+                } else {
+                    icon.classList.remove('fa-chevron-down');
+                    icon.classList.add('fa-chevron-up');
+                }
+            }
         });
 
         links.forEach(link => {
-            // ทำให้ link ของหน้าที่เราอยู่ active
-            if (link.getAttribute('href') === currentPath || link.getAttribute('href') === '..' + currentPath) {
+            const linkHref = link.getAttribute('href');
+            if (!linkHref) return;
+
+            // Resolve the link's href to an absolute path from the site root
+            // This handles cases like href="page.html", href="./page.html", href="../page.html"
+            const absoluteLinkPath = new URL(linkHref, window.location.origin + (linkHref.startsWith('/') ? '' : window.location.pathname)).pathname;
+
+            // Normalize both currentPath and absoluteLinkPath for comparison
+            // 1. Remove trailing slash (if not root "/")
+            // 2. Ensure leading slash
+            const normalize = (path) => {
+                let p = path;
+                if (p !== '/' && p.endsWith('/')) {
+                    p = p.slice(0, -1);
+                }
+                if (!p.startsWith('/')) {
+                    p = '/' + p;
+                }
+                return p;
+            };
+            
+            const normalizedCurrentPath = normalize(currentPath);
+            const normalizedLinkPath = normalize(absoluteLinkPath);
+
+            if (normalizedLinkPath === normalizedCurrentPath) {
                 link.classList.add('active');
                 
-                // เปิด section ของหน้าที่ active อยู่
-                const parentList = link.closest('.nav-chapters-list');
-                if (parentList) {
+                // Open all parent sections of the active link
+                let parentList = link.closest('.nav-chapters-list');
+                while (parentList) {
                     parentList.classList.remove('hidden');
                     const parentToggle = parentList.previousElementSibling;
-                    const parentIcon = parentToggle.querySelector('i');
-                    parentIcon.classList.replace('fa-chevron-down', 'fa-chevron-up');
+                    if (parentToggle && parentToggle.classList.contains('nav-part-toggle')) {
+                        const parentIcon = parentToggle.querySelector('i');
+                        if (parentIcon) {
+                            parentIcon.classList.remove('fa-chevron-down');
+                            parentIcon.classList.add('fa-chevron-up');
+                        }
+                    }
+                    // Move to the next parent list if this one is nested
+                    const grandparent = parentList.parentElement.closest('.nav-chapters-list');
+                    if (grandparent === parentList) { // Should not happen with correct HTML
+                        break; 
+                    }
+                    parentList = grandparent;
                 }
             }
         });
