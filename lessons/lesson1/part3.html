@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="th" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 1.3: อัลกอริทึม - พิมพ์เขียวสู่การแก้ปัญหา</title>
+    <link rel="stylesheet" href="../../css/main.css"> <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="antialiased">
+
+    <div class="container mx-auto max-w-6xl p-4 sm:p-6 lg:p-8 flex flex-col md:flex-row gap-8">
+
+        <aside class="w-full md:w-64 flex-shrink-0">
+            <div id="nav-placeholder" class="sticky top-8">
+                </div>
+        </aside>
+
+        <div class="flex-grow">
+            <main>
+                <section id="intro-algorithm" class="scroll-mt-16">
+                    <div class="content-card">
+                        <div class="flex items-start section-header">
+                            <div class="section-icon" style="background: linear-gradient(135deg, #FF6347 0%, #FF4500 100%);"> <!-- Tomato to OrangeRed -->
+                                <i class="fas fa-brain text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h1 class="text-4xl font-bold text-slate-100 mb-3">Lesson 1.3: อัลกอริทึม - พิมพ์เขียวสู่การแก้ปัญหา</h1>
+                                <p class="text-slate-400 mb-4">ทำความเข้าใจ "สูตรสำเร็จ" ในการสั่งงานคอมพิวเตอร์ และวิธีคิดอย่างเป็นระบบ</p>
+                            </div>
+                        </div>
+
+                        <p class="text-slate-300 mb-4 leading-relaxed">
+                            "อัลกอริทึม" (Algorithm) - ผมเข้าใจดีว่าเมื่อได้ยินคำนี้ครั้งแรก หลายคนอาจจะรู้สึกว่ามันเป็นเรื่องที่ซับซ้อน เป็นคณิตศาสตร์ชั้นสูง หรือเป็นอะไรที่ไกลตัว แต่ในความเป็นจริงแล้ว ผมกล้ารับประกันเลยว่าพวกคุณทุกคนในที่นี้ <strong class="text-amber-400">ใช้อัลกอริทึมอยู่ทุกวัน</strong> โดยที่ไม่รู้ตัว.
+                        </p>
+                        <div class="my-6 text-center">
+                            <img src="https://via.placeholder.com/600x200/1E293B/94A3B8?text=Algorithm+as+a+Recipe+or+Plan" alt="Algorithm Concept" class="mx-auto rounded-lg shadow-md">
+                            <p class="text-xs text-slate-500 mt-2">ภาพแทนอัลกอริทึมเปรียบเหมือนสูตรอาหารหรือแผนการ</p>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 my-6">
+                            <div class="interactive-card text-center">
+                                <i class="fas fa-utensils text-3xl text-primary-400 mb-2"></i>
+                                <p class="text-slate-300 text-sm">ต้มบะหมี่กึ่งสำเร็จรูป? <br><strong class="text-white">ขั้นตอนบนซองนั่นแหละ อัลกอริทึม</strong></p>
+                            </div>
+                            <div class="interactive-card text-center">
+                                <i class="fas fa-route text-3xl text-primary-400 mb-2"></i>
+                                <p class="text-slate-300 text-sm">เดินทางไปมหาวิทยาลัย? <br><strong class="text-white">เส้นทางใน Google Maps ก็มาจากอัลกอริทึม</strong></p>
+                            </div>
+                            <div class="interactive-card text-center">
+                                <i class="fas fa-tools text-3xl text-primary-400 mb-2"></i>
+                                <p class="text-slate-300 text-sm">ประกอบเฟอร์นิเจอร์ IKEA? <br><strong class="text-white">คู่มือการประกอบก็คืออัลกอริทึม</strong></p>
+                            </div>
+                        </div>
+                        <p class="text-slate-300 mb-4 leading-relaxed">
+                            ดังนั้น ขอให้ทุกคนวางความรู้สึกเกรงกลัวที่มีต่อคำนี้ลงก่อนนะครับ เพราะในคาบเรียนนี้ เราจะมา "ปอกเปลือก" แนวคิดของอัลกอริทึมให้เห็นถึงแก่นแท้ของมัน และที่สำคัญที่สุดคือ เราจะมาดูกันว่าแนวคิดนี้มันกลายมาเป็น "สมอง" ที่ขับเคลื่อนรถ Formula SAE EV ของเราได้อย่างไร.
+                        </p>
+
+                        <div class="interactive-card my-6">
+                            <h3 class="text-xl font-semibold text-primary-400 mb-3 flex items-center">
+                                <i class="fas fa-bullseye mr-2"></i> เป้าหมายของคาบเรียนนี้
+                            </h3>
+                            <ul class="list-disc list-inside text-slate-300 space-y-2">
+                                <li>นิยามและเข้าใจ <strong class="text-sky-300">คุณสมบัติของอัลกอริทึมที่ดี</strong></li>
+                                <li>เรียนรู้ <strong class="text-sky-300">กระบวนการในการออกแบบอัลกอริทึม</strong> เพื่อแก้ปัญหา</li>
+                                <li>เห็นตัวอย่างการประยุกต์ใช้ <strong class="text-sky-300">อัลกอริทึมจริงในระบบ VCU และ BMS</strong> ของรถแข่ง</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="what-is-algorithm" class="scroll-mt-16">
+                    <div class="content-card">
+                        <div class="flex items-start section-header">
+                            <div class="section-icon" style="background: linear-gradient(135deg, #FFA07A 0%, #FA8072 100%);"> <!-- LightSalmon to Salmon -->
+                                <i class="fas fa-book-open text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-3xl font-bold text-slate-100 mb-2">ส่วนที่ 1: อัลกอริทึมคืออะไรกันแน่? (What is an Algorithm?)</h2>
+                            </div>
+                        </div>
+                        <p class="text-slate-300 mb-4 leading-relaxed">
+                            ถ้าจะให้คำนิยามอย่างเป็นทางการ:
+                        </p>
+                        <blockquote class="border-l-4 border-primary-500 pl-4 py-2 my-4 bg-dark-800 rounded-r-lg">
+                            <p class="text-slate-200 italic">อัลกอริทึม คือ ชุดของขั้นตอนหรือคำสั่งที่ถูกกำหนดไว้อย่างชัดเจนและมีลำดับ เพื่อใช้ในการแก้ปัญหาหรือทำงานอย่างใดอย่างหนึ่งให้สำเร็จลุล่วง.</p>
+                        </blockquote>
+                        <p class="text-slate-300 mb-4 leading-relaxed">
+                            มันก็คือ "สูตรอาหาร" หรือ "แผนการ" ที่มีรายละเอียดชัดเจนพอที่จะให้ใคร (หรืออะไร) ก็ตามทำตามแล้วได้ผลลัพธ์เหมือนกันทุกครั้ง.
+                        </p>
+                        <p class="text-slate-300 mb-4 leading-relaxed">
+                            แต่อัลกอริทึมที่ดี ไม่ใช่แค่ชุดคำสั่งลอยๆ นะครับ มันจะต้องมีคุณสมบัติที่สำคัญ 5 ประการ ดังนี้:
+                        </p>
+                        <div class="space-y-4">
+                            <div class="p-4 bg-dark-700 rounded-lg border border-dark-600">
+                                <h4 class="font-semibold text-lg text-amber-300"><i class="fas fa-sign-in-alt mr-2"></i>1. มีข้อมูลเข้า (Input)</h4>
+                                <p class="text-slate-300 text-sm">ต้องรู้ว่าอัลกอริทึมต้องการข้อมูลอะไรเพื่อเริ่มต้นทำงาน (อาจจะมี 0 หรือหลายอินพุตก็ได้). <br><em class="text-slate-400">ตัวอย่างบะหมี่: อินพุตคือ บะหมี่ 1 ซอง, น้ำร้อน, ชาม.</em></p>
+                            </div>
+                            <div class="p-4 bg-dark-700 rounded-lg border border-dark-600">
+                                <h4 class="font-semibold text-lg text-amber-300"><i class="fas fa-sign-out-alt mr-2"></i>2. มีข้อมูลออก (Output)</h4>
+                                <p class="text-slate-300 text-sm">ต้องให้ผลลัพธ์อย่างน้อย 1 อย่างออกมาเมื่อทำงานเสร็จ. <br><em class="text-slate-400">ตัวอย่างบะหมี่: เอาต์พุตคือ บะหมี่พร้อมทาน 1 ชาม.</em></p>
+                            </div>
+                            <div class="p-4 bg-dark-700 rounded-lg border border-dark-600">
+                                <h4 class="font-semibold text-lg text-amber-300"><i class="fas fa-flag-checkered mr-2"></i>3. ต้องมีจุดสิ้นสุด (Finiteness)</h4>
+                                <p class="text-slate-300 text-sm">อัลกอริทึมต้องทำงานเสร็จสิ้นในจำนวนขั้นตอนที่จำกัด จะทำงานไปเรื่อยๆ ไม่รู้จบไม่ได้. <br><em class="text-slate-400">ตัวอย่างบะหมี่: ขั้นตอนการต้มมีจุดสิ้นสุด ไม่ได้ต้มไปตลอดกาล.</em></p>
+                            </div>
+                            <div class="p-4 bg-dark-700 rounded-lg border border-dark-600">
+                                <h4 class="font-semibold text-lg text-amber-300"><i class="fas fa-tasks mr-2"></i>4. แต่ละขั้นตอนต้องชัดเจน ไม่กำกวม (Definiteness)</h4>
+                                <p class="text-slate-300 text-sm">ทุกคำสั่งต้องแม่นยำและเข้าใจได้ตรงกัน. <br>
+                                    <span class="text-red-400"><i class="fas fa-times-circle mr-1"></i>คำสั่งที่ไม่ดี: "ใส่เครื่องปรุงตามชอบ"</span><br>
+                                    <span class="text-green-400"><i class="fas fa-check-circle mr-1"></i>คำสั่งที่ดี: "ฉีกซองเครื่องปรุงทั้งหมดใส่ลงในชาม"</span></p>
+                            </div>
+                            <div class="p-4 bg-dark-700 rounded-lg border border-dark-600">
+                                <h4 class="font-semibold text-lg text-amber-300"><i class="fas fa-check-double mr-2"></i>5. แต่ละขั้นตอนต้องสามารถทำได้จริง (Effectiveness)</h4>
+                                <p class="text-slate-300 text-sm">ทุกคำสั่งต้องเป็นสิ่งที่สามารถปฏิบัติได้. <br>
+                                    <span class="text-red-400"><i class="fas fa-times-circle mr-1"></i>คำสั่งที่ไม่ดี: "คนส่วนผสมด้วยความเร็วเหนือเสียง"</span><br>
+                                    <span class="text-green-400"><i class="fas fa-check-circle mr-1"></i>คำสั่งที่ดี: "ใช้ตะเกียบคนส่วนผสมให้เข้ากันเป็นเวลา 30 วินาที"</span></p>
+                            </div>
+                        </div>
+                        <p class="text-slate-300 mt-6 leading-relaxed">
+                            เมื่อเราออกแบบ "แผนการ" ที่มีคุณสมบัติครบทั้ง 5 ข้อนี้ เราก็จะได้ "อัลกอริทึม" ที่ดีและน่าเชื่อถือ ซึ่งเป็นหัวใจสำคัญของการเขียนโปรแกรมคอมพิวเตอร์ครับ.
+                        </p>
+                    </div>
+                </section>
+
+                <section id="designing-algorithm" class="scroll-mt-16">
+                    <div class="content-card">
+                        <div class="flex items-start section-header">
+                            <div class="section-icon" style="background: linear-gradient(135deg, #87CEFA 0%, #00BFFF 100%);"> <!-- LightSkyBlue to DeepSkyBlue -->
+                                <i class="fas fa-pencil-ruler text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-3xl font-bold text-slate-100 mb-2">ส่วนที่ 2: ศิลปะแห่งการแก้ปัญหา - การออกแบบอัลกอริทึม</h2>
+                            </div>
+                        </div>
+                        <p class="text-slate-300 mb-4 leading-relaxed">
+                            พวกเราต้องเข้าใจก่อนว่า <strong class="text-primary-400">การเขียนโปรแกรมไม่ใช่การพิมพ์โค้ด แต่คือการแก้ปัญหา</strong>. ไวยากรณ์ของภาษา C หรือภาษาอื่นๆ เป็นเพียง "เครื่องมือ" ที่เราใช้สื่อสารแผนการแก้ปัญหาของเรากับคอมพิวเตอร์เท่านั้น. "ทักษะ" ที่แท้จริงของโปรแกรมเมอร์และวิศวกรคือ <strong class="text-amber-400">การออกแบบอัลกอริทึม</strong> ครับ.
+                        </p>
+                        <div class="p-4 bg-indigo-800 bg-opacity-30 rounded-lg border border-indigo-700 my-4">
+                            <p class="text-indigo-200"><i class="fas fa-graduation-cap mr-2"></i>นี่คือเหตุผลสำคัญที่ในแผนการสอนของเราได้แนะนำให้เริ่มต้นด้วยหลักสูตรอย่าง CS50x ของฮาร์วาร์ด เพราะหลักสูตรนั้นสอน "ศิลปะแห่งการแก้ปัญหา" และ "การคิดเชิงอัลกอริทึม" นี้ก่อนที่จะลงมือเขียนโค้ดภาษา C เสียอีก.</p>
+                        </div>
+                        <p class="text-slate-300 mb-4 leading-relaxed">
+                            แล้วกระบวนการออกแบบอัลกอริทึมนั้นมีหน้าตาเป็นอย่างไร? โดยทั่วไปแล้วเราจะทำตามขั้นตอนเหล่านี้:
+                        </p>
+                        <ol class="list-decimal list-inside space-y-3 text-slate-300 pl-4">
+                            <li><strong class="text-sky-300">ทำความเข้าใจปัญหา (Understand the Problem):</strong> นี่คือขั้นตอนที่สำคัญที่สุด! เราต้องถามตัวเองว่า:
+                                <ul class="list-disc list-inside pl-6 text-sm text-slate-400 space-y-1 mt-1">
+                                    <li>เป้าหมายคืออะไร?</li>
+                                    <li>อินพุตคืออะไร? (ข้อมูลที่เรามี)</li>
+                                    <li>เอาต์พุตที่ต้องการคืออะไร? (ผลลัพธ์ที่เราอยากได้)</li>
+                                    <li>มีเงื่อนไขหรือข้อจำกัดอะไรบ้าง? (เช่น กฎของ FSAE, ข้อจำกัดของฮาร์ดแวร์)</li>
+                                </ul>
+                            </li>
+                            <li><strong class="text-sky-300">วางแผนการแก้ปัญหา (Devise a Plan):</strong> ลองคิดหาวิธีแก้ปัญหาคร่าวๆ อาจจะวาดรูป หรือเขียนเป็นข้อๆ ยังไม่ต้องกังวลเรื่องโค้ด.</li>
+                            <li><strong class="text-sky-300">ทำให้แผนเป็นทางการ (Formalize the Plan):</strong> เขียนแผนของเราออกมาในรูปแบบที่เป็นโครงสร้างมากขึ้น. เครื่องมือที่นิยมใช้:
+                                <ul class="list-disc list-inside pl-6 text-sm text-slate-400 space-y-1 mt-1">
+                                    <li><strong class="text-purple-300">รหัสเทียม (Pseudocode):</strong> เขียนอธิบายอัลกอริทึมโดยใช้ภาษาที่คล้ายภาษาโปรแกรม.</li>
+                                    <li><strong class="text-purple-300">ผังงาน (Flowchart):</strong> ใช้สัญลักษณ์รูปภาพแสดงขั้นตอนการทำงาน.</li>
+                                </ul>
+                            </li>
+                            <li><strong class="text-sky-300">ลงมือเขียนโค้ด (Implement):</strong> แปลง Pseudocode หรือ Flowchart ให้เป็นโค้ดในภาษาโปรแกรมที่เราเลือก.</li>
+                            <li><strong class="text-sky-300">ทดสอบและปรับปรุง (Test and Refine):</strong> ตรวจสอบว่าโปรแกรมทำงานถูกต้องหรือไม่? จัดการกับกรณีผิดพลาด (Error cases) หรือข้อมูลแปลกๆ (Edge cases) ได้หรือไม่? ถ้าไม่ ก็กลับไปปรับปรุงอัลกอริทึมใหม่.</li>
+                        </ol>
+                        <p class="text-slate-300 mt-4 leading-relaxed">
+                            กระบวนการนี้คือวงจรการทำงานของโปรแกรมเมอร์ทุกคนครับ.
+                        </p>
+                    </div>
+                </section>
+
+                <section id="algorithm-fsae" class="scroll-mt-16">
+                    <div class="content-card">
+                        <div class="flex items-start section-header">
+                            <div class="section-icon" style="background: linear-gradient(135deg, #32CD32 0%, #008000 100%);"> <!-- LimeGreen to Green -->
+                                <i class="fas fa-cogs text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-3xl font-bold text-slate-100 mb-2">ส่วนที่ 3: อัลกอริทึมในสนามแข่ง - สมองของรถ FSAE</h2>
+                            </div>
+                        </div>
+                        <p class="text-slate-300 mb-4 leading-relaxed">
+                            ทีนี้ เรามาดูตัวอย่างที่เป็นรูปธรรมกันดีกว่าครับ ว่า "สมอง" หรือหน่วยควบคุมยานพาหนะ (VCU) ของรถเรานั้นใช้อัลกอริทึมในการตัดสินใจอย่างไร.
+                        </p>
+
+                        <div class="interactive-card my-6">
+                            <h4 class="text-xl font-semibold text-amber-300 mb-3 flex items-center">
+                                <i class="fas fa-shield-alt mr-3"></i> กรณีศึกษาที่ 1: อัลกอริทึมของ Brake System Plausibility Device (BSPD)
+                            </h4>
+                            <p class="text-slate-300 mb-2 leading-relaxed">
+                                ตามกฎของ FSAE รถจะต้องมีระบบความปลอดภัยที่เรียกว่า BSPD ซึ่งมีหน้าที่ตัดกำลังของมอเตอร์ หากตรวจพบว่าคนขับกำลัง "เหยียบเบรก" และ "เหยียบคันเร่ง" พร้อมกันเป็นระยะเวลานานเกินกว่าที่กำหนด. เราจะออกแบบอัลกอริทึมสำหรับฟังก์ชันนี้ได้อย่างไร?
+                            </p>
+                            <div class="my-4 text-center">
+                                <img src="https://via.placeholder.com/500x250/1E293B/94A3B8?text=BSPD+Logic+Flow" alt="BSPD Logic Flow Concept" class="mx-auto rounded-lg shadow-md">
+                                <p class="text-xs text-slate-500 mt-2">ภาพแสดงผังการตัดสินใจของ BSPD</p>
+                            </div>
+                            <div class="bg-dark-800 p-4 rounded-lg border border-dark-600">
+                                <p class="font-semibold text-primary-300 mb-1">1. ทำความเข้าใจปัญหา:</p>
+                                <ul class="list-disc list-inside text-slate-400 text-sm space-y-1 pl-4">
+                                    <li><strong class="text-slate-200">เป้าหมาย:</strong> ตัดกำลังมอเตอร์เพื่อความปลอดภัย.</li>
+                                    <li><strong class="text-slate-200">อินพุต:</strong> ค่าจากเซ็นเซอร์แรงดันเบรก, ค่าจากเซ็นเซอร์ตำแหน่งคันเร่ง.</li>
+                                    <li><strong class="text-slate-200">เอาต์พุต:</strong> สัญญาณ "ตัดกำลังมอเตอร์".</li>
+                                    <li><strong class="text-slate-200">เงื่อนไข:</strong> (เบรก > THRESHOLD) AND (คันเร่ง > THRESHOLD) AND (ต่อเนื่อง > 500ms).</li>
+                                </ul>
+                                <p class="font-semibold text-primary-300 mt-3 mb-1">2. ออกแบบอัลกอริทึมด้วย Pseudocode:</p>
+                                <pre class="code-block text-xs"><code class="language-pseudocode">
+LOOP forever:
+    // อ่านค่าจากอินพุต
+    brake_value = readBrakeSensor()
+    throttle_value = readThrottleSensor()
+
+    // ตรวจสอบเงื่อนไขการเกิด Plausibility Fault
+    IF (brake_value > BRAKE_THRESHOLD) AND (throttle_value > THROTTLE_THRESHOLD):
+        // ถ้าเงื่อนไขเป็นจริง ให้เริ่มจับเวลาหรือนับเวลาต่อ
+        startOrContinue_PlausibilityTimer()
+    ELSE:
+        // ถ้าเงื่อนไขไม่เป็นจริง ให้รีเซ็ตเวลา
+        reset_PlausibilityTimer()
+    END IF
+
+    // ตรวจสอบว่าจับเวลาครบกำหนดหรือยัง
+    IF get_PlausibilityTimerValue() > 500_ms:
+        // ถ้าครบแล้ว ให้ส่งสัญญาณตัดกำลัง
+        set_motor_power(OFF)
+    ELSE:
+        // ถ้ายังไม่ครบ ก็ให้ทำงานตามปกติ
+        set_motor_power(NORMAL)
+    END IF
+
+    // หน่วงเวลาเล็กน้อยก่อนเริ่มรอบใหม่
+    delay(10_ms)
+END LOOP</code></pre>
+                                <p class="text-slate-300 mt-2 text-sm">นี่คือตัวอย่างของอัลกอริทึมที่ชัดเจนและไม่กำกวม ซึ่งเป็นหัวใจของฟังก์ชันความปลอดภัยที่สำคัญในรถของเราครับ.</p>
+                            </div>
+                        </div>
+
+                        <div class="interactive-card my-6">
+                            <h4 class="text-xl font-semibold text-amber-300 mb-3 flex items-center">
+                                <i class="fas fa-tachometer-alt mr-3"></i> กรณีศึกษาที่ 2: อัลกอริทึมหลักของ VCU (Control_Logic_Task)
+                            </h4>
+                            <p class="text-slate-300 mb-2 leading-relaxed">
+                                ในแผนการสอนของเราได้อธิบายสถาปัตยกรรมของ VCU ที่ใช้ RTOS ซึ่งจะแบ่งงานออกเป็น Task ย่อยๆ Task ที่เป็นหัวใจหลักคือ Control_Logic_Task ซึ่งก็คืออัลกอริทึมที่ซับซ้อนขึ้นมาอีกระดับหนึ่ง.
+                            </p>
+                            <div class="bg-dark-800 p-4 rounded-lg border border-dark-600">
+                                <p class="font-semibold text-primary-300 mb-1">1. ทำความเข้าใจปัญหา (อย่างย่อ):</p>
+                                <ul class="list-disc list-inside text-slate-400 text-sm space-y-1 pl-4">
+                                    <li><strong class="text-slate-200">เป้าหมาย:</strong> คำนวณ "แรงบิด" (Torque) ที่เหมาะสมที่สุดเพื่อส่งไปสั่งงานมอเตอร์.</li>
+                                    <li><strong class="text-slate-200">อินพุต:</strong> ข้อมูลจากผู้ขับขี่ (คันเร่ง, เบรก), สถานะรถ (ความเร็ว, อุณหภูมิแบตฯ, สถานะ BMS).</li>
+                                    <li><strong class="text-slate-200">เอาต์พุต:</strong> คำสั่งแรงบิดสุดท้าย.</li>
+                                </ul>
+                                <p class="font-semibold text-primary-300 mt-3 mb-1">2. อัลกอริทึมอย่างย่อ (Conceptual Algorithm):</p>
+                                <pre class="code-block text-xs"><code class="language-pseudocode">
+LOOP forever:
+    // 1. รอรับข้อมูลใหม่จากผู้ขับขี่และจาก CAN bus
+    waitForNewData(from_driver_queue, from_can_queue)
+
+    // 2. ตรวจสอบสถานะความปลอดภัยของระบบโดยรวม
+    IF isSystemSafe(can_data) == FALSE:
+        commanded_torque = 0  // สั่งตัดกำลังทันที
+    ELSE:
+        // 3. ถ้าปลอดภัยดี ให้คำนวณแรงบิดตามปกติ
+        base_torque = calculateTorqueFromThrottle(driver_data.throttle)
+        mode_adjusted_torque = adjustForDrivingMode(base_torque)
+        final_torque = applyTractionControl(mode_adjusted_torque, can_data.wheel_speed)
+        commanded_torque = final_torque
+    END IF
+
+    // 4. ส่งผลลัพธ์สุดท้ายไปยังคิวสำหรับส่งออก
+    sendToQueue(can_transmit_queue, commanded_torque)
+END LOOP</code></pre>
+                                <p class="text-slate-300 mt-2 text-sm">จะเห็นได้ว่าซอฟต์แวร์ที่ซับซ้อนของ VCU นั้น แท้จริงแล้วก็คือการนำอัลกอริทึมย่อยๆ หลายๆ อันมาประกอบร่างกันทำงานอย่างเป็นระบบนั่นเองครับ.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="algorithm-summary" class="scroll-mt-16">
+                    <div class="content-card">
+                         <div class="flex items-start section-header">
+                            <div class="section-icon" style="background: linear-gradient(135deg, #6A5ACD 0%, #483D8B 100%);"> <!-- SlateBlue to DarkSlateBlue -->
+                                <i class="fas fa-lightbulb text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-3xl font-bold text-slate-100 mb-2">บทสรุป: พลังของอัลกอริทึม</h2>
+                            </div>
+                        </div>
+                        <p class="text-slate-300 mb-4 leading-relaxed">
+                            วันนี้เราได้เรียนรู้ว่า "อัลกอริทึม" ไม่ใช่เรื่องน่ากลัว แต่เป็นเพียง "แผนการแก้ปัญหา" ที่มีขั้นตอนชัดเจนและมีลำดับ ซึ่งเป็นสิ่งที่พวกเราใช้กันอยู่แล้วในชีวิตประจำวัน. เราได้เห็นคุณสมบัติ 5 ประการของอัลกอริทึมที่ดี และได้เรียนรู้กระบวนการออกแบบอัลกอริทึมตั้งแต่การทำความเข้าใจปัญหาไปจนถึงการทดสอบ.
+                        </p>
+                        <p class="text-slate-300 mb-4 leading-relaxed">
+                            ที่สำคัญที่สุด เราได้เห็นว่าทุกการตัดสินใจของรถแข่ง EV ของเรา ตั้งแต่ฟังก์ชันความปลอดภัยพื้นฐานอย่าง BSPD ไปจนถึงการคำนวณแรงบิดที่ซับซ้อนของ VCU ล้วนขับเคลื่อนด้วย "อัลกอริทึม" ที่เราในฐานะวิศวกรเป็นผู้ออกแบบขึ้นมาทั้งสิ้น.
+                        </p>
+                        <div class="mt-6 p-6 bg-dark-800 rounded-xl border border-primary-700">
+                            <p class="text-lg text-primary-200 font-medium flex items-start">
+                                <i class="fas fa-map-signs text-yellow-400 mr-3 text-2xl mt-1"></i>
+                                <span>ดังนั้น ผมอยากจะฝากกรอบความคิดใหม่นี้ไว้กับทุกคนครับ: เมื่อไหร่ก็ตามที่คุณเจอปัญหาทางการเขียนโปรแกรม อย่าเพิ่งถามตัวเองว่า "จะเขียนโค้ดอย่างไร?" แต่ให้ถามว่า <strong class="text-white">"อัลกอริทึมในการแก้ปัญหานี้คืออะไร?"</strong> ก่อนเสมอ. <br>เมื่อเรามี "พิมพ์เขียว" หรืออัลกอริทึมที่ชัดเจนและแข็งแรงแล้ว การจะแปลพิมพ์เขียวนั้นให้เป็นโค้ดภาษา C หรือภาษาใดๆ ก็ตาม จะกลายเป็นขั้นตอนที่ตรงไปตรงมาและง่ายขึ้นอย่างมหาศาลครับ.</span>
+                            </p>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <!-- Floating navigation -->
+    <div class="floating-nav">
+        <div class="floating-btn" title="กลับสู่ด้านบน">
+            <i class="fas fa-arrow-up"></i>
+        </div>
+        <div class="floating-btn" id="theme-toggle" title="เปลี่ยนธีม">
+            <i class="fas fa-moon" id="theme-icon"></i>
+        </div>
+    </div>
+
+    <!-- Glossary Modal -->
+    <div id="glossary-modal-backdrop"></div>
+    <div id="glossary-modal">
+        <div class="flex justify-between items-center mb-4">
+            <h3 id="glossary-term" class="text-2xl font-bold text-primary-400"></h3>
+            <button id="glossary-close-btn" class="text-slate-400 hover:text-slate-200">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <p id="glossary-def" class="text-slate-300 leading-relaxed"></p>
+        <div class="mt-6 pt-4 border-t border-dark-600">
+            <p class="text-sm text-slate-400">
+                <i class="fas fa-lightbulb mr-2"></i> คลิกคำศัพท์อื่นๆ ในบทเรียนเพื่อเรียนรู้เพิ่มเติม
+            </p>
+        </div>
+    </div>
+
+    <script src="../../js/main.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="th" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 1.4: กระบวนการแก้ปัญหา - จากโจทย์สู่โซลูชัน</title>
+    <link rel="stylesheet" href="../../css/main.css"> <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="antialiased">
+
+    <div class="container mx-auto max-w-6xl p-4 sm:p-6 lg:p-8 flex flex-col md:flex-row gap-8">
+
+        <aside class="w-full md:w-64 flex-shrink-0">
+            <div id="nav-placeholder" class="sticky top-8">
+                </div>
+        </aside>
+
+        <div class="flex-grow">
+            <main>
+                <section id="intro-problem-solving" class="scroll-mt-16">
+                    <div class="content-card">
+                        <div class="flex items-start section-header">
+                            <div class="section-icon" style="background: linear-gradient(135deg, #9370DB 0%, #8A2BE2 100%);"> <!-- MediumPurple to BlueViolet -->
+                                <i class="fas fa-puzzle-piece text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h1 class="text-4xl font-bold text-slate-100 mb-3">Lesson 1.4: กระบวนการแก้ปัญหา - จากโจทย์สู่โซลูชัน</h1>
+                                <p class="text-slate-400 mb-4">เรียนรู้ทักษะที่สำคัญที่สุดของโปรแกรมเมอร์: การคิดวิเคราะห์และแก้ปัญหาอย่างเป็นระบบ</p>
+                            </div>
+                        </div>
+
+                        <p class="text-slate-300 mb-4 leading-relaxed">
+                            ในคาบที่ผ่านๆ มา เราได้เรียนรู้เกี่ยวกับ "ส่วนประกอบ" ของโลกคอมพิวเตอร์ไปแล้ว ไม่ว่าจะเป็นบิต, ไบต์, ระบบเลขฐาน และเราก็ได้ทำความรู้จักกับ "แผนการ" หรืออัลกอริทึมไปแล้ว แต่วันนี้ เราจะมาพูดถึงทักษะที่เป็น "แก่น" และเป็นตัวตัดสินว่าใครคือโปรแกรมเมอร์หรือวิศวกรที่แท้จริง ทักษะที่ว่านั้นคือ <strong class="text-amber-400">"การแก้ปัญหา" (Problem Solving)</strong> ครับ.
+                        </p>
+                        <div class="interactive-card my-6">
+                            <h3 class="text-xl font-semibold text-primary-400 mb-3 flex items-center">
+                                <i class="far fa-lightbulb mr-2"></i> คุณเคยรู้สึกแบบนี้ไหม?
+                            </h3>
+                            <p class="text-slate-300 leading-relaxed">
+                                คุณเปิดคอมพิวเตอร์ขึ้นมา เปิดโปรแกรมเขียนโค้ด (Text Editor) แล้วก็พบกับหน้ากระดาษว่างๆ พร้อมกับเคอร์เซอร์ที่กระพริบอยู่ตรงหน้า. ในหัวคุณมี "โจทย์" ที่ต้องทำ แต่คุณไม่รู้ว่าจะเริ่มต้นเขียนโค้ดบรรทัดแรกอย่างไรดี. ความรู้สึกว่างเปล่าและงุนงงนี้ ผมเชื่อว่าทุกคนเคยเจอ และมันคือสิ่งที่แยกระหว่างมือสมัครเล่นกับมืออาชีพ.
+                            </p>
+                        </div>
+                        <p class="text-slate-300 mb-4 leading-relaxed">
+                            วันนี้ผมจะมาบอกความลับให้ครับว่า ปัญหาของความรู้สึกนั้นไม่ได้อยู่ที่ว่าคุณ "เขียนโค้ดไม่เป็น" แต่อยู่ที่ว่าคุณยังไม่มี <strong class="text-green-400">"กระบวนการในการแก้ปัญหา" ที่เป็นระบบ</strong>ต่างหาก.
+                        </p>
+                        <p class="text-slate-300 mb-4 leading-relaxed">
+                            การเขียนโค้ดเป็นเพียงขั้นตอนสุดท้ายของการเดินทางอันยาวไกล. ทักษะที่แท้จริงคือความสามารถในการนำทางจาก "จุดเริ่มต้น" ที่เป็นปัญหาอันคลุมเครือ ไปสู่ "จุดหมายปลายทาง" ที่เป็นโซลูชันที่ใช้งานได้จริง. วันนี้เราจะมาสร้าง "แผนที่" หรือ "GPS" สำหรับการเดินทางนั้นกันครับ. เราจะเปลี่ยนนิยามของ "โปรแกรมเมอร์" จาก "คนที่เขียนโค้ด" ไปเป็น <strong class="text-sky-400">"คนที่แก้ปัญหาโดยใช้โค้ดเป็นเครื่องมือ"</strong>.
+                        </p>
+                    </div>
+                </section>
+
+                <section id="problem-solving-framework" class="scroll-mt-16">
+                    <div class="content-card">
+                        <div class="flex items-start section-header">
+                            <div class="section-icon" style="background: linear-gradient(135deg, #20B2AA 0%, #008080 100%);"> <!-- LightSeaGreen to Teal -->
+                                <i class="fas fa-compass text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-3xl font-bold text-slate-100 mb-2">ส่วนที่ 1: กรอบการทำงาน 4 ขั้นตอนเพื่อพิชิตปัญหา (The 4-Step Problem-Solving Framework)</h2>
+                            </div>
+                        </div>
+                        <p class="text-slate-300 mb-4 leading-relaxed">
+                            ไม่ว่าปัญหาจะเล็กเท่ากับการทำให้ไฟ LED ดวงหนึ่งกระพริบ หรือใหญ่เท่ากับการออกแบบระบบควบคุมทั้งคันของรถ Formula SAE EV เราสามารถใช้กรอบการทำงาน 4 ขั้นตอนที่เป็นสากลนี้ได้เสมอ.
+                        </p>
+                        <div class="my-6 text-center">
+                            <img src="https://via.placeholder.com/600x200/1E293B/94A3B8?text=4-Step+Problem-Solving+Framework" alt="Problem Solving Framework" class="mx-auto rounded-lg shadow-md">
+                            <p class="text-xs text-slate-500 mt-2">ภาพรวมกรอบการทำงาน 4 ขั้นตอนในการแก้ปัญหา</p>
+                        </div>
+
+                        <div class="space-y-6">
+                            <div class="p-6 bg-dark-800 rounded-xl border border-dark-700 shadow-lg">
+                                <h3 class="text-2xl font-semibold text-primary-400 mb-3 flex items-center">
+                                    <span class="bg-primary-500 text-white rounded-full w-8 h-8 flex items-center justify-center mr-3 text-lg">1</span>
+                                    ทำความเข้าใจและแยกส่วนปัญหา (Understand & Deconstruct)
+                                </h3>
+                                <p class="text-slate-300 mb-3 leading-relaxed">
+                                    นี่คือขั้นตอนที่สำคัญที่สุด และเป็นขั้นตอนที่คนส่วนใหญ่มักจะมองข้ามเพราะใจร้อนอยากจะเริ่มเขียนโค้ด. Albert Einstein เคยกล่าวไว้ว่า <em class="text-slate-400">"ถ้าข้าพเจ้ามีเวลา 1 ชั่วโมงในการแก้ปัญหา ข้าพเจ้าจะใช้เวลา 55 นาทีในการคิดเกี่ยวกับปัญหา และอีก 5 นาทีในการคิดหาวิธีแก้."</em>
+                                </p>
+                                <p class="text-slate-300 mb-2 leading-relaxed">สิ่งที่คุณต้องทำในขั้นตอนนี้คือ:</p>
+                                <ul class="list-disc list-inside text-slate-300 space-y-2 pl-4 text-sm">
+                                    <li><strong class="text-sky-300">พูดปัญหานั้นซ้ำด้วยคำพูดของตัวเอง:</strong> การที่คุณสามารถอธิบายปัญหาให้คนอื่น (หรือแม้แต่ตัวเอง) ฟังด้วยภาษาที่ง่ายๆ ได้ แสดงว่าคุณเริ่มเข้าใจมันแล้ว.</li>
+                                    <li><strong class="text-sky-300">ระบุ Input, Process, Output (IPO):</strong>
+                                        <ul class="list-circle list-inside pl-6 text-xs text-slate-400">
+                                            <li>Input: เราต้องป้อนข้อมูลอะไรเข้าระบบบ้าง? (เช่น ค่าจากเซ็นเซอร์, คำสั่งจากผู้ใช้)</li>
+                                            <li>Process: เราต้องทำอะไรกับข้อมูลนั้น? (เช่น คำนวณ, เปรียบเทียบ, ตัดสินใจ)</li>
+                                            <li>Output: ผลลัพธ์สุดท้ายที่เราต้องการคืออะไร? (เช่น การแสดงผลบนจอ, การส่งคำสั่งไปที่มอเตอร์)</li>
+                                        </ul>
+                                    </li>
+                                    <li><strong class="text-sky-300">ถามคำถามให้เยอะที่สุด:</strong> อย่าเดา! ถ้ามีอะไรไม่ชัดเจนให้ถาม เช่น "ค่าจากเซ็นเซอร์นี้มีหน่วยเป็นอะไร?", "เงื่อนไขนี้ต้องเกิดขึ้นนานแค่ไหนถึงจะถือว่าผิดปกติ?"</li>
+                                </ul>
+                                <div class="mt-4 p-3 bg-dark-900 rounded-lg border border-dark-600">
+                                    <p class="text-amber-300 text-sm font-semibold"><i class="fas fa-car-side mr-2"></i>ตัวอย่างในโลก FSAE (TSAL Control):</p>
+                                    <p class="text-xs text-slate-400 mt-1"><strong class="text-slate-200">ปัญหา:</strong> เราต้องควบคุมไฟ Tractive System Active Light (TSAL) ให้เป็นไปตามกฎ.</p>
+                                    <p class="text-xs text-slate-400"><strong class="text-slate-200">Deconstruction:</strong> Input (แรงดัน TS), Process (เทียบกับ 60V), Output (สถานะไฟ TSAL).</p>
+                                    <p class="text-xs text-slate-400"><strong class="text-slate-200">คำถาม:</strong> ค่าเกณฑ์คือ 60V DC ใช่หรือไม่? มีเงื่อนไขอื่นอีกไหม?</p>
+                                </div>
+                            </div>
+
+                            <div class="p-6 bg-dark-800 rounded-xl border border-dark-700 shadow-lg">
+                                <h3 class="text-2xl font-semibold text-primary-400 mb-3 flex items-center">
+                                    <span class="bg-primary-500 text-white rounded-full w-8 h-8 flex items-center justify-center mr-3 text-lg">2</span>
+                                    วางแผนและออกแบบ (Plan & Design)
+                                </h3>
+                                <p class="text-slate-300 mb-3 leading-relaxed">
+                                    เมื่อเราเข้าใจปัญหาอย่างทะลุปรุโปร่งแล้ว ก็ถึงเวลาวาง "พิมพ์เขียว" หรือ "อัลกอริทึม" ครับ. ในขั้นตอนนี้ เราจะยังไม่แตะโค้ดเลย แต่เราจะคิดถึง "วิธีทำ".
+                                </p>
+                                <ul class="list-disc list-inside text-slate-300 space-y-2 pl-4 text-sm">
+                                    <li><strong class="text-sky-300">แก้ปัญหาง่ายๆ ก่อน:</strong> ถ้าปัญหามันซับซ้อน ลองคิดถึงเวอร์ชันที่ง่ายที่สุดของปัญหานั้นก่อน แล้วค่อยๆ เพิ่มความซับซ้อนเข้าไป.</li>
+                                    <li><strong class="text-sky-300">แบ่งปัญหาใหญ่ให้เป็นปัญหาย่อย (Top-Down Design):</strong> นี่คือเทคนิคที่ทรงพลังที่สุดเทคนิคหนึ่ง. อย่าพยายามแก้ปัญหาทั้งก้อนในคราวเดียว แต่ให้ซอยมันออกเป็นส่วนเล็กๆ ที่จัดการได้ง่ายกว่า.</li>
+                                    <li><strong class="text-sky-300">เขียนแผนออกมา (Pseudocode / Flowchart):</strong> ใช้เครื่องมือที่เราเรียนไปในคาบที่แล้วเพื่อร่างอัลกอริทึมออกมาให้เห็นภาพชัดเจน.</li>
+                                </ul>
+                                <div class="mt-4 p-3 bg-dark-900 rounded-lg border border-dark-600">
+                                    <p class="text-amber-300 text-sm font-semibold"><i class="fas fa-car-side mr-2"></i>ตัวอย่างในโลก FSAE (ต่อจาก TSAL):</p>
+                                    <p class="text-xs text-slate-400 mt-1"><strong class="text-slate-200">แผน (Pseudocode):</strong></p>
+                                    <pre class="code-block text-xs"><code class="language-pseudocode">
+LOOP forever:
+    voltage = read_TS_voltage_sensor()
+    IF voltage > 60.0:
+        turn_on_TSAL_light()
+    ELSE:
+        turn_off_TSAL_light()
+    END IF
+    delay(100_ms)
+END LOOP</code></pre>
+                                    <p class="text-xs text-slate-400 mt-1">พิมพ์เขียวที่เรียบง่ายนี้คือหัวใจของโซลูชันทั้งหมดครับ.</p>
+                                </div>
+                            </div>
+
+                            <div class="p-6 bg-dark-800 rounded-xl border border-dark-700 shadow-lg">
+                                <h3 class="text-2xl font-semibold text-primary-400 mb-3 flex items-center">
+                                    <span class="bg-primary-500 text-white rounded-full w-8 h-8 flex items-center justify-center mr-3 text-lg">3</span>
+                                    ลงมือทำและแปลเป็นโค้ด (Implement & Translate)
+                                </h3>
+                                <p class="text-slate-300 mb-3 leading-relaxed">
+                                    นี่คือขั้นตอนที่คนส่วนใหญ่เรียกว่า "การเขียนโปรแกรม" แต่ผมอยากให้มองว่ามันเป็นแค่ <strong class="text-purple-300">"การแปล"</strong> ครับ. เรากำลังแปล "พิมพ์เขียว" ที่เราสร้างขึ้นในขั้นตอนที่ 2 ให้เป็นภาษาที่คอมพิวเตอร์เข้าใจ (เช่น ภาษา C).
+                                </p>
+                                <p class="text-slate-300 mb-3 leading-relaxed">
+                                    ถ้าคุณทำขั้นตอนที่ 1 และ 2 มาเป็นอย่างดี ขั้นตอนนี้จะกลายเป็นขั้นตอนที่ตรงไปตรงมาที่สุด!
+                                </p>
+                                <ul class="list-disc list-inside text-slate-300 space-y-2 pl-4 text-sm">
+                                    <li><strong class="text-sky-300">เขียนโค้ดที่สะท้อนแผนของคุณ:</strong> โครงสร้างของโค้ดควรจะล้อไปกับ Pseudocode ของคุณ.</li>
+                                    <li><strong class="text-sky-300">ใช้ชื่อตัวแปรที่สื่อความหมาย:</strong> <code>tractive_system_voltage</code> ดีกว่า <code>v</code> เสมอ.</li>
+                                    <li><strong class="text-sky-300">ใส่คอมเมนต์เพื่ออธิบาย "ทำไม" ไม่ใช่ "อะไร":</strong>
+                                        <ul class="list-circle list-inside pl-6 text-xs text-slate-400">
+                                            <li><span class="text-red-400">ไม่ดี:</span> <code>// add 1 to x</code></li>
+                                            <li><span class="text-green-400">ดี:</span> <code>// Increment counter to track number of CAN message retries</code></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="p-6 bg-dark-800 rounded-xl border border-dark-700 shadow-lg">
+                                <h3 class="text-2xl font-semibold text-primary-400 mb-3 flex items-center">
+                                    <span class="bg-primary-500 text-white rounded-full w-8 h-8 flex items-center justify-center mr-3 text-lg">4</span>
+                                    ทบทวน, ทดสอบ, และปรับปรุง (Review, Test, & Refine)
+                                </h3>
+                                <p class="text-slate-300 mb-3 leading-relaxed">
+                                    ไม่มีโปรแกรมเมอร์คนไหนในโลกที่เขียนโค้ดสมบูรณ์แบบได้ในครั้งแรก. การเขียนโปรแกรมเป็นกระบวนการที่ต้องทำซ้ำๆ (Iterative Process).
+                                </p>
+                                <ul class="list-disc list-inside text-slate-300 space-y-2 pl-4 text-sm">
+                                    <li><strong class="text-sky-300">ทบทวนโค้ด (Code Review):</strong> อ่านโค้ดของตัวเองอีกครั้ง หรือให้เพื่อนในทีมช่วยดู.</li>
+                                    <li><strong class="text-sky-300">ทดสอบ, ทดสอบ, และทดสอบ!:</strong>
+                                        <ul class="list-circle list-inside pl-6 text-xs text-slate-400">
+                                            <li>Happy Path Test: กรณีทำงานปกติ.</li>
+                                            <li>Edge Case Test: กรณีที่เป็น "ขอบ" ของเงื่อนไข (เช่น แรงดัน = 60.0V พอดี).</li>
+                                            <li>Error Case Test: กรณีผิดพลาด (เช่น เซ็นเซอร์เสีย ส่งค่าติดลบ).</li>
+                                        </ul>
+                                    </li>
+                                    <li><strong class="text-sky-300">ดีบัก (Debug):</strong> เมื่อเจอข้อผิดพลาด ให้มองว่ามันคือ "ปริศนา" ที่ท้าทายให้เราสืบสวน.</li>
+                                    <li><strong class="text-sky-300">ปรับปรุง (Refine):</strong> เมื่อเจอจุดที่ต้องแก้ไข ก็กลับไปปรับปรุงแผน (ขั้นตอน 2) แล้วค่อยแก้โค้ด (ขั้นตอน 3) วนไปเรื่อยๆ.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="case-study-vcu" class="scroll-mt-16">
+                    <div class="content-card">
+                        <div class="flex items-start section-header">
+                            <div class="section-icon" style="background: linear-gradient(135deg, #4682B4 0%, #5F9EA0 100%);"> <!-- SteelBlue to CadetBlue -->
+                                <i class="fas fa-tasks text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-3xl font-bold text-slate-100 mb-2">ส่วนที่ 2: กรณีศึกษา - การออกแบบ Task หลักใน VCU (Read_Sensors_Task)</h2>
+                            </div>
+                        </div>
+                        <p class="text-slate-300 mb-4 leading-relaxed">
+                            เรามาลองใช้กรอบการทำงาน 4 ขั้นตอนนี้กับปัญหาที่ซับซ้อนขึ้นกันดีกว่าครับ. จากแผนการสอนของเรา VCU จะมี Task หนึ่งชื่อว่า <code>Read_Sensors_Task</code> ซึ่งมีหน้าที่อ่านค่าจากคันเร่งและเบรก.
+                        </p>
+                        <div class="my-6 text-center">
+                            <img src="https://via.placeholder.com/500x250/1E293B/94A3B8?text=VCU+Sensor+Task+Design" alt="VCU Sensor Task Design Concept" class="mx-auto rounded-lg shadow-md">
+                            <p class="text-xs text-slate-500 mt-2">ภาพแนวคิดการออกแบบ Read_Sensors_Task ใน VCU</p>
+                        </div>
+
+                        <div class="interactive-card my-6">
+                            <h4 class="text-xl font-semibold text-amber-300 mb-3">ขั้นตอนที่ 1: ทำความเข้าใจและแยกส่วนปัญหา</h4>
+                            <ul class="list-disc list-inside text-slate-300 space-y-1 pl-4 text-sm">
+                                <li><strong class="text-slate-100">เป้าหมาย:</strong> อ่านค่าจากเซ็นเซอร์คันเร่ง 2 ตัว (APPS1, APPS2) และเซ็นเซอร์เบรก 1 ตัว, ตรวจสอบความถูกต้อง, ส่งข้อมูลที่ "สะอาด" แล้วไปยัง Task อื่นๆ ผ่านคิว.</li>
+                                <li><strong class="text-slate-100">Input:</strong> ค่า ADC ดิบๆ จากเซ็นเซอร์ 3 ตัว.</li>
+                                <li><strong class="text-slate-100">Output:</strong> เปอร์เซ็นต์คันเร่งสุดท้าย (0-100%) และสถานะการเบรก (เหยียบ/ไม่เหยียบ) ที่ส่งเข้าคิว.</li>
+                                <li><strong class="text-slate-100">เงื่อนไข/กฎ:</strong>
+                                    <ul class="list-circle list-inside pl-5 text-xs text-slate-400">
+                                        <li>FSAE: APPS 2 ตัวแยกกัน, ค่าสอดคล้องกัน (ต่างกันไม่เกิน 10% -> ผิดปกติ, ตัดกำลัง).</li>
+                                        <li>FSAE: ตรวจสอบการเหยียบเบรกและคันเร่งพร้อมกัน (BSPD Logic).</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="interactive-card my-6">
+                            <h4 class="text-xl font-semibold text-amber-300 mb-3">ขั้นตอนที่ 2: วางแผนและออกแบบ (ใช้ Top-Down Design)</h4>
+                            <p class="text-slate-300 mb-2 text-sm">เราจะไม่แก้ปัญหาทั้งหมดในฟังก์ชันเดียว แต่จะซอยมันออกเป็นปัญหาย่อยๆ:</p>
+                            <ul class="list-disc list-inside text-slate-300 space-y-1 pl-4 text-sm">
+                                <li>สร้างฟังก์ชัน <code>ReadRawValues()</code>: อ่านค่า ADC ดิบจากเซ็นเซอร์ 3 ตัว.</li>
+                                <li>สร้างฟังก์ชัน <code>ValidateAcceleratorSensors(apps1_raw, apps2_raw)</code>:
+                                    <ul class="list-circle list-inside pl-5 text-xs text-slate-400">
+                                        <li>แปลงค่าดิบ APPS1, APPS2 เป็นเปอร์เซ็นต์.</li>
+                                        <li>คำนวณผลต่าง.</li>
+                                        <li>IF ผลต่าง > 10% THEN return ERROR ELSE return AVERAGE_PERCENTAGE.</li>
+                                    </ul>
+                                </li>
+                                <li>สร้างฟังก์ชัน <code>CheckBrakeAndThrottle(brake_raw, final_throttle)</code>:
+                                     <ul class="list-circle list-inside pl-5 text-xs text-slate-400">
+                                        <li>นำตรรกะ BSPD มาใส่.</li>
+                                        <li>IF (เบรกถูกเหยียบ) AND (คันเร่งถูกเหยียบ) THEN return FAULT ELSE return OK.</li>
+                                     </ul>
+                                </li>
+                                <li>ออกแบบตรรกะหลักของ Task:
+                                    <ol class="list-decimal list-inside pl-5 text-xs text-slate-400">
+                                        <li>เรียก <code>ReadRawValues()</code>.</li>
+                                        <li>เรียก <code>ValidateAcceleratorSensors()</code>.</li>
+                                        <li>ถ้า ERROR -> คันเร่ง = 0, ส่งสถานะ ERROR.</li>
+                                        <li>ถ้าไม่ ERROR -> เรียก <code>CheckBrakeAndThrottle()</code>.</li>
+                                        <li>ถ้า FAULT -> คันเร่ง = 0, ส่งสถานะ ERROR.</li>
+                                        <li>ถ้าทุกอย่างผ่าน -> นำค่าคันเร่งเฉลี่ยส่งเข้าคิว.</li>
+                                    </ol>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="interactive-card my-6">
+                            <h4 class="text-xl font-semibold text-amber-300 mb-3">ขั้นตอนที่ 3 และ 4 (Implementation & Testing)</h4>
+                            <p class="text-slate-300 text-sm">
+                                จากแผนข้างบน เราจะเห็นว่าเราสามารถสร้างไฟล์ <code>.c</code> ที่มีฟังก์ชันย่อยๆ ที่ทดสอบได้ง่ายและเป็นอิสระต่อกัน. เราสามารถเขียน Unit Test เพื่อทดสอบฟังก์ชัน <code>ValidateAcceleratorSensors()</code> แยกต่างหากได้ โดยการป้อนค่าที่ต่างกันเกิน 10% เข้าไป แล้วดูว่ามันคืนค่า ERROR ออกมาจริงหรือไม่. ซึ่งทำให้การพัฒนาและการบำรุงรักษาทำได้ง่ายกว่าการเขียนทุกอย่างรวมกันในฟังก์ชันเดียวมหาศาล.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="problem-solving-summary" class="scroll-mt-16">
+                    <div class="content-card">
+                         <div class="flex items-start section-header">
+                            <div class="section-icon" style="background: linear-gradient(135deg, #3CB371 0%, #2E8B57 100%);"> <!-- MediumSeaGreen to SeaGreen -->
+                                <i class="fas fa-key text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-3xl font-bold text-slate-100 mb-2">บทสรุป: กุญแจสู่การเป็นนักแก้ปัญหา</h2>
+                            </div>
+                        </div>
+                        <p class="text-slate-300 mb-4 leading-relaxed">
+                            การแก้ปัญหาคือทักษะที่อยู่เหนือภาษาโปรแกรม มันคือกระบวนการทางความคิดที่เป็นระบบและมีวินัย. กรอบการทำงาน 4 ขั้นตอนที่เราเรียนกันในวันนี้ (Understand <i class="fas fa-arrow-right mx-1"></i> Plan <i class="fas fa-arrow-right mx-1"></i> Implement <i class="fas fa-arrow-right mx-1"></i> Review) คือเครื่องมือนำทางที่ทรงพลังที่สุดที่ผมจะมอบให้พวกคุณได้. มันคือสิ่งที่เปลี่ยนความรู้สึกว่า "หน้าจอว่างเปล่า" ให้กลายเป็นความรู้สึก <strong class="text-green-400">"มั่นใจ"</strong> เพราะคุณมีแผนที่อยู่ในมือแล้ว.
+                        </p>
+                        <p class="text-slate-300 mb-4 leading-relaxed">
+                            ผมอยากให้ทุกคนจำไว้ว่า เป้าหมายของเราไม่ใช่การเป็นคนที่พิมพ์โค้ดได้เร็วที่สุด แต่คือการเป็นคนที่สามารถสร้างโซลูชันที่ <strong class="text-sky-300">ถูกต้อง, แข็งแรง, และน่าเชื่อถือที่สุด</strong> ซึ่งทั้งหมดนี้เริ่มต้นจากการมีกระบวนการแก้ปัญหาที่ดี.
+                        </p>
+                        <div class="mt-6 p-6 bg-dark-800 rounded-xl border border-primary-700">
+                            <p class="text-lg text-primary-200 font-medium flex items-start">
+                                <i class="fas fa-pencil-alt text-yellow-400 mr-3 text-2xl mt-1"></i>
+                                <span>ดังนั้น จากนี้ไป เมื่อคุณได้รับโจทย์ใหม่ๆ อย่าเพิ่งรีบเปิดคอมพิวเตอร์ครับ แต่ให้หยิบกระดาษเปล่ากับปากกาขึ้นมา แล้วเริ่มต้นการเดินทาง 4 ขั้นตอนนี้... <strong class="text-white">อย่าเพิ่งเขียนโค้ด แต่จงออกแบบโซลูชัน.</strong> นี่แหละครับคือทักษะที่แท้จริงของโปรแกรมเมอร์และวิศวกรระดับโลก.</span>
+                            </p>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <!-- Floating navigation -->
+    <div class="floating-nav">
+        <div class="floating-btn" title="กลับสู่ด้านบน">
+            <i class="fas fa-arrow-up"></i>
+        </div>
+        <div class="floating-btn" id="theme-toggle" title="เปลี่ยนธีม">
+            <i class="fas fa-moon" id="theme-icon"></i>
+        </div>
+    </div>
+
+    <!-- Glossary Modal -->
+    <div id="glossary-modal-backdrop"></div>
+    <div id="glossary-modal">
+        <div class="flex justify-between items-center mb-4">
+            <h3 id="glossary-term" class="text-2xl font-bold text-primary-400"></h3>
+            <button id="glossary-close-btn" class="text-slate-400 hover:text-slate-200">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <p id="glossary-def" class="text-slate-300 leading-relaxed"></p>
+        <div class="mt-6 pt-4 border-t border-dark-600">
+            <p class="text-sm text-slate-400">
+                <i class="fas fa-lightbulb mr-2"></i> คลิกคำศัพท์อื่นๆ ในบทเรียนเพื่อเรียนรู้เพิ่มเติม
+            </p>
+        </div>
+    </div>
+
+    <script src="../../js/main.js" defer></script>
+</body>
+</html>
