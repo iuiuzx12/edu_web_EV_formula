@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="th" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 1.2: ภาษาของคอมพิวเตอร์ - เลขฐานสองและฐานสิบหก</title>
+    <link rel="stylesheet" href="../../css/main.css"> <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="antialiased">
+
+    <div class="container mx-auto max-w-6xl p-4 sm:p-6 lg:p-8 flex flex-col md:flex-row gap-8">
+
+        <aside class="w-full md:w-64 flex-shrink-0">
+            <div id="nav-placeholder" class="sticky top-8">
+                </div>
+        </aside>
+
+        <div class="flex-grow">
+            <main>
+                <section id="intro-numbers" class="scroll-mt-16">
+                    <div class="content-card">
+                        <div class="flex items-start section-header">
+                            <div class="section-icon" style="background: linear-gradient(135deg, #48D1CC 0%, #20B2AA 100%);"> <!-- MediumTurquoise to LightSeaGreen -->
+                                <i class="fas fa-language text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h1 class="text-4xl font-bold text-slate-100 mb-3">Lesson 1.2: ภาษาของคอมพิวเตอร์ - เลขฐานสองและฐานสิบหก</h1>
+                                <p class="text-slate-400 mb-4">เรียนรู้ระบบตัวเลขที่คอมพิวเตอร์ใช้ และวิธีที่โปรแกรมเมอร์สื่อสารกับเครื่องจักร</p>
+                            </div>
+                        </div>
+
+                        <p class="text-slate-300 mb-4 leading-relaxed">
+                            ก่อนจะเริ่ม ผมอยากถามอะไรหน่อย... ทำไมในชีวิตประจำวันเราถึงใช้ "เลขฐานสิบ" ครับ? ทำไมเราถึงนับ 1, 2, 3... พอถึง 9 แล้วตัวต่อไปต้องขึ้นหลักใหม่เป็น 10? ... คำตอบนั้นง่ายกว่าที่คิดครับ เพราะเรามี <strong class="text-amber-400">สิบนิ้ว</strong> นั่นเอง! ระบบเลขฐานสิบจึงเป็นระบบที่ธรรมชาติที่สุดสำหรับมนุษย์.
+                        </p>
+                        <p class="text-slate-300 mb-4 leading-relaxed">
+                            แต่คอมพิวเตอร์ที่เกิดจากสวิตช์เปิด-ปิด มันไม่ได้มีสิบนิ้วแบบเรา มันมีแค่สองสถานะคือ 0 กับ 1 ดังนั้น "ภาษา" หรือระบบตัวเลขที่มันเข้าใจโดยธรรมชาติจึงแตกต่างจากเราโดยสิ้นเชิง.
+                        </p>
+
+                        <div class="interactive-card my-6">
+                            <h3 class="text-xl font-semibold text-primary-400 mb-3 flex items-center">
+                                <i class="fas fa-globe-americas mr-2"></i> สามภาษาหลักที่เราจะเรียนรู้
+                            </h3>
+                            <ul class="list-disc list-inside text-slate-300 space-y-2">
+                                <li><strong class="text-sky-400">เลขฐานสิบ (Decimal):</strong> ภาษาที่เราใช้กันในชีวิตประจำวัน</li>
+                                <li><strong class="text-lime-400">เลขฐานสอง (Binary):</strong> ภาษาแม่ของคอมพิวเตอร์</li>
+                                <li><strong class="text-purple-400">เลขฐานสิบหก (Hexadecimal):</strong> ภาษาของโปรแกรมเมอร์ ที่เป็นสะพานเชื่อมระหว่างสองโลก</li>
+                            </ul>
+                            <p class="text-slate-400 mt-3 text-sm">
+                                เป้าหมายของคาบเรียนนี้ ไม่ใช่แค่ให้พวกคุณ "คำนวณ" เลขฐานต่างๆ ได้ แต่เพื่อให้ "เข้าใจ" ว่าทำไมเราถึงต้องมีมัน และมันถูกนำไปใช้จริงในการพัฒนารถ Formula SAE EV ของเราอย่างไร.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="decimal-review" class="scroll-mt-16">
+                    <div class="content-card">
+                        <div class="flex items-start section-header">
+                            <div class="section-icon" style="background: linear-gradient(135deg, #ADD8E6 0%, #87CEEB 100%);"> <!-- LightBlue to SkyBlue -->
+                                <i class="fas fa-fingerprint text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-3xl font-bold text-slate-100 mb-2">ส่วนที่ 1: ทบทวนภาษาของเรา - เลขฐานสิบ (Decimal / Base-10)</h2>
+                            </div>
+                        </div>
+                        <p class="text-slate-300 mb-4 leading-relaxed">
+                            ก่อนจะไปเรียนภาษาใหม่ เรามาทบทวนโครงสร้างภาษาแม่ของเราให้เข้าใจอย่างถ่องแท้กันก่อนครับ.
+                        </p>
+                        <p class="text-slate-300 mb-4 leading-relaxed">
+                            เมื่อเราเห็นตัวเลขอย่าง <code class="bg-dark-700 p-1 rounded">357</code> เราไม่ได้อ่านว่า "สาม ห้า เจ็ด" ใช่ไหมครับ? ในใจเราจะรู้ทันทีว่ามันคือ "สามร้อยห้าสิบเจ็ด". ความหมายนี้เกิดขึ้นจากสิ่งที่เรียกว่า <strong class="text-primary-400">"ค่าประจำหลัก" (Place Value)</strong>.
+                        </p>
+                        <div class="my-6 text-center">
+                            <img src="https://via.placeholder.com/600x150/1E293B/94A3B8?text=Decimal+System+(Base-10)" alt="Decimal System Concept" class="mx-auto rounded-lg shadow-md">
+                            <p class="text-xs text-slate-500 mt-2">ภาพแสดงแนวคิดค่าประจำหลักของเลขฐานสิบ</p>
+                        </div>
+                        <div class="bg-dark-800 p-4 rounded-lg border border-dark-600 mb-4">
+                            <ul class="list-none text-slate-300 space-y-1">
+                                <li><code class="text-lime-400">7</code> อยู่ในหลักหน่วย (10<sup>0</sup>) มีค่าเท่ากับ 7 × 1 = <strong class="text-white">7</strong></li>
+                                <li><code class="text-lime-400">5</code> อยู่ในหลักสิบ (10<sup>1</sup>) มีค่าเท่ากับ 5 × 10 = <strong class="text-white">50</strong></li>
+                                <li><code class="text-lime-400">3</code> อยู่ในหลักร้อย (10<sup>2</sup>) มีค่าเท่ากับ 3 × 100 = <strong class="text-white">300</strong></li>
+                            </ul>
+                            <p class="text-slate-300 mt-3">ดังนั้น ค่าของ <code class="text-lime-400">357</code> จริงๆ แล้วก็คือผลรวมของ (3 × 10<sup>2</sup>) + (5 × 10<sup>1</sup>) + (7 × 10<sup>0</sup>).</p>
+                        </div>
+                        <div class="mt-6 p-4 bg-primary-900 bg-opacity-20 rounded-lg border border-primary-700">
+                            <p class="text-primary-200 flex items-start">
+                                <i class="fas fa-key mr-2 mt-1"></i>
+                                <span>นี่คือหัวใจของระบบเลขฐานครับ: <strong class="text-white">ค่าของตัวเลขทั้งหมด คือผลรวมของ (ตัวเลขในหลักนั้น × ค่าประจำหลักนั้น)</strong>. ขอให้ทุกคนจำ "แม่แบบ" หรือ "Template" นี้ไว้ให้ดีนะครับ เพราะเราจะใช้มันกับทุกๆ ฐานที่เราจะเรียนกันในวันนี้.</span>
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="binary-numbers" class="scroll-mt-16">
+                    <div class="content-card">
+                        <div class="flex items-start section-header">
+                            <div class="section-icon" style="background: linear-gradient(135deg, #90EE90 0%, #3CB371 100%);"> <!-- LightGreen to MediumSeaGreen -->
+                                <i class="fas fa-laptop-code text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-3xl font-bold text-slate-100 mb-2">ส่วนที่ 2: ภาษาของคอมพิวเตอร์ - เลขฐานสอง (Binary / Base-2)</h2>
+                            </div>
+                        </div>
+                        <p class="text-slate-300 mb-4 leading-relaxed">
+                            อย่างที่เกริ่นไป คอมพิวเตอร์ทำงานกับบิต (0 และ 1) ดังนั้นระบบเลขของมันจึงมีตัวเลขแค่ 2 ตัว คือ 0 กับ 1 เท่านั้น แล้วมันจะนับเลขที่มากกว่า 1 ได้อย่างไร?
+                        </p>
+                        <p class="text-slate-300 mb-4 leading-relaxed">
+                            คำตอบคือ... มันใช้ "แม่แบบ" เดียวกับเลขฐานสิบเป๊ะๆ เลยครับ! เพียงแค่เปลี่ยน "ฐาน" จาก 10 เป็น 2.
+                        </p>
+                        <h4 class="text-xl font-semibold text-slate-100 mt-6 mb-3">ค่าประจำหลักของเลขฐานสอง:</h4>
+                        <div class="bg-dark-800 p-4 rounded-lg border border-dark-600 mb-4 text-center">
+                            <p class="text-slate-300">... <code class="text-lime-400">2<sup>4</sup>=16</code> | <code class="text-lime-400">2<sup>3</sup>=8</code> | <code class="text-lime-400">2<sup>2</sup>=4</code> | <code class="text-lime-400">2<sup>1</sup>=2</code> | <code class="text-lime-400">2<sup>0</sup>=1</code></p>
+                        </div>
+
+                        <div class="interactive-card my-6">
+                            <h5 class="text-lg font-semibold text-primary-400 mb-2"><i class="fas fa-exchange-alt mr-2"></i> ลองมาแปลเลขฐานสองเป็นฐานสิบกันดูครับ</h5>
+                            <p class="text-slate-300 mb-2">สมมติเราเจอเลขฐานสอง <code class="text-lime-400">1101</code><sub>2</sub> (ตัวห้อย ₂ หมายถึงเป็นเลขฐานสอง) เราจะแปลโดยใช้แม่แบบของเรา:</p>
+                            <pre class="code-block text-sm">
+<span class="text-lime-400">1101</span><sub>2</sub> = (<b>1</b> × 2<sup>3</sup>) + (<b>1</b> × 2<sup>2</sup>) + (<b>0</b> × 2<sup>1</sup>) + (<b>1</b> × 2<sup>0</sup>)
+       = (<b>1</b> × 8) + (<b>1</b> × 4) + (<b>0</b> × 2) + (<b>1</b> × 1)
+       =  8  +  4  +  0  +  1  =  <span class="text-green-400 font-bold">13</span><sub>10</sub></pre>
+                            <p class="text-slate-300 mt-2">เห็นไหมครับว่ามันคือตรรกะเดียวกันเป๊ะๆ เลย.</p>
+                        </div>
+
+                        <h4 class="text-xl font-semibold text-slate-100 mt-6 mb-3">แล้วถ้าจะแปลกลับจากฐานสิบเป็นฐานสองล่ะ?</h4>
+                        <p class="text-slate-300 mb-2 leading-relaxed">
+                            เราจะใช้วิธี "การหารด้วย 2 แล้วเก็บเศษ" ครับ. สมมติเราต้องการแปลง <code class="text-green-400">13</code><sub>10</sub> เป็นฐานสอง:
+                        </p>
+                        <pre class="code-block text-sm">
+13 ÷ 2 = 6 เศษ <span class="text-amber-400">1</span>  (นี่คือบิตขวาสุด หรือ Bit 0)
+ 6 ÷ 2 = 3 เศษ <span class="text-amber-400">0</span>
+ 3 ÷ 2 = 1 เศษ <span class="text-amber-400">1</span>
+ 1 ÷ 2 = 0 เศษ <span class="text-amber-400">1</span>  (นี่คือบิตซ้ายสุด หรือ Bit 3)
+</pre>
+                        <p class="text-slate-300 mt-2 leading-relaxed">
+                            เมื่อผลหารเป็น 0 ก็หยุด แล้วนำเศษที่ได้มาอ่าน "จากล่างขึ้นบน" เราจะได้ <code class="text-lime-400">1101</code><sub>2</sub> ซึ่งตรงกับที่เราคำนวณไว้ตอนแรกพอดี.
+                        </p>
+
+                        <div class="mt-8 p-4 bg-red-800 bg-opacity-20 rounded-lg border border-red-700">
+                            <h5 class="text-red-300 font-semibold mb-2"><i class="fas fa-exclamation-triangle mr-2"></i>ปัญหาของเลขฐานสอง:</h5>
+                            <p class="text-red-200 leading-relaxed">
+                                เลขฐานสองนั้นเป็นภาษาที่คอมพิวเตอร์เข้าใจได้ดีเยี่ยม แต่สำหรับมนุษย์ มันยาวและอ่านยากมากครับ.
+                                ลองนึกภาพว่าถ้าคุณต้องอ่านค่าจากรีจิสเตอร์ขนาด 16 บิต แล้วเห็นค่าเป็น <code class="text-sm">1011101001011100</code>... แค่พยายามอ่านให้ถูกก็ปวดหัวแล้วใช่ไหมครับ? นั่นจึงเป็นที่มาของ "ภาษาสะพาน" ที่เราจะเรียนกันต่อไป.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="hexadecimal-numbers" class="scroll-mt-16">
+                    <div class="content-card">
+                        <div class="flex items-start section-header">
+                            <div class="section-icon" style="background: linear-gradient(135deg, #BA55D3 0%, #8A2BE2 100%);"> <!-- MediumOrchid to BlueViolet -->
+                                <i class="fas fa-exchange-alt text-white text-xl"></i> <!-- Could use a more specific Hex icon if available -->
+                            </div>
+                            <div>
+                                <h2 class="text-3xl font-bold text-slate-100 mb-2">ส่วนที่ 3: ภาษาของโปรแกรมเมอร์ - เลขฐานสิบหก (Hexadecimal / Base-16)</h2>
+                            </div>
+                        </div>
+                        <p class="text-slate-300 mb-4 leading-relaxed">
+                            เพื่อแก้ปัญหาความยาวและอ่านยากของเลขฐานสอง โปรแกรมเมอร์และวิศวกรจึงนิยมใช้ เลขฐานสิบหก (Hexadecimal หรือเรียกสั้นๆ ว่า "Hex") เป็นอย่างมาก. <strong class="text-primary-400">Hexadecimal คือ "ตัวย่อ" ของ Binary นั่นเองครับ.</strong>
+                        </p>
+                        <p class="text-slate-300 mb-4 leading-relaxed">
+                            ระบบนี้มีเลข 16 ตัว แต่เรามีสัญลักษณ์ตัวเลขแค่ 0-9 เราจึงยืมตัวอักษร A-F มาใช้แทนค่าที่มากกว่า 9 ดังนี้:
+                        </p>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-center mb-4">
+                            <p class="bg-dark-700 p-2 rounded">0-9 <i class="fas fa-long-arrow-alt-right mx-1"></i> 0-9</p>
+                            <p class="bg-dark-700 p-2 rounded">A <i class="fas fa-long-arrow-alt-right mx-1"></i> 10</p>
+                            <p class="bg-dark-700 p-2 rounded">B <i class="fas fa-long-arrow-alt-right mx-1"></i> 11</p>
+                            <p class="bg-dark-700 p-2 rounded">C <i class="fas fa-long-arrow-alt-right mx-1"></i> 12</p>
+                            <p class="bg-dark-700 p-2 rounded">D <i class="fas fa-long-arrow-alt-right mx-1"></i> 13</p>
+                            <p class="bg-dark-700 p-2 rounded">E <i class="fas fa-long-arrow-alt-right mx-1"></i> 14</p>
+                            <p class="bg-dark-700 p-2 rounded">F <i class="fas fa-long-arrow-alt-right mx-1"></i> 15</p>
+                        </div>
+                        <div class="interactive-card my-6">
+                            <h5 class="text-lg font-semibold text-primary-400 mb-2"><i class="fas fa-magic mr-2"></i>ความมหัศจรรย์ของเลขฐานสิบหก</h5>
+                            <p class="text-slate-300">
+                                ค่า 16 นั้นเท่ากับ 2<sup>4</sup> พอดีเป๊ะ! ความสัมพันธ์ทางคณิตศาสตร์นี้ทำให้ <strong class="text-amber-400">เลขฐานสิบหก 1 หลัก สามารถแทนเลขฐานสองได้ 4 หลัก (4 บิต) พอดิบพอดี.</strong> นี่คือเหตุผลทั้งหมดที่ทำให้มันมีประโยชน์อย่างมหาศาล.
+                            </p>
+                        </div>
+
+                        <h4 class="text-xl font-semibold text-slate-100 mt-6 mb-3">ตารางเทียบค่า Hex - Binary - Decimal (ตัวอย่าง)</h4>
+                        <div class="my-6 text-center">
+                            <img src="https://via.placeholder.com/600x250/1E293B/94A3B8?text=Binary+to+Hex+Conversion" alt="Binary to Hex Conversion Concept" class="mx-auto rounded-lg shadow-md">
+                            <p class="text-xs text-slate-500 mt-2">ภาพแสดงการจัดกลุ่ม 4 บิตของฐานสองเป็นฐานสิบหก 1 หลัก</p>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-sm text-left text-slate-400 rounded-lg overflow-hidden border border-dark-600">
+                                <thead class="text-xs text-slate-200 uppercase bg-dark-700">
+                                    <tr>
+                                        <th scope="col" class="px-6 py-3">Hex</th>
+                                        <th scope="col" class="px-6 py-3">Binary (4 bits)</th>
+                                        <th scope="col" class="px-6 py-3">Decimal</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="bg-dark-800 border-b border-dark-600">
+                                        <td class="px-6 py-3 font-medium text-purple-400">0</td>
+                                        <td class="px-6 py-3 font-mono text-lime-400">0000</td>
+                                        <td class="px-6 py-3 text-sky-400">0</td>
+                                    </tr>
+                                    <tr class="bg-dark-800 border-b border-dark-600">
+                                        <td class="px-6 py-3 font-medium text-purple-400">1</td>
+                                        <td class="px-6 py-3 font-mono text-lime-400">0001</td>
+                                        <td class="px-6 py-3 text-sky-400">1</td>
+                                    </tr>
+                                    <tr class="bg-dark-800 border-b border-dark-600">
+                                        <td class="px-6 py-3 font-medium text-slate-300">...</td>
+                                        <td class="px-6 py-3 font-mono text-slate-300">...</td>
+                                        <td class="px-6 py-3 text-slate-300">...</td>
+                                    </tr>
+                                    <tr class="bg-dark-800 border-b border-dark-600">
+                                        <td class="px-6 py-3 font-medium text-purple-400">9</td>
+                                        <td class="px-6 py-3 font-mono text-lime-400">1001</td>
+                                        <td class="px-6 py-3 text-sky-400">9</td>
+                                    </tr>
+                                    <tr class="bg-dark-800 border-b border-dark-600">
+                                        <td class="px-6 py-3 font-medium text-purple-400">A</td>
+                                        <td class="px-6 py-3 font-mono text-lime-400">1010</td>
+                                        <td class="px-6 py-3 text-sky-400">10</td>
+                                    </tr>
+                                    <tr class="bg-dark-800 border-b border-dark-600">
+                                        <td class="px-6 py-3 font-medium text-purple-400">B</td>
+                                        <td class="px-6 py-3 font-mono text-lime-400">1011</td>
+                                        <td class="px-6 py-3 text-sky-400">11</td>
+                                    </tr>
+                                    <tr class="bg-dark-800 border-b border-dark-600">
+                                        <td class="px-6 py-3 font-medium text-purple-400">C</td>
+                                        <td class="px-6 py-3 font-mono text-lime-400">1100</td>
+                                        <td class="px-6 py-3 text-sky-400">12</td>
+                                    </tr>
+                                    <tr class="bg-dark-800 border-b border-dark-600">
+                                        <td class="px-6 py-3 font-medium text-purple-400">D</td>
+                                        <td class="px-6 py-3 font-mono text-lime-400">1101</td>
+                                        <td class="px-6 py-3 text-sky-400">13</td>
+                                    </tr>
+                                    <tr class="bg-dark-800 border-b border-dark-600">
+                                        <td class="px-6 py-3 font-medium text-purple-400">E</td>
+                                        <td class="px-6 py-3 font-mono text-lime-400">1110</td>
+                                        <td class="px-6 py-3 text-sky-400">14</td>
+                                    </tr>
+                                    <tr class="bg-dark-800">
+                                        <td class="px-6 py-3 font-medium text-purple-400">F</td>
+                                        <td class="px-6 py-3 font-mono text-lime-400">1111</td>
+                                        <td class="px-6 py-3 text-sky-400">15</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p class="text-xs text-slate-500 text-center mt-1">ตารางแสดงความสัมพันธ์ระหว่างเลขฐานสิบหก, ฐานสอง (4 บิต), และฐานสิบ</p>
+
+                        <h4 class="text-xl font-semibold text-slate-100 mt-8 mb-3">การแปลง Binary เป็น Hex:</h4>
+                        <p class="text-slate-300 mb-2 leading-relaxed">
+                            ลองกลับมาดูเลขฐานสองที่น่าปวดหัวจากตัวอย่างที่แล้วกัน: <code class="font-mono text-sm">1011101001011100</code>.
+                            เราจะแปลงเป็นเลขฐานสิบหกโดยการ "จัดกลุ่มทีละ 4 บิต" จากขวามาซ้าย:
+                        </p>
+                        <pre class="code-block text-center text-lg">
+<span class="text-lime-400">1011</span> | <span class="text-lime-400">1010</span> | <span class="text-lime-400">0101</span> | <span class="text-lime-400">1100</span></pre>
+                        <p class="text-slate-300 my-2 leading-relaxed text-center">จากนั้นก็แค่แปลทีละกลุ่มตามตาราง:</p>
+                        <pre class="code-block text-center text-lg">
+  <span class="text-purple-400">B</span>   |   <span class="text-purple-400">A</span>   |   <span class="text-purple-400">5</span>   |   <span class="text-purple-400">C</span></pre>
+                        <p class="text-slate-300 mt-2 leading-relaxed">
+                            เมื่อนำมารวมกัน เราจะได้เป็น <code class="text-purple-400 font-bold text-xl">BA5C</code><sub>16</sub> ซึ่งสั้น กระชับ อ่านง่าย และสื่อสารผิดพลาดได้ยากกว่าเลขฐานสองยาวๆ มาก. ในภาษาโปรแกรมอย่าง C เราจะเขียนเลขฐานสิบหกโดยการเติม <code class="text-amber-400">0x</code> เข้าไปข้างหน้า เช่น <code class="text-purple-400">0xBA5C</code> เพื่อบอกให้คอมไพเลอร์รู้ว่านี่คือเลขฐานสิบหก.
+                        </p>
+                    </div>
+                </section>
+
+                <section id="hex-application-fsae" class="scroll-mt-16">
+                    <div class="content-card">
+                        <div class="flex items-start section-header">
+                            <div class="section-icon" style="background: linear-gradient(135deg, #FF8C00 0%, #FF4500 100%);"> <!-- DarkOrange to OrangeRed -->
+                                <i class="fas fa-car-battery text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-3xl font-bold text-slate-100 mb-2">ส่วนที่ 4: การประยุกต์ใช้จริงในงานวิศวกรรมยานยนต์ FSAE</h2>
+                            </div>
+                        </div>
+                        <p class="text-slate-300 mb-4 leading-relaxed">
+                            มาถึงส่วนที่สำคัญที่สุด: เราเรียนเรื่องทั้งหมดนี้ไปทำไม? มันเอาไปใช้ตรงไหนในรถของเรา?
+                        </p>
+                        <div class="space-y-6">
+                            <div class="interactive-card">
+                                <h5 class="text-lg font-semibold text-primary-400 mb-2"><i class="fas fa-map-marker-alt mr-2"></i>1. ที่อยู่หน่วยความจำ (Memory Addresses)</h5>
+                                <p class="text-slate-300 text-sm mb-2">ทุกสิ่งทุกอย่างใน MCU ของเรา ไม่ว่าจะเป็นโค้ดโปรแกรม, ตัวแปร, หรือรีจิสเตอร์ที่ใช้ควบคุมฮาร์ดแวร์ ล้วนถูกเก็บไว้ใน "หน่วยความจำ" (Memory) ซึ่งมี "บ้านเลขที่" หรือ "Address" กำกับไว้ทั้งหมด และ Address เหล่านี้ จะถูกแสดงในรูปของเลขฐานสิบหกเสมอ ในเอกสารคู่มือ (Datasheet), ในโปรแกรมดีบักเกอร์, และในโค้ดของเรา.</p>
+                                <p class="text-slate-300 text-sm">ตัวอย่างโค้ดที่อาจจะดูน่ากลัวในตอนแรก แต่ตอนนี้พวกคุณน่าจะเข้าใจมันดีขึ้น:</p>
+                                <pre class="code-block text-xs mt-1"><code class="language-c"><span class="text-sky-300">volatile</span> GPIO_TypeDef *GPIOA = (GPIO_TypeDef *)<span class="text-purple-400">0x40020000</span>;</code></pre>
+                                <p class="text-slate-400 text-xs mt-1">โค้ดบรรทัดนี้กำลังบอกว่า "ช่วยสร้างตัวชี้ชื่อ GPIOA ให้ชี้ไปยังบ้านเลขที่ <code class="text-purple-400">0x40020000</code> ในหน่วยความจำหน่อย" ซึ่งตาม Datasheet ของชิป STM32F4 มันคือตำแหน่งเริ่มต้นของรีจิสเตอร์ที่ใช้ควบคุมพอร์ต I/O A ทั้งหมด. ถ้าเราไม่เข้าใจเลขฐานสิบหก เราจะไม่มีทางรู้ได้เลยว่าโค้ดบรรทัดนี้กำลังทำอะไรอยู่.</p>
+                            </div>
+
+                            <div class="interactive-card">
+                                <h5 class="text-lg font-semibold text-primary-400 mb-2"><i class="fas fa-search mr-2"></i>2. การอ่านค่าจากรีจิสเตอร์ของฮาร์ดแวร์</h5>
+                                <p class="text-slate-300 text-sm mb-2">เมื่อเราใช้โปรแกรมดีบักเกอร์เพื่อตรวจสอบการทำงานของโปรแกรม เรามักจะต้องดูค่าในรีจิสเตอร์ต่างๆ เพื่อให้แน่ใจว่าเราได้ตั้งค่าฮาร์ดแวร์ถูกต้องหรือไม่ ค่าที่แสดงในดีบักเกอร์จะเป็นเลขฐานสิบหก.</p>
+                                <p class="text-slate-300 text-sm">สมมติว่าคุณตั้งค่ารีจิสเตอร์ตัวหนึ่งให้เป็น <code class="text-purple-400">0x000000F0</code>. คุณต้องสามารถแปลค่านี้ในใจกลับเป็นเลขฐานสองได้อย่างรวดเร็ว:</p>
+                                <pre class="code-block text-xs mt-1 text-center"><code class="text-purple-400">0x...F0</code> = <code class="text-lime-400">... 1111 0000</code></pre>
+                                <p class="text-slate-400 text-xs mt-1">นี่ทำให้คุณรู้ทันทีว่า "โอเค บิตที่ 4, 5, 6, 7 ถูกตั้งค่าเป็น 1 ส่วนบิตที่ 0, 1, 2, 3 เป็น 0" ซึ่งช่วยให้การดีบักและการตรวจสอบความถูกต้องของฮาร์ดแวร์ทำได้อย่างรวดเร็ว.</p>
+                            </div>
+
+                            <div class="interactive-card">
+                                <h5 class="text-lg font-semibold text-primary-400 mb-2"><i class="fas fa-broadcast-tower mr-2"></i>3. การสื่อสารข้อมูลผ่าน CAN Bus</h5>
+                                <p class="text-slate-300 text-sm mb-2">อย่างที่เราทราบกันดีว่า CAN bus คือระบบประสาทของรถเรา ข้อมูลที่วิ่งอยู่ใน CAN bus จะถูกส่งเป็น "เฟรม" (Frame) ซึ่งในแต่ละเฟรมจะมีรหัสระบุข้อความ (CAN ID) และข้อมูล (Data Payload) 0-8 ไบต์.</p>
+                                <p class="text-slate-300 text-sm">เมื่อคุณใช้เครื่องมือวิเคราะห์ CAN (CAN Analyzer) เพื่อดูข้อมูลที่วิ่งอยู่ในรถ คุณจะเห็นข้อมูลหน้าตาแบบนี้:</p>
+                                <pre class="code-block text-xs mt-1">ID: <span class="text-purple-400">0x1A8</span> Data: <span class="text-purple-400">0F</span> <span class="text-purple-400">1B</span> <span class="text-purple-400">00</span> <span class="text-purple-400">FF</span> <span class="text-purple-400">C3</span> <span class="text-purple-400">00</span> <span class="text-purple-400">00</span> <span class="text-purple-400">10</span></pre>
+                                <ul class="list-disc list-inside text-slate-400 text-xs mt-1 pl-4">
+                                    <li>ID: <code class="text-purple-400">0x1A8</code> คือรหัสของข้อความนี้ในรูปเลขฐานสิบหก.</li>
+                                    <li>Data: <code class="text-purple-400">0F 1B ...</code> คือข้อมูล 8 ไบต์ ที่แสดงเป็นเลขฐานสิบหก.</li>
+                                </ul>
+                                <p class="text-slate-400 text-xs mt-1">ถ้าคุณไม่เข้าใจเลขฐาน คุณจะไม่สามารถ "อ่าน" ข้อมูลเหล่านี้ได้เลย คุณจะไม่รู้ว่า <code class="text-purple-400">0F</code> คือค่าอะไรที่ส่งมาจาก BMS หรือ <code class="text-purple-400">FF C3</code> คือค่าแรงบิดที่ VCU กำลังส่งไปให้มอเตอร์.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="number-summary" class="scroll-mt-16">
+                    <div class="content-card">
+                         <div class="flex items-start section-header">
+                            <div class="section-icon" style="background: linear-gradient(135deg, #778899 0%, #2F4F4F 100%);"> <!-- LightSlateGray to DarkSlateGray -->
+                                <i class="fas fa-graduation-cap text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-3xl font-bold text-slate-100 mb-2">บทสรุป: โลกสามใบของตัวเลข</h2>
+                            </div>
+                        </div>
+                        <p class="text-slate-300 mb-4 leading-relaxed">
+                            ในคาบเรียนนี้ เราได้เดินทางผ่าน 3 โลกของตัวเลข:
+                        </p>
+                        <ul class="list-decimal list-inside text-slate-300 space-y-2 my-4 pl-4">
+                            <li><strong class="text-sky-400">ฐานสิบ:</strong> โลกของมนุษย์ ที่คุ้นเคยและเป็นธรรมชาติ.</li>
+                            <li><strong class="text-lime-400">ฐานสอง:</strong> โลกของคอมพิวเตอร์ ที่ทำงานกับสถานะเปิด-ปิด.</li>
+                            <li><strong class="text-purple-400">ฐานสิบหก:</strong> โลกของโปรแกรมเมอร์ ที่เป็นสะพานเชื่อม ทำให้เราสามารถอ่านและเขียนภาษาของคอมพิวเตอร์ได้อย่างมีประสิทธิภาพ.</li>
+                        </ul>
+                        <div class="mt-6 p-6 bg-dark-800 rounded-xl border border-primary-700">
+                            <p class="text-lg text-primary-200 font-medium flex items-center">
+                                <i class="fas fa-glasses text-yellow-400 mr-3 text-2xl"></i>
+                                <span>ความสามารถในการแปลงไปมาระหว่างฐานเหล่านี้ได้อย่างคล่องแคล่ว ไม่ใช่แค่ทักษะทางคณิตศาสตร์ แต่เป็น <strong class="text-white">ทักษะพื้นฐานที่จำเป็นอย่างยิ่งยวด</strong> สำหรับวิศวกรระบบสมองกลฝังตัว. มันคือแว่นตาที่ช่วยให้คุณมองเห็นสิ่งที่เกิดขึ้นจริงๆ ภายใต้โค้ดภาษา C ที่สวยงาม มันช่วยให้คุณอ่าน Datasheet ได้, ดีบักโปรแกรมได้, และออกแบบระบบสื่อสารได้อย่างถูกต้อง.</span>
+                            </p>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <!-- Floating navigation -->
+    <div class="floating-nav">
+        <div class="floating-btn" title="กลับสู่ด้านบน">
+            <i class="fas fa-arrow-up"></i>
+        </div>
+        <div class="floating-btn" id="theme-toggle" title="เปลี่ยนธีม">
+            <i class="fas fa-moon" id="theme-icon"></i>
+        </div>
+    </div>
+
+    <!-- Glossary Modal -->
+    <div id="glossary-modal-backdrop"></div>
+    <div id="glossary-modal">
+        <div class="flex justify-between items-center mb-4">
+            <h3 id="glossary-term" class="text-2xl font-bold text-primary-400"></h3>
+            <button id="glossary-close-btn" class="text-slate-400 hover:text-slate-200">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <p id="glossary-def" class="text-slate-300 leading-relaxed"></p>
+        <div class="mt-6 pt-4 border-t border-dark-600">
+            <p class="text-sm text-slate-400">
+                <i class="fas fa-lightbulb mr-2"></i> คลิกคำศัพท์อื่นๆ ในบทเรียนเพื่อเรียนรู้เพิ่มเติม
+            </p>
+        </div>
+    </div>
+
+    <script src="../../js/main.js" defer></script>
+</body>
+</html>

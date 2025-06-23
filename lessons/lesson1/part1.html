@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="th" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 1.1: บิตและไบต์ - อะตอมแห่งโลกดิจิทัล</title>
+    <link rel="stylesheet" href="../../css/main.css"> <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="antialiased">
+
+    <div class="container mx-auto max-w-6xl p-4 sm:p-6 lg:p-8 flex flex-col md:flex-row gap-8">
+
+        <aside class="w-full md:w-64 flex-shrink-0">
+            <div id="nav-placeholder" class="sticky top-8">
+                </div>
+        </aside>
+
+        <div class="flex-grow">
+            <main>
+                <section id="intro" class="scroll-mt-16">
+                    <div class="content-card">
+                        <div class="flex items-start section-header">
+                            <div class="section-icon" style="background: linear-gradient(135deg, #1E90FF 0%, #4169E1 100%);"> <!-- DodgerBlue to RoyalBlue -->
+                                <i class="fas fa-atom text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h1 class="text-4xl font-bold text-slate-100 mb-3">Lesson 1.1: บิตและไบต์ - อะตอมแห่งโลกดิจิทัล</h1>
+                                <p class="text-slate-400 mb-4">ทำความเข้าใจหน่วยข้อมูลที่เล็กที่สุด ที่เป็นรากฐานของทุกสิ่งในคอมพิวเตอร์</p>
+                            </div>
+                        </div>
+
+                        <p class="text-slate-300 mb-4 leading-relaxed">
+                            หลายคนอาจจะเคยได้ยินคำเหล่านี้ผ่านหูมาบ้าง อาจจะจากสเปคคอมพิวเตอร์หรือความเร็วอินเทอร์เน็ต แต่วันนี้ เราจะไม่ได้แค่ "รู้จัก" มัน แต่เราจะ "เข้าใจ" มันอย่างถ่องแท้ เพราะสำหรับวิศวกร Formula SAE EV อย่างพวกคุณ การไม่เข้าใจบิตและไบต์ก็เปรียบเสมือนนักแข่งรถที่ไม่เข้าใจว่าเครื่องยนต์ทำงานอย่างไร มันอาจจะขับได้ แต่ไม่มีทางดึงศักยภาพสูงสุดออกมาได้ และที่สำคัญคือ เมื่อเกิดปัญหา คุณจะไม่สามารถวิเคราะห์และแก้ไขที่ต้นตอได้เลย
+                        </p>
+
+                        <div class="interactive-card my-6">
+                            <h3 class="text-xl font-semibold text-primary-400 mb-3 flex items-center">
+                                <i class="fas fa-question-circle mr-2"></i> คำถามสำคัญในบทเรียนนี้
+                            </h3>
+                            <ul class="list-disc list-inside text-slate-300 space-y-2">
+                                <li>อะไรคือบิตและไบต์? - เราจะทำความรู้จักกับหน่วยที่เล็กที่สุดของข้อมูล</li>
+                                <li>มันทำงานอย่างไร? - ทำไมคอมพิวเตอร์ถึงเลือกใช้ระบบนี้ และมันสร้างข้อมูลที่ซับซ้อนขึ้นมาได้อย่างไร</li>
+                                <li>ทำไมมันถึงสำคัญอย่างยิ่งยวดต่องานของเรา? - เราจะเชื่อมโยงความรู้พื้นฐานนี้เข้ากับการควบคุมไมโครคอนโทรลเลอร์ในรถแข่ง EV ของเราโดยตรง</li>
+                            </ul>
+                        </div>
+                        <p class="text-slate-300 mb-4 leading-relaxed">เอาล่ะครับ มาเริ่มกันที่หน่วยที่เล็กที่สุดกันก่อน</p>
+                    </div>
+                </section>
+
+                <section id="bit" class="scroll-mt-16">
+                    <div class="content-card">
+                        <div class="flex items-start section-header">
+                            <div class="section-icon" style="background: linear-gradient(135deg, #87CEEB 0%, #4682B4 100%);"> <!-- SkyBlue to SteelBlue -->
+                                <i class="fas fa-toggle-on text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-3xl font-bold text-slate-100 mb-2">ส่วนที่ 1: บิต (Bit) - อะตอมแห่งโลกดิจิทัล</h2>
+                            </div>
+                        </div>
+                        <p class="text-slate-300 mb-4 leading-relaxed">
+                            ลองจินตนาการตามผมนะครับ ลองนึกถึงสวิตช์ไฟธรรมดาๆ ในห้องของเรา มันมีสถานะที่เป็นไปได้กี่อย่างครับ? ... ใช่แล้วครับ มีแค่ 2 อย่าง คือ "เปิด" กับ "ปิด" เท่านั้น ไม่มีสถานะ "เปิดครึ่งๆ" หรือ "หรี่ๆ" (นั่นคือโลกของอนาล็อกที่เราจะไม่พูดถึงวันนี้)
+                        </p>
+                        <div class="my-6 text-center">
+                            <img src="https://via.placeholder.com/600x200/1E293B/94A3B8?text=Digital+Switches+(0+and+1)" alt="Digital Switches Concept" class="mx-auto rounded-lg shadow-md">
+                            <p class="text-xs text-slate-500 mt-2">ภาพแทนแนวคิดของบิตเทียบกับสวิตช์เปิดปิด</p>
+                        </div>
+                        <p class="text-slate-300 mb-4 leading-relaxed">
+                            <strong class="text-primary-400">"บิต"</strong> ก็คือสวิตช์ไฟตัวนั้นในโลกดิจิทัลครับ
+                        </p>
+                        <p class="text-slate-300 mb-4 leading-relaxed">
+                            บิต (Bit) ย่อมาจาก <strong class="text-amber-400">Binary Digit</strong> ซึ่งแปลตรงตัวว่า "ตัวเลขฐานสอง" มันคือหน่วยข้อมูลที่เล็กที่สุดที่คอมพิวเตอร์สามารถจัดการได้ และมันมีค่าที่เป็นไปได้เพียง 2 สถานะเท่านั้น คือ:
+                        </p>
+                        <ul class="list-disc list-inside text-slate-300 space-y-2 my-4 pl-4">
+                            <li><strong class="text-lime-400">0</strong> (เปรียบเหมือนสวิตช์ "ปิด", ไม่มีกระแสไฟ, สถานะ Low)</li>
+                            <li><strong class="text-lime-400">1</strong> (เปรียบเหมือนสวิตช์ "เปิด", มีกระแสไฟ, สถานะ High)</li>
+                        </ul>
+                        <div class="mt-6 p-4 bg-dark-800 rounded-xl border border-dark-700">
+                            <h4 class="text-lg font-semibold text-amber-300 mb-3 flex items-center">
+                                <i class="fas fa-puzzle-piece mr-2"></i> คำถามชวนคิด: ทำไมต้อง 0 กับ 1?
+                            </h4>
+                            <p class="text-slate-400 leading-relaxed">
+                                ทำไมไม่ใช้ 0-9 เหมือนที่เราคุ้นเคย? คำตอบอยู่ที่ธรรมชาติของอุปกรณ์อิเล็กทรอนิกส์ครับ การสร้างวงจรที่สามารถแยกแยะสถานะ "มีไฟ" กับ "ไม่มีไฟ" ได้อย่างชัดเจนและน่าเชื่อถือนั้นทำได้ง่ายและต้นทุนถูกกว่าการสร้างวงจรที่ต้องแยกแยะระดับแรงดันไฟฟ้า 10 ระดับอย่างแม่นยำมากๆ ในทางกายภาพ บิต 1 บิต ก็คือทรานซิสเตอร์ตัวจิ๋วๆ 1 ตัวที่ทำหน้าที่เป็นสวิตช์เปิด-ปิดนั่นเอง การใช้ระบบฐานสองจึงทำให้การออกแบบฮาร์ดแวร์มีความเสถียร ทนทานต่อสัญญาณรบกวน และทำงานได้อย่างรวดเร็วครับ
+                            </p>
+                        </div>
+                        <p class="text-slate-300 mt-6 mb-4 leading-relaxed">
+                            แต่... บิตเพียงตัวเดียวมันทำอะไรได้ไม่มากนักใช่ไหมครับ? เราบอกได้แค่ ใช่/ไม่ใช่, จริง/เท็จ, เปิด/ปิด มันยังไม่สามารถใช้แทนข้อมูลที่ซับซ้อนอย่างตัวอักษรหรือตัวเลขจำนวนมากๆ ได้ นั่นจึงนำเราไปสู่ส่วนต่อไป
+                        </p>
+                    </div>
+                </section>
+
+                <section id="byte" class="scroll-mt-16">
+                    <div class="content-card">
+                        <div class="flex items-start section-header">
+                            <div class="section-icon" style="background: linear-gradient(135deg, #32CD32 0%, #228B22 100%);"> <!-- LimeGreen to ForestGreen -->
+                                <i class="fas fa-cubes text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-3xl font-bold text-slate-100 mb-2">ส่วนที่ 2: ไบต์ (Byte) - การรวมพลังเพื่อสร้างความหมาย</h2>
+                            </div>
+                        </div>
+                        <p class="text-slate-300 mb-4 leading-relaxed">
+                            เมื่อบิตเดียวไม่พอ เราก็แค่เอามันมาเรียงต่อกันเป็นกลุ่มครับ เหมือนกับการนำตัวอักษรมาเรียงต่อกันให้เป็น "คำ" ในโลกคอมพิวเตอร์ กลุ่มของบิตที่ได้รับการยอมรับเป็นมาตรฐานสากลและใช้กันอย่างแพร่หลายที่สุดก็คือ "ไบต์" (Byte)
+                        </p>
+                        <div class="text-center my-6">
+                            <p class="text-2xl text-slate-100 font-semibold bg-dark-700 p-4 rounded-lg inline-block border border-primary-500 shadow-lg">
+                                1 ไบต์ (Byte) = 8 บิต (Bits)
+                            </p>
+                        </div>
+                        <p class="text-slate-300 mb-4 leading-relaxed">
+                            ทีนี้ล่ะครับ ความมหัศจรรย์เริ่มบังเกิด เมื่อเรามีสวิตช์ไฟ 8 ตัวเรียงกัน เราจะสามารถสร้างรูปแบบการเปิด-ปิดที่แตกต่างกันได้กี่แบบ?
+                        </p>
+                        <ul class="list-none text-slate-300 space-y-2 my-4 pl-4 bg-dark-800 p-4 rounded-lg border border-dark-600">
+                            <li><i class="fas fa-lightbulb mr-2 text-yellow-400"></i> ถ้ามี 1 บิต (สวิตช์ 1 ตัว) เรามี 2 รูปแบบ: 0, 1</li>
+                            <li><i class="fas fa-lightbulb mr-2 text-yellow-400"></i> ถ้ามี 2 บิต (สวิตช์ 2 ตัว) เรามี 4 รูปแบบ: 00, 01, 10, 11</li>
+                            <li><i class="fas fa-lightbulb mr-2 text-yellow-400"></i> ถ้ามี 3 บิต (สวิตช์ 3 ตัว) เรามี 8 รูปแบบ: 000, 001, 010, 011, 100, 101, 110, 111</li>
+                        </ul>
+                        <p class="text-slate-300 my-4 leading-relaxed">
+                            สังเกตเห็นรูปแบบทางคณิตศาสตร์ไหมครับ? จำนวนรูปแบบที่เป็นไปได้คือ <strong class="text-primary-400">2<sup>n</sup></strong> โดยที่ n คือจำนวนบิต.
+                        </p>
+                        <p class="text-slate-300 mb-4 leading-relaxed">
+                            ดังนั้น เมื่อเรามี 8 บิตใน 1 ไบต์ เราจะมีรูปแบบที่แตกต่างกันได้ทั้งหมด <strong class="text-green-400 text-xl">2<sup>8</sup> = 256 รูปแบบ!</strong>
+                            <br>ตั้งแต่ <code>00000000</code> ไปจนถึง <code>11111111</code>.
+                        </p>
+                        <h4 class="text-xl font-semibold text-slate-100 mt-6 mb-3">แล้ว 256 รูปแบบนี้เอาไปทำอะไรได้?</h4>
+                        <p class="text-slate-300 mb-4 leading-relaxed">
+                            เราในฐานะโปรแกรมเมอร์และวิศวกร สามารถ "ตกลง" กันได้ว่าแต่ละรูปแบบจะใช้แทนความหมายอะไร นี่คือหัวใจสำคัญครับ รูปแบบบิตเองไม่มีความหมาย จนกว่าเราจะให้ความหมายกับมันผ่านสิ่งที่เรียกว่า <strong class="text-amber-400">"การเข้ารหัส" (Encoding)</strong>.
+                        </p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                            <div class="interactive-card">
+                                <h5 class="text-lg font-semibold text-primary-400 mb-2"><i class="fas fa-calculator mr-2"></i>การแทนตัวเลข</h5>
+                                <p class="text-slate-300 text-sm">เราสามารถใช้ 256 รูปแบบนี้เพื่อแทนตัวเลขจำนวนเต็มได้ตั้งแต่ 0 (<code>00000000</code>) ไปจนถึง 255 (<code>11111111</code>). นี่คือพื้นฐานของชนิดข้อมูลแบบ <code>unsigned char</code> หรือ <code>uint8_t</code> ในภาษา C.</p>
+                            </div>
+                            <div class="interactive-card">
+                                <h5 class="text-lg font-semibold text-primary-400 mb-2"><i class="fas fa-font mr-2"></i>การแทนตัวอักษร</h5>
+                                <p class="text-slate-300 text-sm">เรามีมาตรฐานสากลที่ชื่อว่า <strong class="keyword-glossary text-accent-400" data-term="ASCII" data-def="American Standard Code for Information Interchange: มาตรฐานการเข้ารหัสตัวอักขระที่ใช้กันอย่างแพร่หลายในคอมพิวเตอร์ยุคแรกๆ กำหนดให้ตัวอักษร ตัวเลข และสัญลักษณ์ต่างๆ มีรหัสตัวเลขเฉพาะตัว">ASCII</strong> ซึ่งกำหนดว่ารูปแบบบิตแบบไหนจะแทนตัวอักษร, ตัวเลข, หรือสัญลักษณ์อะไร.
+                                    <br>เช่น:
+                                    <ul class="list-disc list-inside mt-2 text-xs">
+                                        <li><code>01000001</code> (65) = 'A'</li>
+                                        <li><code>01000010</code> (66) = 'B'</li>
+                                        <li><code>00110001</code> (49) = '1'</li>
+                                    </ul>
+                                </p>
+                            </div>
+                        </div>
+                        <p class="text-slate-300 mt-6 mb-4 leading-relaxed">
+                            ดังนั้น ทุกครั้งที่คุณพิมพ์คีย์บอร์ด สิ่งที่คอมพิวเตอร์รับเข้าไปจริงๆ ไม่ใช่ตัวอักษร แต่เป็นชุดของบิตและไบต์ตามมาตรฐานนี้นั่นเองครับ.
+                        </p>
+                    </div>
+                </section>
+
+                <section id="application" class="scroll-mt-16">
+                    <div class="content-card">
+                        <div class="flex items-start section-header">
+                            <div class="section-icon" style="background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);"> <!-- Gold to Orange -->
+                                <i class="fas fa-cogs text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-3xl font-bold text-slate-100 mb-2">ส่วนที่ 3: การประยุกต์ใช้จริงสำหรับวิศวกร FSAE</h2>
+                            </div>
+                        </div>
+                        <p class="text-slate-300 mb-4 leading-relaxed">
+                            เอาล่ะครับ ถึงช่วงที่สำคัญที่สุดแล้ว ทำไมทั้งหมดที่ผมพูดมาถึงสำคัญกับคนที่กำลังจะสร้างรถแข่ง EV?
+                        </p>
+
+                        <div class="mt-6 space-y-8">
+                            <div>
+                                <h4 class="text-xl font-semibold text-amber-300 mb-3 flex items-center">
+                                    <i class="fas fa-microchip mr-3"></i> 1. การควบคุมฮาร์ดแวร์โดยตรงผ่าน "รีจิสเตอร์" (Registers)
+                                </h4>
+                                <p class="text-slate-300 mb-4 leading-relaxed">
+                                    ไมโครคอนโทรลเลอร์ (MCU) อย่าง STM32 ที่พวกเราใช้กันเป็นหลักในวงการ FSAE มันคือสมองของรถ การจะสั่งให้ MCU ทำงาน ไม่ว่าจะเป็นการเปิดไฟ LED, อ่านค่าจากเซ็นเซอร์คันเร่ง, หรือส่งข้อมูลผ่าน CAN bus เราไม่ได้สั่งมันด้วยคำพูดสวยหรูครับ แต่เราทำโดยการ <strong class="text-primary-400">"เขียนค่าบิต"</strong> ลงไปในตำแหน่งหน่วยความจำพิเศษที่เรียกว่า "รีจิสเตอร์" (Hardware Registers).
+                                </p>
+                                <div class="bg-dark-800 p-4 rounded-lg border border-dark-600">
+                                    <p class="text-slate-400 mb-2"><i class="fas fa-lightbulb mr-2 text-yellow-400"></i>ลองนึกภาพตามนะครับ:</p>
+                                    <ul class="list-disc list-inside text-slate-300 space-y-1 pl-4 text-sm">
+                                        <li>MCU อาจจะมีรีจิสเตอร์ตัวหนึ่งชื่อว่า <code>GPIOA_ODR</code> ขนาด 32 บิต สำหรับควบคุมการเปิด-ปิดขา I/O ของพอร์ต A ทั้ง 32 ขา.</li>
+                                        <li>ถ้าขาที่ 5 (Bit 5) ของพอร์ตนี้ต่ออยู่กับไฟ LED บนแดชบอร์ด.</li>
+                                        <li>การที่เราจะสั่งให้ไฟดวงนี้ติด เราต้องเข้าไปเปลี่ยนค่า <strong class="text-lime-400">บิตที่ 5</strong> ของรีจิสเตอร์ <code>GPIOA_ODR</code> ให้เป็น <strong class="text-lime-400">1</strong>.</li>
+                                        <li>และที่สำคัญคือ เราต้องทำสิ่งนี้ โดยไม่ไปกระทบกับค่าของบิตอื่นๆ อีก 31 บิตที่อาจจะกำลังควบคุมอุปกรณ์อื่นอยู่!</li>
+                                    </ul>
+                                    <p class="text-slate-300 mt-3 text-sm">
+                                        นี่คือเหตุผลว่าทำไมเราต้องเรียนเรื่อง <strong class="text-accent-400">Bitwise Operations</strong> (AND, OR, XOR, SHIFT) ในบทเรียนถัดๆ ไป เพราะมันคือเครื่องมือที่ช่วยให้เราสามารถเข้าไปจัดการบิตแต่ละตัวในไบต์หรือในเวิร์ด (Word) ได้อย่างแม่นยำ. การควบคุมฮาร์ดแวร์ในระดับล่างคือการเขียน-อ่านบิตในรีจิสเตอร์นั่นเองครับ.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div>
+                                <h4 class="text-xl font-semibold text-amber-300 mb-3 flex items-center">
+                                    <i class="fas fa-memory mr-3"></i> 2. การใช้หน่วยความจำ (RAM) อย่างมีประสิทธิภาพสูงสุด
+                                </h4>
+                                <p class="text-slate-300 mb-4 leading-relaxed">
+                                    แตกต่างจากคอมพิวเตอร์ทั่วไปที่อาจมี RAM 16 หรือ 32 กิกะไบต์, MCU ของเรามีทรัพยากรที่จำกัดมาก อาจจะมี SRAM แค่ไม่กี่ร้อยกิโลไบต์เท่านั้น ดังนั้น <strong class="text-primary-400">ทุกๆ ไบต์จึงมีค่ามหาศาล</strong>.
+                                </p>
+                                <div class="interactive-card my-4">
+                                    <p class="text-slate-300 mb-2"><i class="fas fa-thermometer-half mr-2 text-red-400"></i>สมมติว่าคุณกำลังอ่านค่าอุณหภูมิของแบตเตอรี่ ซึ่งมีค่าอยู่ในช่วง 0 - 150 องศาเซลเซียส.</p>
+                                    <ul class="list-disc list-inside text-slate-300 space-y-1 pl-4 text-sm">
+                                        <li>ตัวเลข 150 สามารถจัดเก็บใน 1 ไบต์ (8 บิต) ได้สบายๆ เพราะ 1 ไบต์เก็บค่าได้ถึง 255.</li>
+                                        <li>ถ้าคุณประกาศตัวแปรในภาษา C โดยใช้ชนิดข้อมูล <code>int</code> ซึ่งใน MCU ตระกูล ARM มักจะมีขนาด 4 ไบต์ (32 บิต) เพื่อเก็บค่าอุณหภูมินี้ นั่นหมายความว่าคุณกำลัง <strong class="text-red-400">สิ้นเปลืองหน่วยความจำไป 3 ไบต์โดยไม่จำเป็น</strong> สำหรับทุกๆ ตัวแปรอุณหภูมิที่คุณสร้าง!</li>
+                                        <li>อาจจะฟังดูไม่เยอะ แต่ถ้าคุณต้องเก็บข้อมูลอุณหภูมิของเซลล์แบตเตอรี่ 100 เซลล์ในอาร์เรย์ คุณจะเสียหน่วยความจำไปเปล่าๆ ถึง 300 ไบต์ ซึ่งอาจเป็นหน่วยความจำที่มีค่าสำหรับ Task อื่นๆ ของ RTOS ก็เป็นได้.</li>
+                                    </ul>
+                                    <p class="text-slate-300 mt-3 text-sm">
+                                        การเลือกใช้ชนิดข้อมูลที่เล็กที่สุดที่เพียงพอต่องาน (เช่น <code>uint8_t</code> ที่มีขนาด 1 ไบต์) จึงเป็นทักษะที่สำคัญอย่างยิ่งสำหรับโปรแกรมเมอร์ระบบสมองกลฝังตัว เพื่อสงวน SRAM อันมีค่าไว้.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div>
+                                <h4 class="text-xl font-semibold text-amber-300 mb-3 flex items-center">
+                                    <i class="fas fa-network-wired mr-3"></i> 3. การ "แพ็ค" และ "แกะ" ข้อมูลในการสื่อสาร
+                                </h4>
+                                <p class="text-slate-300 mb-4 leading-relaxed">
+                                    ระบบสื่อสารหลักในรถของเราคือ CAN bus ซึ่งเป็นระบบที่ส่ง "ข้อความ" (Messages) หากัน โครงสร้างข้อความของ CAN หนึ่งเฟรมนั้นมีส่วนของ "ข้อมูล" (Data Payload) ได้แค่ <strong class="text-primary-400">0 ถึง 8 ไบต์เท่านั้น</strong>.
+                                </p>
+                                <div class="bg-dark-800 p-4 rounded-lg border border-dark-600">
+                                     <p class="text-slate-400 mb-2"><i class="fas fa-shipping-fast mr-2 text-blue-400"></i>สมมติว่า VCU (Vehicle Control Unit) ต้องการส่งคำสั่งไปยังตัวควบคุมมอเตอร์ โดยในคำสั่งนั้นประกอบด้วย:</p>
+                                    <ul class="list-disc list-inside text-slate-300 space-y-1 pl-4 text-sm">
+                                        <li>คำสั่งแรงบิด (Torque Command): สมมติว่ามีค่า 0 - 4000</li>
+                                        <li>สถานะ (Status): 4 สถานะ (เช่น Off, Forward, Reverse, Regen)</li>
+                                        <li>คำสั่งเปิด/ปิดพัดลม (Fan Command): เปิด หรือ ปิด</li>
+                                    </ul>
+                                    <p class="text-slate-300 my-3 text-sm">
+                                        คุณจะส่งข้อมูล 3 อย่างนี้ไปใน 8 ไบต์ได้อย่างไร? คุณไม่สามารถส่งแยกข้อความกันได้เพราะจะเปลืองแบนด์วิดท์และอาจเกิดความล่าช้า.
+                                        <br>คำตอบคือการ <strong class="text-accent-400">"แพ็คข้อมูล" (Data Packing)</strong> ครับ คุณต้องออกแบบว่าจะเอาข้อมูลแต่ละส่วนไปยัดไว้ในบิตไหนของไบต์ไหนบ้าง.
+                                    </p>
+                                    <div class="bg-dark-900 p-3 rounded-md text-xs">
+                                        <p class="text-slate-400">คำนวณบิตที่ต้องการ:</p>
+                                        <ul class="list-disc list-inside text-slate-300 space-y-1 pl-4">
+                                            <li>ค่าแรงบิด 4000: 2<sup>11</sup>=2048, 2<sup>12</sup>=4096 <i class="fas fa-arrow-right mx-1"></i> <strong class="text-lime-400">12 บิต</strong></li>
+                                            <li>สถานะ 4 สถานะ: 2<sup>2</sup>=4 <i class="fas fa-arrow-right mx-1"></i> <strong class="text-lime-400">2 บิต</strong></li>
+                                            <li>คำสั่งพัดลม เปิด/ปิด: <i class="fas fa-arrow-right mx-1"></i> <strong class="text-lime-400">1 บิต</strong></li>
+                                        </ul>
+                                    </div>
+                                    <p class="text-slate-300 mt-3 text-sm">
+                                        คุณอาจจะใช้ 2 ไบต์แรก (16 บิต) โดย 12 บิตแรกเก็บค่าแรงบิด, 2 บิตถัดมาเก็บสถานะ, 1 บิตถัดมาเก็บคำสั่งพัดลม และเหลืออีก 1 บิตไว้เฉยๆ หรือใช้เป็นแฟล็ก (Flag) อื่นๆ.
+                                        <br>เมื่อฝั่งรับ (ตัวควบคุมมอเตอร์) ได้รับ 2 ไบต์นี้มา มันก็ต้องรู้วิธี "แกะ" ข้อมูลกลับออกมาตามรูปแบบที่เราตกลงกันไว้.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-8 p-6 bg-dark-800 rounded-xl border border-primary-700">
+                            <p class="text-lg text-center text-primary-200 font-medium flex items-center justify-center">
+                                <i class="fas fa-exclamation-triangle text-yellow-400 mr-3 text-2xl"></i>
+                                <span>นี่คือโลกแห่งความเป็นจริงของการพัฒนาระบบสมองกลฝังตัวครับ เราต้องทำงานในระดับ "บิต" และ "ไบต์" อยู่ตลอดเวลา!</span>
+                            </p>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <!-- Floating navigation -->
+    <div class="floating-nav">
+        <div class="floating-btn" title="กลับสู่ด้านบน">
+            <i class="fas fa-arrow-up"></i>
+        </div>
+        <div class="floating-btn" id="theme-toggle" title="เปลี่ยนธีม">
+            <i class="fas fa-moon" id="theme-icon"></i>
+        </div>
+    </div>
+
+    <!-- Glossary Modal -->
+    <div id="glossary-modal-backdrop"></div>
+    <div id="glossary-modal">
+        <div class="flex justify-between items-center mb-4">
+            <h3 id="glossary-term" class="text-2xl font-bold text-primary-400"></h3>
+            <button id="glossary-close-btn" class="text-slate-400 hover:text-slate-200">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <p id="glossary-def" class="text-slate-300 leading-relaxed"></p>
+        <div class="mt-6 pt-4 border-t border-dark-600">
+            <p class="text-sm text-slate-400">
+                <i class="fas fa-lightbulb mr-2"></i> คลิกคำศัพท์อื่นๆ ในบทเรียนเพื่อเรียนรู้เพิ่มเติม
+            </p>
+        </div>
+    </div>
+
+    <script src="../../js/main.js" defer></script>
+</body>
+</html>
