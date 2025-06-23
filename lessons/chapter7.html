@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="th" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>บทที่ 7: ตัวชี้ (Pointers)</title> 
+    <link rel="stylesheet" href="../css/main.css"> <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body class="antialiased">
+    
+    <div class="container mx-auto max-w-6xl p-4 sm:p-6 lg:p-8 flex flex-col md:flex-row gap-8">
+        
+        <aside class="w-full md:w-64 flex-shrink-0">
+            <div id="nav-placeholder" class="sticky top-8">
+                </div>
+        </aside>
+
+        <div class="flex-grow">
+            <main>
+                <section id="c-pointers" class="scroll-mt-16">
+                    <div class="content-card">
+                        <div class="flex items-start section-header">
+                            <div class="section-icon" style="background: linear-gradient(135deg, #a855f7 0%, #d946ef 100%);">
+                                <i class="fas fa-map-marker-alt text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-3xl font-bold text-slate-100 mb-2">บทที่ 7: ตัวชี้ (Pointers) - หัวใจของภาษา C</h2>
+                                <div class="flex items-center text-slate-400 mb-4">
+                                    <i class="far fa-clock mr-1"></i>
+                                    <span class="text-sm">ระยะเวลาอ่าน: 12 นาที</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+                        <p class="text-slate-300 mb-4 leading-relaxed">
+                            ยินดีต้อนรับสู่บทเรียนที่อาจจะ "น่ากลัว" ที่สุด แต่ก็ "ทรงพลัง" ที่สุดในภาษา C ครับ หลายคนยอมแพ้ที่บทนี้ แต่สำหรับวิศวกรระบบสมองกลฝังตัวแล้ว ตัวชี้ (Pointer) ไม่ใช่ปีศาจ แต่เป็นเครื่องมือชิ้นเอกที่ช่วยให้เราสามารถพูดคุยกับหน่วยความจำและฮาร์ดแวร์ได้โดยตรง
+                        </p>
+                        <p class="text-slate-300 mb-4 leading-relaxed">
+                            ลองจินตนาการง่ายๆ ครับ: <strong class="text-amber-400">ตัวแปร</strong> คือ "บ้าน" ที่เก็บของ (ข้อมูล) ส่วน <strong class="text-primary-400">ตัวชี้ (Pointer)</strong> คือ "ที่อยู่ของบ้าน" (Memory Address) นั่นเองครับ มันไม่ได้เก็บของไว้เอง แต่มัน "รู้" ว่าของชิ้นนั้นถูกเก็บไว้ที่ไหน
+                        </p>
+
+                        <h3 class="text-xl font-semibold text-slate-100 mt-8 mb-3 flex items-center">
+                            <i class="fas fa-tools mr-2 text-yellow-400"></i> เครื่องมือของนักท่องไปในหน่วยความจำ
+                        </h3>
+                        <p class="text-slate-300 mb-4">เรามีเครื่องมือ 2 ชิ้นสำคัญในการทำงานกับตัวชี้ครับ:</p>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-6">
+                            <div class="interactive-card">
+                                <h4 class="text-lg font-semibold text-slate-100 mb-3 flex items-center">
+                                    <i class="fas fa-at mr-2 text-primary-400"></i> Address-of Operator (&amp;)
+                                </h4>
+                                <p class="text-slate-300">เครื่องหมาย `&amp;` ใช้สำหรับ "ถามหาที่อยู่" ของตัวแปร เหมือนการไปถามที่เขตว่า "บ้านเลขที่ 5 อยู่ตรงไหนของแผนที่?"</p>
+                                <div class="mt-4 p-3 bg-dark-800 rounded-lg">
+                                    <pre class="code-block"><code class="language-c"><span class="keyword-glossary code-keyword" data-term="int" data-def="ชนิดข้อมูลสำหรับเก็บเลขจำนวนเต็ม">int</span> age = 25;
+<span class="keyword-glossary code-keyword" data-term="int*" data-def="การประกาศตัวชี้ (pointer) ที่จะชี้ไปยังข้อมูลชนิด int">int*</span> p_age = <span class="keyword-glossary" data-term="& (Address-of)" data-def="ตัวดำเนินการที่ใช้ในการดึงค่า 'ที่อยู่หน่วยความจำ' (memory address) ของตัวแปรออกมา">&amp;</span>age; <span class="code-comment">// p_age ตอนนี้เก็บ "ที่อยู่" ของ age</span></code></pre>
+                                </div>
+                            </div>
+                            
+                            <div class="interactive-card">
+                                <h4 class="text-lg font-semibold text-slate-100 mb-3 flex items-center">
+                                    <i class="fas fa-hand-pointer mr-2 text-green-400"></i> Dereference Operator (*)
+                                </h4>
+                                <p class="text-slate-300">เครื่องหมาย `*` (เมื่อใช้กับตัวชี้) ใช้สำหรับ "เข้าไปดูของในบ้านตามที่อยู่" หรือ "ไปหยิบของจากบ้านหลังนั้น"</p>
+                                <div class="mt-4 p-3 bg-dark-800 rounded-lg">
+                                     <pre class="code-block"><code class="language-c"><span class="keyword-glossary code-function" data-term="printf" data-def="ฟังก์ชันมาตรฐานสำหรับแสดงผลข้อความและค่าของตัวแปรออกไปยังหน้าจอ">printf</span>(<span class="code-string">"Age is %i"</span>, <span class="keyword-glossary" data-term="* (Dereference)" data-def="ตัวดำเนินการที่ใช้ในการเข้าถึง 'ค่า' ที่ถูกเก็บอยู่ในที่อยู่หน่วยความจำที่ตัวชี้นั้นชี้ไป">*</span>p_age); <span class="code-comment">// พิมพ์ 25</span></code></pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="interactive-card mt-8">
+                            <h3 class="text-xl font-semibold text-slate-100 mb-4 flex items-center">
+                                <i class="fas fa-microscope mr-2 text-purple-400"></i> ห้องทดลอง: ส่องหน่วยความจำ (Memory Visualizer)
+                            </h3>
+                            <p class="text-slate-300 mb-4">มาดูการทำงานของตัวชี้แบบเห็นภาพกันครับ ลองเปลี่ยนค่าในกล่อง แล้วสังเกตความสัมพันธ์ระหว่างตัวแปร, ที่อยู่, และตัวชี้</p>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                <div class="bg-dark-800 p-5 rounded-lg flex flex-col justify-between">
+                                    <div>
+                                        <h4 class="text-lg font-semibold text-slate-100 mb-3">ควบคุมค่า</h4>
+                                        <label for="var-value" class="block text-slate-300 mb-2">กำหนดค่าให้ตัวแปร `score`:</label>
+                                        <input type="number" id="var-value" class="input-field w-full" value="95">
+                                    </div>
+                                    <div class="text-sm text-slate-400 mt-4">
+                                        <p><i class="fas fa-info-circle mr-1"></i> ที่อยู่หน่วยความจำ (เช่น `0x7ffc...`) เป็นค่าสมมติเพื่อการแสดงผล</p>
+                                    </div>
+                                </div>
+
+                                <div class="bg-dark-800 p-5 rounded-lg border-2 border-amber-400">
+                                    <p class="text-sm text-amber-300 font-semibold">ตัวแปร (Variable)</p>
+                                    <h4 class="text-lg font-bold text-slate-100 mb-2">int score;</h4>
+                                    <div class="mt-4">
+                                        <p class="text-slate-400 text-sm">มีค่า (Value):</p>
+                                        <p id="var-display-value" class="text-3xl font-bold text-amber-400">95</p>
+                                    </div>
+                                    <div class="mt-4">
+                                        <p class="text-slate-400 text-sm">อยู่ที่ (Address):</p>
+                                        <p id="var-address" class="text-lg font-mono text-slate-200">0x7ffc4d3f3a1c</p>
+                                    </div>
+                                </div>
+
+                                <div class="bg-dark-800 p-5 rounded-lg border-2 border-primary-400 relative">
+                                    <i class="fas fa-long-arrow-alt-left text-primary-400 text-4xl absolute -left-10 top-1/2 -translate-y-1/2 hidden md:block"></i>
+                                    <p class="text-sm text-primary-300 font-semibold">ตัวชี้ (Pointer)</p>
+                                    <h4 class="text-lg font-bold text-slate-100 mb-2">int* p_score;</h4>
+                                    <div class="mt-4">
+                                        <p class="text-slate-400 text-sm">ชี้ไปยังที่อยู่ (Value):</p>
+                                        <p id="ptr-address" class="text-lg font-mono text-primary-400">0x7ffc4d3f3a1c</p>
+                                    </div>
+                                    <div class="mt-4">
+                                        <p class="text-slate-400 text-sm">เมื่อ Dereference (`*p_score`) จะได้ค่า:</p>
+                                        <p id="ptr-deref-value" class="text-3xl font-bold text-primary-400">95</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3 class="text-xl font-semibold text-slate-100 mt-8 mb-3 flex items-center">
+                            <i class="fas fa-exclamation-triangle mr-2 text-red-400"></i> ข้อควรระวัง: NULL Pointers
+                        </h3>
+                        <p class="text-slate-300 mb-4 leading-relaxed">
+                            บางครั้งเราสร้างตัวชี้ขึ้นมาแต่ยังไม่พร้อมจะให้มันชี้ไปที่ไหน การปล่อยให้มันว่างๆ โดยไม่กำหนดค่าเริ่มต้นเป็นความคิดที่อันตรายมาก เพราะมันอาจจะชี้ไปยังที่อยู่มั่วๆ ในหน่วยความจำได้ การพยายามเข้าไปดูข้อมูล ณ ที่อยู่นั้น (Dereference) จะทำให้โปรแกรมของคุณพังทันที!
+                        </p>
+                        <p class="text-slate-300 mb-4 leading-relaxed">
+                            ทางปฏิบัติที่ดีที่สุดคือการกำหนดค่าให้มันเป็น <strong class="keyword-glossary" data-term="NULL" data-def="ค่าพิเศษที่ใช้ระบุว่า 'ตัวชี้นี้ไม่ได้ชี้ไปที่ไหนเลย' เป็นเหมือนที่อยู่บ้านเลขที่ 0 ที่ไม่มีอยู่จริง">NULL</strong> ซึ่งเปรียบเสมือนการบอกว่า "ตัวชี้นี้ไม่ได้ชี้ไปที่ไหนทั้งนั้น" และก่อนจะใช้งาน เราควรตรวจสอบเสมอว่ามันไม่ใช่ NULL
+                        </p>
+
+                        <div class="bg-dark-800 p-4 rounded-lg">
+                        <pre class="code-block"><code class="language-c"><span class="keyword-glossary code-keyword" data-term="int*" data-def="การประกาศตัวชี้ (pointer) ที่จะชี้ไปยังข้อมูลชนิด int">int*</span> p_safe = <span class="keyword-glossary code-keyword" data-term="NULL" data-def="ค่าพิเศษที่ใช้ระบุว่า 'ตัวชี้นี้ไม่ได้ชี้ไปที่ไหนเลย' ซึ่งมีค่าเป็น 0">NULL</span>; <span class="code-comment">// กำหนดค่าเริ่มต้นเป็น NULL เสมอ</span>
+
+<span class="code-comment">// ... ต่อมาในโปรแกรม ...</span>
+
+<span class="keyword-glossary code-keyword" data-term="if" data-def="คำสั่งเริ่มต้นเงื่อนไข 'ถ้า...' เพื่อตรวจสอบว่าสิ่งที่อยู่ในวงเล็บเป็นจริงหรือไม่">if</span> (p_safe != <span class="keyword-glossary code-keyword" data-term="NULL" data-def="ค่าพิเศษที่ใช้ระบุว่า 'ตัวชี้นี้ไม่ได้ชี้ไปที่ไหนเลย' ซึ่งมีค่าเป็น 0">NULL</span>)
+<span class="keyword-glossary" data-term="{ }" data-def="ปีกกา คือสัญลักษณ์ที่ใช้กำหนด 'ขอบเขต' การทำงานของโค้ด">{</span>
+    <span class="code-comment">// ทำงานกับตัวชี้ได้ เพราะมั่นใจว่ามันชี้ไปที่ไหนสักแห่ง</span>
+    <span class="keyword-glossary code-function" data-term="printf" data-def="ฟังก์ชันมาตรฐานสำหรับแสดงผลข้อความและค่าของตัวแปรออกไปยังหน้าจอ">printf</span>(<span class="code-string">"Value is %i\n"</span>, *p_safe)<span class="keyword-glossary" data-term=";" data-def="เครื่องหมายจบประโยคคำสั่งในภาษา C">;</span>
+<span class="keyword-glossary" data-term="{ }" data-def="ปีกกา คือสัญลักษณ์ที่ใช้กำหนด 'ขอบเขต' การทำงานของโค้ด">}</span></code></pre>
+                        </div>
+                        
+                        <div class="interactive-card mt-8 border-t-4 border-green-500">
+                            <h3 class="text-xl font-semibold text-slate-100 mb-4 flex items-center">
+                                <i class="fas fa-graduation-cap mr-2 text-green-400"></i> โจทย์ปัญหา: ฟังก์ชันสลับค่า (Swap Function)
+                            </h3>
+                            <p class="text-slate-300 mb-4">
+                                <strong>คำสั่ง:</strong> หนึ่งในแบบฝึกหัดเกี่ยวกับตัวชี้ที่คลาสสิกที่สุดคือการเขียนฟังก์ชันที่สามารถ "สลับค่า" ของตัวแปรสองตัวได้จริง ๆ จงเติมโค้ดในฟังก์ชัน `swap` ให้สมบูรณ์โดยใช้ตัวชี้
+                            </p>
+                            <h5 class="font-semibold text-slate-200 mb-2">โค้ดเริ่มต้น:</h5>
+                            <pre class="bg-dark-800 p-3 rounded-lg text-slate-200 font-mono text-sm">
+<span class="keyword-glossary code-keyword" data-term="void" data-def="ระบุว่าฟังก์ชันนี้ไม่มีการคืนค่า (return) ใดๆ">void</span> swap(<span class="keyword-glossary code-keyword" data-term="int*" data-def="การประกาศตัวชี้ (pointer) ที่จะชี้ไปยังข้อมูลชนิด int">int*</span> a, <span class="keyword-glossary code-keyword" data-term="int*" data-def="การประกาศตัวชี้ (pointer) ที่จะชี้ไปยังข้อมูลชนิด int">int*</span> b)
+<span class="keyword-glossary" data-term="{ }" data-def="ปีกกา คือสัญลักษณ์ที่ใช้กำหนด 'ขอบเขต' การทำงานของโค้ด">{</span>
+    <span class="code-comment">// เติมโค้ดของคุณที่นี่</span>
+<span class="keyword-glossary" data-term="{ }" data-def="ปีกกา คือสัญลักษณ์ที่ใช้กำหนด 'ขอบเขต' การทำงานของโค้ด">}</span>
+
+<span class="keyword-glossary code-keyword" data-term="int" data-def="ชนิดข้อมูลสำหรับเก็บเลขจำนวนเต็ม">int</span> <span class="keyword-glossary code-function" data-term="main" data-def="คือชื่อฟังก์ชันที่พิเศษที่สุด ถือเป็น 'ประตูทางเข้าหลัก' ของทุกโปรแกรมในภาษา C">main</span>(<span class="keyword-glossary code-keyword" data-term="void" data-def="ระบุว่าฟังก์ชันนี้ไม่มีการรับค่าใดๆ">void</span>)
+<span class="keyword-glossary" data-term="{ }" data-def="ปีกกา คือสัญลักษณ์ที่ใช้กำหนด 'ขอบเขต' การทำงานของโค้ด">{</span>
+    <span class="keyword-glossary code-keyword" data-term="int" data-def="ชนิดข้อมูลสำหรับเก็บเลขจำนวนเต็ม">int</span> x = 10;
+    <span class="keyword-glossary code-keyword" data-term="int" data-def="ชนิดข้อมูลสำหรับเก็บเลขจำนวนเต็ม">int</span> y = 50;
+    <span class="keyword-glossary code-function" data-term="printf" data-def="ฟังก์ชันมาตรฐานสำหรับแสดงผลข้อความและค่าของตัวแปรออกไปยังหน้าจอ">printf</span>(<span class="code-string">"Before: x = %i, y = %i\n"</span>, x, y);
+    swap(<span class="keyword-glossary" data-term="& (Address-of)" data-def="ตัวดำเนินการที่ใช้ในการดึงค่า 'ที่อยู่หน่วยความจำ' (memory address) ของตัวแปรออกมา">&amp;</span>x, <span class="keyword-glossary" data-term="& (Address-of)" data-def="ตัวดำเนินการที่ใช้ในการดึงค่า 'ที่อยู่หน่วยความจำ' (memory address) ของตัวแปรออกมา">&amp;</span>y);
+    <span class="keyword-glossary code-function" data-term="printf" data-def="ฟังก์ชันมาตรฐานสำหรับแสดงผลข้อความและค่าของตัวแปรออกไปยังหน้าจอ">printf</span>(<span class="code-string">"After: x = %i, y = %i\n"</span>, x, y);
+    <span class="keyword-glossary code-keyword" data-term="return" data-def="คำสั่งที่ใช้ในการจบการทำงานของฟังก์ชันและส่งค่ากลับ">return</span> 0;
+<span class="keyword-glossary" data-term="{ }" data-def="ปีกกา คือสัญลักษณ์ที่ใช้กำหนด 'ขอบเขต' การทำงานของโค้ด">}</span>
+</pre>
+                            <h5 class="font-semibold text-slate-200 mt-4 mb-2">ผลลัพธ์ที่คาดหวัง:</h5>
+                            <pre class="bg-dark-800 p-3 rounded-lg text-slate-200 font-mono text-sm">Before: x = 10, y = 50
+After: x = 50, y = 10</pre>
+                            <div class="bg-dark-800 p-4 rounded-lg mt-4">
+                                <h5 class="font-semibold text-slate-200 mb-2">
+                                    <i class="fas fa-lightbulb mr-2 text-yellow-400"></i> คำใบ้ (Hint)
+                                </h5>
+                                <p class="text-slate-400 text-sm">
+                                    คุณต้องสร้างตัวแปรชั่วคราว (temporary variable) ขึ้นมา 1 ตัวเพื่อเก็บค่าของ `*a` ไว้ก่อน จากนั้นจึงกำหนดค่า `*b` ให้กับ `*a` และสุดท้ายก็นำค่าจากตัวแปรชั่วคราวไปใส่ใน `*b`
+                                </p>
+                            </div>
+                        </div>
+                        </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <div class="floating-nav">
+        <div class="floating-btn" title="กลับสู่ด้านบน">
+            <i class="fas fa-arrow-up"></i>
+        </div>
+        <div class="floating-btn" id="theme-toggle" title="เปลี่ยนธีม">
+            <i class="fas fa-moon" id="theme-icon"></i>
+        </div>
+    </div>
+    <div id="glossary-modal-backdrop"></div>
+    <div id="glossary-modal">
+        <div class="flex justify-between items-center mb-4">
+            <h3 id="glossary-term" class="text-2xl font-bold text-primary-400"></h3>
+            <button id="glossary-close-btn" class="text-slate-400 hover:text-slate-200">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <p id="glossary-def" class="text-slate-300 leading-relaxed"></p>
+        <div class="mt-6 pt-4 border-t border-dark-600">
+            <p class="text-sm text-slate-400">
+                <i class="fas fa-lightbulb mr-2"></i> คลิกคำศัพท์อื่นๆ ในบทเรียนเพื่อเรียนรู้เพิ่มเติม
+            </p>
+        </div>
+    </div>
+
+
+    <script src="../js/main.js" defer></script>
+    <script>
+        // Script for Memory Visualizer
+        document.addEventListener('DOMContentLoaded', function() {
+            const varValueInput = document.getElementById('var-value');
+            if (varValueInput) {
+                const varDisplayValue = document.getElementById('var-display-value');
+                const ptrDerefValue = document.getElementById('ptr-deref-value');
+
+                varValueInput.addEventListener('input', function() {
+                    const value = this.value || 0;
+                    varDisplayValue.textContent = value;
+                    ptrDerefValue.textContent = value;
+                });
+            }
+        });
+    </script>
+</body>
+</html>

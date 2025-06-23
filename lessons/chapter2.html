@@ -156,12 +156,14 @@
                             <pre class="code-block"><code class="language-c"><span class="code-comment">// นำเข้าไลบรารีมาตรฐานสำหรับ Input/Output</span>
 <span class="keyword-glossary" data-term="#include" data-def="คำสั่ง 'พรีโปรเซสเซอร์' ใช้บอกคอมไพเลอร์ว่า 'ช่วยไปเอาโค้ดจากไฟล์อื่นมารวมกับไฟล์นี้ที' เหมือนการไปหยิบกล่องเครื่องมือมาเตรียมไว้ใช้งาน">#include</span> <span class="code-string">&lt;<span class="keyword-glossary" data-term="stdio.h" data-def="ชื่อของ 'กล่องเครื่องมือ' มาตรฐาน (Standard Input/Output Header) ที่มีฟังก์ชันพื้นฐานอย่าง printf() อยู่ข้างใน">stdio.h</span>&gt;</span>
 
-<span class="code-comment">// ฟังก์ชัน main คือจุดเริ่มต้นของทุกโปรแกรมภาษา C</span>
-<span class="keyword-glossary" data-term="int" data-def="ย่อมาจาก Integer คือชนิดของข้อมูลที่เป็น 'เลขจำนวนเต็ม' การระบุ int หน้า main หมายความว่าเมื่อฟังก์ชันนี้ทำงานเสร็จ จะต้อง 'คืนค่า' กลับไปเป็นเลขจำนวนเต็ม">int</span> <span class="keyword-glossary code-function" data-term="main" data-def="คือชื่อฟังก์ชันที่พิเศษที่สุด ถือเป็น 'ประตูทางเข้าหลัก' ของทุกโปรแกรมในภาษา C คอมพิวเตอร์จะมองหาฟังก์ชัน main() เป็นอันดับแรกเสมอ">main</span>(<span class="keyword-glossary" data-term="void" data-def="แปลว่า 'ว่างเปล่า' ในที่นี้หมายความว่าฟังก์ชัน main ไม่ต้องการรับข้อมูลใดๆ จากภายนอกเพื่อเริ่มทำงาน">void</span>)
-<span class="keyword-glossary" data-term="{ }" data-def="ปีกกา คือสัญลักษณ์ที่ใช้กำหนด 'ขอบเขต' การทำงานของฟังก์ชัน หรือบล็อกของโค้ด ทุกอย่างที่อยู่ระหว่างปีกกาเปิด { และปีกกาปิด } ถือว่าเป็นส่วนหนึ่งของบล็อกนั้นๆ">{</span>
+<span class="keyword-glossary" data-term="int" data-def="...">int</span> <span class="keyword-glossary code-function" data-term="main" data-def="...">main</span>(<span class="keyword-glossary" data-term="void" data-def="...">void</span>)
+<span class="keyword-glossary" data-term="{ }" data-def="..."> {</span>
     <span class="code-comment">// ใช้ฟังก์ชัน printf เพื่อพิมพ์ข้อความออกทางหน้าจอ</span>
-    <span class="keyword-glossary code-function" data-term="printf" data-def="มาจาก Print-Formatted เป็นฟังก์ชันที่อยู่ใน stdio.h ใช้สำหรับแสดงผลข้อความหรือค่าของตัวแปรออกไปยังหน้าจอ">printf</span>(<span class="code-string">"Hello, world!\n"</span>)<span class="keyword-glossary" data-term=";" data-def="เซมิโคลอน คือเครื่องหมาย 'จบประโยค' ในภาษา C มันทำหน้าที่เหมือนจุด full-stop ในภาษาอังกฤษ เพื่อบอกคอมไพเลอร์ว่าคำสั่งนี้จบลงแล้ว">;</span>
-<span class="keyword-glossary" data-term="{ }" data-def="ปีกกา คือสัญลักษณ์ที่ใช้กำหนด 'ขอบเขต' การทำงานของฟังก์ชัน หรือบล็อกของโค้ด ทุกอย่างที่อยู่ระหว่างปีกกาเปิด { และปีกกาปิด } ถือว่าเป็นส่วนหนึ่งของบล็อกนั้นๆ">}</span></code></pre>
+    <span class="keyword-glossary code-function" data-term="printf" data-def="...">printf</span>(<span class="code-string">"Hello, world!\n"</span>)<span class="keyword-glossary" data-term=";" data-def="...">;</span>
+    
+    <span class="code-comment">// คืนค่า 0 เพื่อบอกว่าโปรแกรมทำงานสำเร็จ</span>
+    <span class="keyword-glossary" data-term="return 0" data-def="คำสั่งให้ฟังก์ชัน main คืนค่าเลข 0 กลับไปยังระบบปฏิบัติการ ซึ่งเป็นสัญลักษณ์สากลว่าโปรแกรมทำงานเสร็จสิ้นสมบูรณ์โดยไม่มีข้อผิดพลาด">return 0;</span><span class="keyword-glossary" data-term=";" data-def="...">;</span>
+<span class="keyword-glossary" data-term="{ }" data-def="...">}</span>
                         </div>
                         
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
@@ -205,6 +207,29 @@
                                 </ul>
                             </div>
                         </div>
+
+                        <div class="interactive-card mt-8 border-t-4 border-green-500">
+                            <h3 class="text-xl font-semibold text-slate-100 mb-4 flex items-center">
+                                <i class="fas fa-graduation-cap mr-2 text-green-400"></i> โจทย์ปัญหา: แนะนำตัวเอง
+                            </h3>
+                            <p class="text-slate-300 mb-4">
+                                <strong>คำสั่ง:</strong> แก้ไขโปรแกรม "Hello, world!" ของคุณ ให้แสดงผลข้อมูลแนะนำตัวเอง 3 บรรทัด คือ ชื่อ, สาขาวิชา, และมหาวิทยาลัย
+                            </p>
+                            <h5 class="font-semibold text-slate-200 mb-2">ผลลัพธ์ที่คาดหวัง:</h5>
+                            <pre class="bg-dark-800 p-3 rounded-lg text-slate-200 font-mono text-sm">My name is Adam
+                        Major: Computer Science
+                        University: Harvard</pre>
+                            <div class="bg-dark-800 p-4 rounded-lg mt-4">
+                                <h5 class="font-semibold text-slate-200 mb-2">
+                                    <i class="fas fa-lightbulb mr-2 text-yellow-400"></i> คำใบ้ (Hint)
+                                </h5>
+                                <p class="text-slate-400 text-sm">
+                                    คุณสามารถใช้ฟังก์ชัน `printf()` หลายครั้ง หรือใช้ `printf()` ครั้งเดียวพร้อมกับตัวอักษรพิเศษ `\n` เพื่อขึ้นบรรทัดใหม่
+                                </p>
+                            </div>
+                        </div>
+
+
                     </div>
                 </section>
 

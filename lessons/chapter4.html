@@ -118,6 +118,20 @@
                                 <div class="text-sm text-slate-300">หารเอาเศษ</div>
                             </div>
                         </div>
+
+                        <h4 class="text-lg font-semibold text-slate-100 mt-6 mb-3 flex items-center">
+                            <i class="fas fa-exclamation-circle mr-2 text-amber-400"></i> สิ่งที่ต้องรู้: ลำดับความสำคัญของตัวดำเนินการ
+                        </h4>
+                        <p class="text-slate-300 mb-4">
+                            คอมพิวเตอร์ไม่ได้คำนวณจากซ้ายไปขวาเสมอไป แต่มีลำดับความสำคัญเหมือนคณิตศาสตร์ครับ โดยทั่วไปแล้ว <strong>การคูณ (*)</strong>, <strong>การหาร (/)</strong>, และ <strong>หารเอาเศษ (%)</strong> จะถูกทำก่อน <strong>การบวก (+)</strong> และ <strong>การลบ (-)</strong> เสมอ
+                        </p>
+                        <div class="bg-dark-800 p-4 rounded-lg">
+                            <pre class="code-block"><code class="language-c"><span class="code-comment">// คอมพิวเตอร์จะทำ 5 * 2 ก่อน แล้วจึงนำผลลัพธ์ (10) ไปบวกกับ 3</span>
+                        <span class="code-keyword">int</span> result = 3 + 5 * 2;  <span class="code-comment">// ผลลัพธ์คือ 13 ไม่ใช่ 16</span>
+
+                        <span class="code-comment">// หากต้องการให้บวกก่อน ให้ใช้วงเล็บเพื่อบังคับลำดับ</span>
+                        <span class="code-keyword">int</span> correct_result = (3 + 5) * 2; <span class="code-comment">// ผลลัพธ์คือ 16</span></code></pre>
+                        </div>
                         
                         <h3 class="text-xl font-semibold text-slate-100 mt-8 mb-3 flex items-center">
                             <i class="fas fa-plus-circle mr-2 text-green-400"></i> มาสร้างเครื่องบวกเลขอย่างง่ายกัน!
@@ -318,6 +332,30 @@
                                 <i class="fas fa-star text-yellow-400 mr-2"></i> เพียงเท่านี้ คุณก็ได้สร้างโปรแกรมที่ไม่ได้แค่โต้ตอบ แต่ยัง "คิด" และคำนวณให้คุณได้แล้ว!
                             </p>
                         </div>
+
+                        <div class="interactive-card mt-8 border-t-4 border-green-500">
+                            <h3 class="text-xl font-semibold text-slate-100 mb-4 flex items-center">
+                                <i class="fas fa-graduation-cap mr-2 text-green-400"></i> โจทย์ปัญหา: โปรแกรมคำนวณพื้นที่สี่เหลี่ยม
+                            </h3>
+                            <p class="text-slate-300 mb-4">
+                                <strong>คำสั่ง:</strong> เขียนโปรแกรมที่รับค่า "ความกว้าง" และ "ความยาว" ของสี่เหลี่ยม (ซึ่งอาจเป็นเลขทศนิยม) จากผู้ใช้ แล้วคำนวณและแสดงผล "พื้นที่" ของสี่เหลี่ยมนั้น
+                            </p>
+                            <h5 class="font-semibold text-slate-200 mb-2">ผลลัพธ์ที่คาดหวัง:</h5>
+                            <pre class="bg-dark-800 p-3 rounded-lg text-slate-200 font-mono text-sm">Width: 5.5
+                        Length: 10.2
+                        Area: 56.10</pre>
+                            <div class="bg-dark-800 p-4 rounded-lg mt-4">
+                                <h5 class="font-semibold text-slate-200 mb-2">
+                                    <i class="fas fa-lightbulb mr-2 text-yellow-400"></i> คำใบ้ (Hint)
+                                </h5>
+                                <p class="text-slate-400 text-sm">
+                                    ใช้ชนิดข้อมูล `float` สำหรับตัวแปร และใช้ฟังก์ชัน `get_float()` จากไลบรารี `cs50.h` เพื่อรับค่าทศนิยม อย่าลืมใช้ Format Specifier `%f` ใน `printf()` เพื่อแสดงผลทศนิยมนะครับ
+                                </p>
+                            </div>
+                        </div>
+
+
+
                     </div>
                 </section>
 

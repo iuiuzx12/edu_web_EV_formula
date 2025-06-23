@@ -1,151 +1,182 @@
 :root {
     /* ========================== */
-    /*      Color Palette         */
+    /*      Color Palette (New)   */
     /* ========================== */
 
-    /* Dark Theme Colors */
-    --dark-bg-start: #0f172a;
-    --dark-bg-end: #1e293b;
-    --dark-text-primary: #e2e8f0;
-    --dark-text-headings: #f1f5f9;
-    --dark-text-secondary: #cbd5e1;
-    --dark-text-muted: #94a3b8;
+    /* Primary Colors (Navy Blue Focus) */
+    --primary-navy-dark: #001f3f; /* Darker Navy for backgrounds in dark mode */
+    --primary-navy-main: #002366; /* Main Navy Blue - Formal and Trustworthy */
+    --primary-navy-light: #19376D; /* Lighter Navy for accents or light mode backgrounds */
+    --primary-navy-very-light: #E0EFFF; /* Very light blue for subtle highlights */
 
-    --dark-card-bg-start: rgba(30, 41, 59, 0.7);
-    --dark-card-bg-end: rgba(30, 41, 59, 0.9);
-    --dark-card-border: rgba(100, 116, 139, 0.2);
-    --dark-interactive-card-bg-start: rgba(30, 41, 59, 0.9);
-    --dark-interactive-card-bg-end: rgba(15, 23, 42, 0.9);
+    /* Secondary Colors (Grays) */
+    --secondary-gray-lightest: #F5F5F5; /* Lightest gray for secondary backgrounds */
+    --secondary-gray-light: #EAEAEA;   /* Light gray for borders or subtle divisions */
+    --secondary-gray-medium: #D3D3D3;  /* Medium gray for less prominent borders */
+    --secondary-gray-dark: #707070;    /* Dark gray for secondary text */
+    --secondary-gray-darkest: #4A4A4A; /* Darkest gray for sub-headings or less important text */
 
-    --dark-code-bg-start: #0f172a;
-    --dark-code-bg-end: #1e293b;
-    --dark-code-text: #e2e8f0;
-    --dark-code-border: rgba(100, 116, 139, 0.3);
-    --dark-code-keyword: #60a5fa;
-    --dark-code-function: #a78bfa;
-    --dark-code-comment: #94a3b8;
-    --dark-code-string: #a3e635;
-    --dark-code-placeholder: #fbbf24;
-    --dark-highlight-bg: rgba(56, 189, 248, 0.1);
-    --dark-highlight-border: #60a5fa;
+    /* Accent Colors */
+    --accent-blue-cta: #007BFF;      /* Bright blue for Call-to-Actions */
+    --accent-green-success: #006400; /* Dark green for success, growth (use sparingly) */
+    /* Consider an alternative accent if green clashes */
+    --accent-blue-highlight: #60a5fa; /* Existing highlight blue, can be kept or refined */
 
-    --dark-button-primary-bg-start: #3b82f6;
-    --dark-button-primary-bg-end: #8b5cf6;
-    --dark-button-text: white;
-    --dark-tab-bg: rgba(30, 41, 59, 0.7);
-    --dark-tab-border: #475569;
-    --dark-tab-hover-bg: rgba(51, 65, 85, 0.7);
-    --dark-input-bg: rgba(15, 23, 42, 0.5);
-    --dark-input-border: #475569;
-    --dark-input-focus-border: #3b82f6;
-    --dark-input-focus-shadow: rgba(59, 130, 246, 0.3);
 
-    --dark-nav-link-active-bg-start: rgba(59, 130, 246, 0.3);
-    --dark-nav-link-active-bg-end: rgba(139, 92, 246, 0.3);
-    --dark-nav-link-active-border: #3b82f6;
+    /* Text Colors */
+    --text-color-main: #212529;       /* Dark gray (almost black) for main content - Improved Readability */
+    --text-color-secondary: #495057;  /* Slightly lighter gray for secondary content */
+    --text-color-headings: #19376D;  /* Navy for headings to match primary color */
+    --text-color-on-dark-bg: #E2E8F0; /* Light gray/white for text on dark backgrounds */
+    --text-color-on-navy-bg: #FFFFFF; /* White text on navy backgrounds */
+    --text-color-muted: var(--secondary-gray-dark); /* Muted text */
+
+
+    /* Dark Theme Colors (Using New Palette) */
+    --dark-bg-start: var(--primary-navy-dark);
+    --dark-bg-end: #001a33; /* Slightly different shade of dark navy */
+    --dark-text-primary: var(--text-color-on-dark-bg);
+    --dark-text-headings: var(--primary-navy-very-light); /* Light blue for headings on dark bg */
+    --dark-text-secondary: var(--secondary-gray-medium); /* Lighter gray for secondary text on dark */
+    --dark-text-muted: var(--secondary-gray-dark);
+
+    --dark-card-bg-start: rgba(25, 55, 109, 0.7); /* Semi-transparent Navy (primary-navy-light) */
+    --dark-card-bg-end: rgba(25, 55, 109, 0.9);
+    --dark-card-border: rgba(100, 116, 139, 0.3); /* Keeping a subtle border */
+    --dark-interactive-card-bg-start: rgba(25, 55, 109, 0.9);
+    --dark-interactive-card-bg-end: rgba(0, 31, 63, 0.9); /* Darker navy for interactive elements */
+
+    --dark-code-bg-start: var(--primary-navy-dark);
+    --dark-code-bg-end: #001a33;
+    --dark-code-text: var(--text-color-on-dark-bg);
+    --dark-code-border: rgba(100, 116, 139, 0.4);
+    --dark-code-keyword: var(--accent-blue-highlight);
+    --dark-code-function: #a78bfa; /* Keeping purple for functions for now, can be reviewed */
+    --dark-code-comment: var(--secondary-gray-dark);
+    --dark-code-string: #a3e635; /* Keeping green for strings for now */
+    --dark-code-placeholder: #fbbf24; /* Keeping amber for placeholders */
+    --dark-highlight-bg: rgba(96, 165, 250, 0.15); /* accent-blue-highlight with more opacity */
+    --dark-highlight-border: var(--accent-blue-highlight);
+
+    --dark-button-primary-bg-start: var(--accent-blue-cta);
+    --dark-button-primary-bg-end: #0062CC; /* Slightly darker CTA blue for gradient */
+    --dark-button-text: var(--text-color-on-navy-bg);
+    --dark-tab-bg: rgba(25, 55, 109, 0.7);
+    --dark-tab-border: var(--primary-navy-light);
+    --dark-tab-hover-bg: rgba(25, 55, 109, 0.9);
+    --dark-input-bg: rgba(0, 31, 63, 0.5);
+    --dark-input-border: var(--primary-navy-light);
+    --dark-input-focus-border: var(--accent-blue-cta);
+    --dark-input-focus-shadow: rgba(0, 123, 255, 0.3);
+
+    --dark-nav-link-active-bg-start: rgba(0, 123, 255, 0.2); /* accent-blue-cta transparent */
+    --dark-nav-link-active-bg-end: rgba(0, 98, 204, 0.3);
+    --dark-nav-link-active-border: var(--accent-blue-cta);
     
-    --dark-modal-bg-start: #1e293b;
-    --dark-modal-bg-end: #0f172a;
+    --dark-modal-bg-start: var(--primary-navy-main);
+    --dark-modal-bg-end: var(--primary-navy-dark);
 
-    /* Light Theme Colors */
-    --light-bg-start: #f0f9ff;
-    --light-bg-end: #e6f7ff;
-    --light-text-primary: #1a202c; /* Base text color for light mode, used by --text-primary in body.light-mode - Changed */
-    --light-text-headings: #0a0e14; /* Changed */
-    --light-text-primary-actual: #1a202c; /* Specific variable for light mode if needed, though --text-primary is preferred - Changed */
-    --light-text-secondary: #2d3748; /* Changed */
-    --light-text-muted: #4a5568; /* Changed */
-    --light-text-subtle: #718096; /* Changed */
+    /* Light Theme Colors (Using New Palette) */
+    --light-bg-start: var(--secondary-gray-lightest); /* Clean, light gray background */
+    --light-bg-end: #FFFFFF;                          /* White for gradient end */
+    --light-text-primary: var(--text-color-main);
+    --light-text-headings: var(--text-color-headings); /* Navy for headings */
+    --light-text-primary-actual: var(--text-color-main);
+    --light-text-secondary: var(--text-color-secondary);
+    --light-text-muted: var(--secondary-gray-dark);
+    --light-text-subtle: var(--secondary-gray-darkest);
 
-    --light-card-bg-start: rgba(255, 255, 255, 0.9);
-    --light-card-bg-end: rgba(240, 240, 240, 0.9);
-    --light-card-border: rgba(148, 163, 184, 0.2);
-    --light-interactive-card-bg-start: rgba(255, 255, 255, 0.9);
-    --light-interactive-card-bg-end: rgba(241, 245, 249, 0.9);
-    --light-interactive-card-border: #cbd5e1;
+    --light-card-bg-start: #FFFFFF; /* White card background */
+    --light-card-bg-end: var(--secondary-gray-lightest); /* Very light gray for subtle gradient */
+    --light-card-border: var(--secondary-gray-medium); /* Medium gray border */
+    --light-interactive-card-bg-start: #FFFFFF;
+    --light-interactive-card-bg-end: var(--secondary-gray-lightest);
+    --light-interactive-card-border: var(--secondary-gray-light);
 
-    --light-code-bg: var(--color-white);
-    --light-code-text: #0a0e14; /* Changed from var(--light-text-headings) */
-    --light-code-border: var(--light-interactive-card-border);
-    --light-code-keyword: #1e3a8a; /* Darker blue - Changed from var(--color-blue-darker) */
-    --light-code-function: #5b21b6; /* Darker purple - Changed from var(--color-purple-darker) */
-    --light-code-comment: #4a5568; /* Darker gray - Changed from var(--light-text-subtle) */
-    --light-code-string: #047857; /* Darker green - Changed from var(--color-green-darkest) */
-    --light-code-placeholder: #92400e; /* Darker amber - Changed from var(--color-amber-darker) */
+    --light-code-bg: var(--secondary-gray-lightest);
+    --light-code-text: var(--text-color-main);
+    --light-code-border: var(--secondary-gray-medium);
+    --light-code-keyword: #0056b3; /* Darker blue for keywords */
+    --light-code-function: #581c87; /* Darker purple */
+    --light-code-comment: var(--secondary-gray-dark);
+    --light-code-string: #004d00; /* Darker green */
+    --light-code-placeholder: #7f5f00; /* Darker amber */
     
-    --light-button-primary-bg-start: var(--color-blue-darker);
-    --light-button-primary-bg-end: var(--color-purple-darker);
-    --light-tab-bg: rgba(241, 245, 249, 0.7);
-    --light-tab-border: var(--light-interactive-card-border);
-    --light-input-bg: rgba(255, 255, 255, 0.7);
-    --light-input-border: var(--light-interactive-card-border);
-    --light-input-focus-border: var(--color-blue-primary);
-    --light-input-focus-shadow: rgba(59, 130, 246, 0.2);
+    --light-button-primary-bg-start: var(--accent-blue-cta);
+    --light-button-primary-bg-end: #0056b3; /* Darker blue for gradient */
+    /* --light-button-primary-bg-start: var(--accent-green-success); /* Alternative: Green CTA */
+    /* --light-button-primary-bg-end: #004d00; /* Darker Green CTA */
+    --light-tab-bg: var(--secondary-gray-lightest);
+    --light-tab-border: var(--secondary-gray-medium);
+    --light-input-bg: #FFFFFF;
+    --light-input-border: var(--secondary-gray-medium);
+    --light-input-focus-border: var(--accent-blue-cta);
+    --light-input-focus-shadow: rgba(0, 123, 255, 0.2);
 
-    --light-nav-link-color: var(--light-text-muted);
-    --light-nav-link-hover-color: var(--light-text-headings);
-    --light-nav-link-hover-bg: rgba(226, 232, 240, 0.9);
-    --light-nav-link-active-bg-start: rgba(30, 64, 175, 0.1);
-    --light-nav-link-active-bg-end: rgba(124, 58, 237, 0.1);
-    --light-nav-link-active-color: var(--color-blue-darker);
-    --light-nav-link-active-border: var(--color-blue-darker);
-    --light-section-icon-bg-start: var(--color-blue-darker);
-    --light-section-icon-bg-end: #4338ca; 
+    --light-nav-link-color: var(--secondary-gray-darkest);
+    --light-nav-link-hover-color: var(--primary-navy-main);
+    --light-nav-link-hover-bg: var(--primary-navy-very-light);
+    --light-nav-link-active-bg-start: rgba(0, 123, 255, 0.1); /* accent-blue-cta transparent */
+    --light-nav-link-active-bg-end: rgba(0, 98, 204, 0.15);
+    --light-nav-link-active-color: var(--accent-blue-cta);
+    --light-nav-link-active-border: var(--accent-blue-cta);
+    --light-section-icon-bg-start: var(--primary-navy-main);
+    --light-section-icon-bg-end: var(--primary-navy-light); 
     
-    --light-modal-bg-start: #f1f5f9;
-    --light-modal-bg-end: #e2e8f0;
+    --light-modal-bg-start: var(--secondary-gray-lightest);
+    --light-modal-bg-end: #FFFFFF;
 
     /* ========================== */
-    /* Theme-Agnostic Color Palette */
+    /* Theme-Agnostic Color Palette (Legacy - Will be phased out or integrated) */
     /* ========================== */
     /* These colors are used directly or as base for theme-specific variables. */
-    --color-white: white;
-    --color-red-error: #ef4444;
-    --color-red-error-shadow: rgba(239, 68, 68, 0.3);
-    --color-red-darker: #b91c1c;
-    --color-red-light-bg: #fee2e2;
-    --color-red-light-border: #fca5a5;
-    --color-red-active-border: #f87171;
+    --color-white: #FFFFFF; /* Explicit white */
+    --color-red-error: #dc3545; /* Bootstrap-like error red */
+    --color-red-error-shadow: rgba(220, 53, 69, 0.3);
+    --color-red-darker: #b02a37;
+    --color-red-light-bg: #f8d7da;
+    --color-red-light-border: #f5c6cb;
+    --color-red-active-border: #f1aeb5;
 
-    --color-blue-primary: #3b82f6;
-    --color-blue-darker: #1e40af;
-    --color-blue-darkest: #1d4ed8;
-    --color-blue-light-bg: #dbeafe;
-    --color-blue-light-border: #93c5fd;
-    --color-blue-active-border: #60a5fa;
+    --color-blue-primary: var(--accent-blue-cta); /* Referencing new palette */
+    --color-blue-darker: #0056b3; /* Darker blue for general use if needed */
+    --color-blue-darkest: #004085;
+    --color-blue-light-bg: #cce5ff;
+    --color-blue-light-border: #b8daff;
+    --color-blue-active-border: var(--accent-blue-highlight); /* Referencing new palette */
     
-    --color-purple-primary: #8b5cf6;
+    --color-purple-primary: #8b5cf6; /* Kept for now, review if needed */
     --color-purple-darker: #7c3aed;
     --color-purple-darkest: #6d28d9;
 
-    --color-amber-primary: #f59e0b;
-    --color-amber-darker: #b45309;
-    --color-amber-darkest: #92400e;
-    --color-amber-light-bg: #fffbeb;
-    --color-amber-light-border: #fbbf24;
-    --color-amber-inline-code-bg: #fef3c7;
-    --color-amber-inline-code-text: #7c2d12;
+    --color-amber-primary: #ffc107; /* Bootstrap-like warning amber */
+    --color-amber-darker: #cc9a06;
+    --color-amber-darkest: #997404;
+    --color-amber-light-bg: #fff3cd;
+    --color-amber-light-border: #ffeeba;
+    --color-amber-inline-code-bg: #fff9e6;
+    --color-amber-inline-code-text: #856404;
 
-    --color-green-primary: #10b981;
-    --color-green-darker: #059669;
-    --color-green-darkest: #15803d;
-    --color-green-decision: #166534;
+    --color-green-primary: #28a745; /* Bootstrap-like success green */
+    --color-green-darker: #1e7e34;
+    --color-green-darkest: #155724;
+    --color-green-decision: var(--accent-green-success); /* Referencing new palette */
 
     /* ========================== */
     /*      Fonts & Sizing        */
     /* ========================== */
     /* Fonts */
-    --font-primary: 'Sarabun', sans-serif;
+    --font-primary: 'Lato', 'Sarabun', sans-serif; /* Changed to Lato, Sarabun as fallback */
     --font-code: 'Fira Code', 'Courier New', monospace;
 
     /* Sizes & Spacing */
-    --border-radius-sm: 0.5rem;
-    --border-radius-md: 0.75rem;
-    --border-radius-lg: 1rem;
-    --padding-sm: 0.75rem;
-    --padding-md: 1.5rem;
-    --padding-lg: 2rem;
-    --padding-xl: 2.5rem;
+    --border-radius-sm: 0.5rem; /* 8px */
+    --border-radius-md: 0.75rem; /* 12px */
+    --border-radius-lg: 1rem; /* 16px */
+    --padding-sm: 0.75rem; /* 12px */
+    --padding-md: 1.5rem; /* 24px */
+    --padding-lg: 2rem; /* 32px */
+    --padding-xl: 2.5rem; /* 40px */
 
     /* Transitions */
     --transition-bg-color: background-color 0.3s ease, color 0.3s ease;
@@ -162,12 +193,12 @@
     --text-headings: var(--dark-text-headings);
     --text-secondary: var(--dark-text-secondary);
     --text-muted: var(--dark-text-muted);
-    --text-subtle: var(--dark-text-muted);
+    --text-subtle: var(--dark-text-muted); /* Keeping subtle for now, maps to muted in dark */
 
     --card-bg-gradient: linear-gradient(145deg, var(--dark-card-bg-start) 0%, var(--dark-card-bg-end) 100%);
     --card-border: var(--dark-card-border);
     --interactive-card-bg-gradient: linear-gradient(145deg, var(--dark-interactive-card-bg-start) 0%, var(--dark-interactive-card-bg-end) 100%);
-    --interactive-card-border: var(--dark-card-border);
+    --interactive-card-border: var(--dark-card-border); /* Can be a different gray if needed */
     
     --code-bg-gradient: linear-gradient(145deg, var(--dark-code-bg-start) 0%, var(--dark-code-bg-end) 100%);
     --code-text-color: var(--dark-code-text);
@@ -181,7 +212,7 @@
     --highlight-border-color: var(--dark-highlight-border);
 
     --button-primary-bg-gradient: linear-gradient(90deg, var(--dark-button-primary-bg-start) 0%, var(--dark-button-primary-bg-end) 100%);
-    --button-text-color: var(--dark-button-text);
+    --button-text-color: var(--dark-button-text); /* Should be white or very light gray */
     --tab-bg-color: var(--dark-tab-bg);
     --tab-border-color: var(--dark-tab-border);
     --tab-hover-bg-color: var(--dark-tab-hover-bg);
@@ -192,24 +223,25 @@
 
     --nav-link-color: var(--dark-text-secondary);
     --nav-link-hover-color: var(--dark-text-headings);
-    --nav-link-hover-bg: var(--dark-tab-bg);
+    --nav-link-hover-bg: var(--dark-tab-hover-bg); /* Using tab hover for consistency */
     --nav-link-active-bg-gradient: linear-gradient(90deg, var(--dark-nav-link-active-bg-start) 0%, var(--dark-nav-link-active-bg-end) 100%);
     --nav-link-active-color: var(--dark-text-headings);
     --nav-link-active-border-color: var(--dark-nav-link-active-border);
-    --section-icon-bg-gradient: linear-gradient(135deg, var(--dark-button-primary-bg-start) 0%, var(--dark-button-primary-bg-end) 100%);
-    --progress-bar-bg-gradient: linear-gradient(90deg, var(--dark-button-primary-bg-start) 0%, var(--dark-button-primary-bg-end) 100%);
+    --section-icon-bg-gradient: linear-gradient(135deg, var(--primary-navy-main) 0%, var(--primary-navy-light) 100%); /* Updated Icon BG */
+    --progress-bar-bg-gradient: linear-gradient(90deg, var(--accent-blue-cta) 0%, var(--accent-blue-highlight) 100%); /* Updated Progress Bar */
     
     --modal-bg-gradient: linear-gradient(145deg, var(--dark-modal-bg-start) 0%, var(--dark-modal-bg-end) 100%);
-    --modal-border-color: var(--dark-card-border);
+    --modal-border-color: var(--dark-card-border); /* Consistent with card border */
 
-    --card-box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.2);
-    --card-hover-box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
-    --interactive-card-box-shadow: none; 
-    --button-primary-box-shadow: 0 4px 6px rgba(59, 130, 246, 0.2);
-    --button-primary-hover-box-shadow: 0 6px 8px rgba(59, 130, 246, 0.3);
-    --floating-btn-box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    --floating-btn-hover-box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
-    --code-block-box-shadow: inset 0 1px 3px rgba(0,0,0,0.5);
+    /* Updated box shadows for better consistency and subtlety */
+    --card-box-shadow: 0 8px 16px -4px rgba(0, 0, 0, 0.2), 0 6px 10px -6px rgba(0, 0, 0, 0.15);
+    --card-hover-box-shadow: 0 16px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -5px rgba(0, 0, 0, 0.1);
+    --interactive-card-box-shadow: 0 4px 8px rgba(0,0,0,0.15); 
+    --button-primary-box-shadow: 0 4px 6px rgba(0, 123, 255, 0.25);
+    --button-primary-hover-box-shadow: 0 6px 8px rgba(0, 123, 255, 0.35);
+    --floating-btn-box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    --floating-btn-hover-box-shadow: 0 8px 15px rgba(0, 0, 0, 0.35);
+    --code-block-box-shadow: inset 0 1px 3px rgba(0,0,0,0.4);
 }
 
 /* ===================================== */
@@ -220,18 +252,18 @@
    stylesheet to style elements for the light theme. */
 body.light-mode {
     --bg-gradient: linear-gradient(135deg, var(--light-bg-start) 0%, var(--light-bg-end) 100%);
-    --text-primary: var(--light-text-primary-actual); 
-    --text-headings: var(--light-text-headings);
-    --text-secondary: var(--light-text-secondary);
-    --text-muted: var(--light-text-muted);
-    --text-subtle: var(--light-text-subtle);
+    --text-primary: var(--light-text-primary-actual); /* This now refers to --text-color-main */
+    --text-headings: var(--light-text-headings);    /* This now refers to --text-color-headings (navy) */
+    --text-secondary: var(--light-text-secondary);  /* This now refers to --text-color-secondary */
+    --text-muted: var(--light-text-muted);        /* This now refers to --secondary-gray-dark */
+    --text-subtle: var(--light-text-subtle);      /* This now refers to --secondary-gray-darkest */
 
     --card-bg-gradient: linear-gradient(145deg, var(--light-card-bg-start) 0%, var(--light-card-bg-end) 100%);
     --card-border: var(--light-card-border);
     --interactive-card-bg-gradient: linear-gradient(145deg, var(--light-interactive-card-bg-start) 0%, var(--light-interactive-card-bg-end) 100%);
     --interactive-card-border: var(--light-interactive-card-border);
 
-    --code-bg-gradient: var(--light-code-bg);
+    --code-bg-gradient: var(--light-code-bg); /* This is now --secondary-gray-lightest */
     --code-text-color: var(--light-code-text);
     --code-border-color: var(--light-code-border);
     --code-keyword-color: var(--light-code-keyword);
@@ -241,8 +273,10 @@ body.light-mode {
     --code-placeholder-color: var(--light-code-placeholder);
     
     --button-primary-bg-gradient: linear-gradient(90deg, var(--light-button-primary-bg-start) 0%, var(--light-button-primary-bg-end) 100%);
+    /* Button text color will inherit or be set specifically on the button class if needed */
     --tab-bg-color: var(--light-tab-bg);
     --tab-border-color: var(--light-tab-border);
+    --tab-hover-bg-color: var(--primary-navy-very-light); /* Using very light blue for hover */
     --input-bg-color: var(--light-input-bg);
     --input-border-color: var(--light-input-border);
     --input-focus-border-color: var(--light-input-focus-border);
@@ -255,19 +289,20 @@ body.light-mode {
     --nav-link-active-color: var(--light-nav-link-active-color);
     --nav-link-active-border-color: var(--light-nav-link-active-border);
     --section-icon-bg-gradient: linear-gradient(135deg, var(--light-section-icon-bg-start) 0%, var(--light-section-icon-bg-end) 100%);
-    --progress-bar-bg-gradient: linear-gradient(90deg, var(--light-button-primary-bg-start) 0%, var(--light-button-primary-bg-end) 100%);
+    --progress-bar-bg-gradient: linear-gradient(90deg, var(--accent-blue-cta) 0%, var(--accent-blue-highlight) 100%); /* Updated Progress Bar for Light Mode */
     
     --modal-bg-gradient: linear-gradient(145deg, var(--light-modal-bg-start) 0%, var(--light-modal-bg-end) 100%);
-    --modal-border-color: var(--light-interactive-card-border);
+    --modal-border-color: var(--light-interactive-card-border); /* Consistent with interactive card border */
 
-    --card-box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.05);
-    --card-hover-box-shadow: 0 20px 25px -5px rgba(0,0,0,0.08), 0 10px 10px -5px rgba(0,0,0,0.03);
-    --interactive-card-box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-    --button-primary-box-shadow: 0 4px 6px rgba(30, 64, 175, 0.1);
-    --button-primary-hover-box-shadow: 0 6px 8px rgba(30, 64, 175, 0.15);
-    --floating-btn-box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    --floating-btn-hover-box-shadow: 0 8px 15px rgba(0,0,0,0.15);
-    --code-block-box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    /* Updated box shadows for better consistency and subtlety in Light Mode */
+    --card-box-shadow: 0 6px 12px -3px rgba(25, 55, 109, 0.1), 0 4px 8px -4px rgba(25, 55, 109, 0.06); /* Softer, navy-tinted shadow */
+    --card-hover-box-shadow: 0 10px 20px -5px rgba(25, 55, 109, 0.12), 0 6px 10px -5px rgba(25, 55, 109, 0.07);
+    --interactive-card-box-shadow: 0 3px 6px rgba(25, 55, 109, 0.08);
+    --button-primary-box-shadow: 0 4px 6px rgba(0, 123, 255, 0.2);
+    --button-primary-hover-box-shadow: 0 5px 7px rgba(0, 123, 255, 0.25);
+    --floating-btn-box-shadow: 0 4px 10px rgba(25, 55, 109, 0.15);
+    --floating-btn-hover-box-shadow: 0 6px 12px rgba(25, 55, 109, 0.2);
+    --code-block-box-shadow: 0 2px 4px rgba(25, 55, 109, 0.07);
 }
 
 
@@ -284,11 +319,40 @@ body {
     color: var(--text-primary);     /* Themed primary text color */
     font-family: var(--font-primary); /* Default font for the entire page */
     min-height: 100vh;              /* Ensure body takes at least full viewport height */
+    line-height: 1.65;               /* Improved line height for readability */
+    letter-spacing: 0.01em;         /* Slight letter spacing for clarity */
 }
 
 h1, h2, h3, h4, h5, h6 {
     color: var(--text-headings); /* Themed color for all heading levels */
-    font-weight: 600;            /* Semi-bold headings */
+    font-family: var(--font-primary); /* Ensure headings also use the primary font */
+    font-weight: 700;            /* Bold headings for Lato (700) */
+    margin-bottom: 0.75rem;      /* Consistent spacing below headings */
+    line-height: 1.3;            /* Tighter line height for headings */
+}
+
+h1 { font-size: 2.5rem; } /* Example: 40px */
+h2 { font-size: 2rem; }   /* Example: 32px */
+h3 { font-size: 1.75rem; } /* Example: 28px */
+h4 { font-size: 1.5rem; }  /* Example: 24px */
+h5 { font-size: 1.25rem; } /* Example: 20px */
+h6 { font-size: 1rem; }    /* Example: 16px */
+
+p {
+    margin-bottom: 1.25rem; /* Increased paragraph spacing */
+    line-height: 1.75;      /* More generous line height for paragraphs */
+    font-weight: 400;       /* Regular weight for Lato */
+}
+
+/* Ensure Tailwind's antialiased class doesn't override our font settings aggressively */
+.antialiased {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* If Tailwind base styles are too aggressive, we might need to be more specific */
+body, .text-base { /* Or other relevant Tailwind text classes */
+    font-family: var(--font-primary) !important; /* Force Lato if needed */
 }
 
 /* ========================== */
@@ -298,21 +362,22 @@ h1, h2, h3, h4, h5, h6 {
 /* General purpose card for displaying content sections */
 .content-card {
     /* Box Model */
-    border: 1px solid var(--card-border);
-    border-radius: var(--border-radius-lg);
-    margin-bottom: var(--padding-lg); /* Space below the card */
+    border: 1px solid var(--secondary-gray-light); /* Updated border color */
+    border-radius: var(--border-radius-md); /* Slightly smaller radius for a more formal look */
+    margin-bottom: var(--padding-lg); 
     padding: var(--padding-lg);
     /* Visual */
-    backdrop-filter: blur(10px); /* Frosted glass effect behind the card */
-    background: var(--card-bg-gradient);
-    box-shadow: var(--card-box-shadow);
+    backdrop-filter: blur(8px); /* Slightly reduced blur */
+    /* Background will be primarily white/light gray based on theme vars */
+    background: var(--card-bg-gradient); /* This now uses the new light gray/white vars */
+    box-shadow: var(--card-box-shadow); /* This now uses the new softer shadow vars */
     /* Animation & Transitions */
-    transition: var(--transition-transform-shadow); /* Smooth hover effect */
+    transition: var(--transition-transform-shadow); 
 }
 
 .content-card:hover {
-    box-shadow: var(--card-hover-box-shadow);
-    transform: translateY(-5px);
+    box-shadow: var(--card-hover-box-shadow); /* Uses new softer hover shadow */
+    transform: translateY(-4px); /* Slightly less movement on hover */
 }
 
 .interactive-card {
@@ -331,7 +396,8 @@ h1, h2, h3, h4, h5, h6 {
 .gradient-header {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    background: var(--button-primary-bg-gradient); 
+    /* Ensures that text-color-headings (navy) is the dominant color in the gradient */
+    background: linear-gradient(90deg, var(--text-color-headings) 70%, var(--accent-blue-cta) 100%); 
     background-clip: text;
     color: transparent;
 }
@@ -675,29 +741,41 @@ body.light-mode .bg-red-800\/50 { background-color: var(--color-red-light-bg) !i
 
 body.light-mode .border-t { border-color: var(--interactive-card-border); }
 
+/* Ensure .border-dark-600 uses our theme variable */
+.border-dark-600 {
+    border-color: var(--card-border) !important; /* Use theme-aware card border color */
+}
+
+/* For light mode, specifically, we might want a slightly different shade if card-border is too subtle or too dark */
+body.light-mode .border-dark-600 {
+    border-color: var(--secondary-gray-medium) !important; /* Or var(--light-card-border) if preferred */
+}
+
 
 /* ===================================== */
 /* Chapter-Specific Styles             */
 /* ===================================== */
 /* This section overrides specific Tailwind text color classes
-   to ensure high contrast and readability in light mode across all chapters. */
+   to ensure high contrast and readability in light mode across all chapters,
+   aligning with the new color palette. */
 
 /* ----- Generic Text Color Overrides for Light Mode ----- */
 
-/* Main paragraph and list text */
+/* Main paragraph and list text (e.g., text-slate-300 originally) */
 body.light-mode .text-slate-100,
 body.light-mode .text-slate-200,
-body.light-mode .text-slate-300 {
-    color: var(--light-text-primary); /* Use the main dark text color: #1a202c */
+body.light-mode .text-slate-300 { 
+    color: var(--text-primary) !important; /* Should be --text-color-main (#212529) */
 }
 
-/* Secondary, muted, and subtle text */
+/* Secondary, muted, and subtle text (e.g., text-slate-400 originally) */
 body.light-mode .text-slate-400,
 body.light-mode .text-slate-500 {
-    color: var(--light-text-muted); /* Use the darker muted color: #4a5568 */
+    color: var(--text-muted) !important; /* Should be --secondary-gray-dark (#707070) */
 }
 
 /* ----- Primary Accent Colors (Blue/Purple) ----- */
+/* These are often used for links or highlighted text within paragraphs. */
 body.light-mode .text-primary-200,
 body.light-mode .text-primary-300,
 body.light-mode .text-primary-400,
@@ -705,38 +783,39 @@ body.light-mode .text-primary-500,
 body.light-mode .text-blue-200,
 body.light-mode .text-blue-300,
 body.light-mode .text-blue-400 {
-    color: var(--light-code-keyword); /* A strong, dark blue: #1e3a8a */
+    color: var(--accent-blue-cta) !important; /* Using the CTA blue for general blue text highlights */
 }
 
 body.light-mode .text-purple-300,
 body.light-mode .text-purple-400,
 body.light-mode .text-accent-500 {
-    color: var(--light-code-function); /* A strong, dark purple: #5b21b6 */
+    color: var(--light-code-function) !important; /* Using the darker purple from code variables */
 }
 
 
 /* ----- Other Accent Colors (Amber, Green, Red) ----- */
+/* These are often used for semantic highlighting. */
 body.light-mode .text-amber-200,
 body.light-mode .text-amber-300,
 body.light-mode .text-amber-400 {
-    color: var(--light-code-placeholder); /* A rich, dark amber: #92400e */
+    color: var(--light-code-placeholder) !important; /* Using the darker amber from code variables */
 }
 
 body.light-mode .text-green-400,
 body.light-mode .text-lime-400 {
-    color: var(--light-code-string); /* A deep green: #047857 */
+    color: var(--light-code-string) !important; /* Using the darker green from code variables */
 }
 
 body.light-mode .text-red-200,
 body.light-mode .text-red-300,
 body.light-mode .text-red-400 {
-    color: var(--color-red-darker); /* A deep red: #b91c1c */
+    color: var(--color-red-darker) !important; /* Using the theme-agnostic darker red */
 }
 
 /* ----- Special Highlight Classes ----- */
 
-body.light-mode .text-loop-highlight {
-    color: #1d4ed8; /* A very strong blue for special highlights */
+body.light-mode .text-loop-highlight { /* This was a specific highlight, ensure it's distinct */
+    color: var(--accent-blue-highlight) !important; /* Using a slightly different blue if needed, or CTA */
 }
 
 body.light-mode #c-conditionals code.bg-amber-900 { 
