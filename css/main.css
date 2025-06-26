@@ -82,9 +82,9 @@
     --light-text-primary: var(--text-color-main);
     --light-text-headings: var(--text-color-headings); /* Navy for headings */
     --light-text-primary-actual: var(--text-color-main);
-    --light-text-secondary: var(--text-color-secondary);
-    --light-text-muted: var(--secondary-gray-dark);
-    --light-text-subtle: var(--secondary-gray-darkest);
+    --light-text-secondary: #475569; /* Darker for better contrast */
+    --light-text-muted: #475569;     /* Darker for better contrast */
+    --light-text-subtle: #475569;    /* Darker for better contrast */
 
     --light-card-bg-start: #FFFFFF; /* White card background */
     --light-card-bg-end: var(--secondary-gray-lightest); /* Very light gray for subtle gradient */
@@ -244,12 +244,263 @@
     --code-block-box-shadow: inset 0 1px 3px rgba(0,0,0,0.4);
 }
 
-/* ===================================== */
-/*      Light Mode Variable Overrides    */
-/* ===================================== */
-/* This block redefines the theme-specific variables for when the 'light-mode' 
-   class is applied to the body. These variables are then used throughout the
-   stylesheet to style elements for the light theme. */
+/* ==================== */
+/* Theme Toggle Button  */
+/* ==================== */
+.theme-toggle-button {
+    background: transparent;
+    border: none;
+    color: var(--text-primary);
+    cursor: pointer;
+    font-size: 1.25rem; /* 20px */
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.theme-toggle-button:hover {
+    background-color: var(--nav-link-hover-bg);
+    color: var(--nav-link-hover-color);
+}
+
+body.light-mode .theme-toggle-button {
+    color: var(--light-text-primary);
+}
+
+body.light-mode .theme-toggle-button:hover {
+    background-color: var(--light-nav-link-hover-bg);
+    color: var(--light-nav-link-hover-color);
+}
+
+/* Ensure the icon color is correct based on theme */
+#theme-icon {
+    color: var(--text-primary); /* Default to dark mode text color */
+}
+
+body.light-mode #theme-icon {
+    color: var(--light-text-primary); /* Light mode text color */
+}
+
+/* ========================== */
+/*      Navigation Styles     */
+/* ========================== */
+
+/* Main container for the navigation */
+.nav-container {
+    background: var(--interactive-card-bg-gradient);
+    border: 1px solid var(--card-border);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--card-box-shadow);
+    padding: var(--padding-md);
+    height: 100%;
+}
+
+/* Header of the navigation section */
+.nav-header {
+    font-size: 1.25rem; /* 20px */
+    font-weight: 700;
+    color: var(--text-headings);
+    display: flex;
+    align-items: center;
+    padding-bottom: var(--padding-sm);
+    margin-bottom: var(--padding-sm);
+    border-bottom: 1px solid var(--card-border);
+}
+
+.nav-header .fa-book-open {
+    color: var(--accent-blue-cta);
+}
+
+/* Unordered list for main parts */
+.nav-parts-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Each main part/section of the navigation */
+.nav-part {
+    margin-bottom: 0.5rem; /* 8px */
+}
+
+/* Toggle button for each part */
+.nav-part-toggle {
+    background: transparent;
+    border: none;
+    border-radius: var(--border-radius-sm);
+    color: var(--text-primary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem; /* 12px */
+    text-align: left;
+    width: 100%;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.nav-part-toggle:hover {
+    background-color: var(--nav-link-hover-bg);
+    color: var(--nav-link-hover-color);
+}
+
+.nav-part-title {
+    display: flex;
+    align-items: center;
+    font-size: 1rem; /* 16px */
+    font-weight: 600;
+}
+
+.nav-part-icon {
+    width: 20px;
+    margin-right: 0.75rem; /* 12px */
+    color: var(--text-secondary);
+    transition: color 0.2s ease;
+}
+
+.nav-part-toggle:hover .nav-part-icon {
+    color: var(--nav-link-hover-color);
+}
+
+.nav-part-chevron {
+    font-size: 0.8rem; /* 12.8px */
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-part-toggle.open .nav-part-chevron {
+    transform: rotate(180deg);
+}
+
+/* List of chapters within a part */
+.nav-chapters-list {
+    list-style: none;
+    margin: 0;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.4s ease-in-out, opacity 0.3s ease-in-out, padding 0.4s ease-in-out;
+    padding-left: 1.5rem; /* 24px */
+    border-left: 2px solid var(--card-border);
+    margin-left: 1.25rem; /* 20px, aligns with icon */
+}
+
+.nav-chapters-list.open {
+    max-height: 1000px; /* Arbitrarily large value */
+    opacity: 1;
+    padding-top: 0.5rem; /* 8px */
+    padding-bottom: 0.5rem; /* 8px */
+}
+
+/* Sub-part styling */
+.nav-sub-part .nav-part-toggle {
+    padding: 0.5rem 0.75rem; /* 8px 12px */
+}
+.nav-sub-part .nav-part-title {
+    font-size: 0.9rem; /* 14.4px */
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+.nav-sub-part .nav-part-icon {
+    font-size: 0.9em;
+}
+.nav-sub-chapters-list {
+    padding-left: 1.25rem; /* 20px */
+    margin-left: 1.25rem; /* 20px */
+    border-left-style: dashed;
+}
+
+
+/* Individual chapter link */
+.nav-link {
+    color: var(--nav-link-color);
+    display: block;
+    font-size: 0.9rem; /* 14.4px */
+    padding: 0.5rem 1rem; /* 8px 16px */
+    border-radius: var(--border-radius-sm);
+    position: relative;
+    transition: background-color 0.2s ease, color 0.2s ease, border-left-color 0.2s ease;
+    border-left: 3px solid transparent;
+    margin-left: -1rem; /* Pull it left to align text */
+    padding-left: calc(1rem + 3px); /* Compensate for border and margin */
+}
+
+.nav-link:hover {
+    background-color: var(--nav-link-hover-bg);
+    color: var(--nav-link-hover-color);
+}
+
+.nav-link.active {
+    background: var(--nav-link-active-bg-gradient);
+    color: var(--nav-link-active-color);
+    border-left-color: var(--nav-link-active-border-color);
+    font-weight: 600;
+}
+
+/* Disabled/Upcoming links */
+.nav-link.text-slate-500 {
+    color: var(--text-muted);
+    cursor: not-allowed;
+    font-style: italic;
+}
+body.light-mode .nav-link.text-slate-500 {
+    color: var(--text-muted) !important;
+}
+.nav-link.text-slate-500:hover {
+    background-color: transparent;
+}
+
+
+/* ================================== */
+/*   Light Mode Navigation Overrides  */
+/* ================================== */
+body.light-mode .nav-container {
+    background: var(--light-card-bg-start); /* Cleaner look for light mode */
+}
+
+body.light-mode .nav-header {
+    color: var(--light-text-headings);
+    border-bottom-color: var(--light-card-border);
+}
+
+body.light-mode .nav-part-toggle {
+    color: var(--light-text-primary);
+}
+
+body.light-mode .nav-part-toggle:hover {
+    background-color: var(--light-nav-link-hover-bg);
+    color: var(--light-nav-link-hover-color);
+}
+
+body.light-mode .nav-part-icon {
+    color: var(--light-text-secondary);
+}
+
+body.light-mode .nav-part-toggle:hover .nav-part-icon {
+    color: var(--light-nav-link-hover-color);
+}
+
+body.light-mode .nav-chapters-list {
+    border-left-color: var(--light-card-border);
+}
+
+body.light-mode .nav-sub-part .nav-part-title {
+    color: var(--light-text-secondary);
+}
+
+body.light-mode .nav-link {
+    color: var(--light-nav-link-color);
+}
+
+body.light-mode .nav-link:hover {
+    background-color: var(--light-nav-link-hover-bg);
+    color: var(--light-nav-link-hover-color);
+}
+
+body.light-mode .nav-link.active {
+    background: var(--light-nav-link-active-bg-gradient);
+    color: var(--light-nav-link-active-color);
+    border-left-color: var(--light-nav-link-active-border-color);
+}
 body.light-mode {
     --bg-gradient: linear-gradient(135deg, var(--light-bg-start) 0%, var(--light-bg-end) 100%);
     --text-primary: var(--light-text-primary-actual); /* This now refers to --text-color-main */
@@ -570,325 +821,4 @@ body, .text-base { /* Or other relevant Tailwind text classes */
     background-color: var(--color-blue-primary) !important; 
     border-color: var(--color-blue-active-border);
     color: var(--color-white) !important; 
-}
-
-/* ==================== */
-/* Navigation & Modals  */
-/* ==================== */
-.nav-link {
-    /* Positioning */
-    align-items: center;
-    display: flex;
-    /* Box Model */
-    border-radius: var(--border-radius-sm);
-    margin-bottom: var(--padding-sm);
-    padding: var(--padding-sm) var(--padding-md);
-    /* Typography */
-    color: var(--nav-link-color);
-    /* Animation & Transitions */
-    transition: var(--transition-all-fast);
-}
-
-.nav-link:hover {
-    background: var(--nav-link-hover-bg);
-    color: var(--nav-link-hover-color);
-}
-
-.nav-link.active {
-    background: var(--nav-link-active-bg-gradient);
-    border-left: 4px solid var(--nav-link-active-border-color);
-    color: var(--nav-link-active-color);
-}
-body.light-mode .nav-link i { 
-    color: var(--light-button-primary-bg-start) !important; 
-}
-
-
-.progress-bar {
-    /* Positioning */
-    left: 0;
-    position: fixed;
-    top: 0;
-    z-index: 50;
-    /* Box Model */
-    border-radius: 2px;
-    height: 4px;
-    /* Visual */
-    background: var(--progress-bar-bg-gradient);
-}
-
-.section-icon {
-    /* Positioning */
-    align-items: center;
-    display: flex;
-    flex-shrink: 0;
-    justify-content: center;
-    /* Box Model */
-    border-radius: 12px; 
-    height: 50px;
-    margin-right: 1rem;
-    width: 50px;
-    /* Visual */
-    background: var(--section-icon-bg-gradient);
-}
-
-.floating-nav {
-    /* Positioning */
-    bottom: var(--padding-lg);
-    display: flex;
-    position: fixed;
-    right: var(--padding-lg);
-    z-index: 40;
-    /* Box Model */
-    gap: var(--padding-sm);
-}
-
-.floating-btn {
-    /* Positioning */
-    align-items: center;
-    display: flex;
-    justify-content: center;
-    /* Box Model */
-    border-radius: 50%;
-    height: 50px;
-    width: 50px;
-    /* Typography */
-    color: var(--button-text-color);
-    font-size: 1.25rem;
-    /* Visual */
-    background: var(--button-primary-bg-gradient); 
-    box-shadow: var(--floating-btn-box-shadow);
-    /* Animation & Transitions */
-    transition: var(--transition-all-fast);
-    /* Misc */
-    cursor: pointer;
-}
-
-.floating-btn:hover {
-    box-shadow: var(--floating-btn-hover-box-shadow);
-    transform: translateY(-5px) rotate(5deg);
-}
-
-#glossary-modal-backdrop {
-    /* Positioning */
-    left: 0;
-    position: fixed;
-    top: 0;
-    z-index: 99;
-    /* Box Model */
-    height: 100%;
-    width: 100%;
-    /* Visual */
-    backdrop-filter: blur(5px);
-    background-color: rgba(0, 0, 0, 0.7);
-    /* Misc */
-    display: none; 
-}
-
-#glossary-modal {
-    /* Positioning */
-    left: 50%;
-    position: fixed;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 100;
-    /* Box Model */
-    border: 1px solid var(--modal-border-color);
-    border-radius: var(--border-radius-lg);
-    max-width: 500px;
-    padding: var(--padding-xl);
-    width: 90%;
-    /* Visual */
-    background: var(--modal-bg-gradient);
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); 
-    /* Misc */
-    display: none;
-}
-
-/* ==================== */
-/* Animations & Effects */
-/* ==================== */
-@keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-5px); }
-    75% { transform: translateX(5px); }
-}
-
-.animate-shake {
-    animation: shake 0.3s ease-in-out;
-}
-
-.text-loop-highlight {
-    color: #cadcff; 
-}
-body.light-mode .text-loop-highlight {
-    color: #3e64d3;
-}
-
-/* ======================== */
-/* Utility / Helper Classes */
-/* ======================== */
-.bg-yellow-800\/50 { 
-    background-color: rgba(146, 64, 14, 0.5); 
-}
-body.light-mode .bg-yellow-800\/50 { background-color: var(--color-amber-inline-code-bg) !important; }
-
-
-.bg-red-800\/50 {
-    background-color: rgba(153, 27, 27, 0.5); 
-}
-body.light-mode .bg-red-800\/50 { background-color: var(--color-red-light-bg) !important; }
-
-body.light-mode .border-t { border-color: var(--interactive-card-border); }
-
-/* Ensure .border-dark-600 uses our theme variable */
-.border-dark-600 {
-    border-color: var(--card-border) !important; /* Use theme-aware card border color */
-}
-
-/* For light mode, specifically, we might want a slightly different shade if card-border is too subtle or too dark */
-body.light-mode .border-dark-600 {
-    border-color: var(--secondary-gray-medium) !important; /* Or var(--light-card-border) if preferred */
-}
-
-
-/* ===================================== */
-/* Chapter-Specific Styles             */
-/* ===================================== */
-/* This section overrides specific Tailwind text color classes
-   to ensure high contrast and readability in light mode across all chapters,
-   aligning with the new color palette. */
-
-/* ----- Generic Text Color Overrides for Light Mode ----- */
-
-/* Main paragraph and list text (e.g., text-slate-300 originally) */
-body.light-mode .text-slate-100,
-body.light-mode .text-slate-200,
-body.light-mode .text-slate-300 { 
-    color: var(--text-primary) !important; /* Should be --text-color-main (#212529) */
-}
-
-/* Secondary, muted, and subtle text (e.g., text-slate-400 originally) */
-body.light-mode .text-slate-400,
-body.light-mode .text-slate-500 {
-    color: var(--text-muted) !important; /* Should be --secondary-gray-dark (#707070) */
-}
-
-/* ----- Primary Accent Colors (Blue/Purple) ----- */
-/* These are often used for links or highlighted text within paragraphs. */
-body.light-mode .text-primary-200,
-body.light-mode .text-primary-300,
-body.light-mode .text-primary-400,
-body.light-mode .text-primary-500,
-body.light-mode .text-blue-200,
-body.light-mode .text-blue-300,
-body.light-mode .text-blue-400 {
-    color: var(--accent-blue-cta) !important; /* Using the CTA blue for general blue text highlights */
-}
-
-body.light-mode .text-purple-300,
-body.light-mode .text-purple-400,
-body.light-mode .text-accent-500 {
-    color: var(--light-code-function) !important; /* Using the darker purple from code variables */
-}
-
-
-/* ----- Other Accent Colors (Amber, Green, Red) ----- */
-/* These are often used for semantic highlighting. */
-body.light-mode .text-amber-200,
-body.light-mode .text-amber-300,
-body.light-mode .text-amber-400 {
-    color: var(--light-code-placeholder) !important; /* Using the darker amber from code variables */
-}
-
-body.light-mode .text-green-400,
-body.light-mode .text-lime-400 {
-    color: var(--light-code-string) !important; /* Using the darker green from code variables */
-}
-
-body.light-mode .text-red-200,
-body.light-mode .text-red-300,
-body.light-mode .text-red-400 {
-    color: var(--color-red-darker) !important; /* Using the theme-agnostic darker red */
-}
-
-/* ----- Special Highlight Classes ----- */
-
-body.light-mode .text-loop-highlight { /* This was a specific highlight, ensure it's distinct */
-    color: var(--accent-blue-highlight) !important; /* Using a slightly different blue if needed, or CTA */
-}
-
-body.light-mode #c-conditionals code.bg-amber-900 { 
-    background-color: var(--color-amber-inline-code-bg);
-    border: 1px solid var(--color-amber-light-border);
-    color: var(--color-amber-inline-code-text);
-    font-weight: 600;
-}
-
-body.light-mode #c-conditionals #decision-output .text-green-400 { 
-    color: var(--color-green-decision); 
-    font-weight: 600; 
-}
-
-body.light-mode #c-conditionals #decision-output .text-red-400 { 
-    color: var(--color-red-darker); 
-    font-weight: 600; 
-}
-
-/* ----- Table styles for light mode ----- */
-body.light-mode table { 
-    border-color: var(--interactive-card-border); 
-}
-body.light-mode th,
-body.light-mode td {
-    border-color: var(--light-modal-bg-end);
-    color: var(--text-primary);
-}
-
-/* ==================== */
-/* Responsive Design    */
-/* ==================== */
-@media (max-width: 768px) {
-    .content-card {
-        padding: var(--padding-md);
-    }
-    
-    .section-header { 
-        align-items: flex-start;
-        flex-direction: column;
-    }
-    
-    .section-icon {
-        margin-bottom: 1rem; 
-    }
-}
-
-/* ================================== */
-/* Light Mode Contrast Patch v2.0    */
-/* ================================== */
-/* Force-overriding specific faint Tailwind classes in light mode */
-
-body.light-mode .text-slate-300 {
-    color: #1e293b; /* Using a much darker color (like slate-800) for main paragraphs */
-}
-
-body.light-mode .text-slate-400 {
-    color: #475569; /* Using a darker color (like slate-600) for secondary text */
-}
-
-/* ================================== */
-/* Light Mode Icon Background Fix    */
-/* ================================== */
-/* Overriding faint icon background colors for light mode */
-
-body.light-mode .bg-primary-500 {
-    background-color: var(--color-blue-darker) !important; /* Force a dark blue */
-}
-
-body.light-mode .bg-accent-500 {
-    background-color: var(--color-purple-darker) !important; /* Force a dark purple */
-}
-
-body.light-mode .bg-green-500 {
-    background-color: var(--color-green-darker) !important; /* Force a dark green for other icons */
 }

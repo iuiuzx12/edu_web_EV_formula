@@ -125,6 +125,64 @@
                             ดังนั้น เมื่อเรามี 8 บิตใน 1 ไบต์ เราจะมีรูปแบบที่แตกต่างกันได้ทั้งหมด <strong class="text-green-400 text-xl">2<sup>8</sup> = 256 รูปแบบ!</strong>
                             <br>ตั้งแต่ <code>00000000</code> ไปจนถึง <code>11111111</code>.
                         </p>
+
+                        <div class="bg-dark-800 rounded-xl border border-cyan-700 p-6 my-6">
+                            <h4 class="text-lg font-semibold text-cyan-300 mb-3 flex items-center">
+                                <i class="fas fa-glasses mr-2"></i> ตัวอย่างเพื่อให้เห็นภาพ: จากสวิตช์ 8 ตัวสู่ข้อมูล
+                            </h4>
+                            <p class="text-slate-400 mb-4 leading-relaxed">
+                                ลองนึกภาพแถวของสวิตช์ไฟ 8 ตัวเรียงกัน แต่ละตัวสามารถเปิด (1) หรือปิด (0) ได้อย่างอิสระ แถวสวิตช์ 8 ตัวนี้ก็คือ 1 ไบต์นั่นเองครับ การผสมผสานการเปิด-ปิดที่แตกต่างกัน 256 รูปแบบนี้เองที่ทำให้เราสร้างข้อมูลที่มีความหมายได้
+                            </p>
+                            <p class="text-slate-400 mb-2 font-semibold">ลองมาดูตัวอย่างการแทนตัวเลขกันครับ:</p>
+                            <p class="text-slate-400 mb-4 leading-relaxed">
+                                ในระบบเลขฐานสอง แต่ละตำแหน่งของบิตจะมี "ค่าประจำตำแหน่ง" ของมันเอง โดยเริ่มจาก 1 ทางขวาสุดและคูณด้วย 2 ไปเรื่อยๆ ทางซ้าย ดังนี้:
+                            </p>
+                            <!-- Binary to Decimal Table -->
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-sm text-left text-slate-300 bg-dark-900 rounded-lg">
+                                    <thead class="text-xs text-amber-300 uppercase bg-dark-700">
+                                        <tr>
+                                            <th scope="col" class="px-4 py-2">ค่าประจำตำแหน่ง</th>
+                                            <td class="px-4 py-2 text-center">128</td>
+                                            <td class="px-4 py-2 text-center">64</td>
+                                            <td class="px-4 py-2 text-center">32</td>
+                                            <td class="px-4 py-2 text-center">16</td>
+                                            <td class="px-4 py-2 text-center">8</td>
+                                            <td class="px-4 py-2 text-center">4</td>
+                                            <td class="px-4 py-2 text-center">2</td>
+                                            <td class="px-4 py-2 text-center">1</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="border-t border-dark-600">
+                                            <th scope="row" class="px-4 py-2 font-medium text-slate-100">ตัวอย่างไบต์ (Bit)</th>
+                                            <td class="px-4 py-2 text-center font-mono text-lg text-lime-400">0</td>
+                                            <td class="px-4 py-2 text-center font-mono text-lg text-lime-400">1</td>
+                                            <td class="px-4 py-2 text-center font-mono text-lg text-lime-400">0</td>
+                                            <td class="px-4 py-2 text-center font-mono text-lg text-lime-400">0</td>
+                                            <td class="px-4 py-2 text-center font-mono text-lg text-lime-400">1</td>
+                                            <td class="px-4 py-2 text-center font-mono text-lg text-lime-400">1</td>
+                                            <td class="px-4 py-2 text-center font-mono text-lg text-lime-400">0</td>
+                                            <td class="px-4 py-2 text-center font-mono text-lg text-lime-400">1</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <p class="text-slate-400 mt-4 leading-relaxed">
+                                วิธีคิดคือ: "ถ้าบิตเป็น 1 เราจะเอาค่าประจำตำแหน่งนั้นมาบวกด้วย ถ้าเป็น 0 เราก็ไม่นับ"
+                                <br>จากตัวอย่างไบต์ <code>01001101</code> ด้านบน เราจะได้:
+                            </p>
+                            <p class="text-center text-lg font-mono text-amber-300 bg-dark-900 p-3 rounded-md my-3">
+                                (0*128) + (1*64) + (0*32) + (0*16) + (1*8) + (1*4) + (0*2) + (1*1)
+                                <br>= 64 + 8 + 4 + 1
+                                <br>= <span class="text-2xl text-green-400 font-bold">77</span>
+                            </p>
+                            <p class="text-slate-400 leading-relaxed">
+                                ดังนั้น รูปแบบบิต <code>01001101</code> จึงสามารถใช้แทนเลข 77 ได้ และถ้าเราไปดูในตาราง ASCII เราจะพบว่าเลข 77 นี้ถูกกำหนดให้ใช้แทนตัวอักษร 'M' พอดี!
+                                <br>นี่คือวิธีที่คอมพิวเตอร์ใช้สวิตช์เปิด-ปิดง่ายๆ เพื่อสร้างข้อมูลที่ซับซ้อนอย่างตัวเลขและตัวอักษรขึ้นมาครับ
+                            </p>
+                        </div>
+
                         <h4 class="text-xl font-semibold text-slate-100 mt-6 mb-3">แล้ว 256 รูปแบบนี้เอาไปทำอะไรได้?</h4>
                         <p class="text-slate-300 mb-4 leading-relaxed">
                             เราในฐานะโปรแกรมเมอร์และวิศวกร สามารถ "ตกลง" กันได้ว่าแต่ละรูปแบบจะใช้แทนความหมายอะไร นี่คือหัวใจสำคัญครับ รูปแบบบิตเองไม่มีความหมาย จนกว่าเราจะให้ความหมายกับมันผ่านสิ่งที่เรียกว่า <strong class="text-amber-400">"การเข้ารหัส" (Encoding)</strong>.

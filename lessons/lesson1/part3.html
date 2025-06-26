@@ -271,6 +271,66 @@ END LOOP</code></pre>
                                 <p class="text-slate-300 mt-2 text-sm">จะเห็นได้ว่าซอฟต์แวร์ที่ซับซ้อนของ VCU นั้น แท้จริงแล้วก็คือการนำอัลกอริทึมย่อยๆ หลายๆ อันมาประกอบร่างกันทำงานอย่างเป็นระบบนั่นเองครับ.</p>
                             </div>
                         </div>
+
+                        <div class="interactive-card my-6">
+                            <h4 class="text-xl font-semibold text-amber-300 mb-3 flex items-center">
+                                <i class="fas fa-car-alt mr-3"></i> กรณีศึกษาที่ 3: อัลกอริทึมสำหรับ State Machine ของ VCU
+                            </h4>
+                            <p class="text-slate-300 mb-2 leading-relaxed">
+                                รถแข่ง EV ของเราไม่ได้แค่เปิด-ปิดได้ง่ายๆ เหมือนรถของเล่น แต่มีสถานะการทำงานที่ซับซ้อนเพื่อความปลอดภัยและประสิทธิภาพสูงสุด. VCU จะต้องจัดการการเปลี่ยนผ่านระหว่างสถานะเหล่านี้อย่างเป็นระบบ ซึ่งเราเรียกแนวคิดนี้ว่า <strong class="text-primary-400">"State Machine"</strong> หรือเครื่องสถานะจำกัด.
+                            </p>
+                            <p class="text-slate-300 mb-2 leading-relaxed">
+                                ลองนึกภาพว่า VCU มีสถานะหลักๆ เช่น:
+                                <ul class="list-disc list-inside text-slate-300 space-y-1 pl-4">
+                                    <li><strong class="text-sky-300">OFF:</strong> ปิดระบบทั้งหมด</li>
+                                    <li><strong class="text-sky-300">PRECHARGE:</strong> กำลังเตรียมระบบไฟฟ้าแรงสูง (ตรวจสอบความปลอดภัย)</li>
+                                    <li><strong class="text-sky-300">READY_TO_DRIVE:</strong> พร้อมขับเคลื่อน (มอเตอร์พร้อมรับคำสั่ง)</li>
+                                    <li><strong class="text-sky-300">FAULT:</strong> เกิดข้อผิดพลาดร้ายแรง (ตัดกำลังมอเตอร์, แจ้งเตือน)</li>
+                                </ul>
+                            </p>
+                            <div class="bg-dark-800 p-4 rounded-lg border border-dark-600">
+                                <p class="font-semibold text-primary-300 mb-1">อัลกอริทึมการเปลี่ยนสถานะ (Simplified State Transition):</p>
+                                <pre class="code-block text-xs"><code class="language-pseudocode">
+current_state = OFF
+
+LOOP forever:
+    // อ่านข้อมูลจากเซ็นเซอร์และระบบต่างๆ
+    read_all_sensors_and_can_data()
+
+    SWITCH current_state:
+        CASE OFF:
+            IF (ignition_on) AND (bms_ok) AND (precharge_button_pressed):
+                current_state = PRECHARGE
+            END IF
+        CASE PRECHARGE:
+            IF (precharge_complete) AND (voltage_stable):
+                current_state = READY_TO_DRIVE
+            ELSE IF (precharge_timeout) OR (bms_fault):
+                current_state = FAULT
+            END IF
+        CASE READY_TO_DRIVE:
+            IF (driver_requests_shutdown) OR (critical_fault_detected):
+                current_state = OFF
+            ELSE IF (bms_fault) OR (motor_overheat):
+                current_state = FAULT
+            END IF
+        CASE FAULT:
+            // ในสถานะ Fault อาจจะรอให้ผู้ขับขี่กดปุ่ม Reset หรือแก้ไขปัญหา
+            IF (fault_cleared) AND (reset_button_pressed):
+                current_state = OFF // กลับไปเริ่มต้นใหม่
+            END IF
+    END SWITCH
+
+    // ทำงานตามสถานะปัจจุบัน (เช่น เปิด/ปิดคอนแทคเตอร์, คำนวณแรงบิด)
+    execute_actions_for_current_state(current_state)
+
+    delay(10_ms)
+END LOOP</code></pre>
+                                <p class="text-slate-300 mt-2 text-sm">
+                                    นี่คือตัวอย่างที่ทรงพลังของอัลกอริทึมที่ใช้ในการควบคุมระบบที่ซับซ้อนมากๆ อย่างรถแข่ง EV ของเราครับ การออกแบบ State Machine ที่ดีจะทำให้ระบบมีความเสถียร ปลอดภัย และสามารถจัดการกับสถานการณ์ต่างๆ ได้อย่างถูกต้อง.
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </section>
 

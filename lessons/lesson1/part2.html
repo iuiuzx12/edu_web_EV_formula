@@ -263,6 +263,28 @@
                         <p class="text-slate-300 mt-2 leading-relaxed">
                             เมื่อนำมารวมกัน เราจะได้เป็น <code class="text-purple-400 font-bold text-xl">BA5C</code><sub>16</sub> ซึ่งสั้น กระชับ อ่านง่าย และสื่อสารผิดพลาดได้ยากกว่าเลขฐานสองยาวๆ มาก. ในภาษาโปรแกรมอย่าง C เราจะเขียนเลขฐานสิบหกโดยการเติม <code class="text-amber-400">0x</code> เข้าไปข้างหน้า เช่น <code class="text-purple-400">0xBA5C</code> เพื่อบอกให้คอมไพเลอร์รู้ว่านี่คือเลขฐานสิบหก.
                         </p>
+
+                        <div class="interactive-card my-6">
+                            <h5 class="text-lg font-semibold text-primary-400 mb-2"><i class="fas fa-thermometer-half mr-2"></i> ตัวอย่าง: แปลงค่าอุณหภูมิ (Decimal) เป็น Hexadecimal สำหรับ CAN Bus</h5>
+                            <p class="text-slate-300 mb-2">สมมติว่าเซ็นเซอร์วัดอุณหภูมิแบตเตอรี่ได้ <code class="text-green-400">85</code> องศาเซลเซียส และเราต้องการส่งค่านี้ผ่าน CAN Bus ซึ่งมักจะส่งข้อมูลเป็นเลขฐานสิบหก</p>
+                            <p class="text-slate-300 mb-2">เราจะใช้วิธี "การหารด้วย 16 แล้วเก็บเศษ" คล้ายกับการแปลงฐานสิบเป็นฐานสอง แต่คราวนี้หารด้วย 16 และเศษที่ได้อาจเป็น 10-15 ซึ่งต้องแปลงเป็น A-F</p>
+                            <pre class="code-block text-sm">
+85 ÷ 16 = 5 เศษ <span class="text-amber-400">5</span>
+ 5 ÷ 16 = 0 เศษ <span class="text-amber-400">5</span>
+</pre>
+                            <p class="text-slate-300 mt-2">อ่านเศษจากล่างขึ้นบน: <code class="text-purple-400 font-bold text-xl">55</code><sub>16</sub>. ดังนั้น ค่าอุณหภูมิ 85 องศาเซลเซียส จะถูกส่งเป็น <code class="text-purple-400">0x55</code> ใน CAN Bus</p>
+                        </div>
+
+                        <div class="interactive-card my-6">
+                            <h5 class="text-lg font-semibold text-primary-400 mb-2"><i class="fas fa-exclamation-triangle mr-2"></i> ตัวอย่าง: แปลงรหัสข้อผิดพลาด (Hexadecimal) เป็น Decimal</h5>
+                            <p class="text-slate-300 mb-2">เมื่อเกิดข้อผิดพลาดในระบบ BMS (Battery Management System) มันอาจส่งรหัสข้อผิดพลาดผ่าน CAN Bus เป็นเลขฐานสิบหก สมมติว่าคุณได้รับรหัส <code class="text-purple-400">0x3C</code></p>
+                            <p class="text-slate-300 mb-2">เราจะใช้หลักการ "ค่าประจำหลัก" เหมือนเดิม แต่คราวนี้ฐานคือ 16</p>
+                            <pre class="code-block text-sm">
+<span class="text-purple-400">3C</span><sub>16</sub> = (<b>3</b> × 16<sup>1</sup>) + (<b>C</b> × 16<sup>0</sup>)
+       = (<b>3</b> × 16) + (<b>12</b> × 1)
+       =  48  +  12  =  <span class="text-green-400 font-bold">60</span><sub>10</sub></pre>
+                            <p class="text-slate-300 mt-2">ดังนั้น รหัสข้อผิดพลาด <code class="text-purple-400">0x3C</code> หมายถึงข้อผิดพลาดหมายเลข 60. คุณสามารถนำเลข 60 นี้ไปเทียบกับตารางรหัสข้อผิดพลาดใน Datasheet ของ BMS เพื่อหาสาเหตุต่อไป</p>
+                        </div>
                     </div>
                 </section>
 
