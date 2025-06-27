@@ -82,7 +82,7 @@
     --light-text-primary: var(--text-color-main);
     --light-text-headings: var(--text-color-headings); /* Navy for headings */
     --light-text-primary-actual: var(--text-color-main);
-    --light-text-secondary: #475569; /* Darker for better contrast */
+    --light-text-secondary: #334155; /* Darker for better contrast */
     --light-text-muted: #475569;     /* Darker for better contrast */
     --light-text-subtle: #475569;    /* Darker for better contrast */
 
@@ -821,4 +821,175 @@ body, .text-base { /* Or other relevant Tailwind text classes */
     background-color: var(--color-blue-primary) !important; 
     border-color: var(--color-blue-active-border);
     color: var(--color-white) !important; 
+}
+
+/* ========================== */
+/* Floating Action Buttons    */
+/* ========================== */
+.floating-nav {
+    position: fixed;
+    bottom: 1.5rem; /* 24px */
+    right: 1.5rem; /* 24px */
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem; /* 12px */
+    z-index: 50;
+}
+
+.floating-btn {
+    width: 3.5rem; /* 56px */
+    height: 3.5rem; /* 56px */
+    border-radius: 50%;
+    background: var(--interactive-card-bg-gradient);
+    border: 1px solid var(--card-border);
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: var(--floating-btn-box-shadow);
+    transition: var(--transition-transform-shadow);
+}
+
+.floating-btn:hover {
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: var(--floating-btn-hover-box-shadow);
+}
+
+.floating-btn i {
+    font-size: 1.5rem; /* 24px */
+    transition: color 0.2s ease;
+}
+
+.floating-btn:hover i {
+    color: var(--accent-blue-cta);
+}
+
+/* Custom override for light mode text visibility */
+body.light-mode .text-slate-300 {
+    color: var(--light-text-secondary);
+}
+
+/* Adjustments for text-slate-400 and text-slate-100 in light mode */
+body.light-mode .text-slate-400 {
+    color: var(--light-text-secondary);
+}
+
+body.light-mode .text-slate-100 {
+    color: var(--light-text-primary);
+}
+
+/* Adjustments for other specific text colors in light mode for better readability */
+body.light-mode .text-slate-200 {
+    color: var(--light-text-secondary);
+}
+
+body.light-mode .text-red-300 {
+    color: var(--color-red-darker);
+}
+
+body.light-mode .text-amber-300 {
+    color: var(--color-amber-darker);
+}
+
+/* Adjustment for text-red-200 in light mode for better readability */
+body.light-mode .text-red-200 {
+    color: var(--color-red-darker);
+}
+
+/* Adjustments for other specific text colors in light mode for better readability */
+body.light-mode .text-slate-200 {
+    color: var(--light-text-secondary);
+}
+
+body.light-mode .text-red-300 {
+    color: var(--color-red-darker);
+}
+
+body.light-mode .text-amber-300 {
+    color: var(--color-amber-darker);
+}
+
+body.light-mode .text-blue-300 {
+    color: var(--color-blue-darker);
+}
+
+body.light-mode .text-purple-300 {
+    color: var(--color-purple-darker);
+}
+
+body.light-mode .text-primary-400 {
+    color: var(--primary-navy-main); /* A strong navy blue */
+}
+
+body.light-mode .text-primary-200 {
+    color: var(--light-text-secondary);
+}
+
+body.light-mode .text-amber-200 {
+    color: var(--color-amber-darker);
+}
+
+body.light-mode .text-blue-200 {
+    color: var(--color-blue-darker);
+}
+
+body.light-mode .text-loop-highlight {
+    color: var(--primary-navy-main); /* Make it dark in light mode */
+}
+
+body.light-mode .text-primary-500 {
+    color: var(--primary-navy-main);
+}
+
+body.light-mode .text-accent-400 {
+    color: var(--color-purple-darker);
+}
+
+body.light-mode .text-green-400 {
+    color: var(--color-green-darker);
+}
+
+body.light-mode .text-red-400 {
+    color: var(--color-red-darker);
+}
+
+body.light-mode .text-purple-400 {
+    color: var(--color-purple-darker);
+}
+
+body.light-mode .text-white {
+    color: var(--text-color-main); /* Change white text to dark in light mode */
+}
+
+body.light-mode .text-green-400 {
+    color: var(--color-green-darker);
+}
+
+body.light-mode .text-yellow-400 {
+    color: var(--color-amber-darker);
+}
+
+body.light-mode .text-blue-400 {
+    color: var(--color-blue-darker);
+}
+
+body.light-mode .text-indigo-200 {
+    color: var(--primary-navy-main);
+}
+
+body.light-mode .text-accent-500 {
+    color: var(--color-purple-darker);
+}
+
+body.light-mode .text-sky-300 {
+    color: var(--color-blue-darker);
+}
+
+body.light-mode .text-slate-500 {
+    color: var(--light-text-secondary);
+}
+
+body.light-mode .text-primary-300 {
+    color: var(--primary-navy-main);
 }

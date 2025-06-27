@@ -1,25 +1,83 @@
 document.addEventListener('DOMContentLoaded', function () {
     const navPlaceholder = document.getElementById('nav-placeholder');
     if (navPlaceholder) {
-        const pathSegments = window.location.pathname.split('/').filter(segment => segment !== '' && segment !== 'index.html');
-        let relativePathToRoot = '';
-        const currentPathParts = window.location.pathname.split('/').filter(Boolean);
-        if (currentPathParts.length > 0 && currentPathParts[currentPathParts.length - 1].includes('.')) {
-            currentPathParts.pop();
-        }
-        relativePathToRoot = '../'.repeat(currentPathParts.length);
-        const navPath = relativePathToRoot + '_navigation.html';
+        console.log("[Debug Nav] Initializing navigation loading...");
+        // Determine basePath (e.g., "" or "/project-name")
+        const mainScriptSrc = document.currentScript ? document.currentScript.src : "DOCUMENT_CURRENTSCRIPT_IS_NULL";
+        console.log("[Debug Nav] document.currentScript.src:", mainScriptSrc);
 
-        fetch(navPath)
+        let basePath = "";
+        if (mainScriptSrc !== "DOCUMENT_CURRENTSCRIPT_IS_NULL") {
+            const mainScriptPath = new URL(mainScriptSrc).pathname; // e.g., /project-name/js/main.js
+            basePath = mainScriptPath.substring(0, mainScriptPath.lastIndexOf('/js/main.js'));
+        }
+        console.log("[Debug Nav] Calculated basePath:", basePath);
+
+        // Calculate path from current page's directory to site root (basePath)
+        const currentPagePath = window.location.pathname;
+        console.log("[Debug Nav] window.location.pathname (currentPagePath):", currentPagePath);
+        let currentPageDir = currentPagePath;
+        
+        // Normalize currentPageDir to be a directory path
+        if (currentPageDir.endsWith('/') && currentPageDir.length > 1 ) { 
+             currentPageDir = currentPageDir.slice(0, -1); // Remove trailing slash if not root "/"
+        }
+        // If it's a file path (e.g., /index.html, /lessons/part1.html), get its directory
+        if (currentPageDir.includes('.') && currentPageDir.lastIndexOf('.') > currentPageDir.lastIndexOf('/')) {
+            currentPageDir = currentPageDir.substring(0, currentPageDir.lastIndexOf('/'));
+        }
+        // If currentPageDir became empty (e.g. from "/index.html"), it means it's the root directory.
+        if (currentPageDir === '') {
+            currentPageDir = '/';
+        }
+        console.log("[Debug Nav] Calculated currentPageDir:", currentPageDir);
+
+        const baseParts = basePath.split('/').filter(Boolean);
+        const currentDirParts = currentPageDir.split('/').filter(Boolean);
+
+        let commonLength = 0;
+        while (commonLength < baseParts.length && commonLength < currentDirParts.length && baseParts[commonLength] === currentDirParts[commonLength]) {
+            commonLength++;
+        }
+
+        let pathToSiteRoot = '';
+        const upLevels = currentDirParts.length - commonLength;
+        pathToSiteRoot += '../'.repeat(upLevels);
+        
+        if (pathToSiteRoot === '') {
+            pathToSiteRoot = './';
+        }
+        console.log("[Debug Nav] Calculated pathToSiteRoot:", pathToSiteRoot);
+
+        const navPathForFetch = pathToSiteRoot + '_navigation.html';
+        console.log("[Debug Nav] Final navPathForFetch:", navPathForFetch);
+
+        fetch(navPathForFetch)
             .then(response => {
                 if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status} while fetching ${navPath}`);
+                    console.error(`[Debug Nav] Fetch failed for ${navPathForFetch}. Status: ${response.status}`);
+                    throw new Error(`HTTP error! status: ${response.status} while fetching ${navPathForFetch} (pathToSiteRoot: ${pathToSiteRoot}, basePath: ${basePath}, currentPageDir: ${currentPageDir})`);
                 }
+                console.log(`[Debug Nav] Fetch successful for ${navPathForFetch}`);
                 return response.text();
             })
             .then(data => {
+                console.log(`[Debug Nav] Received data for navigation. Length: ${data.length}`);
+                if (data.trim().length === 0) {
+                    console.warn("[Debug Nav] Navigation data is empty!");
+                }
                 navPlaceholder.innerHTML = data;
-                initializeNavigation();
+
+                // Prepend pathToSiteRoot to relative links in the fetched navigation HTML
+                const navLinks = navPlaceholder.querySelectorAll('a.nav-link');
+                navLinks.forEach(link => {
+                    let href = link.getAttribute('href');
+                    if (href && !href.startsWith('#') && !href.startsWith('http://') && !href.startsWith('https://') && !href.startsWith('/')) {
+                        link.setAttribute('href', pathToSiteRoot + href);
+                    }
+                });
+                
+                initializeNavigation(basePath); // Pass basePath to initializeNavigation
                 // Now that nav is loaded, safe to run functions that depend on it.
                 if (document.querySelectorAll('section').length > 0) {
                     setActiveNav(); // Initial call
@@ -75,7 +133,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    function initializeNavigation() {
+    function initializeNavigation(basePath) { // basePath is passed as an argument
         const toggles = document.querySelectorAll('.nav-part-toggle');
         const links = document.querySelectorAll('#main-nav .nav-link');
         const currentPath = window.location.pathname;
@@ -103,16 +161,24 @@ document.addEventListener('DOMContentLoaded', function () {
             if (!linkHref) return;
 
             const absoluteLinkPath = new URL(linkHref, window.location.href).pathname;
-            const normalize = (path) => {
-                let p = path;
-                if (p !== '/' && p.endsWith('/')) {
-                    p = p.slice(0, -1);
+            
+            // basePath (e.g. /project-name or "") is available here if needed for normalization,
+            // but the revised normalize function should work on absolute paths directly.
+            const normalize = (path) => { // path is an absolute pathname e.g. /project-name/lessons/page.html or /project-name/
+                let normalizedPath = path;
+                // 1. Remove filename if present (specifically .html)
+                if (normalizedPath.endsWith('.html')) { 
+                    normalizedPath = normalizedPath.substring(0, normalizedPath.lastIndexOf('/'));
                 }
-                if (p.endsWith('index.html')) {
-                    p = p.substring(0, p.lastIndexOf('/'));
-                    if(p === '') p = '/';
+                // 2. Remove trailing slash if not root path "/"
+                if (normalizedPath.endsWith('/') && normalizedPath.length > 1) {
+                    normalizedPath = normalizedPath.slice(0, -1);
                 }
-                return p;
+                // 3. If path became empty (e.g. from "/index.html"), set to "/"
+                if (normalizedPath === '') {
+                    normalizedPath = '/';
+                }
+                return normalizedPath;
             };
             
             const normalizedCurrentPath = normalize(currentPath);
